@@ -159,12 +159,18 @@ fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
             match node {
                 RefNode::ModuleDeclarationAnsi(x) => {
                     let id = module_identifier(node, &syntax_tree).unwrap();
-                    println!("ENTER module: {}", id);
+                    println!("ENTER ANSI module: {}", id);
+
+                    let d = parse_module_declaration_ansi(x, &syntax_tree);
+                    println!("  {:?}", d);
 
                 }
                 RefNode::ModuleDeclarationNonansi(x) => {
                     let id = module_identifier(node, &syntax_tree).unwrap();
-                    println!("ENTER module: {}", id);
+                    println!("ENTER non-ANSI module: {}", id);
+
+                    let d = parse_module_declaration_nonansi(x, &syntax_tree);
+                    println!("  {:?}", d);
 
                 }
                 _ => (),
@@ -183,8 +189,8 @@ fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
     }
 }
 
-fn identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = match unwrap_node!(node, SimpleIdentifier, EscapedIdentifier) {
+fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let id = match unwrap_node!(parent, SimpleIdentifier, EscapedIdentifier) {
         Some(RefNode::SimpleIdentifier(x)) => {
             Some(x.nodes.0)
         }
@@ -200,23 +206,160 @@ fn identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
+fn datatype(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let t = match unwrap_node!(parent, DataType) {
+        /*
+        Some(RefNode::DataType(x)) => {
+            println!("HERE x={:?}", x);
+            Some(String::from("TODO"))
+        }
+        */
+        Some(x) => {
+            println!("HERE x={:?}", x);
+            Some(String::from("TODO"))
+        }
+        _ => None
+    };
+
+    /*
+    match t {
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
+        _ => None,
+    }
+    */
+    t
+}
+
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree)
 }
 
-/*
-fn parse_module_declaration() -> structures::SvModuleDeclaration {
-    let mut ret = structures::SvModuleDeclaration::new();
+fn parse_module_declaration_ansi(
+    m: &sv_parser::ModuleDeclarationAnsi,
+    syntax_tree: &SyntaxTree,
+) -> structures::SvModuleDeclaration {
+    let mut ret = structures::SvModuleDeclaration {
+        parameters: Vec::new(),
+        ports: Vec::new(),
+    };
+    for node in m {
+        match node {
+            RefNode::ParameterDeclarationParam(p) =>
+                ret.parameters.push(parse_module_declaration_parameter(p, syntax_tree)),
+            RefNode::AnsiPortDeclaration(p) => {
+                ret.ports.push(parse_module_declaration_port(p, syntax_tree))
+            },
+            _ => (),
+        }
+    }
     ret
 }
 
-fn parse_module_declaration_parameter(node: RefNode, syntax_tree: &SyntaxTree) -> structures::SvParameter {
+fn parse_module_declaration_nonansi(
+    _m: &sv_parser::ModuleDeclarationNonansi,
+    _syntax_tree: &SyntaxTree,
+) -> structures::SvModuleDeclaration {
+    let ret = structures::SvModuleDeclaration {
+        parameters: Vec::new(),
+        ports: Vec::new(),
+    };
+    // TODO
+    ret
 }
 
-fn parse_module_declaration_port() -> structures::SvPort {
+fn parse_module_declaration_parameter(
+    p: &sv_parser::ParameterDeclarationParam,
+    _syntax_tree: &SyntaxTree,
+) -> structures::SvParameter {
+    println!("parameter={:?}", p);
+    structures::SvParameter {
+        identifier: String::from("foo"),
+        datatype: String::from("bar"),
+    }
 }
 
+fn port_identifier(
+    node: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> String {
+    let id = unwrap_node!(node, PortIdentifier).unwrap();
+    identifier(id, &syntax_tree).unwrap()
+}
+
+fn port_direction(
+    node: &sv_parser::AnsiPortDeclaration,
+) -> structures::SvPortDirection {
+    let dir = unwrap_node!(node, PortDirection);
+    match dir {
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) =>
+            structures::SvPortDirection::Inout,
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Input(_))) =>
+            structures::SvPortDirection::Input,
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Output(_))) =>
+            structures::SvPortDirection::Output,
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) =>
+            structures::SvPortDirection::Ref,
+        _ =>
+            structures::SvPortDirection::IMPLICIT,
+    }
+}
+
+fn port_datakind(
+    node: &sv_parser::AnsiPortDeclaration,
+) -> structures::SvPortDatakind {
+    match node {
+        sv_parser::AnsiPortDeclaration::Net(_) =>
+            structures::SvPortDatakind::Net,
+        sv_parser::AnsiPortDeclaration::Variable(_) =>
+            structures::SvPortDatakind::Variable,
+        sv_parser::AnsiPortDeclaration::Paren(_) =>
+            structures::SvPortDatakind::IMPLICIT,
+    }
+}
+
+fn port_datatype(
+    node: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> String {
+    match node {
+        sv_parser::AnsiPortDeclaration::Net(p) =>
+            match &p.nodes.0 {
+                Some(x) => syntax_tree.get_str_trim(x).unwrap().to_string(),
+                None => String::from("IMPLICIT"),
+            },
+        sv_parser::AnsiPortDeclaration::Variable(p) =>
+            match &p.nodes.0 {
+                Some(x) => {
+                    //let t = datatype(x, syntax_tree);
+                    let t = Some(String::from("TODO"));
+                    match t {
+                        Some(x) => x,
+                        _ => String::from("IMPLICIT"),
+                    }
+                },
+                None => String::from("IMPLICIT"),
+            },
+        sv_parser::AnsiPortDeclaration::Paren(_) =>
+            String::from("IMPLICIT"),
+    }
+}
+
+fn parse_module_declaration_port(
+    p: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> structures::SvPort {
+    //println!("port={:?}", p);
+
+    structures::SvPort {
+        identifier: port_identifier(p, syntax_tree),
+        direction: port_direction(p),
+        datakind: port_datakind(p),
+        datatype: port_datatype(p, syntax_tree),
+    }
+}
+
+/*
 fn parse_package_declaration() -> structures::SvPackageDeclaration {
 }
 

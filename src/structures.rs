@@ -3,40 +3,48 @@ use serde::Serialize;
 
 #[derive(Debug, Serialize)]
 pub struct SvData {
-    modules: Vec<SvModuleDeclaration>,
-    packages: Vec<SvPackageDeclaration>,
+    pub modules: Vec<SvModuleDeclaration>,
+    pub packages: Vec<SvPackageDeclaration>,
 }
 
 #[derive(Debug, Serialize)]
 pub struct SvModuleDeclaration {
-    parameters: Vec<SvParameter>,
-    ports: Vec<SvPort>,
+    pub parameters: Vec<SvParameter>,
+    pub ports: Vec<SvPort>,
 }
 
 #[derive(Debug, Serialize)]
 pub struct SvPackageDeclaration {
-    parameters: Vec<SvParameter>,
+    pub parameters: Vec<SvParameter>,
 }
 
 #[derive(Debug, Serialize)]
 pub struct SvParameter {
-    identifier: String,
-    datatype: String,
+    pub identifier: String,
+    pub datatype: String,
 }
 
 #[derive(Debug, Serialize)]
 pub enum SvPortDirection {
+    Inout,
     Input,
     Output,
-    Inout,
     Ref,
-    Interface,
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize)]
+pub enum SvPortDatakind {
+    Net,
+    Variable,
+    IMPLICIT,
 }
 
 #[derive(Debug, Serialize)]
 pub struct SvPort {
-    identifier: String,
-    datatype: String,
-    direction: Option<SvPortDirection>,
+    pub identifier: String,
+    pub direction: SvPortDirection,
+    pub datakind: SvPortDatakind,
+    pub datatype: String,
 }
 
