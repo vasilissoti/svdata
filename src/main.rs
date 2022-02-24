@@ -4,7 +4,7 @@ use enquote;
 use std::collections::HashMap;
 use std::{env, process};
 use std::path::{Path, PathBuf};
-use sv_parser::{parse_sv, unwrap_node, Define, DefineText, Locate, RefNode, SyntaxTree};
+use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
 use svdata::structures;
 use verilog_filelist_parser;
 
@@ -145,40 +145,82 @@ fn parse_filelist(
 }
 
 fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
-    for node in syntax_tree {
-        // The type of each node is RefNode
-        match node {
-            RefNode::ModuleDeclarationNonansi(x) => {
-                // unwrap_node! gets the nearest ModuleIdentifier from x
-                let id = unwrap_node!(x, ModuleIdentifier).unwrap();
+    for event in syntax_tree.into_iter().event() {
+        let enter_not_leave = match event {
+            NodeEvent::Enter(_) => true,
+            NodeEvent::Leave(_) => false,
+        };
+        let node = match event {
+            NodeEvent::Enter(x) => x,
+            NodeEvent::Leave(x) => x,
+        };
 
-                let id = get_identifier(id).unwrap();
+        if enter_not_leave {
+            match node {
+                RefNode::ModuleDeclarationAnsi(x) => {
+                    let id = module_identifier(node, &syntax_tree).unwrap();
+                    println!("ENTER module: {}", id);
 
-                // Original string can be got by SyntaxTree::get_str(self, locate: &Locate)
-                let id = syntax_tree.get_str(&id).unwrap();
-                println!("module: {}", id);
+                }
+                RefNode::ModuleDeclarationNonansi(x) => {
+                    let id = module_identifier(node, &syntax_tree).unwrap();
+                    println!("ENTER module: {}", id);
+
+                }
+                _ => (),
             }
-            RefNode::ModuleDeclarationAnsi(x) => {
-                let id = unwrap_node!(x, ModuleIdentifier).unwrap();
-                let id = get_identifier(id).unwrap();
-                let id = syntax_tree.get_str(&id).unwrap();
-                println!("module: {}", id);
+        } else {
+            match node {
+                RefNode::ModuleDeclarationAnsi(_) |
+                RefNode::ModuleDeclarationNonansi(_) => {
+                    let id = module_identifier(node, &syntax_tree).unwrap();
+                    println!("LEAVE module: {}", id);
+
+                }
+                _ => (),
             }
-            _ => (),
         }
     }
 }
 
-fn get_identifier(node: RefNode) -> Option<Locate> {
-    // unwrap_node! can take multiple types
-    match unwrap_node!(node, SimpleIdentifier, EscapedIdentifier) {
+fn identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let id = match unwrap_node!(node, SimpleIdentifier, EscapedIdentifier) {
         Some(RefNode::SimpleIdentifier(x)) => {
-            return Some(x.nodes.0);
+            Some(x.nodes.0)
         }
         Some(RefNode::EscapedIdentifier(x)) => {
-            return Some(x.nodes.0);
+            Some(x.nodes.0)
         }
+        _ => None
+    };
+
+    match id {
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
         _ => None,
     }
 }
+
+fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let id = unwrap_node!(node, ModuleIdentifier).unwrap();
+    identifier(id, &syntax_tree)
+}
+
+/*
+fn parse_module_declaration() -> structures::SvModuleDeclaration {
+    let mut ret = structures::SvModuleDeclaration::new();
+    ret
+}
+
+fn parse_module_declaration_parameter(node: RefNode, syntax_tree: &SyntaxTree) -> structures::SvParameter {
+}
+
+fn parse_module_declaration_port() -> structures::SvPort {
+}
+
+fn parse_package_declaration() -> structures::SvPackageDeclaration {
+}
+
+fn parse_package_declaration_parameter() -> structures::SvParameter {
+}
+*/
 
