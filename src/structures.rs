@@ -1,12 +1,12 @@
 use serde::Serialize;
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvData {
     pub modules: Vec<SvModuleDeclaration>,
     pub packages: Vec<SvPackageDeclaration>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvModuleDeclaration {
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
@@ -14,12 +14,12 @@ pub struct SvModuleDeclaration {
     pub declaration_type: String, // "ANSI"/"NONANSI"
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPackageDeclaration {
     pub parameters: Vec<SvParameter>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
     pub datatype: String,
@@ -30,7 +30,7 @@ pub struct SvParameter {
 // "IMPLICIT" should never be left in the end of a full parse (1st phase) - For Non-Ansi models and during phase 1 an "IMPLICIT handler function will be responsible for placing the default
 // entries based on what is left IMPLICIT and what is not
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum SvPortDirection {
     Inout,
     Input,
@@ -39,14 +39,14 @@ pub enum SvPortDirection {
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum SvDataKind {
     Net,
     Variable,
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum SvDataType {
     Logic,
     Reg,
@@ -67,7 +67,7 @@ pub enum SvDataType {
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum SvNetType {
     Wire,
     Uwire,
@@ -85,24 +85,24 @@ pub enum SvNetType {
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub enum SvSignedness {
     Signed,
     Unsigned,
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvUnpackedDimensions {
     pub dimensions: Vec<String>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPackedDimensions {
     pub dimensions: Vec<String>,
 }
 
-#[derive(Debug, Serialize)]
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,

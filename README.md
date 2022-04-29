@@ -2,6 +2,8 @@
 svdata - Extract Specific Data From SystemVerilog
 =================================================
 
+Working on DaveMcEwan's "svdata" files for  extending functionality.
+
 This is intended to be a helper utility for tools which want to find specific
 data, without having to parse a full AST.
 Using this utility, specific data are extracted from a SystemVerilog

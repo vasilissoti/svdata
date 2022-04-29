@@ -5,7 +5,7 @@ module Doo
 ( input  var logic signed i_first, i_foo
 , input logic [5:0] i_bar
 , output var logic o_yesvar
-, output logic o_novar
+, output o_novar
 , output wire logic [FOO-1:0] o_third
 , output logic o_fourth
 );

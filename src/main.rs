@@ -262,9 +262,10 @@ fn datatype(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     t
 }
 
-fn print_type_of<T>(_: &T) {
-    println!("{}", std::any::type_name::<T>())
-}
+// VNotes: Used for debugging
+// fn print_type_of<T>(_: &T) {
+//     println!("{}", std::any::type_name::<T>())
+// }
 
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
@@ -284,12 +285,17 @@ fn parse_module_declaration_ansi(
         filepath: String::from(filepath), // VNotes
         declaration_type: String::from("ANSI"), // VNotes
     };
+
+    let mut prev_port: Option<structures::SvPort> = None;
+    
     for node in m {
         match node {
             RefNode::ParameterDeclarationParam(p) =>
                 ret.parameters.push(parse_module_declaration_ansi_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
-                ret.ports.push(parse_module_declaration_ansi_port(p, syntax_tree))
+                let parsed_port: structures::SvPort = parse_module_declaration_ansi_port(p, syntax_tree, &prev_port.clone());
+                ret.ports.push(parsed_port.clone());
+                prev_port = Some(parsed_port.clone());
             },
             _ => (),
         }
@@ -331,7 +337,7 @@ fn port_identifier(
 }
 
 fn port_direction_ansi( // VNotes
-    node: &sv_parser::AnsiPortDeclaration
+    node: &sv_parser::AnsiPortDeclaration, prev_port: &Option<structures::SvPort>
 ) -> structures::SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
     match dir {
@@ -344,7 +350,10 @@ fn port_direction_ansi( // VNotes
         Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) =>
             structures::SvPortDirection::Ref,
         _ =>
-            structures::SvPortDirection::Inout, // VNotes: Add possibility for hierarchy here
+            match prev_port{
+                Some(_) => prev_port.clone().unwrap().direction, // If not the first port, take the previous port's direction
+                None => structures::SvPortDirection::Inout, // VNotes: Default case
+            }
     }
 }
 
@@ -477,16 +486,22 @@ fn port_signedness_ansi(
 
 
 
-// fn port_check_inheritance_ansi(
-//     m: &sv_parser::AnsiPortDeclaration) -> bool {
-//         match (m, )
-// }
+fn port_check_inheritance_ansi(
+    m: &sv_parser::AnsiPortDeclaration) -> bool {
+    let dir = unwrap_node!(m, DataType, NetType, PortDirection, VarDataType); // If DataType RefNode exists then either signedness or datatype is explicitly declared
+
+    match dir{
+        Some(_) => false, // Do not inherit signedness, data_type, data_kind and direction from last port
+        _ => true, // Inherit them
+    }
+    
+}
 
 
 
 fn parse_module_declaration_ansi_port(
     p: &sv_parser::AnsiPortDeclaration,
-    syntax_tree: &SyntaxTree,
+    syntax_tree: &SyntaxTree, prev_port: &Option<structures::SvPort>
 ) -> structures::SvPort {
     //println!("port={:?}", p);
 
@@ -500,22 +515,39 @@ fn parse_module_declaration_ansi_port(
 
     // VNotes complete inheritance
 
-    // let replicate = port_check_inheritance_ansi()
+    let inherit = port_check_inheritance_ansi(p);
+    let ret: structures::SvPort;
 
-    let ret = structures::SvPort { // VNotes: Attention order of compilation in the following lines matters!
-        identifier: port_identifier(p, syntax_tree),
-        direction: port_direction_ansi(p),
-        nettype: port_nettype_ansi(p, &port_direction_ansi(p)),
-        datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p))),
-        datatype: port_datatype_ansi(p),
-        signedness: port_signedness_ansi(p),
-        unpacked_dim: vet1,
-        packed_dim: vet2,
-        port_expression: String::from("Same"),
+    if inherit == false{
+        ret = structures::SvPort { // VNotes: Attention order of compilation in the following lines matters!
+            identifier: port_identifier(p, syntax_tree),
+            direction: port_direction_ansi(p, prev_port),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
+            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
+            datatype: port_datatype_ansi(p),
+            signedness: port_signedness_ansi(p),
+            unpacked_dim: vet1,
+            packed_dim: vet2,
+            port_expression: String::from("Same"),
 
-    };
+        };
+    }
 
-    println!("{:?}", ret); // VNotes: Used for debugging
+    else {
+        ret = structures::SvPort{
+            identifier: port_identifier(p, syntax_tree),
+            direction: prev_port.clone().unwrap().direction,
+            nettype: prev_port.clone().unwrap().nettype,
+            datakind: prev_port.clone().unwrap().datakind,
+            datatype: prev_port.clone().unwrap().datatype,
+            signedness: prev_port.clone().unwrap().signedness,
+            unpacked_dim: vet1,
+            packed_dim: vet2,
+            port_expression: String::from("Same"),
+        };
+    }
+
+    // println!("{:?}", ret); // VNotes: Used for debugging
 
     return ret;
 }
