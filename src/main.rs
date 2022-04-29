@@ -8,6 +8,9 @@ use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, S
 use svdata::structures;
 use verilog_filelist_parser;
 
+
+// Clap is used for accepting arguments through command prompt
+
 #[derive(Debug, Parser)]
 #[clap(name = "svdata")]
 #[clap(long_version(option_env!("LONG_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))))]
@@ -38,9 +41,9 @@ pub struct Opt {
     pub ignore_include: bool,
 }
 
-#[cfg_attr(tarpaulin, skip)]
+#[cfg_attr(tarpaulin, skip)] 
 pub fn main() {
-    let opt = Parser::parse();
+    let opt = Parser::parse(); // This is from clap
     let exit_code = match run_opt(&opt) {
         Ok(pass) => {
             if pass {
@@ -58,7 +61,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
+pub fn run_opt(opt: &Opt) -> Result<bool, Error> { // VNotes: The run opt will return [Err] if something didn't go well or otherwise will return [Ok]
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -94,10 +97,15 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
     let mut all_pass = true;
 
     for path in &files {
+        
+        println!("");
+        println!("The current path is: {}", path.to_string_lossy().into_owned()); // VNotes
+        println!("");
+        
         let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
-                sv_to_structure(&syntax_tree);
+                sv_to_structure(&syntax_tree, &path.to_string_lossy().into_owned()); // VNotes
                 defines = new_defines;
             }
             Err(_) => {
@@ -113,6 +121,8 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
 
     Ok(all_pass)
 }
+
+// In case that the system verilog files are given in the format of a filelist
 
 #[cfg_attr(tarpaulin, skip)]
 fn parse_filelist(
@@ -144,12 +154,16 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
+// Take it for granted up to here
+// The following function is responsible for storing the data to the corresponding structs
+
+fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str) -> () { // VNotes
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
             NodeEvent::Leave(_) => false,
         };
+
         let node = match event {
             NodeEvent::Enter(x) => x,
             NodeEvent::Leave(x) => x,
@@ -161,7 +175,7 @@ fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
                     let id = module_identifier(node, &syntax_tree).unwrap();
                     println!("ENTER ANSI module: {}", id);
 
-                    let d = parse_module_declaration_ansi(x, &syntax_tree);
+                    let d = parse_module_declaration_ansi(x, &syntax_tree, filepath);
                     println!("  {:?}", d);
 
                 }
@@ -193,12 +207,13 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = match unwrap_node!(parent, SimpleIdentifier, EscapedIdentifier) {
         Some(RefNode::SimpleIdentifier(x)) => {
             Some(x.nodes.0)
-        }
+        },
         Some(RefNode::EscapedIdentifier(x)) => {
             Some(x.nodes.0)
-        }
-        _ => None
+        },
+        _ => None,
     };
+
 
     match id {
         Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
@@ -230,25 +245,34 @@ fn datatype(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     t
 }
 
+fn print_type_of<T>(_: &T) {
+    println!("{}", std::any::type_name::<T>())
+}
+
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree)
 }
 
+
+// This is the core of the parsed data into structures for the ansi models
+
 fn parse_module_declaration_ansi(
     m: &sv_parser::ModuleDeclarationAnsi,
-    syntax_tree: &SyntaxTree,
+    syntax_tree: &SyntaxTree, filepath: &str // VNotes
 ) -> structures::SvModuleDeclaration {
     let mut ret = structures::SvModuleDeclaration {
         parameters: Vec::new(),
         ports: Vec::new(),
+        filepath: String::from(filepath), // VNotes
+        declaration_type: String::from("ANSI"), // VNotes
     };
     for node in m {
         match node {
             RefNode::ParameterDeclarationParam(p) =>
-                ret.parameters.push(parse_module_declaration_parameter(p, syntax_tree)),
+                ret.parameters.push(parse_module_declaration_ansi_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
-                ret.ports.push(parse_module_declaration_port(p, syntax_tree))
+                ret.ports.push(parse_module_declaration_ansi_port(p, syntax_tree))
             },
             _ => (),
         }
@@ -263,12 +287,14 @@ fn parse_module_declaration_nonansi(
     let ret = structures::SvModuleDeclaration {
         parameters: Vec::new(),
         ports: Vec::new(),
+        filepath: String::new(), // VNotes
+        declaration_type: String::new(), // VNotes
     };
     // TODO
     ret
 }
 
-fn parse_module_declaration_parameter(
+fn parse_module_declaration_ansi_parameter(
     p: &sv_parser::ParameterDeclarationParam,
     _syntax_tree: &SyntaxTree,
 ) -> structures::SvParameter {
@@ -287,7 +313,7 @@ fn port_identifier(
     identifier(id, &syntax_tree).unwrap()
 }
 
-fn port_direction(
+fn port_direction_ansi( // VNotes
     node: &sv_parser::AnsiPortDeclaration,
 ) -> structures::SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
@@ -305,30 +331,36 @@ fn port_direction(
     }
 }
 
-fn port_datakind(
+fn port_datakind_ansi( // VNotes
     node: &sv_parser::AnsiPortDeclaration,
-) -> structures::SvPortDatakind {
+) -> structures::SvDatakind {
     match node {
         sv_parser::AnsiPortDeclaration::Net(_) =>
-            structures::SvPortDatakind::Net,
+            structures::SvDatakind::Net, // VNotes
         sv_parser::AnsiPortDeclaration::Variable(_) =>
-            structures::SvPortDatakind::Variable,
+            structures::SvDatakind::Variable, // VNotes
         sv_parser::AnsiPortDeclaration::Paren(_) =>
-            structures::SvPortDatakind::IMPLICIT,
+            structures::SvDatakind::IMPLICIT,
     }
 }
 
-fn port_datatype(
+fn port_datatype_ansi( // VNotes
     node: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
 ) -> String {
     match node {
-        sv_parser::AnsiPortDeclaration::Net(p) =>
+        sv_parser::AnsiPortDeclaration::Net(p) => {
+            println!("Net Detected"); //VNotes
+            println!("The name of that port is: {}", port_identifier(node, syntax_tree)); // VNotes
+
             match &p.nodes.0 {
                 Some(x) => syntax_tree.get_str_trim(x).unwrap().to_string(),
                 None => String::from("IMPLICIT"),
-            },
-        sv_parser::AnsiPortDeclaration::Variable(p) =>
+            }},
+        sv_parser::AnsiPortDeclaration::Variable(p) => {
+            println!("Var Detected"); //VNotes
+            println!("The name of that port is: {}", port_identifier(node, syntax_tree)); // VNotes
+
             match &p.nodes.0 {
                 Some(x) => {
                     //let t = datatype(x, syntax_tree);
@@ -339,24 +371,46 @@ fn port_datatype(
                     }
                 },
                 None => String::from("IMPLICIT"),
-            },
+            }},
         sv_parser::AnsiPortDeclaration::Paren(_) =>
             String::from("IMPLICIT"),
     }
 }
 
-fn parse_module_declaration_port(
+fn implicit_handler_ansi(s: &structures::SvPort){
+    //println!("nothing");
+}
+
+fn parse_module_declaration_ansi_port(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
 ) -> structures::SvPort {
     //println!("port={:?}", p);
 
-    structures::SvPort {
+    let vet1 = structures::SvUnpackedDimensions{ // VNotes
+        dimensions: Vec::new(),
+    };
+
+    let vet2 = structures::SvPackedDimensions{ // VNotes
+        dimensions: Vec::new(),
+    };
+
+    let ret = structures::SvPort { // VNotes: Attention order of compilation in the following lines matters!
         identifier: port_identifier(p, syntax_tree),
-        direction: port_direction(p),
-        datakind: port_datakind(p),
-        datatype: port_datatype(p, syntax_tree),
-    }
+        direction: port_direction_ansi(p),
+        nettype: None,
+        datakind: port_datakind_ansi(p),
+        datatype: port_datatype_ansi(p, syntax_tree),
+        signedness: structures::SvSignedness::Signed,
+        unpacked_dim: vet1,
+        packed_dim: vet2,
+        port_expression: String::from("Same"),
+
+    };
+
+    implicit_handler_ansi(&ret);
+
+    return ret;
 }
 
 /*

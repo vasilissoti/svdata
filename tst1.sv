@@ -1,7 +1,4 @@
-package foo;
-endpackage
-
-module Foo
+module Doo
 #(int FIRST = 123
 , bit SECOND = 1'b1
 )
@@ -12,13 +9,4 @@ module Foo
 , output wire logic [FOO-1:0] o_third
 , output logic o_fourth
 );
-endmodule
-
-package bar;
-endpackage
-
-module Bar();
-`ifndef WIDTH
- `define WIDTH 8
-`endif
 endmodule

@@ -1,4 +1,3 @@
-
 use serde::Serialize;
 
 #[derive(Debug, Serialize)]
@@ -11,6 +10,8 @@ pub struct SvData {
 pub struct SvModuleDeclaration {
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
+    pub filepath: String,
+    pub declaration_type: String, // "ANSI"/"NONANSI"
 }
 
 #[derive(Debug, Serialize)]
@@ -24,6 +25,11 @@ pub struct SvParameter {
     pub datatype: String,
 }
 
+// "IMPLICIT" is only used for NON-ANSI over a full parsing phase and temporarily for Ansi since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
+// In case of an ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)  
+// "IMPLICIT" should never be left in the end of a full parse (1st phase) - For Non-Ansi models and during phase 1 an "IMPLICIT handler function will be responsible for placing the default
+// entries based on what is left IMPLICIT and what is not
+
 #[derive(Debug, Serialize)]
 pub enum SvPortDirection {
     Inout,
@@ -34,17 +40,67 @@ pub enum SvPortDirection {
 }
 
 #[derive(Debug, Serialize)]
-pub enum SvPortDatakind {
+pub enum SvDatakind {
     Net,
     Variable,
     IMPLICIT,
 }
 
 #[derive(Debug, Serialize)]
+pub enum SvDataType {
+    Logic,
+    Reg,
+    Integer,
+    Array,
+    Real,
+    Enum,
+    Struct,
+    Class,
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize)]
+pub enum SvNetType {
+    Wire,
+    Tri,
+    Wor,
+    Wand,
+    Triand,
+    Trireg,
+    Tri0,
+    Tri1,
+    Supply0,
+    Supply1,
+    NA, // In not SVDataKind != Net
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize)]
+pub enum SvSignedness {
+    Signed,
+    Unsigned,
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize)]
+pub struct SvUnpackedDimensions {
+    pub dimensions: Vec<String>,
+}
+
+#[derive(Debug, Serialize)]
+pub struct SvPackedDimensions {
+    pub dimensions: Vec<String>,
+}
+
+#[derive(Debug, Serialize)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
-    pub datakind: SvPortDatakind,
+    pub port_expression: String, // Identifier of the internal object connected to the port (allows e.g: .a(i))
+    pub datakind: SvDatakind,
     pub datatype: String,
+    pub nettype: Option<SvNetType>,
+    pub signedness: SvSignedness,
+    pub unpacked_dim: SvUnpackedDimensions,
+    pub packed_dim: SvPackedDimensions,
 }
-
