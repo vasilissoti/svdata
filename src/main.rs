@@ -221,6 +221,23 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
+// VNotes: For future implementations
+fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> String {
+    let id = match unwrap_node!(parent, Keyword){
+        Some(RefNode::Keyword(x)) => { // VNotes Question ?
+            Some(x.nodes.0)
+        },
+
+        _ => unreachable!(),
+    };
+
+    match id {
+        Some(x) => syntax_tree.get_str(&x).unwrap().to_string(),
+        _ => unreachable!(),
+    }
+
+}
+
 fn datatype(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let t = match unwrap_node!(parent, DataType) {
         /*
@@ -307,14 +324,14 @@ fn parse_module_declaration_ansi_parameter(
 
 fn port_identifier(
     node: &sv_parser::AnsiPortDeclaration,
-    syntax_tree: &SyntaxTree,
+    syntax_tree: &SyntaxTree
 ) -> String {
     let id = unwrap_node!(node, PortIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
 
 fn port_direction_ansi( // VNotes
-    node: &sv_parser::AnsiPortDeclaration,
+    node: &sv_parser::AnsiPortDeclaration
 ) -> structures::SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
     match dir {
@@ -327,59 +344,145 @@ fn port_direction_ansi( // VNotes
         Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) =>
             structures::SvPortDirection::Ref,
         _ =>
-            structures::SvPortDirection::IMPLICIT,
+            structures::SvPortDirection::Inout, // VNotes: Add possibility for hierarchy here
     }
 }
 
 fn port_datakind_ansi( // VNotes
-    node: &sv_parser::AnsiPortDeclaration,
-) -> structures::SvDatakind {
-    match node {
-        sv_parser::AnsiPortDeclaration::Net(_) =>
-            structures::SvDatakind::Net, // VNotes
-        sv_parser::AnsiPortDeclaration::Variable(_) =>
-            structures::SvDatakind::Variable, // VNotes
-        sv_parser::AnsiPortDeclaration::Paren(_) =>
-            structures::SvDatakind::IMPLICIT,
+    nettype: &structures::SvNetType
+) -> structures::SvDataKind {
+
+    match nettype{
+        structures::SvNetType::NA => structures::SvDataKind::Variable,
+
+        _ => structures::SvDataKind::Net,
     }
 }
 
 fn port_datatype_ansi( // VNotes
-    node: &sv_parser::AnsiPortDeclaration,
-    syntax_tree: &SyntaxTree,
-) -> String {
-    match node {
-        sv_parser::AnsiPortDeclaration::Net(p) => {
-            println!("Net Detected"); //VNotes
-            println!("The name of that port is: {}", port_identifier(node, syntax_tree)); // VNotes
+    node: &sv_parser::AnsiPortDeclaration
+) -> structures::SvDataType {
 
-            match &p.nodes.0 {
-                Some(x) => syntax_tree.get_str_trim(x).unwrap().to_string(),
-                None => String::from("IMPLICIT"),
-            }},
-        sv_parser::AnsiPortDeclaration::Variable(p) => {
-            println!("Var Detected"); //VNotes
-            println!("The name of that port is: {}", port_identifier(node, syntax_tree)); // VNotes
+    let dir = unwrap_node!(node, IntegerVectorType, IntegerAtomType, NonIntegerType);
+    match dir {
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) =>
+            structures::SvDataType::Logic,
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) =>
+            structures::SvDataType::Reg,
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) =>
+            structures::SvDataType::Bit,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) =>
+            structures::SvDataType::Byte,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) =>
+            structures::SvDataType::Shortint,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) =>
+            structures::SvDataType::Int,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) =>
+            structures::SvDataType::Longint,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) =>
+            structures::SvDataType::Integer,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) =>
+            structures::SvDataType::Time,
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) =>
+            structures::SvDataType::Time,
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) =>
+            structures::SvDataType::Time,
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) =>
+            structures::SvDataType::Time, // VNotes Add array enum, struct, class!
+        _ =>
+            structures::SvDataType::Logic, // VNotes: Default = Logic
+    }
 
-            match &p.nodes.0 {
-                Some(x) => {
-                    //let t = datatype(x, syntax_tree);
-                    let t = Some(String::from("TODO"));
-                    match t {
-                        Some(x) => x,
-                        _ => String::from("IMPLICIT"),
-                    }
-                },
-                None => String::from("IMPLICIT"),
-            }},
-        sv_parser::AnsiPortDeclaration::Paren(_) =>
-            String::from("IMPLICIT"),
+}
+
+fn port_nettype_ansi(
+    m: &sv_parser::AnsiPortDeclaration, direction: &structures::SvPortDirection) -> structures::SvNetType {
+
+    let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
+    match dir{
+        Some(RefNode::AnsiPortDeclarationVariable(_)) =>
+            return structures::SvNetType::NA, // "Var" token was found
+        
+        Some(RefNode::AnsiPortDeclarationNet(x)) => {
+            let dir = unwrap_node!(x, NetType);
+
+            match dir{ // "Var" token was not found
+                Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) =>
+                    return structures::SvNetType::Supply0,
+                Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) =>
+                    return structures::SvNetType::Supply1,
+                Some(RefNode::NetType(sv_parser::NetType::Triand(_))) =>
+                    return structures::SvNetType::Triand,
+                Some(RefNode::NetType(sv_parser::NetType::Trior(_))) =>
+                    return structures::SvNetType::Trior,
+                Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) =>
+                    return structures::SvNetType::Trireg,
+                Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) =>
+                    return structures::SvNetType::Tri0,
+                Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) =>
+                    return structures::SvNetType::Tri1,
+                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) =>
+                    return structures::SvNetType::Tri,
+                Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) =>
+                    return structures::SvNetType::Uwire,
+                Some(RefNode::NetType(sv_parser::NetType::Wire(_))) =>
+                    return structures::SvNetType::Wire,
+                Some(RefNode::NetType(sv_parser::NetType::Wand(_))) =>
+                    return structures::SvNetType::Wand,
+                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) =>
+                    return structures::SvNetType::Wor,
+                
+                _ => match direction{ // Explicit net type was not found
+
+                    structures::SvPortDirection::Inout | structures::SvPortDirection::Input =>
+                        return structures::SvNetType::Wire, // For input/inout direction, default: net of net type wire
+
+                    structures::SvPortDirection::Output => {
+                        match unwrap_node!(m, IntegerVectorType, IntegerAtomType, NonIntegerType) {  // VNotes Add array enum, struct, class!
+                            Some(_) => return structures::SvNetType::NA, // For output with explicit data type, default: variable
+                            _ => return structures::SvNetType::Wire, // For output with no explicit data type, default: net of net type wire
+                        }
+                    },
+
+                    structures::SvPortDirection::Ref => {
+                        return structures::SvNetType::NA; // For ref, default: variable
+                    },
+
+                    _  => unreachable!() // Should never get here - IMPLICIT should never be used by ANSI
+
+                }
+            }       
+        },
+
+        _ => unreachable!(), // VNotes: Should never get here - Always one of the two must be available
     }
 }
 
-fn implicit_handler_ansi(s: &structures::SvPort){
-    //println!("nothing");
+
+fn port_signedness_ansi(
+    m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
+    
+    let dir = unwrap_node!(m, Signing);
+    match dir {
+        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) =>
+            structures::SvSignedness::Signed,
+        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) =>
+            structures::SvSignedness::Unsigned,
+        _ =>
+            structures::SvSignedness::Unsigned, // VNotes: The default is signed
+    }
+
 }
+
+
+
+
+// fn port_check_inheritance_ansi(
+//     m: &sv_parser::AnsiPortDeclaration) -> bool {
+//         match (m, )
+// }
+
+
 
 fn parse_module_declaration_ansi_port(
     p: &sv_parser::AnsiPortDeclaration,
@@ -387,28 +490,32 @@ fn parse_module_declaration_ansi_port(
 ) -> structures::SvPort {
     //println!("port={:?}", p);
 
-    let vet1 = structures::SvUnpackedDimensions{ // VNotes
+    let vet1 = structures::SvUnpackedDimensions{ // VNotes {TEMP}
         dimensions: Vec::new(),
     };
 
-    let vet2 = structures::SvPackedDimensions{ // VNotes
+    let vet2 = structures::SvPackedDimensions{ // VNotes {TEMP}
         dimensions: Vec::new(),
     };
+
+    // VNotes complete inheritance
+
+    // let replicate = port_check_inheritance_ansi()
 
     let ret = structures::SvPort { // VNotes: Attention order of compilation in the following lines matters!
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction_ansi(p),
-        nettype: None,
-        datakind: port_datakind_ansi(p),
-        datatype: port_datatype_ansi(p, syntax_tree),
-        signedness: structures::SvSignedness::Signed,
+        nettype: port_nettype_ansi(p, &port_direction_ansi(p)),
+        datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p))),
+        datatype: port_datatype_ansi(p),
+        signedness: port_signedness_ansi(p),
         unpacked_dim: vet1,
         packed_dim: vet2,
         port_expression: String::from("Same"),
 
     };
 
-    implicit_handler_ansi(&ret);
+    println!("{:?}", ret); // VNotes: Used for debugging
 
     return ret;
 }

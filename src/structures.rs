@@ -25,8 +25,8 @@ pub struct SvParameter {
     pub datatype: String,
 }
 
-// "IMPLICIT" is only used for NON-ANSI over a full parsing phase and temporarily for Ansi since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
-// In case of an ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)  
+// "IMPLICIT" is only used for NON-ANSI since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
+// In case of an NON-ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)  
 // "IMPLICIT" should never be left in the end of a full parse (1st phase) - For Non-Ansi models and during phase 1 an "IMPLICIT handler function will be responsible for placing the default
 // entries based on what is left IMPLICIT and what is not
 
@@ -40,7 +40,7 @@ pub enum SvPortDirection {
 }
 
 #[derive(Debug, Serialize)]
-pub enum SvDatakind {
+pub enum SvDataKind {
     Net,
     Variable,
     IMPLICIT,
@@ -50,9 +50,17 @@ pub enum SvDatakind {
 pub enum SvDataType {
     Logic,
     Reg,
+    Bit,
+    Byte,
     Integer,
-    Array,
+    Int,
+    Shortint,
+    Longint,
+    Time,
     Real,
+    Shortreal,
+    Realtime,
+    Array,
     Enum,
     Struct,
     Class,
@@ -62,10 +70,12 @@ pub enum SvDataType {
 #[derive(Debug, Serialize)]
 pub enum SvNetType {
     Wire,
+    Uwire,
     Tri,
     Wor,
     Wand,
     Triand,
+    Trior,
     Trireg,
     Tri0,
     Tri1,
@@ -97,9 +107,9 @@ pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
     pub port_expression: String, // Identifier of the internal object connected to the port (allows e.g: .a(i))
-    pub datakind: SvDatakind,
-    pub datatype: String,
-    pub nettype: Option<SvNetType>,
+    pub datakind: SvDataKind,
+    pub datatype: SvDataType,
+    pub nettype: SvNetType,
     pub signedness: SvSignedness,
     pub unpacked_dim: SvUnpackedDimensions,
     pub packed_dim: SvPackedDimensions,
