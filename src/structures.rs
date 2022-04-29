@@ -60,10 +60,12 @@ pub enum SvDataType {
     Real,
     Shortreal,
     Realtime,
-    Array,
-    Enum,
-    Struct,
+    Array, // 
+    Enum, // Class?
+    Struct, //Class?
+    Union, // Class?
     Class,
+    TypeRef, // VNotes: That means whatever the datatype of reference is
     IMPLICIT,
 }
 
