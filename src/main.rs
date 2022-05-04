@@ -172,18 +172,19 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str) -> () { // VNotes
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(x) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
+                    let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
                     println!("ENTER ANSI module: {}", id);
 
-                    let d = parse_module_declaration_ansi(x, &syntax_tree, filepath);
-                    println!("  {:?}", d);
+                    let d = parse_module_declaration_ansi(node, x, &syntax_tree, filepath);
+                    //println!("  {:?}", d);
+                    println!("{}", d); // VNotes: Used for debugging deplay trait
 
                 }
                 RefNode::ModuleDeclarationNonansi(x) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
+                    let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
                     println!("ENTER non-ANSI module: {}", id);
 
-                    let d = parse_module_declaration_nonansi(x, &syntax_tree);
+                    let d = parse_module_declaration_nonansi(node, x, &syntax_tree);
                     println!("  {:?}", d);
 
                 }
@@ -279,10 +280,12 @@ fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> 
 // This is the core of the parsed data into structures for the ansi models
 
 fn parse_module_declaration_ansi(
+    node: RefNode,
     m: &sv_parser::ModuleDeclarationAnsi,
     syntax_tree: &SyntaxTree, filepath: &str // VNotes
 ) -> structures::SvModuleDeclaration {
     let mut ret = structures::SvModuleDeclaration {
+        identifier: module_identifier(node, syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
         filepath: String::from(filepath), // VNotes
@@ -307,10 +310,12 @@ fn parse_module_declaration_ansi(
 }
 
 fn parse_module_declaration_nonansi(
+    _node: RefNode,
     _m: &sv_parser::ModuleDeclarationNonansi,
     _syntax_tree: &SyntaxTree,
 ) -> structures::SvModuleDeclaration {
     let ret = structures::SvModuleDeclaration {
+        identifier: module_identifier(_node, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
         filepath: String::new(), // VNotes
@@ -523,11 +528,11 @@ fn parse_module_declaration_ansi_port(
     //println!("port={:?}", p);
 
     let vet1 = structures::SvUnpackedDimensions{ // VNotes {TEMP}
-        dimensions: Vec::new(),
+        dimensions: vec![String::from("Not supported yet")],
     };
 
     let vet2 = structures::SvPackedDimensions{ // VNotes {TEMP}
-        dimensions: Vec::new(),
+        dimensions: vec![String::from("Not supported yet")],
     };
 
     // VNotes complete inheritance
@@ -564,7 +569,7 @@ fn parse_module_declaration_ansi_port(
         };
     }
 
-    println!("{:?}", ret); // VNotes: Used for debugging
+    //println!("{:?}", ret); // VNotes: Used for debugging
 
     return ret;
 }

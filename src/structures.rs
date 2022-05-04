@@ -1,4 +1,5 @@
 use serde::Serialize;
+use std::fmt;
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvData {
@@ -8,6 +9,7 @@ pub struct SvData {
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvModuleDeclaration {
+    pub identifier: String,
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
     pub filepath: String,
@@ -116,3 +118,61 @@ pub struct SvPort {
     pub unpacked_dim: SvUnpackedDimensions,
     pub packed_dim: SvPackedDimensions,
 }
+
+// VNotes: SvData, Packages, and Port_Parameters are not yet supported
+impl fmt::Display for SvModuleDeclaration{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        
+        writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
+        writeln!(f, "  Identifier: {}", self.identifier)?;
+        writeln!(f, "  Type: {}", self.declaration_type)?;
+        writeln!(f, "  Filepath: {}", self.filepath)?;
+
+        for port in self.ports.clone(){
+            write!(f, "{}", port)?;
+        }
+
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvPort{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        
+        writeln!(f, "  Port: ")?;
+        writeln!(f, "    Identifier: {}", self.identifier)?;
+        writeln!(f, "    Direction: {:?}", self.direction)?;
+        writeln!(f, "    Expression: {}", self.port_expression)?;
+        writeln!(f, "    DataKind: {:?}", self.datakind)?;
+        writeln!(f, "    DataType: {:?}", self.datatype)?;
+        writeln!(f, "    NetType: {:?}", self.nettype)?;
+        writeln!(f, "    Signedness: {:?}", self.signedness)?;
+        writeln!(f, "    Unpacked Dim: {}", self.unpacked_dim)?;
+        writeln!(f, "    Packed Dim: {}", self.packed_dim) 
+
+    }
+}
+
+impl fmt::Display for SvPackedDimensions{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+
+        for dim in self.dimensions.clone(){
+            write!(f, "{}", dim)?;
+        }
+
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvUnpackedDimensions{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+
+        for dim in self.dimensions.clone(){
+            write!(f, "{}", dim)?;
+        }
+
+        write!(f, "")
+    }
+}
+
+
