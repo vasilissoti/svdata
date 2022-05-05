@@ -1,0 +1,95 @@
+Module:
+  Identifier: Doo
+  Type: ANSI
+  Filepath: testcases_display_format/sv_files/ansi_ports_extraction_test_case_1.sv
+  Port: 
+    Identifier: i_first
+    Direction: Input
+    Expression: Same
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: i_foo
+    Direction: Input
+    Expression: Same
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: vasilis
+    Direction: Input
+    Expression: Same
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: i_bar
+    Direction: Input
+    Expression: Same
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: o_yesvar
+    Direction: Output
+    Expression: Same
+    DataKind: Variable
+    DataType: Logic
+    NetType: NA
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: vasilis2
+    Direction: Output
+    Expression: Same
+    DataKind: Variable
+    DataType: Logic
+    NetType: NA
+    Signedness: Signed
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: o_novar
+    Direction: Output
+    Expression: Same
+    DataKind: Variable
+    DataType: Class
+    NetType: NA
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: o_third
+    Direction: Output
+    Expression: Same
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+  Port: 
+    Identifier: o_fourth
+    Direction: Output
+    Expression: Same
+    DataKind: Variable
+    DataType: Logic
+    NetType: NA
+    Signedness: Unsigned
+    Unpacked Dim: Not supported yet
+    Packed Dim: Not supported yet
+

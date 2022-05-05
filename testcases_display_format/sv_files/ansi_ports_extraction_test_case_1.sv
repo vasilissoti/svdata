@@ -7,7 +7,7 @@ module Doo
 #(int FIRST = 123
 , bit SECOND = 1'b1
 )
-( input reg signed i_first, i_foo, logic vasilis
+( input signed i_first, i_foo, unsigned vasilis
 , input i_bar
 , output logic o_yesvar, signed vasilis2
 , output my_struct_t o_novar

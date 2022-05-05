@@ -525,9 +525,11 @@ dependencies = [
  "anyhow",
  "clap",
  "enquote",
+ "regex",
  "serde",
  "sv-parser",
  "verilog-filelist-parser",
+ "walkdir",
 ]
 
 [[package]]

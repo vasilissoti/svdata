@@ -119,7 +119,18 @@ pub struct SvPort {
     pub packed_dim: SvPackedDimensions,
 }
 
-// VNotes: SvData, Packages, and Port_Parameters are not yet supported
+// VNotes: Packages, and Port_Parameters are not yet supported
+
+impl fmt::Display for SvData{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        for module in self.modules.clone(){
+            write!(f, "{}", module)?;
+        }
+
+        write!(f, "")
+    }
+}
+
 impl fmt::Display for SvModuleDeclaration{
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         
@@ -132,7 +143,7 @@ impl fmt::Display for SvModuleDeclaration{
             write!(f, "{}", port)?;
         }
 
-        write!(f, "")
+        writeln!(f, "")
     }
 }
 

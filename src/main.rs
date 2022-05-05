@@ -45,7 +45,7 @@ pub struct Opt {
 pub fn main() {
     let opt = Parser::parse(); // This is from clap
     let exit_code = match run_opt(&opt) {
-        Ok(pass) => {
+        Ok((pass, _)) => {
             if pass {
                 0
             } else {
@@ -61,7 +61,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<bool, Error> { // VNotes: The run opt will return [Err] if something didn't go well or otherwise will return [Ok]
+pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> { // VNotes: The run opt will return [Err] if something didn't go well or otherwise will return [Ok]
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -95,17 +95,21 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> { // VNotes: The run opt will r
     };
 
     let mut all_pass = true;
+    let mut svdata = structures::SvData{ // VNotes
+        modules: Vec::new(),
+        packages: Vec::new(),
+    };
 
     for path in &files {
         
-        println!("");
-        println!("The current path is: {}", path.to_string_lossy().into_owned()); // VNotes
-        println!("");
+        // println!("");
+        // println!("The current path is: {}", path.to_string_lossy().into_owned()); // VNotes
+        // println!("");
         
         let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
-                sv_to_structure(&syntax_tree, &path.to_string_lossy().into_owned()); // VNotes
+                sv_to_structure(&syntax_tree, &path.to_string_lossy().into_owned(), &mut svdata); // VNotes
                 defines = new_defines;
             }
             Err(_) => {
@@ -119,7 +123,17 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> { // VNotes: The run opt will r
         }
     }
 
-    Ok(all_pass)
+    print!("{}", svdata);
+    
+    let ret: Option<structures::SvData>; // VNotes
+    if all_pass{ // VNotes
+        ret = Some(svdata);
+    }
+    else{ // VNotes
+        ret = None;
+    }
+
+    Ok((all_pass, ret)) // VNotes
 }
 
 // In case that the system verilog files are given in the format of a filelist
@@ -157,7 +171,7 @@ fn parse_filelist(
 // Take it for granted up to here
 // The following function is responsible for storing the data to the corresponding structs
 
-fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str) -> () { // VNotes
+fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: & mut structures::SvData) -> () { // VNotes
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
@@ -172,12 +186,12 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str) -> () { // VNotes
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(x) => {
-                    let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
-                    println!("ENTER ANSI module: {}", id);
+                    //let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
+                    //println!("ENTER ANSI module: {}", id);
 
                     let d = parse_module_declaration_ansi(node, x, &syntax_tree, filepath);
-                    //println!("  {:?}", d);
-                    println!("{}", d); // VNotes: Used for debugging deplay trait
+                    svdata.modules.push(d.clone());
+                    //println!("{}", d); // VNotes: Used for debugging deplay trait
 
                 }
                 RefNode::ModuleDeclarationNonansi(x) => {
@@ -194,8 +208,8 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str) -> () { // VNotes
             match node {
                 RefNode::ModuleDeclarationAnsi(_) |
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
-                    println!("LEAVE module: {}", id);
+                    //let id = module_identifier(node, &syntax_tree).unwrap();
+                    //println!("LEAVE module: {}", id);
 
                 }
                 _ => (),
@@ -581,4 +595,34 @@ fn parse_package_declaration() -> structures::SvPackageDeclaration {
 fn parse_package_declaration_parameter() -> structures::SvParameter {
 }
 */
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs::File;
+    use std::io::{BufReader, Read};
+
+    fn test_display_format(name: &str){
+
+        let sv_path = format!("testcases_display_format/sv_files/{}.sv", name);
+        let expected_path = format!("testcases_display_format/expected/{}.md", name);
+
+        let expected_file = File::open(expected_path).unwrap();
+        let mut expected_file = BufReader::new(expected_file);
+        let mut expected_string = String::new();
+        let _ = expected_file.read_to_string(&mut expected_string);
+
+        let args = vec!["svdata", &sv_path];
+        let opt = Opt::parse_from(args.iter());
+
+        let (_, svdata) = run_opt(&opt).unwrap();
+        let actual_string: String = format!("{}", svdata.unwrap());
+        
+        assert_eq!(expected_string, actual_string);
+        
+    }
+
+    include!(concat!(env!("OUT_DIR"), "/test_display_format.rs")); // VNotes: The rust script contains the individual functions - Within each of these functions there is a call to the above test_display_format fn
+}
+
 
