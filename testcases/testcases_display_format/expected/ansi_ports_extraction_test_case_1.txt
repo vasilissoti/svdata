@@ -1,7 +1,7 @@
 Module:
   Identifier: Doo
   Type: ANSI
-  Filepath: testcases_display_format/sv_files/ansi_ports_extraction_test_case_1.sv
+  Filepath: testcases/sv_files/ansi_ports_extraction_test_case_1.sv
   Port: 
     Identifier: i_first
     Direction: Input

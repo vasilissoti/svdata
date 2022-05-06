@@ -600,13 +600,14 @@ fn parse_package_declaration_parameter() -> structures::SvParameter {
 mod tests {
     use super::*;
     use std::fs::File;
-    use std::io::{BufReader, Read};
+    use std::io::{BufReader, BufWriter, Read, Write};
+    use serde_json;
 
-    fn test_display_format(name: &str){
+    fn tests(name: &str){
 
-        let sv_path = format!("testcases_display_format/sv_files/{}.sv", name);
-        let expected_path = format!("testcases_display_format/expected/{}.md", name);
-
+        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        
+        let expected_path = format!("testcases/testcases_display_format/expected/{}.txt", name);
         let expected_file = File::open(expected_path).unwrap();
         let mut expected_file = BufReader::new(expected_file);
         let mut expected_string = String::new();
@@ -616,13 +617,49 @@ mod tests {
         let opt = Opt::parse_from(args.iter());
 
         let (_, svdata) = run_opt(&opt).unwrap();
-        let actual_string: String = format!("{}", svdata.unwrap());
-        
-        assert_eq!(expected_string, actual_string);
+        let actual_string: String = format!("{}", svdata.clone().unwrap());
+
+        // VNotes: In order to enable visualization of the obtained values
+        let actual_path = format!("testcases/testcases_display_format/obtained/{}.txt", name);
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_string, actual_string); // Testing: Display format
+
+        let expected_path = format!("testcases/testcases_json_format/expected/{}.json", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_json_value: serde_json::Value = serde_json::from_reader(expected_file).unwrap(); // VNotes: Interpret as JSON string to ensure that if the structure is correct, text appearance doesn't matter
+
+        let actual_string: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
+
+        let actual_path = format!("testcases/testcases_json_format/obtained/{}.json", name);
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_json_value, actual_json_value); // Testing: JSON format
+
+        let expected_path = format!("testcases/testcases_yaml_format/expected/{}.yaml", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(expected_file).unwrap(); // VNotes: Interpret as YAML string to ensure that if the structure is correct, text appearance doesn't matter
+
+        let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
+
+        let actual_path = format!("testcases/testcases_yaml_format/obtained/{}.yaml", name);
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_yaml_value, actual_yaml_value); // Testing: YAML format
         
     }
 
-    include!(concat!(env!("OUT_DIR"), "/test_display_format.rs")); // VNotes: The rust script contains the individual functions - Within each of these functions there is a call to the above test_display_format fn
+    include!(concat!(env!("OUT_DIR"), "/tests.rs")); // VNotes: The rust script contains the individual functions - Within each of these functions there is a call to the above tests fn
 }
 
 

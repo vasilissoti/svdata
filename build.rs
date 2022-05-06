@@ -10,7 +10,7 @@ fn main(){
 
 
     let mut entries = Vec::new();
-    for entry in WalkDir::new("testcases_display_format/expected") {
+    for entry in WalkDir::new("testcases/sv_files") {
         let entry = entry.unwrap();
         if entry.file_type().is_file() {
             let file_name = String::from(entry.path().file_stem().unwrap().to_string_lossy());
@@ -23,15 +23,15 @@ fn main(){
     // Output 'test.rs'
     // -------------------------------------------------------------------------------------------------
 
-    let out_test = Path::new(&out_dir).join("test_display_format.rs");
+    let out_test = Path::new(&out_dir).join("tests.rs");
     let mut out_test = File::create(&out_test).unwrap();
 
     for file_name in &entries {
 
         let _ = write!(out_test, "#[test]\n");
         let _ = write!(out_test, "fn test_{}() {{\n", file_name);
-        let _ = write!(out_test, "    test_display_format(\"{}\");\n", file_name);
-        let _ = write!(out_test, "}}\n");
+        let _ = write!(out_test, "    tests(\"{}\");\n", file_name);
+        let _ = writeln!(out_test, "}}\n");
     
     }
 }
