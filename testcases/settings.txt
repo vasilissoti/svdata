@@ -1,0 +1,13 @@
+[Files_Excluded_Overall_Testing:]
+
+[Tested_Formats_To_Run:]
+
+Display: Yes
+JSON: Yes
+YAML: Yes
+
+[Files_Excluded_Display:]
+
+[Files_Excluded_JSON:] ansi_ports_extraction_test_case_1
+
+[Files_Excluded_YAML:]
