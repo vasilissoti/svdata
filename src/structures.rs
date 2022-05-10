@@ -13,7 +13,7 @@ pub struct SvModuleDeclaration {
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
     pub filepath: String,
-    pub declaration_type: String, // "ANSI"/"NONANSI"
+    pub declaration_type: SvModuleDeclarationType,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -25,6 +25,12 @@ pub struct SvPackageDeclaration {
 pub struct SvParameter {
     pub identifier: String,
     pub datatype: String,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvModuleDeclarationType {
+    Ansi,
+    NonAnsi,
 }
 
 // "IMPLICIT" is only used for NON-ANSI since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
@@ -68,6 +74,7 @@ pub enum SvDataType {
     Union, // Class?
     Class,
     TypeRef, // VNotes: That means whatever the datatype of reference is
+    String,
     IMPLICIT,
 }
 
@@ -136,7 +143,7 @@ impl fmt::Display for SvModuleDeclaration{
         
         writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
         writeln!(f, "  Identifier: {}", self.identifier)?;
-        writeln!(f, "  Type: {}", self.declaration_type)?;
+        writeln!(f, "  Type: {:?}", self.declaration_type)?;
         writeln!(f, "  Filepath: {}", self.filepath)?;
 
         for port in self.ports.clone(){

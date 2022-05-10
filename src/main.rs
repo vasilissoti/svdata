@@ -237,18 +237,18 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
 }
 
 // VNotes: For future implementations
-fn _keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> String {
+fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = match unwrap_node!(parent, Keyword){
-        Some(RefNode::Keyword(x)) => { // VNotes Question ?
+        Some(RefNode::Keyword(x)) => {
             Some(x.nodes.0)
         },
 
-        _ => unreachable!(),
+        _ => None,
     };
 
     match id {
-        Some(x) => syntax_tree.get_str(&x).unwrap().to_string(),
-        _ => unreachable!(),
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
+        _ => None,
     }
 
 }
@@ -303,7 +303,7 @@ fn parse_module_declaration_ansi(
         parameters: Vec::new(),
         ports: Vec::new(),
         filepath: String::from(filepath), // VNotes
-        declaration_type: String::from("ANSI"), // VNotes
+        declaration_type: structures::SvModuleDeclarationType::Ansi, // VNotes
     };
 
     let mut prev_port: Option<structures::SvPort> = None;
@@ -313,7 +313,7 @@ fn parse_module_declaration_ansi(
             RefNode::ParameterDeclarationParam(p) =>
                 ret.parameters.push(parse_module_declaration_ansi_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
-                let parsed_port: structures::SvPort = parse_module_declaration_ansi_port(p, syntax_tree, &prev_port.clone());
+                let parsed_port: structures::SvPort = parse_module_declaration_ansi_port(p, node, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
             },
@@ -333,7 +333,7 @@ fn parse_module_declaration_nonansi(
         parameters: Vec::new(),
         ports: Vec::new(),
         filepath: String::new(), // VNotes
-        declaration_type: String::new(), // VNotes
+        declaration_type: structures::SvModuleDeclarationType::NonAnsi, // VNotes
     };
     // TODO
     ret
@@ -391,10 +391,10 @@ fn port_datakind_ansi( // VNotes
 }
 
 fn port_datatype_ansi( // VNotes
-    node: &sv_parser::AnsiPortDeclaration
+    node: RefNode, syntax_tree: &SyntaxTree
 ) -> structures::SvDataType {
 
-    let dir = unwrap_node!(node, IntegerVectorType, IntegerAtomType, NonIntegerType, ClassType, TypeReference);
+    let dir = unwrap_node!(node.clone(), IntegerVectorType, IntegerAtomType, NonIntegerType, ClassType, TypeReference);
     match dir {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) =>
             structures::SvDataType::Logic,
@@ -424,14 +424,34 @@ fn port_datatype_ansi( // VNotes
             structures::SvDataType::Class,
         Some(RefNode::TypeReference(_)) =>
             structures::SvDataType::TypeRef,
-        _ =>
-            structures::SvDataType::Logic, // VNotes: Default = Logic
+        _ => {
+                match unwrap_node!(node.clone(), DataType){
+
+                    Some(_) => { 
+                        match keyword(node, syntax_tree){
+                            Some(x) => {
+                                if x == "string" {
+                                    return structures::SvDataType::String;
+                                }
+
+                                else {
+                                    println!("{}", x);
+                                    unreachable!(); // VNotes: This is a more strict measure in order to ensure that we haven't forgotten any data type
+                                }
+                            },
+
+                            _ => unreachable!(), //VNotes: We should never end up here!
+                        }                           
+                    },
+                    _ => return structures::SvDataType::Logic
+                }     
+        }
     }
 
 }
 
 fn port_nettype_ansi(
-    m: &sv_parser::AnsiPortDeclaration, direction: &structures::SvPortDirection, prev_port: &Option<structures::SvPort>) -> structures::SvNetType {
+    m: &sv_parser::AnsiPortDeclaration, direction: &structures::SvPortDirection) -> structures::SvNetType {
 
     let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match dir{
@@ -470,22 +490,12 @@ fn port_nettype_ansi(
                 _ => match direction{ // Explicit net type was not found
 
                     structures::SvPortDirection::Inout | structures::SvPortDirection::Input => {
-                        let dir = unwrap_node!(m, PortDirection);
-                        match dir {
-                            Some(_) => return structures::SvNetType::Wire, // For input/inout direction, if explicit direction found, no hierarchy for net type and data kind, default: net of net type wire
-                            _ => return prev_port.clone().unwrap().nettype, // Else inherit from previous port
-                        }
+                        return structures::SvNetType::Wire;
                     },
                     structures::SvPortDirection::Output => {
                         match unwrap_node!(m,  IntegerVectorType, IntegerAtomType, NonIntegerType, ClassType, TypeReference) {  // VNotes Add array enum, struct, class!
                             Some(_) => return structures::SvNetType::NA, // For output with explicit data type, default: variable
-                            _ => {
-                                let dir = unwrap_node!(m, PortDirection);
-                                match dir{
-                                    Some(_) => return structures::SvNetType::Wire, // For output with no explicit data type, default: net of net type wire
-                                    _ => return prev_port.clone().unwrap().nettype, // Else inherit from previous port
-                                }
-                            }
+                            _ => return structures::SvNetType::Wire,
                         }
                     },
 
@@ -536,7 +546,7 @@ fn port_check_inheritance_ansi(
 
 
 fn parse_module_declaration_ansi_port(
-    p: &sv_parser::AnsiPortDeclaration,
+    p: &sv_parser::AnsiPortDeclaration, node: RefNode,
     syntax_tree: &SyntaxTree, prev_port: &Option<structures::SvPort>
 ) -> structures::SvPort {
     //println!("port={:?}", p);
@@ -558,9 +568,9 @@ fn parse_module_declaration_ansi_port(
         ret = structures::SvPort { // VNotes: Attention order of compilation in the following lines matters!
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
-            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), prev_port),
-            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port), prev_port)),
-            datatype: port_datatype_ansi(p),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
+            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
+            datatype: port_datatype_ansi(node, syntax_tree),
             signedness: port_signedness_ansi(p),
             unpacked_dim: vet1,
             packed_dim: vet2,
