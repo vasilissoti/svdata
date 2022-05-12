@@ -61,7 +61,7 @@ impl fmt::Display for SvData {
 
 impl fmt::Display for SvModuleDeclaration {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
+        writeln!(f, "Module:")?;
         writeln!(f, "  Identifier: {}", self.identifier)?;
 
         for port in self.ports.clone() {
