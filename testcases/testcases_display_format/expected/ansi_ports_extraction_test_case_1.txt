@@ -1,6 +1,6 @@
 Module:
   Identifier: Doo
-  Type: ANSI
+  Type: Ansi
   Filepath: testcases/sv_files/ansi_ports_extraction_test_case_1.sv
   Port: 
     Identifier: i_first
@@ -56,9 +56,9 @@ Module:
     Identifier: vasilis2
     Direction: Output
     Expression: Same
-    DataKind: Variable
+    DataKind: Net
     DataType: Logic
-    NetType: NA
+    NetType: Wire
     Signedness: Signed
     Unpacked Dim: Not supported yet
     Packed Dim: Not supported yet

@@ -34,7 +34,7 @@ pub enum SvModuleDeclarationType {
 }
 
 // "IMPLICIT" is only used for NON-ANSI since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
-// In case of an NON-ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)  
+// In case of an NON-ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)
 // "IMPLICIT" should never be left in the end of a full parse (1st phase) - For Non-Ansi models and during phase 1 an "IMPLICIT handler function will be responsible for placing the default
 // entries based on what is left IMPLICIT and what is not
 
@@ -68,10 +68,10 @@ pub enum SvDataType {
     Real,
     Shortreal,
     Realtime,
-    Array, // 
-    Enum, // Class?
+    Array,  //
+    Enum,   // Class?
     Struct, //Class?
-    Union, // Class?
+    Union,  // Class?
     Class,
     TypeRef, // VNotes: That means whatever the datatype of reference is
     String,
@@ -128,9 +128,9 @@ pub struct SvPort {
 
 // VNotes: Packages, and Port_Parameters are not yet supported
 
-impl fmt::Display for SvData{
+impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        for module in self.modules.clone(){
+        for module in self.modules.clone() {
             write!(f, "{}", module)?;
         }
 
@@ -138,15 +138,14 @@ impl fmt::Display for SvData{
     }
 }
 
-impl fmt::Display for SvModuleDeclaration{
+impl fmt::Display for SvModuleDeclaration {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        
         writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
         writeln!(f, "  Identifier: {}", self.identifier)?;
         writeln!(f, "  Type: {:?}", self.declaration_type)?;
         writeln!(f, "  Filepath: {}", self.filepath)?;
 
-        for port in self.ports.clone(){
+        for port in self.ports.clone() {
             write!(f, "{}", port)?;
         }
 
@@ -154,9 +153,8 @@ impl fmt::Display for SvModuleDeclaration{
     }
 }
 
-impl fmt::Display for SvPort{
+impl fmt::Display for SvPort {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        
         writeln!(f, "  Port: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
         writeln!(f, "    Direction: {:?}", self.direction)?;
@@ -166,15 +164,13 @@ impl fmt::Display for SvPort{
         writeln!(f, "    NetType: {:?}", self.nettype)?;
         writeln!(f, "    Signedness: {:?}", self.signedness)?;
         writeln!(f, "    Unpacked Dim: {}", self.unpacked_dim)?;
-        writeln!(f, "    Packed Dim: {}", self.packed_dim) 
-
+        writeln!(f, "    Packed Dim: {}", self.packed_dim)
     }
 }
 
-impl fmt::Display for SvPackedDimensions{
+impl fmt::Display for SvPackedDimensions {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-
-        for dim in self.dimensions.clone(){
+        for dim in self.dimensions.clone() {
             write!(f, "{}", dim)?;
         }
 
@@ -182,14 +178,12 @@ impl fmt::Display for SvPackedDimensions{
     }
 }
 
-impl fmt::Display for SvUnpackedDimensions{
+impl fmt::Display for SvUnpackedDimensions {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-
-        for dim in self.dimensions.clone(){
+        for dim in self.dimensions.clone() {
             write!(f, "{}", dim)?;
         }
 
         write!(f, "")
     }
 }
-

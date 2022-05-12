@@ -71,9 +71,9 @@ modules:
       - identifier: vasilis2
         direction: Output
         port_expression: Same
-        datakind: Variable
+        datakind: Net
         datatype: Logic
-        nettype: NA
+        nettype: Wire
         signedness: Signed
         unpacked_dim:
           dimensions:
@@ -121,5 +121,5 @@ modules:
           dimensions:
             - Not supported yet
     filepath: testcases/sv_files/ansi_ports_extraction_test_case_1.sv
-    declaration_type: ANSI
+    declaration_type: Ansi
 packages: []

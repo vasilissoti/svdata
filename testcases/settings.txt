@@ -8,6 +8,6 @@ YAML: Yes
 
 [Files_Excluded_Display:]
 
-[Files_Excluded_JSON:] ansi_ports_extraction_test_case_1
+[Files_Excluded_JSON:]
 
 [Files_Excluded_YAML:]
