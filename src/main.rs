@@ -114,6 +114,8 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
             all_pass = false;
         }
     }
+    
+    println!("{}", svdata);
 
     Ok(all_pass)
 }
@@ -162,20 +164,20 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, svdata: & mut structures::SvData) -
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(_) => {
-                    let id = module_identifier(node.clone(), &syntax_tree).unwrap();
-                    println!("ENTER ANSI module: {}", id);
+                    // let id = module_identifier(node.clone(), &syntax_tree).unwrap();
+                    // println!("ENTER ANSI module: {}", id);
 
                     let d = parse_module_declaration_ansi(node, &syntax_tree);
                     svdata.modules.push(d.clone());
-                    println!("  {:?}", d);
+                    // println!("  {:?}", d);
 
                 }
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let id = module_identifier(node.clone(), &syntax_tree).unwrap();
-                    println!("ENTER non-ANSI module: {}", id);
+                    // let id = module_identifier(node.clone(), &syntax_tree).unwrap();
+                    // println!("ENTER non-ANSI module: {}", id);
 
                     let d = parse_module_declaration_nonansi(node, &syntax_tree);
-                    println!("  {:?}", d);
+                    // println!("  {:?}", d);
 
                 }
                 _ => (),
@@ -184,8 +186,8 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, svdata: & mut structures::SvData) -
             match node {
                 RefNode::ModuleDeclarationAnsi(_) |
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
-                    println!("LEAVE module: {}", id);
+                    // let id = module_identifier(node, &syntax_tree).unwrap();
+                    // println!("LEAVE module: {}", id);
 
                 }
                 _ => (),

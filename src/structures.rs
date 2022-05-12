@@ -1,5 +1,5 @@
-
 use serde::Serialize;
+use std::fmt;
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvData {
@@ -49,3 +49,38 @@ pub struct SvPort {
     pub datatype: String,
 }
 
+impl fmt::Display for SvData{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        for module in self.modules.clone(){
+            write!(f, "{}", module)?;
+        }
+
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvModuleDeclaration{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        
+        writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
+        writeln!(f, "  Identifier: {}", self.identifier)?;
+
+        for port in self.ports.clone(){
+            write!(f, "{}", port)?;
+        }
+
+        writeln!(f, "")
+    }
+}
+
+impl fmt::Display for SvPort{
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        
+        writeln!(f, "  Port: ")?;
+        writeln!(f, "    Identifier: {}", self.identifier)?;
+        writeln!(f, "    Direction: {:?}", self.direction)?;
+        writeln!(f, "    DataKind: {:?}", self.datakind)?;
+        writeln!(f, "    DataType: {:?}", self.datatype) 
+
+    }
+}
