@@ -92,12 +92,16 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
     };
 
     let mut all_pass = true;
+    let mut svdata = structures::SvData{ // VNotes
+        modules: Vec::new(),
+        packages: Vec::new(),
+    };
 
     for path in &files {
         let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
-                sv_to_structure(&syntax_tree);
+                sv_to_structure(&syntax_tree, &mut svdata);
                 defines = new_defines;
             }
             Err(_) => {
@@ -144,7 +148,7 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
+fn sv_to_structure(syntax_tree: &SyntaxTree, svdata: & mut structures::SvData) -> () {
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
@@ -157,19 +161,20 @@ fn sv_to_structure(syntax_tree: &SyntaxTree) -> () {
 
         if enter_not_leave {
             match node {
-                RefNode::ModuleDeclarationAnsi(x) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
+                RefNode::ModuleDeclarationAnsi(_) => {
+                    let id = module_identifier(node.clone(), &syntax_tree).unwrap();
                     println!("ENTER ANSI module: {}", id);
 
-                    let d = parse_module_declaration_ansi(x, &syntax_tree);
+                    let d = parse_module_declaration_ansi(node, &syntax_tree);
+                    svdata.modules.push(d.clone());
                     println!("  {:?}", d);
 
                 }
-                RefNode::ModuleDeclarationNonansi(x) => {
-                    let id = module_identifier(node, &syntax_tree).unwrap();
+                RefNode::ModuleDeclarationNonansi(_) => {
+                    let id = module_identifier(node.clone(), &syntax_tree).unwrap();
                     println!("ENTER non-ANSI module: {}", id);
 
-                    let d = parse_module_declaration_nonansi(x, &syntax_tree);
+                    let d = parse_module_declaration_nonansi(node, &syntax_tree);
                     println!("  {:?}", d);
 
                 }
@@ -236,13 +241,16 @@ fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> 
 }
 
 fn parse_module_declaration_ansi(
-    m: &sv_parser::ModuleDeclarationAnsi,
+
+    m: RefNode,
     syntax_tree: &SyntaxTree,
 ) -> structures::SvModuleDeclaration {
     let mut ret = structures::SvModuleDeclaration {
+        identifier: module_identifier(m.clone(), syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
     };
+
     for node in m {
         match node {
             RefNode::ParameterDeclarationParam(p) =>
@@ -257,10 +265,11 @@ fn parse_module_declaration_ansi(
 }
 
 fn parse_module_declaration_nonansi(
-    _m: &sv_parser::ModuleDeclarationNonansi,
+    _m: RefNode,
     _syntax_tree: &SyntaxTree,
 ) -> structures::SvModuleDeclaration {
     let ret = structures::SvModuleDeclaration {
+        identifier: module_identifier(_m, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
     };
