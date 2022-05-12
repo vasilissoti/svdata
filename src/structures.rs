@@ -49,9 +49,9 @@ pub struct SvPort {
     pub datatype: String,
 }
 
-impl fmt::Display for SvData{
+impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        for module in self.modules.clone(){
+        for module in self.modules.clone() {
             write!(f, "{}", module)?;
         }
 
@@ -59,13 +59,12 @@ impl fmt::Display for SvData{
     }
 }
 
-impl fmt::Display for SvModuleDeclaration{
+impl fmt::Display for SvModuleDeclaration {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        
         writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
         writeln!(f, "  Identifier: {}", self.identifier)?;
 
-        for port in self.ports.clone(){
+        for port in self.ports.clone() {
             write!(f, "{}", port)?;
         }
 
@@ -73,14 +72,12 @@ impl fmt::Display for SvModuleDeclaration{
     }
 }
 
-impl fmt::Display for SvPort{
+impl fmt::Display for SvPort {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        
         writeln!(f, "  Port: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
         writeln!(f, "    Direction: {:?}", self.direction)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
-        writeln!(f, "    DataType: {:?}", self.datatype) 
-
+        writeln!(f, "    DataType: {:?}", self.datatype)
     }
 }
