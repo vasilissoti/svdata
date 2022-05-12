@@ -92,7 +92,7 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
     };
 
     let mut all_pass = true;
-    let mut svdata = structures::SvData{ // VNotes
+    let mut svdata = structures::SvData{
         modules: Vec::new(),
         packages: Vec::new(),
     };
