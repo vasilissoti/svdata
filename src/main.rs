@@ -99,7 +99,7 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
         let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
-                sv_to_structure(&syntax_tree, &mut svdata);
+                sv_to_structure(&syntax_tree, &path.to_string_lossy().into_owned(), &mut svdata);
                 defines = new_defines;
             }
             Err(_) => {
@@ -148,7 +148,7 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-fn sv_to_structure(syntax_tree: &SyntaxTree, svdata: &mut structures::SvData) -> () {
+fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut structures::SvData) -> () {
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
@@ -162,11 +162,11 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, svdata: &mut structures::SvData) ->
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(_) => {
-                    let d = parse_module_declaration_ansi(node, &syntax_tree);
+                    let d = parse_module_declaration_ansi(node, &syntax_tree, filepath);
                     svdata.modules.push(d.clone());
                 }
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let _d = parse_module_declaration_nonansi(node, &syntax_tree);
+                    let _d = parse_module_declaration_nonansi(node, &syntax_tree, filepath);
                 }
                 _ => (),
             }
@@ -219,11 +219,13 @@ fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> 
 fn parse_module_declaration_ansi(
     m: RefNode,
     syntax_tree: &SyntaxTree,
+    filepath: &str,
 ) -> structures::SvModuleDeclaration {
     let mut ret = structures::SvModuleDeclaration {
         identifier: module_identifier(m.clone(), syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        filepath: String::from(filepath),
     };
 
     for node in m {
@@ -243,11 +245,13 @@ fn parse_module_declaration_ansi(
 fn parse_module_declaration_nonansi(
     _m: RefNode,
     _syntax_tree: &SyntaxTree,
+    _filepath: &str,
 ) -> structures::SvModuleDeclaration {
     let ret = structures::SvModuleDeclaration {
         identifier: module_identifier(_m, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        filepath: String::from(_filepath),
     };
     // TODO
     ret
