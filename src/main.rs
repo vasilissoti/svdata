@@ -195,6 +195,19 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
+fn _keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let id = match unwrap_node!(parent, Keyword) {
+        Some(RefNode::Keyword(x)) => Some(x.nodes.0),
+
+        _ => None,
+    };
+
+    match id {
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
+        _ => None,
+    }
+}
+
 fn _datatype(parent: RefNode, _syntax_tree: &SyntaxTree) -> Option<String> {
     let t = match unwrap_node!(parent, DataType) {
         /*
