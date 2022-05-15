@@ -99,7 +99,11 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
         let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
-                sv_to_structure(&syntax_tree, &path.to_string_lossy().into_owned(), &mut svdata);
+                sv_to_structure(
+                    &syntax_tree,
+                    &path.to_string_lossy().into_owned(),
+                    &mut svdata,
+                );
                 defines = new_defines;
             }
             Err(_) => {
@@ -148,7 +152,11 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut structures::SvData) -> () {
+fn sv_to_structure(
+    syntax_tree: &SyntaxTree,
+    filepath: &str,
+    svdata: &mut structures::SvData,
+) -> () {
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
