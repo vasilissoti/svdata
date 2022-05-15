@@ -228,14 +228,19 @@ fn parse_module_declaration_ansi(
         filepath: String::from(filepath),
     };
 
+    let mut prev_port: Option<structures::SvPort> = None;
+
     for node in m {
         match node {
             RefNode::ParameterDeclarationParam(p) => ret
                 .parameters
                 .push(parse_module_declaration_parameter(p, syntax_tree)),
-            RefNode::AnsiPortDeclaration(p) => ret
-                .ports
-                .push(parse_module_declaration_port(p, syntax_tree)),
+            RefNode::AnsiPortDeclaration(p) => {
+                let parsed_port: structures::SvPort =
+                    parse_module_declaration_port(p, syntax_tree, &prev_port.clone());
+                ret.ports.push(parsed_port.clone());
+                prev_port = Some(parsed_port.clone());
+            }
             _ => (),
         }
     }
@@ -324,6 +329,7 @@ fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree
 fn parse_module_declaration_port(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
+    _prev_port: &Option<structures::SvPort>,
 ) -> structures::SvPort {
     structures::SvPort {
         identifier: port_identifier(p, syntax_tree),
