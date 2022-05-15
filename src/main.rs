@@ -286,7 +286,10 @@ fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTr
     identifier(id, &syntax_tree).unwrap()
 }
 
-fn port_direction_ansi(node: &sv_parser::AnsiPortDeclaration, prev_port: &Option<structures::SvPort>) -> structures::SvPortDirection {
+fn port_direction_ansi(
+    node: &sv_parser::AnsiPortDeclaration,
+    prev_port: &Option<structures::SvPort>,
+) -> structures::SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
     match dir {
         Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) => {
