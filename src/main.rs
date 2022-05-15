@@ -313,7 +313,7 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
     }
 }
 
-fn port_datatype(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &SyntaxTree) -> structures::SvDataType {
+fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &SyntaxTree) -> structures::SvDataType {
     match node {
         sv_parser::AnsiPortDeclaration::Net(p) => match &p.nodes.0 {
             Some(_) => structures::SvDataType::TODO,
@@ -343,7 +343,7 @@ fn parse_module_declaration_port_ansi(
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction(p),
         datakind: port_datakind(p),
-        datatype: port_datatype(p, syntax_tree),
+        datatype: port_datatype_ansi(p, syntax_tree),
     }
 }
 
