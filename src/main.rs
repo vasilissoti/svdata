@@ -314,23 +314,54 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
 }
 
 fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &SyntaxTree) -> structures::SvDataType {
-    match node {
-        sv_parser::AnsiPortDeclaration::Net(p) => match &p.nodes.0 {
-            Some(_) => structures::SvDataType::TODO,
-            None => structures::SvDataType::IMPLICIT,
-        },
-        sv_parser::AnsiPortDeclaration::Variable(p) => match &p.nodes.0 {
-            Some(_x) => {
-                //let t = datatype(x, syntax_tree);
-                let t = Some(String::from("TODO"));
-                match t {
-                    Some(_) => structures::SvDataType::TODO,
-                    _ => structures::SvDataType::IMPLICIT,
-                }
-            }
-            None => structures::SvDataType::IMPLICIT,
-        },
-        sv_parser::AnsiPortDeclaration::Paren(_) => structures::SvDataType::IMPLICIT,
+    let dir = unwrap_node!(
+        node,
+        IntegerVectorType,
+        IntegerAtomType,
+        NonIntegerType,
+        ClassType,
+        TypeReference
+    );
+    match dir {
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
+            structures::SvDataType::Logic
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
+            structures::SvDataType::Reg
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
+            structures::SvDataType::Bit
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
+            structures::SvDataType::Byte
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
+            structures::SvDataType::Shortint
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
+            structures::SvDataType::Int
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
+            structures::SvDataType::Longint
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
+            structures::SvDataType::Integer
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
+            structures::SvDataType::Time
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
+            structures::SvDataType::Shortreal
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
+            structures::SvDataType::Realtime
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
+            structures::SvDataType::Real
+        }
+        Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
+        Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
+        _ => return structures::SvDataType::Logic,
     }
 }
 
