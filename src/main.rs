@@ -245,7 +245,7 @@ fn parse_module_declaration_ansi(
                 .push(parse_module_declaration_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
                 let parsed_port: structures::SvPort =
-                    parse_module_declaration_port(p, syntax_tree, &prev_port.clone());
+                    parse_module_declaration_port_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
             }
@@ -313,28 +313,28 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
     }
 }
 
-fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {
+fn port_datatype(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &SyntaxTree) -> structures::SvDataType {
     match node {
         sv_parser::AnsiPortDeclaration::Net(p) => match &p.nodes.0 {
-            Some(x) => syntax_tree.get_str_trim(x).unwrap().to_string(),
-            None => String::from("IMPLICIT"),
+            Some(_) => structures::SvDataType::TODO,
+            None => structures::SvDataType::IMPLICIT,
         },
         sv_parser::AnsiPortDeclaration::Variable(p) => match &p.nodes.0 {
             Some(_x) => {
                 //let t = datatype(x, syntax_tree);
                 let t = Some(String::from("TODO"));
                 match t {
-                    Some(x) => x,
-                    _ => String::from("IMPLICIT"),
+                    Some(_) => structures::SvDataType::TODO,
+                    _ => structures::SvDataType::IMPLICIT,
                 }
             }
-            None => String::from("IMPLICIT"),
+            None => structures::SvDataType::IMPLICIT,
         },
-        sv_parser::AnsiPortDeclaration::Paren(_) => String::from("IMPLICIT"),
+        sv_parser::AnsiPortDeclaration::Paren(_) => structures::SvDataType::IMPLICIT,
     }
 }
 
-fn parse_module_declaration_port(
+fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
     _prev_port: &Option<structures::SvPort>,

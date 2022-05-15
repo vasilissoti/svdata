@@ -43,11 +43,36 @@ pub enum SvPortDatakind {
 }
 
 #[derive(Debug, Serialize, Clone)]
+pub enum SvDataType {
+    Logic,
+    Reg,
+    Bit,
+    Byte,
+    Integer,
+    Int,
+    Shortint,
+    Longint,
+    Time,
+    Real,
+    Shortreal,
+    Realtime,
+    Array,
+    Enum,
+    Struct,
+    Union,
+    Class,
+    TypeRef,
+    String,
+    IMPLICIT,
+    TODO,
+}
+
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
     pub datakind: SvPortDatakind,
-    pub datatype: String,
+    pub datatype: SvDataType,
 }
 
 impl fmt::Display for SvData {
