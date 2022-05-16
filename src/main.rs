@@ -426,7 +426,6 @@ fn parse_module_declaration_port_ansi(
     syntax_tree: &SyntaxTree,
     prev_port: &Option<structures::SvPort>,
 ) -> structures::SvPort {
-
     let inherit = port_check_inheritance_ansi(p);
     let ret: structures::SvPort;
 
@@ -438,9 +437,7 @@ fn parse_module_declaration_port_ansi(
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
         }
-    }  
-    
-    else {
+    } else {
         ret = structures::SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: prev_port.clone().unwrap().direction,
