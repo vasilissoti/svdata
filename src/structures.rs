@@ -49,6 +49,7 @@ pub enum SvSignedness {
     IMPLICIT,
 }
 
+#[derive(Debug, Serialize, Clone)]
 pub enum SvDataType {
     Logic,
     Reg,
@@ -77,7 +78,7 @@ pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
     pub datakind: SvPortDatakind,
-    pub datatype: String,
+    pub datatype: SvDataType,
     pub signedness: SvSignedness,
 }
 

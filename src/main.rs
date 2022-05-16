@@ -421,7 +421,7 @@ fn parse_module_declaration_port_ansi(
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction_ansi(p, prev_port),
         datakind: port_datakind(p),
-        datatype: port_datatype(p, syntax_tree),
+        datatype: port_datatype_ansi(p, syntax_tree),
         signedness: port_signedness_ansi(p),
     }
 }
