@@ -12,6 +12,7 @@ pub struct SvModuleDeclaration {
     pub identifier: String,
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
+    pub filepath: String,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -63,6 +64,7 @@ impl fmt::Display for SvModuleDeclaration {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "Module:")?;
         writeln!(f, "  Identifier: {}", self.identifier)?;
+        writeln!(f, "  Filepath: {}", self.filepath)?;
 
         for port in self.ports.clone() {
             write!(f, "{}", port)?;
