@@ -43,6 +43,13 @@ pub enum SvPortDatakind {
 }
 
 #[derive(Debug, Serialize, Clone)]
+pub enum SvSignedness {
+    Signed,
+    Unsigned,
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize, Clone)]
 pub enum SvDataType {
     Logic,
     Reg,
@@ -72,6 +79,7 @@ pub struct SvPort {
     pub direction: SvPortDirection,
     pub datakind: SvPortDatakind,
     pub datatype: SvDataType,
+    pub signedness: SvSignedness,
 }
 
 impl fmt::Display for SvData {
@@ -104,6 +112,7 @@ impl fmt::Display for SvPort {
         writeln!(f, "    Identifier: {}", self.identifier)?;
         writeln!(f, "    Direction: {:?}", self.direction)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
-        writeln!(f, "    DataType: {:?}", self.datatype)
+        writeln!(f, "    DataType: {:?}", self.datatype)?;
+        writeln!(f, "    Signedness: {:?}", self.signedness)
     }
 }
