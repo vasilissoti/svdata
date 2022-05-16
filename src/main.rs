@@ -326,7 +326,10 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
     }
 }
 
-fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> structures::SvDataType {
+fn port_datatype_ansi(
+    node: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> structures::SvDataType {
     let dir = unwrap_node!(
         node,
         IntegerVectorType,
@@ -374,25 +377,21 @@ fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &Synta
         }
         Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
         Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
-        _ => {
-            match unwrap_node!(node, DataType) {
+        _ => match unwrap_node!(node, DataType) {
+            Some(x) => match keyword(x, syntax_tree) {
                 Some(x) => {
-                    match keyword(x, syntax_tree) {
-                        Some(x) => {
-                            if x == "string" {
-                                return structures::SvDataType::String;
-                            } else {
-                                println!("{}", x);
-                                unreachable!();
-                            }
-                        }
-
-                        _ => unreachable!(),
+                    if x == "string" {
+                        return structures::SvDataType::String;
+                    } else {
+                        println!("{}", x);
+                        unreachable!();
                     }
                 }
-                _ => return structures::SvDataType::Logic,
-            }
-        }
+
+                _ => unreachable!(),
+            },
+            _ => return structures::SvDataType::Logic,
+        },
     }
 }
 
