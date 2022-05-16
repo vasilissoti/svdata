@@ -195,6 +195,19 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
+fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let id = match unwrap_node!(parent, Keyword) {
+        Some(RefNode::Keyword(x)) => Some(x.nodes.0),
+
+        _ => None,
+    };
+
+    match id {
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
+        _ => None,
+    }
+}
+
 fn _datatype(parent: RefNode, _syntax_tree: &SyntaxTree) -> Option<String> {
     let t = match unwrap_node!(parent, DataType) {
         /*
@@ -319,24 +332,72 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
     }
 }
 
-fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {
-    match node {
-        sv_parser::AnsiPortDeclaration::Net(p) => match &p.nodes.0 {
-            Some(x) => syntax_tree.get_str_trim(x).unwrap().to_string(),
-            None => String::from("IMPLICIT"),
-        },
-        sv_parser::AnsiPortDeclaration::Variable(p) => match &p.nodes.0 {
-            Some(_x) => {
-                //let t = datatype(x, syntax_tree);
-                let t = Some(String::from("TODO"));
-                match t {
-                    Some(x) => x,
-                    _ => String::from("IMPLICIT"),
+fn port_datatype_ansi(
+    node: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> structures::SvDataType {
+    let dir = unwrap_node!(
+        node,
+        IntegerVectorType,
+        IntegerAtomType,
+        NonIntegerType,
+        ClassType,
+        TypeReference
+    );
+    match dir {
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
+            structures::SvDataType::Logic
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
+            structures::SvDataType::Reg
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
+            structures::SvDataType::Bit
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
+            structures::SvDataType::Byte
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
+            structures::SvDataType::Shortint
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
+            structures::SvDataType::Int
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
+            structures::SvDataType::Longint
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
+            structures::SvDataType::Integer
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
+            structures::SvDataType::Time
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
+            structures::SvDataType::Shortreal
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
+            structures::SvDataType::Realtime
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
+            structures::SvDataType::Real
+        }
+        Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
+        Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
+        _ => match unwrap_node!(node, DataType) {
+            Some(x) => match keyword(x, syntax_tree) {
+                Some(x) => {
+                    if x == "string" {
+                        return structures::SvDataType::String;
+                    } else {
+                        println!("{}", x);
+                        unreachable!();
+                    }
                 }
-            }
-            None => String::from("IMPLICIT"),
+
+                _ => unreachable!(),
+            },
+            _ => return structures::SvDataType::Logic,
         },
-        sv_parser::AnsiPortDeclaration::Paren(_) => String::from("IMPLICIT"),
     }
 }
 
@@ -349,7 +410,7 @@ fn parse_module_declaration_port_ansi(
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction_ansi(p, prev_port),
         datakind: port_datakind(p),
-        datatype: port_datatype(p, syntax_tree),
+        datatype: port_datatype_ansi(p, syntax_tree),
     }
 }
 
