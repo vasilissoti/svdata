@@ -445,8 +445,8 @@ fn port_datatype_ansi(
         Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
         _ => {
             match unwrap_node!(node.clone(), DataType) {
-                Some(_) => {
-                    match keyword(node, syntax_tree) {
+                Some(x) => {
+                    match keyword(x, syntax_tree) {
                         Some(x) => {
                             if x == "string" {
                                 return structures::SvDataType::String;
