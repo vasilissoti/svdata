@@ -64,7 +64,6 @@ pub enum SvDataType {
     TypeRef,
     String,
     IMPLICIT,
-    TODO,
 }
 
 #[derive(Debug, Serialize, Clone)]
