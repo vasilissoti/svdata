@@ -245,7 +245,7 @@ fn parse_module_declaration_ansi(
                 .push(parse_module_declaration_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
                 let parsed_port: structures::SvPort =
-                    parse_module_declaration_port(p, syntax_tree, &prev_port.clone());
+                    parse_module_declaration_port_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
             }
@@ -334,7 +334,7 @@ fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree
     }
 }
 
-fn parse_module_declaration_port(
+fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
     _prev_port: &Option<structures::SvPort>,
