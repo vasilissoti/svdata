@@ -49,6 +49,29 @@ pub enum SvSignedness {
     IMPLICIT,
 }
 
+pub enum SvDataType {
+    Logic,
+    Reg,
+    Bit,
+    Byte,
+    Integer,
+    Int,
+    Shortint,
+    Longint,
+    Time,
+    Real,
+    Shortreal,
+    Realtime,
+    Array,
+    Enum,
+    Struct,
+    Union,
+    Class,
+    TypeRef,
+    String,
+    IMPLICIT,
+}
+
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
