@@ -404,6 +404,7 @@ fn port_datatype_ansi(
 fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &structures::SvPortDirection,
+    syntax_tree: &SyntaxTree,
 ) -> structures::SvNetType {
     let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match dir {
@@ -465,7 +466,25 @@ fn port_nettype_ansi(
                             TypeReference
                         ) {
                             Some(_) => return structures::SvNetType::NA,
-                            _ => return structures::SvNetType::Wire,
+                            _ => {
+                                match unwrap_node!(m, DataType) {
+                                    Some(x) => {
+                                        match keyword(x, syntax_tree) {
+                                            Some(x) => {
+                                                if x == "string" {
+                                                    return structures::SvNetType::NA;
+                                                } else {
+                                                    println!("{}", x);
+                                                    unreachable!();
+                                                }
+                                            }
+                    
+                                            _ => unreachable!(),
+                                        }
+                                    }
+                                    _ => return structures::SvNetType::Wire,
+                                }
+                            }
                         }
                     }
 
@@ -501,7 +520,7 @@ fn parse_module_declaration_port_ansi(
     structures::SvPort {
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction_ansi(p, prev_port),
-        nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
+        nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
         datakind: port_datakind(p),
         datatype: port_datatype_ansi(p, syntax_tree),
         signedness: port_signedness_ansi(p),
