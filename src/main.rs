@@ -468,6 +468,7 @@ fn port_datatype_ansi(
 fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &structures::SvPortDirection,
+    syntax_tree: &SyntaxTree
 ) -> structures::SvNetType {
     let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match dir {
@@ -531,7 +532,25 @@ fn port_nettype_ansi(
                         ) {
                             // VNotes Add array enum, struct, class!
                             Some(_) => return structures::SvNetType::NA, // For output with explicit data type, default: variable
-                            _ => return structures::SvNetType::Wire,
+                            _ => {
+                                match unwrap_node!(m, DataType) {
+                                    Some(x) => {
+                                        match keyword(x, syntax_tree) {
+                                            Some(x) => {
+                                                if x == "string" {
+                                                    return structures::SvNetType::NA;
+                                                } else {
+                                                    println!("{}", x);
+                                                    unreachable!();
+                                                }
+                                            }
+                    
+                                            _ => unreachable!(),
+                                        }
+                                    }
+                                    _ => return structures::SvNetType::Wire,
+                                }
+                            }
                         }
                     }
 
@@ -596,8 +615,8 @@ fn parse_module_declaration_ansi_port(
             // VNotes: Attention order of compilation in the following lines matters!
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
-            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
-            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
+            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree)),
             datatype: port_datatype_ansi(node, syntax_tree),
             signedness: port_signedness_ansi(p),
             unpacked_dim: vet1,
