@@ -466,25 +466,21 @@ fn port_nettype_ansi(
                             TypeReference
                         ) {
                             Some(_) => return structures::SvNetType::NA,
-                            _ => {
-                                match unwrap_node!(m, DataType) {
+                            _ => match unwrap_node!(m, DataType) {
+                                Some(x) => match keyword(x, syntax_tree) {
                                     Some(x) => {
-                                        match keyword(x, syntax_tree) {
-                                            Some(x) => {
-                                                if x == "string" {
-                                                    return structures::SvNetType::NA;
-                                                } else {
-                                                    println!("{}", x);
-                                                    unreachable!();
-                                                }
-                                            }
-                    
-                                            _ => unreachable!(),
+                                        if x == "string" {
+                                            return structures::SvNetType::NA;
+                                        } else {
+                                            println!("{}", x);
+                                            unreachable!();
                                         }
                                     }
-                                    _ => return structures::SvNetType::Wire,
-                                }
-                            }
+
+                                    _ => unreachable!(),
+                                },
+                                _ => return structures::SvNetType::Wire,
+                            },
                         }
                     }
 
