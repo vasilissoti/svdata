@@ -334,6 +334,15 @@ fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree
     }
 }
 
+fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
+    let dir = unwrap_node!(m, Signing);
+    match dir {
+        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => structures::SvSignedness::Signed,
+        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => structures::SvSignedness::Unsigned,
+        _ => structures::SvSignedness::Unsigned,
+    }
+}
+
 fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
@@ -344,6 +353,7 @@ fn parse_module_declaration_port_ansi(
         direction: port_direction(p),
         datakind: port_datakind(p),
         datatype: port_datatype(p, syntax_tree),
+        signedness: port_signedness_ansi(p),
     }
 }
 
