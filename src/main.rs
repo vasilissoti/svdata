@@ -325,6 +325,7 @@ fn port_direction_ansi(
 }
 
 fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDatakind {
+    
     match node {
         sv_parser::AnsiPortDeclaration::Net(_) => structures::SvPortDatakind::Net,
         sv_parser::AnsiPortDeclaration::Variable(_) => structures::SvPortDatakind::Variable,
