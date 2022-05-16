@@ -401,6 +401,87 @@ fn port_datatype_ansi(
     }
 }
 
+fn port_nettype_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    direction: &structures::SvPortDirection,
+) -> structures::SvNetType {
+    let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
+    match dir {
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => return structures::SvNetType::NA, // "Var" token was found
+
+        Some(RefNode::AnsiPortDeclarationNet(x)) => {
+            let dir = unwrap_node!(x, NetType);
+
+            match dir {
+                // "Var" token was not found
+                Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
+                    return structures::SvNetType::Supply0
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => {
+                    return structures::SvNetType::Supply1
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => {
+                    return structures::SvNetType::Triand
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => {
+                    return structures::SvNetType::Trior
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => {
+                    return structures::SvNetType::Trireg
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => {
+                    return structures::SvNetType::Tri0
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => {
+                    return structures::SvNetType::Tri1
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => {
+                    return structures::SvNetType::Tri
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => {
+                    return structures::SvNetType::Uwire
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => {
+                    return structures::SvNetType::Wire
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => {
+                    return structures::SvNetType::Wand
+                }
+                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => {
+                    return structures::SvNetType::Wor
+                }
+
+                _ => match direction {
+                    structures::SvPortDirection::Inout | structures::SvPortDirection::Input => {
+                        return structures::SvNetType::Wire;
+                    }
+                    structures::SvPortDirection::Output => {
+                        match unwrap_node!(
+                            m,
+                            IntegerVectorType,
+                            IntegerAtomType,
+                            NonIntegerType,
+                            ClassType,
+                            TypeReference
+                        ) {
+                            Some(_) => return structures::SvNetType::NA,
+                            _ => return structures::SvNetType::Wire,
+                        }
+                    }
+
+                    structures::SvPortDirection::Ref => {
+                        return structures::SvNetType::NA;
+                    }
+
+                    _ => unreachable!(),
+                },
+            }
+        }
+
+        _ => unreachable!(),
+    }
+}
+
 fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
     let dir = unwrap_node!(m, Signing);
     match dir {
@@ -420,6 +501,7 @@ fn parse_module_declaration_port_ansi(
     structures::SvPort {
         identifier: port_identifier(p, syntax_tree),
         direction: port_direction_ansi(p, prev_port),
+        nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
         datakind: port_datakind(p),
         datatype: port_datatype_ansi(p, syntax_tree),
         signedness: port_signedness_ansi(p),
