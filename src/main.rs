@@ -245,7 +245,7 @@ fn parse_module_declaration_ansi(
                 .push(parse_module_declaration_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
                 let parsed_port: structures::SvPort =
-                    parse_module_declaration_port(p, syntax_tree, &prev_port.clone());
+                    parse_module_declaration_port_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
             }
@@ -286,7 +286,10 @@ fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTr
     identifier(id, &syntax_tree).unwrap()
 }
 
-fn port_direction(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDirection {
+fn port_direction_ansi(
+    node: &sv_parser::AnsiPortDeclaration,
+    prev_port: &Option<structures::SvPort>,
+) -> structures::SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
     match dir {
         Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) => {
@@ -301,7 +304,10 @@ fn port_direction(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDi
         Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) => {
             structures::SvPortDirection::Ref
         }
-        _ => structures::SvPortDirection::IMPLICIT,
+        _ => match prev_port {
+            Some(_) => prev_port.clone().unwrap().direction,
+            None => structures::SvPortDirection::Inout,
+        },
     }
 }
 
@@ -334,14 +340,14 @@ fn port_datatype(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree
     }
 }
 
-fn parse_module_declaration_port(
+fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
-    _prev_port: &Option<structures::SvPort>,
+    prev_port: &Option<structures::SvPort>,
 ) -> structures::SvPort {
     structures::SvPort {
         identifier: port_identifier(p, syntax_tree),
-        direction: port_direction(p),
+        direction: port_direction_ansi(p, prev_port),
         datakind: port_datakind(p),
         datatype: port_datatype(p, syntax_tree),
     }
