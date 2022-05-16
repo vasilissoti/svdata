@@ -324,11 +324,11 @@ fn port_direction_ansi(
     }
 }
 
-fn port_datakind_ansi(nettype: &structures::SvNetType) -> structures::SvDataKind {
+fn port_datakind_ansi(nettype: &Option<structures::SvNetType>) -> structures::SvDataKind {
     match nettype {
-        structures::SvNetType::NA => structures::SvDataKind::Variable,
+        None => structures::SvDataKind::Variable,
 
-        _ => structures::SvDataKind::Net,
+        Some(_) => structures::SvDataKind::Net,
     }
 }
 
