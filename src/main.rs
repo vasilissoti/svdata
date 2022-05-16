@@ -195,7 +195,7 @@ fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
-fn _keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = match unwrap_node!(parent, Keyword) {
         Some(RefNode::Keyword(x)) => Some(x.nodes.0),
 
@@ -326,7 +326,7 @@ fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDat
     }
 }
 
-fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &SyntaxTree) -> structures::SvDataType {
+fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> structures::SvDataType {
     let dir = unwrap_node!(
         node,
         IntegerVectorType,
@@ -374,7 +374,25 @@ fn port_datatype_ansi(node: &sv_parser::AnsiPortDeclaration, _syntax_tree: &Synt
         }
         Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
         Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
-        _ => return structures::SvDataType::Logic,
+        _ => {
+            match unwrap_node!(node, DataType) {
+                Some(x) => {
+                    match keyword(x, syntax_tree) {
+                        Some(x) => {
+                            if x == "string" {
+                                return structures::SvDataType::String;
+                            } else {
+                                println!("{}", x);
+                                unreachable!();
+                            }
+                        }
+
+                        _ => unreachable!(),
+                    }
+                }
+                _ => return structures::SvDataType::Logic,
+            }
+        }
     }
 }
 
