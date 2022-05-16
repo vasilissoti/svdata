@@ -134,10 +134,10 @@ impl fmt::Display for SvPort {
         match self.nettype.clone() {
             None => {
                 writeln!(f, "    NetType: None")?;
-            },
+            }
             Some(x) => {
                 writeln!(f, "    NetType: {:?}", x)?;
-            },
+            }
         }
         writeln!(f, "    Signedness: {:?}", self.signedness)
     }
