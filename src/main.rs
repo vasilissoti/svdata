@@ -338,7 +338,9 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSig
     let dir = unwrap_node!(m, Signing);
     match dir {
         Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => structures::SvSignedness::Signed,
-        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => structures::SvSignedness::Unsigned,
+        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
+            structures::SvSignedness::Unsigned
+        }
         _ => structures::SvSignedness::Unsigned,
     }
 }
