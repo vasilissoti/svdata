@@ -87,7 +87,6 @@ pub enum SvNetType {
     Tri1,
     Supply0,
     Supply1,
-    NA,
     IMPLICIT,
 }
 
@@ -97,7 +96,7 @@ pub struct SvPort {
     pub direction: SvPortDirection,
     pub datakind: SvDataKind,
     pub datatype: SvDataType,
-    pub nettype: SvNetType,
+    pub nettype: Option<SvNetType>,
     pub signedness: SvSignedness,
 }
 
@@ -132,7 +131,14 @@ impl fmt::Display for SvPort {
         writeln!(f, "    Direction: {:?}", self.direction)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
         writeln!(f, "    DataType: {:?}", self.datatype)?;
-        writeln!(f, "    NetType: {:?}", self.nettype)?;
+        match self.nettype.clone() {
+            None => {
+                writeln!(f, "    NetType: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    NetType: {:?}", x)?;
+            }
+        }
         writeln!(f, "    Signedness: {:?}", self.signedness)
     }
 }
