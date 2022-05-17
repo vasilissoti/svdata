@@ -457,10 +457,27 @@ fn parse_module_declaration_port_ansi(
     return ret;
 }
 
-/*
-fn parse_package_declaration() -> structures::SvPackageDeclaration {
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs::File;
+    use std::io::{BufReader, Read};
 
-fn parse_package_declaration_parameter() -> structures::SvParameter {
+    fn tests(name: &str) {
+        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        let args = vec!["svdata", &sv_path];
+        let opt = Opt::parse_from(args.iter());
+        let (_, svdata) = run_opt(&opt).unwrap();
+
+        let expected_path = format!("testcases/expected_display_format/{}.txt", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let mut expected_file = BufReader::new(expected_file);
+        let mut expected_string = String::new();
+        let _ = expected_file.read_to_string(&mut expected_string);
+
+        let actual_string: String = format!("{}", svdata.clone().unwrap());
+
+        assert_eq!(expected_string, actual_string);
+    }
+    include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
-*/

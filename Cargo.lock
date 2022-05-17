@@ -528,6 +528,7 @@ dependencies = [
  "serde",
  "sv-parser",
  "verilog-filelist-parser",
+ "walkdir",
 ]
 
 [[package]]

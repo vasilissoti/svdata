@@ -1,0 +1,50 @@
+Module:
+  Identifier: Foo
+  Filepath: testcases/sv_files/tst.sv
+  Port: 
+    Identifier: i_first
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: i_foo
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: i_bar
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: o_yesvar
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: o_novar
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: o_third
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    Signedness: Unsigned
+  Port: 
+    Identifier: o_fourth
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    Signedness: Unsigned
+
+Module:
+  Identifier: Bar
+  Filepath: testcases/sv_files/tst.sv
+
