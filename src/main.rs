@@ -508,23 +508,48 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSig
     }
 }
 
+fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
+    let dir = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
+
+    match dir {
+        Some(_) => false,
+        _ => true,
+    }
+}
+
 fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
     prev_port: &Option<structures::SvPort>,
 ) -> structures::SvPort {
-    structures::SvPort {
-        identifier: port_identifier(p, syntax_tree),
-        direction: port_direction_ansi(p, prev_port),
-        nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
-        datakind: port_datakind_ansi(&port_nettype_ansi(
-            p,
-            &port_direction_ansi(p, prev_port),
-            syntax_tree,
-        )),
-        datatype: port_datatype_ansi(p, syntax_tree),
-        signedness: port_signedness_ansi(p),
+    let inherit = port_check_inheritance_ansi(p);
+    let ret: structures::SvPort;
+
+    if inherit == false {
+        ret = structures::SvPort {
+            identifier: port_identifier(p, syntax_tree),
+            direction: port_direction_ansi(p, prev_port),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
+            datakind: port_datakind_ansi(&port_nettype_ansi(
+                p,
+                &port_direction_ansi(p, prev_port),
+                syntax_tree,
+            )),
+            datatype: port_datatype_ansi(p, syntax_tree),
+            signedness: port_signedness_ansi(p),
+        }
+    } else {
+        ret = structures::SvPort {
+            identifier: port_identifier(p, syntax_tree),
+            direction: prev_port.clone().unwrap().direction,
+            nettype: prev_port.clone().unwrap().nettype,
+            datakind: prev_port.clone().unwrap().datakind,
+            datatype: prev_port.clone().unwrap().datatype,
+            signedness: prev_port.clone().unwrap().signedness,
+        };
     }
+
+    return ret;
 }
 
 /*
