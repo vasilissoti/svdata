@@ -460,10 +460,13 @@ fn parse_module_declaration_port_ansi(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs;
     use std::fs::File;
-    use std::io::{BufReader, Read};
+    use std::io::{BufReader, BufWriter, Read, Write};
 
     fn tests(name: &str) {
+        let out_dir = env::var("OUT_DIR").unwrap();
+
         let sv_path = format!("testcases/sv_files/{}.sv", name);
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
@@ -477,7 +480,15 @@ mod tests {
 
         let actual_string: String = format!("{}", svdata.clone().unwrap());
 
+        let actual_path =
+            Path::new(&out_dir).join(format!("testcases/obtained_display_format/{}.txt", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/obtained_display_format")).unwrap();
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
         assert_eq!(expected_string, actual_string);
     }
+
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
