@@ -86,7 +86,7 @@
           "port_expression": "Same",
           "datakind": "Variable",
           "datatype": "Logic",
-          "nettype": "NA",
+          "nettype": null,
           "signedness": "Unsigned",
           "unpacked_dim": {
             "dimensions": [
@@ -124,7 +124,7 @@
           "port_expression": "Same",
           "datakind": "Variable",
           "datatype": "Class",
-          "nettype": "NA",
+          "nettype": null,
           "signedness": "Unsigned",
           "unpacked_dim": {
             "dimensions": [
@@ -162,7 +162,7 @@
           "port_expression": "Same",
           "datakind": "Variable",
           "datatype": "Logic",
-          "nettype": "NA",
+          "nettype": null,
           "signedness": "Unsigned",
           "unpacked_dim": {
             "dimensions": [

@@ -382,12 +382,12 @@ fn port_direction_ansi(
 
 fn port_datakind_ansi(
     // VNotes
-    nettype: &structures::SvNetType,
+    nettype: &Option<structures::SvNetType>,
 ) -> structures::SvDataKind {
     match nettype {
-        structures::SvNetType::NA => structures::SvDataKind::Variable,
+        None => structures::SvDataKind::Variable,
 
-        _ => structures::SvDataKind::Net,
+        Some(_) => structures::SvDataKind::Net,
     }
 }
 
@@ -469,10 +469,10 @@ fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &structures::SvPortDirection,
     syntax_tree: &SyntaxTree
-) -> structures::SvNetType {
+) -> Option<structures::SvNetType> {
     let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match dir {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return structures::SvNetType::NA, // "Var" token was found
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
             let dir = unwrap_node!(x, NetType);
@@ -480,46 +480,46 @@ fn port_nettype_ansi(
             match dir {
                 // "Var" token was not found
                 Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
-                    return structures::SvNetType::Supply0
+                    return Some(structures::SvNetType::Supply0)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => {
-                    return structures::SvNetType::Supply1
+                    return Some(structures::SvNetType::Supply1)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => {
-                    return structures::SvNetType::Triand
+                    return Some(structures::SvNetType::Triand)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => {
-                    return structures::SvNetType::Trior
+                    return Some(structures::SvNetType::Trior)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => {
-                    return structures::SvNetType::Trireg
+                    return Some(structures::SvNetType::Trireg)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => {
-                    return structures::SvNetType::Tri0
+                    return Some(structures::SvNetType::Tri0)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => {
-                    return structures::SvNetType::Tri1
+                    return Some(structures::SvNetType::Tri1)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => {
-                    return structures::SvNetType::Tri
+                    return Some(structures::SvNetType::Tri)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => {
-                    return structures::SvNetType::Uwire
+                    return Some(structures::SvNetType::Uwire)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => {
-                    return structures::SvNetType::Wire
+                    return Some(structures::SvNetType::Wire)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => {
-                    return structures::SvNetType::Wand
+                    return Some(structures::SvNetType::Wand)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => {
-                    return structures::SvNetType::Wor
+                    return Some(structures::SvNetType::Wor)
                 }
 
                 _ => match direction {
                     // Explicit net type was not found
                     structures::SvPortDirection::Inout | structures::SvPortDirection::Input => {
-                        return structures::SvNetType::Wire;
+                        return Some(structures::SvNetType::Wire);
                     }
                     structures::SvPortDirection::Output => {
                         match unwrap_node!(
@@ -531,14 +531,14 @@ fn port_nettype_ansi(
                             TypeReference
                         ) {
                             // VNotes Add array enum, struct, class!
-                            Some(_) => return structures::SvNetType::NA, // For output with explicit data type, default: variable
+                            Some(_) => return None, // For output with explicit data type, default: variable
                             _ => {
                                 match unwrap_node!(m, DataType) {
                                     Some(x) => {
                                         match keyword(x, syntax_tree) {
                                             Some(x) => {
                                                 if x == "string" {
-                                                    return structures::SvNetType::NA;
+                                                    return None;
                                                 } else {
                                                     println!("{}", x);
                                                     unreachable!();
@@ -548,14 +548,14 @@ fn port_nettype_ansi(
                                             _ => unreachable!(),
                                         }
                                     }
-                                    _ => return structures::SvNetType::Wire,
+                                    _ => return Some(structures::SvNetType::Wire),
                                 }
                             }
                         }
                     }
 
                     structures::SvPortDirection::Ref => {
-                        return structures::SvNetType::NA; // For ref, default/always: variable
+                        return None; // For ref, default/always: variable
                     }
 
                     _ => unreachable!(), // Should never get here - IMPLICIT should never be used by ANSI

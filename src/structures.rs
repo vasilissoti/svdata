@@ -120,7 +120,7 @@ pub struct SvPort {
     pub port_expression: String, // Identifier of the internal object connected to the port (allows e.g: .a(i))
     pub datakind: SvDataKind,
     pub datatype: SvDataType,
-    pub nettype: SvNetType,
+    pub nettype: Option<SvNetType>,
     pub signedness: SvSignedness,
     pub unpacked_dim: SvUnpackedDimensions,
     pub packed_dim: SvPackedDimensions,
@@ -161,7 +161,14 @@ impl fmt::Display for SvPort {
         writeln!(f, "    Expression: {}", self.port_expression)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
         writeln!(f, "    DataType: {:?}", self.datatype)?;
-        writeln!(f, "    NetType: {:?}", self.nettype)?;
+        match self.nettype.clone() {
+            None => {
+                writeln!(f, "    NetType: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    NetType: {:?}", x)?;
+            }
+        }
         writeln!(f, "    Signedness: {:?}", self.signedness)?;
         writeln!(f, "    Unpacked Dim: {}", self.unpacked_dim)?;
         writeln!(f, "    Packed Dim: {}", self.packed_dim)

@@ -60,7 +60,7 @@ modules:
         port_expression: Same
         datakind: Variable
         datatype: Logic
-        nettype: NA
+        nettype: ~
         signedness: Unsigned
         unpacked_dim:
           dimensions:
@@ -86,7 +86,7 @@ modules:
         port_expression: Same
         datakind: Variable
         datatype: Class
-        nettype: NA
+        nettype: ~
         signedness: Unsigned
         unpacked_dim:
           dimensions:
@@ -112,7 +112,7 @@ modules:
         port_expression: Same
         datakind: Variable
         datatype: Logic
-        nettype: NA
+        nettype: ~
         signedness: Unsigned
         unpacked_dim:
           dimensions:

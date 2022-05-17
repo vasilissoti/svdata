@@ -48,7 +48,7 @@ Module:
     Expression: Same
     DataKind: Variable
     DataType: Logic
-    NetType: NA
+    NetType: None
     Signedness: Unsigned
     Unpacked Dim: Not supported yet
     Packed Dim: Not supported yet
@@ -68,7 +68,7 @@ Module:
     Expression: Same
     DataKind: Variable
     DataType: Class
-    NetType: NA
+    NetType: None
     Signedness: Unsigned
     Unpacked Dim: Not supported yet
     Packed Dim: Not supported yet
@@ -88,7 +88,7 @@ Module:
     Expression: Same
     DataKind: Variable
     DataType: Logic
-    NetType: NA
+    NetType: None
     Signedness: Unsigned
     Unpacked Dim: Not supported yet
     Packed Dim: Not supported yet
