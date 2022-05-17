@@ -42,7 +42,7 @@ pub struct Opt {
 pub fn main() {
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
-        Ok(pass) => {
+        Ok((pass, _)) => {
             if pass {
                 0
             } else {
@@ -56,7 +56,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
+pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -119,7 +119,14 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
 
     println!("{}", svdata);
 
-    Ok(all_pass)
+    let ret: Option<structures::SvData>;
+    if all_pass {
+        ret = Some(svdata);
+    } else {
+        ret = None;
+    }
+
+    Ok((all_pass, ret))
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -449,11 +456,3 @@ fn parse_module_declaration_port_ansi(
 
     return ret;
 }
-
-/*
-fn parse_package_declaration() -> structures::SvPackageDeclaration {
-}
-
-fn parse_package_declaration_parameter() -> structures::SvParameter {
-}
-*/
