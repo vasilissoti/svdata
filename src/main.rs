@@ -530,6 +530,7 @@ fn parse_module_declaration_port_ansi(
         ret = structures::SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
             datakind: port_datakind(p),
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
@@ -538,6 +539,7 @@ fn parse_module_declaration_port_ansi(
         ret = structures::SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: prev_port.clone().unwrap().direction,
+            nettype: prev_port.clone().unwrap().nettype,
             datakind: prev_port.clone().unwrap().datakind,
             datatype: prev_port.clone().unwrap().datatype,
             signedness: prev_port.clone().unwrap().signedness,
