@@ -457,10 +457,29 @@ fn parse_module_declaration_port_ansi(
     return ret;
 }
 
-/*
-fn parse_package_declaration() -> structures::SvPackageDeclaration {
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json;
+    use std::fs::File;
+    use std::io::BufReader;
 
-fn parse_package_declaration_parameter() -> structures::SvParameter {
+    fn tests(name: &str) {
+        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        let args = vec!["svdata", &sv_path];
+        let opt = Opt::parse_from(args.iter());
+        let (_, svdata) = run_opt(&opt).unwrap();
+
+        let expected_path = format!("testcases/expected_json_format/{}.json", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_json_value: serde_json::Value =
+            serde_json::from_reader(expected_file).unwrap();
+
+        let actual_string: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
+
+        assert_eq!(expected_json_value, actual_json_value);
+    }
+    include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
-*/
