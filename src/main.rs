@@ -461,10 +461,13 @@ fn parse_module_declaration_port_ansi(
 mod tests {
     use super::*;
     use serde_json;
+    use std::fs;
     use std::fs::File;
-    use std::io::BufReader;
+    use std::io::{BufReader, BufWriter, Write};
 
     fn tests(name: &str) {
+        let out_dir = env::var("OUT_DIR").unwrap();
+
         let sv_path = format!("testcases/sv_files/{}.sv", name);
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
@@ -480,6 +483,13 @@ mod tests {
         let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
 
         assert_eq!(expected_json_value, actual_json_value);
+
+        let actual_path =
+            Path::new(&out_dir).join(format!("testcases/obtained_json_format/{}.json", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/obtained_json_format")).unwrap();
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
     }
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
