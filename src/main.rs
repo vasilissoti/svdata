@@ -456,3 +456,30 @@ fn parse_module_declaration_port_ansi(
 
     return ret;
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_yaml;
+    use std::fs::File;
+    use std::io::BufReader;
+
+    fn tests(name: &str) {
+        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        let args = vec!["svdata", &sv_path];
+        let opt = Opt::parse_from(args.iter());
+        let (_, svdata) = run_opt(&opt).unwrap();
+
+        let expected_path = format!("testcases/expected_yaml_format/{}.yaml", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_yaml_value: serde_yaml::Value =
+            serde_yaml::from_reader(expected_file).unwrap();
+
+        let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
+
+        assert_eq!(expected_yaml_value, actual_yaml_value);
+    }
+    include!(concat!(env!("OUT_DIR"), "/tests.rs"));
+}

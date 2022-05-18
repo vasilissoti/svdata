@@ -1,125 +1,46 @@
 ---
 modules:
-  - identifier: Doo
+  - identifier: Foo
     parameters: []
     ports:
       - identifier: i_first
         direction: Input
-        port_expression: Same
-        datakind: Net
+        datakind: Variable
         datatype: Logic
-        nettype: Wire
-        signedness: Signed
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
+        signedness: Unsigned
       - identifier: i_foo
         direction: Input
-        port_expression: Same
-        datakind: Net
+        datakind: Variable
         datatype: Logic
-        nettype: Wire
-        signedness: Signed
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
-      - identifier: vasilis
-        direction: Input
-        port_expression: Same
-        datakind: Net
-        datatype: Logic
-        nettype: Wire
         signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
       - identifier: i_bar
         direction: Input
-        port_expression: Same
         datakind: Net
         datatype: Logic
-        nettype: Wire
         signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
       - identifier: o_yesvar
         direction: Output
-        port_expression: Same
         datakind: Variable
         datatype: Logic
-        nettype: ~
         signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
-      - identifier: vasilis2
-        direction: Output
-        port_expression: Same
-        datakind: Net
-        datatype: Logic
-        nettype: Wire
-        signedness: Signed
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
       - identifier: o_novar
         direction: Output
-        port_expression: Same
-        datakind: Variable
-        datatype: Class
-        nettype: ~
-        signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
-      - identifier: o_third
-        direction: Output
-        port_expression: Same
         datakind: Net
         datatype: Logic
-        nettype: Wire
         signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
+      - identifier: o_third
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        signedness: Unsigned
       - identifier: o_fourth
         direction: Output
-        port_expression: Same
-        datakind: Variable
+        datakind: Net
         datatype: Logic
-        nettype: ~
         signedness: Unsigned
-        unpacked_dim:
-          dimensions:
-            - Not supported yet
-        packed_dim:
-          dimensions:
-            - Not supported yet
-    filepath: testcases/sv_files/ansi_ports_extraction_test_case_1.sv
-    declaration_type: Ansi
+    filepath: testcases/sv_files/tst.sv
+  - identifier: Bar
+    parameters: []
+    ports: []
+    filepath: testcases/sv_files/tst.sv
 packages: []
