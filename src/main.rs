@@ -5,7 +5,10 @@ use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::{env, process};
 use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
-use svdata::structures;
+use svdata::structures::{
+    SvData, SvDataKind, SvDataType, SvModuleDeclaration, SvNetType, SvParameter, SvPort,
+    SvPortDirection, SvSignedness,
+};
 use verilog_filelist_parser;
 
 #[derive(Debug, Parser)]
@@ -90,7 +93,7 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
     };
 
     let mut all_pass = true;
-    let mut svdata = structures::SvData {
+    let mut svdata = SvData {
         modules: Vec::new(),
         packages: Vec::new(),
     };
@@ -152,11 +155,7 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-fn sv_to_structure(
-    syntax_tree: &SyntaxTree,
-    filepath: &str,
-    svdata: &mut structures::SvData,
-) -> () {
+fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut SvData) -> () {
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
@@ -241,15 +240,15 @@ fn parse_module_declaration_ansi(
     m: RefNode,
     syntax_tree: &SyntaxTree,
     filepath: &str,
-) -> structures::SvModuleDeclaration {
-    let mut ret = structures::SvModuleDeclaration {
+) -> SvModuleDeclaration {
+    let mut ret = SvModuleDeclaration {
         identifier: module_identifier(m.clone(), syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
         filepath: String::from(filepath),
     };
 
-    let mut prev_port: Option<structures::SvPort> = None;
+    let mut prev_port: Option<SvPort> = None;
 
     for node in m {
         match node {
@@ -257,7 +256,7 @@ fn parse_module_declaration_ansi(
                 .parameters
                 .push(parse_module_declaration_parameter(p, syntax_tree)),
             RefNode::AnsiPortDeclaration(p) => {
-                let parsed_port: structures::SvPort =
+                let parsed_port: SvPort =
                     parse_module_declaration_port_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
@@ -272,8 +271,8 @@ fn parse_module_declaration_nonansi(
     _m: RefNode,
     _syntax_tree: &SyntaxTree,
     _filepath: &str,
-) -> structures::SvModuleDeclaration {
-    let ret = structures::SvModuleDeclaration {
+) -> SvModuleDeclaration {
+    let ret = SvModuleDeclaration {
         identifier: module_identifier(_m, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
@@ -286,9 +285,9 @@ fn parse_module_declaration_nonansi(
 fn parse_module_declaration_parameter(
     p: &sv_parser::ParameterDeclarationParam,
     _syntax_tree: &SyntaxTree,
-) -> structures::SvParameter {
+) -> SvParameter {
     println!("parameter={:?}", p);
-    structures::SvParameter {
+    SvParameter {
         identifier: String::from("foo"),
         datatype: String::from("bar"),
     }
@@ -301,41 +300,35 @@ fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTr
 
 fn port_direction_ansi(
     node: &sv_parser::AnsiPortDeclaration,
-    prev_port: &Option<structures::SvPort>,
-) -> structures::SvPortDirection {
+    prev_port: &Option<SvPort>,
+) -> SvPortDirection {
     let dir = unwrap_node!(node, PortDirection);
     match dir {
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) => {
-            structures::SvPortDirection::Inout
-        }
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Input(_))) => {
-            structures::SvPortDirection::Input
-        }
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) => SvPortDirection::Inout,
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Input(_))) => SvPortDirection::Input,
         Some(RefNode::PortDirection(sv_parser::PortDirection::Output(_))) => {
-            structures::SvPortDirection::Output
+            SvPortDirection::Output
         }
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) => {
-            structures::SvPortDirection::Ref
-        }
+        Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) => SvPortDirection::Ref,
         _ => match prev_port {
             Some(_) => prev_port.clone().unwrap().direction,
-            None => structures::SvPortDirection::Inout,
+            None => SvPortDirection::Inout,
         },
     }
 }
 
-fn port_datakind_ansi(nettype: &Option<structures::SvNetType>) -> structures::SvDataKind {
+fn port_datakind_ansi(nettype: &Option<SvNetType>) -> SvDataKind {
     match nettype {
-        None => structures::SvDataKind::Variable,
+        None => SvDataKind::Variable,
 
-        Some(_) => structures::SvDataKind::Net,
+        Some(_) => SvDataKind::Net,
     }
 }
 
 fn port_datatype_ansi(
     node: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
-) -> structures::SvDataType {
+) -> SvDataType {
     let datatype = unwrap_node!(
         node,
         IntegerVectorType,
@@ -346,48 +339,36 @@ fn port_datatype_ansi(
     );
     match datatype {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
-            structures::SvDataType::Logic
+            SvDataType::Logic
         }
-        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
-            structures::SvDataType::Reg
-        }
-        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
-            structures::SvDataType::Bit
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
-            structures::SvDataType::Byte
-        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => SvDataType::Reg,
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => SvDataType::Bit,
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => SvDataType::Byte,
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
-            structures::SvDataType::Shortint
+            SvDataType::Shortint
         }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
-            structures::SvDataType::Int
-        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => SvDataType::Int,
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
-            structures::SvDataType::Longint
+            SvDataType::Longint
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
-            structures::SvDataType::Integer
+            SvDataType::Integer
         }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
-            structures::SvDataType::Time
-        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => SvDataType::Time,
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
-            structures::SvDataType::Shortreal
+            SvDataType::Shortreal
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
-            structures::SvDataType::Realtime
+            SvDataType::Realtime
         }
-        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
-            structures::SvDataType::Real
-        }
-        Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
-        Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => SvDataType::Real,
+        Some(RefNode::ClassType(_)) => SvDataType::Class,
+        Some(RefNode::TypeReference(_)) => SvDataType::TypeRef,
         _ => match unwrap_node!(node, DataType) {
             Some(x) => match keyword(x, syntax_tree) {
                 Some(x) => {
                     if x == "string" {
-                        return structures::SvDataType::String;
+                        return SvDataType::String;
                     } else {
                         println!("{}", x);
                         unreachable!();
@@ -396,16 +377,16 @@ fn port_datatype_ansi(
 
                 _ => unreachable!(),
             },
-            _ => return structures::SvDataType::Logic,
+            _ => return SvDataType::Logic,
         },
     }
 }
 
 fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
-    direction: &structures::SvPortDirection,
+    direction: &SvPortDirection,
     syntax_tree: &SyntaxTree,
-) -> Option<structures::SvNetType> {
+) -> Option<SvNetType> {
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
@@ -416,47 +397,43 @@ fn port_nettype_ansi(
             match dir {
                 // "Var" token was not found
                 Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
-                    return Some(structures::SvNetType::Supply0)
+                    return Some(SvNetType::Supply0)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => {
-                    return Some(structures::SvNetType::Supply1)
+                    return Some(SvNetType::Supply1)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => {
-                    return Some(structures::SvNetType::Triand)
+                    return Some(SvNetType::Triand)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => {
-                    return Some(structures::SvNetType::Trior)
+                    return Some(SvNetType::Trior)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => {
-                    return Some(structures::SvNetType::Trireg)
+                    return Some(SvNetType::Trireg)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => {
-                    return Some(structures::SvNetType::Tri0)
+                    return Some(SvNetType::Tri0)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => {
-                    return Some(structures::SvNetType::Tri1)
+                    return Some(SvNetType::Tri1)
                 }
-                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => {
-                    return Some(structures::SvNetType::Tri)
-                }
+                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => return Some(SvNetType::Tri),
                 Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => {
-                    return Some(structures::SvNetType::Uwire)
+                    return Some(SvNetType::Uwire)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => {
-                    return Some(structures::SvNetType::Wire)
+                    return Some(SvNetType::Wire)
                 }
                 Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => {
-                    return Some(structures::SvNetType::Wand)
+                    return Some(SvNetType::Wand)
                 }
-                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => {
-                    return Some(structures::SvNetType::Wor)
-                }
+                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => return Some(SvNetType::Wor),
 
                 _ => match direction {
-                    structures::SvPortDirection::Inout | structures::SvPortDirection::Input => {
-                        return Some(structures::SvNetType::Wire);
+                    SvPortDirection::Inout | SvPortDirection::Input => {
+                        return Some(SvNetType::Wire);
                     }
-                    structures::SvPortDirection::Output => {
+                    SvPortDirection::Output => {
                         match unwrap_node!(
                             m,
                             IntegerVectorType,
@@ -479,12 +456,12 @@ fn port_nettype_ansi(
 
                                     _ => unreachable!(),
                                 },
-                                _ => return Some(structures::SvNetType::Wire),
+                                _ => return Some(SvNetType::Wire),
                             },
                         }
                     }
 
-                    structures::SvPortDirection::Ref => {
+                    SvPortDirection::Ref => {
                         return None;
                     }
 
@@ -497,14 +474,12 @@ fn port_nettype_ansi(
     }
 }
 
-fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
+fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> SvSignedness {
     let signedness = unwrap_node!(m, Signing);
     match signedness {
-        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => structures::SvSignedness::Signed,
-        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
-            structures::SvSignedness::Unsigned
-        }
-        _ => structures::SvSignedness::Unsigned,
+        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => SvSignedness::Signed,
+        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => SvSignedness::Unsigned,
+        _ => SvSignedness::Unsigned,
     }
 }
 
@@ -520,13 +495,13 @@ fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
 fn parse_module_declaration_port_ansi(
     p: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
-    prev_port: &Option<structures::SvPort>,
-) -> structures::SvPort {
+    prev_port: &Option<SvPort>,
+) -> SvPort {
     let inherit = port_check_inheritance_ansi(p);
-    let ret: structures::SvPort;
+    let ret: SvPort;
 
     if inherit == false {
-        ret = structures::SvPort {
+        ret = SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
             nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
@@ -539,7 +514,7 @@ fn parse_module_declaration_port_ansi(
             signedness: port_signedness_ansi(p),
         }
     } else {
-        ret = structures::SvPort {
+        ret = SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: prev_port.clone().unwrap().direction,
             nettype: prev_port.clone().unwrap().nettype,
@@ -553,9 +528,9 @@ fn parse_module_declaration_port_ansi(
 }
 
 /*
-fn parse_package_declaration() -> structures::SvPackageDeclaration {
+fn parse_package_declaration() -> SvPackageDeclaration {
 }
 
-fn parse_package_declaration_parameter() -> structures::SvParameter {
+fn parse_package_declaration_parameter() -> SvParameter {
 }
 */
