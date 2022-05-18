@@ -36,7 +36,7 @@ pub enum SvPortDirection {
 }
 
 #[derive(Debug, Serialize, Clone)]
-pub enum SvPortDatakind {
+pub enum SvDataKind {
     Net,
     Variable,
     IMPLICIT,
@@ -94,7 +94,7 @@ pub enum SvNetType {
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
-    pub datakind: SvPortDatakind,
+    pub datakind: SvDataKind,
     pub datatype: SvDataType,
     pub nettype: Option<SvNetType>,
     pub signedness: SvSignedness,

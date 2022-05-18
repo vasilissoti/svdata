@@ -324,11 +324,11 @@ fn port_direction_ansi(
     }
 }
 
-fn port_datakind(node: &sv_parser::AnsiPortDeclaration) -> structures::SvPortDatakind {
-    match node {
-        sv_parser::AnsiPortDeclaration::Net(_) => structures::SvPortDatakind::Net,
-        sv_parser::AnsiPortDeclaration::Variable(_) => structures::SvPortDatakind::Variable,
-        sv_parser::AnsiPortDeclaration::Paren(_) => structures::SvPortDatakind::IMPLICIT,
+fn port_datakind_ansi(nettype: &Option<structures::SvNetType>) -> structures::SvDataKind {
+    match nettype {
+        None => structures::SvDataKind::Variable,
+
+        Some(_) => structures::SvDataKind::Net,
     }
 }
 
@@ -530,7 +530,11 @@ fn parse_module_declaration_port_ansi(
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
             nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
-            datakind: port_datakind(p),
+            datakind: port_datakind_ansi(&port_nettype_ansi(
+                p,
+                &port_direction_ansi(p, prev_port),
+                syntax_tree,
+            )),
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
         }
