@@ -59,7 +59,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> {
+pub fn run_opt(opt: &Opt) -> Result<(bool, Option<SvData>), Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -122,7 +122,7 @@ pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> {
 
     println!("{}", svdata);
 
-    let ret: Option<structures::SvData>;
+    let ret: Option<SvData>;
     if all_pass {
         ret = Some(svdata);
     } else {

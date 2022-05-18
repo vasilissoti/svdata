@@ -6,42 +6,49 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    NetType: None
     Signedness: Unsigned
   Port: 
     Identifier: i_foo
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    NetType: None
     Signedness: Unsigned
   Port: 
     Identifier: i_bar
     Direction: Input
     DataKind: Net
     DataType: Logic
+    NetType: Wire
     Signedness: Unsigned
   Port: 
     Identifier: o_yesvar
     Direction: Output
     DataKind: Variable
     DataType: Logic
+    NetType: None
     Signedness: Unsigned
   Port: 
     Identifier: o_novar
     Direction: Output
-    DataKind: Net
+    DataKind: Variable
     DataType: Logic
+    NetType: None
     Signedness: Unsigned
   Port: 
     Identifier: o_third
     Direction: Output
     DataKind: Net
     DataType: Logic
+    NetType: Wire
     Signedness: Unsigned
   Port: 
     Identifier: o_fourth
     Direction: Output
-    DataKind: Net
+    DataKind: Variable
     DataType: Logic
+    NetType: None
     Signedness: Unsigned
 
 Module:
