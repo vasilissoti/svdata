@@ -7,36 +7,43 @@ modules:
         direction: Input
         datakind: Variable
         datatype: Logic
+        nettype: ~
         signedness: Unsigned
       - identifier: i_foo
         direction: Input
         datakind: Variable
         datatype: Logic
+        nettype: ~
         signedness: Unsigned
       - identifier: i_bar
         direction: Input
         datakind: Net
         datatype: Logic
+        nettype: Wire
         signedness: Unsigned
       - identifier: o_yesvar
         direction: Output
         datakind: Variable
         datatype: Logic
+        nettype: ~
         signedness: Unsigned
       - identifier: o_novar
         direction: Output
-        datakind: Net
+        datakind: Variable
         datatype: Logic
+        nettype: ~
         signedness: Unsigned
       - identifier: o_third
         direction: Output
         datakind: Net
         datatype: Logic
+        nettype: Wire
         signedness: Unsigned
       - identifier: o_fourth
         direction: Output
-        datakind: Net
+        datakind: Variable
         datatype: Logic
+        nettype: ~
         signedness: Unsigned
     filepath: testcases/sv_files/tst.sv
   - identifier: Bar
