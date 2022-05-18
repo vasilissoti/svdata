@@ -336,7 +336,7 @@ fn port_datatype_ansi(
     node: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
 ) -> structures::SvDataType {
-    let dir = unwrap_node!(
+    let datatype = unwrap_node!(
         node,
         IntegerVectorType,
         IntegerAtomType,
@@ -344,7 +344,7 @@ fn port_datatype_ansi(
         ClassType,
         TypeReference
     );
-    match dir {
+    match datatype {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
             structures::SvDataType::Logic
         }
@@ -406,8 +406,8 @@ fn port_nettype_ansi(
     direction: &structures::SvPortDirection,
     syntax_tree: &SyntaxTree,
 ) -> Option<structures::SvNetType> {
-    let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
-    match dir {
+    let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
+    match nettype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
@@ -498,8 +498,8 @@ fn port_nettype_ansi(
 }
 
 fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
-    let dir = unwrap_node!(m, Signing);
-    match dir {
+    let signedness = unwrap_node!(m, Signing);
+    match signedness {
         Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => structures::SvSignedness::Signed,
         Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
             structures::SvSignedness::Unsigned
@@ -509,9 +509,9 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSig
 }
 
 fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
-    let dir = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
+    let datatype = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
 
-    match dir {
+    match datatype {
         Some(_) => false,
         _ => true,
     }
