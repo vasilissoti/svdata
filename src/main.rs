@@ -535,14 +535,14 @@ mod tests {
         let actual_string: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
         let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
 
-        assert_eq!(expected_json_value, actual_json_value);
-
         let actual_path =
             Path::new(&out_dir).join(format!("testcases/obtained_json_format/{}.json", name));
         fs::create_dir_all(Path::new(&out_dir).join("testcases/obtained_json_format")).unwrap();
         let actual_file = File::create(actual_path);
         let mut actual_file = BufWriter::new(actual_file.unwrap());
         _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_json_value, actual_json_value);
     }
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
