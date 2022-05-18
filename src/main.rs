@@ -207,30 +207,6 @@ fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
-fn _datatype(parent: RefNode, _syntax_tree: &SyntaxTree) -> Option<String> {
-    let t = match unwrap_node!(parent, DataType) {
-        /*
-        Some(RefNode::DataType(x)) => {
-            println!("HERE x={:?}", x);
-            Some(String::from("TODO"))
-        }
-        */
-        Some(x) => {
-            println!("HERE x={:?}", x);
-            Some(String::from("TODO"))
-        }
-        _ => None,
-    };
-
-    /*
-    match t {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
-    }
-    */
-    t
-}
-
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree)
@@ -526,11 +502,3 @@ fn parse_module_declaration_port_ansi(
 
     return ret;
 }
-
-/*
-fn parse_package_declaration() -> SvPackageDeclaration {
-}
-
-fn parse_package_declaration_parameter() -> SvParameter {
-}
-*/
