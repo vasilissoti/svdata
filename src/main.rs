@@ -45,13 +45,8 @@ pub struct Opt {
 pub fn main() {
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
-        Ok((pass, _)) => {
-            if pass {
-                0
-            } else {
-                1
-            }
-        }
+        Ok(Some(_)) => 0,
+        Ok(None) => 1,
         Err(_) => 2,
     };
 
@@ -59,7 +54,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<(bool, Option<SvData>), Error> {
+pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -122,14 +117,8 @@ pub fn run_opt(opt: &Opt) -> Result<(bool, Option<SvData>), Error> {
 
     println!("{}", svdata);
 
-    let ret: Option<SvData>;
-    if all_pass {
-        ret = Some(svdata);
-    } else {
-        ret = None;
-    }
-
-    Ok((all_pass, ret))
+    let ret: Option<SvData> = if all_pass { Some(svdata) } else { None };
+    Ok(ret)
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -524,7 +513,7 @@ mod tests {
         let sv_path = format!("testcases/sv/{}.sv", name);
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
-        let (_, svdata) = run_opt(&opt).unwrap();
+        let svdata = run_opt(&opt).unwrap();
 
         let expected_path = format!("testcases/json/{}.json", name);
         let expected_file = File::open(expected_path).unwrap();
