@@ -521,12 +521,12 @@ mod tests {
     fn tests(name: &str) {
         let out_dir = env::var("OUT_DIR").unwrap();
 
-        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        let sv_path = format!("testcases/sv/{}.sv", name);
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
         let (_, svdata) = run_opt(&opt).unwrap();
 
-        let expected_path = format!("testcases/expected_yaml_format/{}.yaml", name);
+        let expected_path = format!("testcases/yaml/{}.yaml", name);
         let expected_file = File::open(expected_path).unwrap();
         let expected_file = BufReader::new(expected_file);
         let expected_yaml_value: serde_yaml::Value =
@@ -535,9 +535,8 @@ mod tests {
         let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
         let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
 
-        let actual_path =
-            Path::new(&out_dir).join(format!("testcases/obtained_yaml_format/{}.yaml", name));
-        fs::create_dir_all(Path::new(&out_dir).join("testcases/obtained_yaml_format")).unwrap();
+        let actual_path = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/yaml")).unwrap();
         let actual_file = File::create(actual_path);
         let mut actual_file = BufWriter::new(actual_file.unwrap());
         _ = write!(actual_file, "{}", actual_string);
