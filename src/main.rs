@@ -533,8 +533,7 @@ mod tests {
 
         let actual_string: String = format!("{}", svdata.clone().unwrap());
 
-        let actual_path =
-            Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
+        let actual_path = Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
         fs::create_dir_all(Path::new(&out_dir).join("testcases/display")).unwrap();
         let actual_file = File::create(actual_path);
         let mut actual_file = BufWriter::new(actual_file.unwrap());
