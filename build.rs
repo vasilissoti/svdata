@@ -8,7 +8,7 @@ fn main() {
     let out_dir = env::var("OUT_DIR").unwrap();
 
     let mut entries = Vec::new();
-    for entry in WalkDir::new("testcases/sv_files") {
+    for entry in WalkDir::new("testcases/sv") {
         let entry = entry.unwrap();
         if entry.file_type().is_file() {
             let file_name = String::from(entry.path().file_stem().unwrap().to_string_lossy());

@@ -520,12 +520,12 @@ mod tests {
     fn tests(name: &str) {
         let out_dir = env::var("OUT_DIR").unwrap();
 
-        let sv_path = format!("testcases/sv_files/{}.sv", name);
+        let sv_path = format!("testcases/sv/{}.sv", name);
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
         let (_, svdata) = run_opt(&opt).unwrap();
 
-        let expected_path = format!("testcases/expected_display_format/{}.txt", name);
+        let expected_path = format!("testcases/display/{}.txt", name);
         let expected_file = File::open(expected_path).unwrap();
         let mut expected_file = BufReader::new(expected_file);
         let mut expected_string = String::new();
@@ -534,8 +534,8 @@ mod tests {
         let actual_string: String = format!("{}", svdata.clone().unwrap());
 
         let actual_path =
-            Path::new(&out_dir).join(format!("testcases/obtained_display_format/{}.txt", name));
-        fs::create_dir_all(Path::new(&out_dir).join("testcases/obtained_display_format")).unwrap();
+            Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/display")).unwrap();
         let actual_file = File::create(actual_path);
         let mut actual_file = BufWriter::new(actual_file.unwrap());
         _ = write!(actual_file, "{}", actual_string);

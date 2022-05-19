@@ -1,6 +1,6 @@
 Module:
   Identifier: Foo
-  Filepath: testcases/sv_files/tst.sv
+  Filepath: testcases/sv/tst.sv
   Port: 
     Identifier: i_first
     Direction: Input
@@ -53,5 +53,5 @@ Module:
 
 Module:
   Identifier: Bar
-  Filepath: testcases/sv_files/tst.sv
+  Filepath: testcases/sv/tst.sv
 
