@@ -61,13 +61,13 @@
           "signedness": "Unsigned"
         }
       ],
-      "filepath": "testcases/sv_files/tst.sv"
+      "filepath": "testcases/sv/tst.sv"
     },
     {
       "identifier": "Bar",
       "parameters": [],
       "ports": [],
-      "filepath": "testcases/sv_files/tst.sv"
+      "filepath": "testcases/sv/tst.sv"
     }
   ],
   "packages": []
