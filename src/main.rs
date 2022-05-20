@@ -506,9 +506,9 @@ mod tests {
     use serde_yaml;
     use std::fs;
     use std::fs::File;
-    use std::io::{BufReader, BufWriter, Write};
+    use std::io::{BufReader, BufWriter, Read, Write};
 
-    fn tests(name: &str) {
+    fn check_outputs(name: &str) {
         let out_dir = env::var("OUT_DIR").unwrap();
 
         let sv_path = format!("testcases/sv/{}.sv", name);
@@ -516,37 +516,54 @@ mod tests {
         let opt = Opt::parse_from(args.iter());
         let svdata = run_opt(&opt).unwrap();
 
-        let expected_path = format!("testcases/json/{}.json", name);
-        let expected_file = File::open(expected_path).unwrap();
-        let expected_file = BufReader::new(expected_file);
-        let expected_json_value: serde_json::Value =
-            serde_json::from_reader(expected_file).unwrap();
+        let e = format!("testcases/display/{}.txt", name);
+        let e = File::open(e).unwrap();
+        let mut e = BufReader::new(e);
+        let mut expected_string: String = String::new();
+        e.read_to_string(&mut expected_string).unwrap();
 
-        let actual_string: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
-        let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
+        let actual_string: String = format!("{}", svdata.clone().unwrap());
 
-        let actual_path = Path::new(&out_dir).join(format!("testcases/json/{}.json", name));
+        // Write actual display to file for manual inspection.
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/display")).unwrap();
+        let a = Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
+        let a = File::create(a);
+        let mut a = BufWriter::new(a.unwrap());
+        _ = write!(a, "{}", actual_string);
+
+        assert_eq!(expected_string, actual_string);
+
+        let e = format!("testcases/json/{}.json", name);
+        let e = File::open(e).unwrap();
+        let e = BufReader::new(e);
+        let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
+
+        let s: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
+
+        // Write actual JSON to file for manual inspection.
         fs::create_dir_all(Path::new(&out_dir).join("testcases/json")).unwrap();
-        let actual_file = File::create(actual_path);
-        let mut actual_file = BufWriter::new(actual_file.unwrap());
-        _ = write!(actual_file, "{}", actual_string);
+        let a = Path::new(&out_dir).join(format!("testcases/json/{}.json", name));
+        let a = File::create(a);
+        let mut a = BufWriter::new(a.unwrap());
+        write!(a, "{}", s).unwrap();
 
         assert_eq!(expected_json_value, actual_json_value);
 
-        let expected_path = format!("testcases/yaml/{}.yaml", name);
-        let expected_file = File::open(expected_path).unwrap();
-        let expected_file = BufReader::new(expected_file);
-        let expected_yaml_value: serde_yaml::Value =
-            serde_yaml::from_reader(expected_file).unwrap();
+        let e = format!("testcases/yaml/{}.yaml", name);
+        let e = File::open(e).unwrap();
+        let e = BufReader::new(e);
+        let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
 
-        let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
-        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
+        let s: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
 
-        let actual_path = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
+        // Write actual YAML to file for manual inspection.
         fs::create_dir_all(Path::new(&out_dir).join("testcases/yaml")).unwrap();
-        let actual_file = File::create(actual_path);
-        let mut actual_file = BufWriter::new(actual_file.unwrap());
-        _ = write!(actual_file, "{}", actual_string);
+        let a = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
+        let a = File::create(a);
+        let mut a = BufWriter::new(a.unwrap());
+        write!(a, "{}", s).unwrap();
 
         assert_eq!(expected_yaml_value, actual_yaml_value);
     }
