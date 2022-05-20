@@ -502,6 +502,7 @@ fn parse_module_declaration_port_ansi(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serde_json;
     use serde_yaml;
     use std::fs;
     use std::fs::File;
@@ -514,6 +515,23 @@ mod tests {
         let args = vec!["svdata", &sv_path];
         let opt = Opt::parse_from(args.iter());
         let svdata = run_opt(&opt).unwrap();
+
+        let expected_path = format!("testcases/json/{}.json", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_json_value: serde_json::Value =
+            serde_json::from_reader(expected_file).unwrap();
+
+        let actual_string: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let actual_json_value: serde_json::Value = serde_json::from_str(&actual_string).unwrap();
+
+        let actual_path = Path::new(&out_dir).join(format!("testcases/json/{}.json", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/json")).unwrap();
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_json_value, actual_json_value);
 
         let expected_path = format!("testcases/yaml/{}.yaml", name);
         let expected_file = File::open(expected_path).unwrap();

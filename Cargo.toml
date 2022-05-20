@@ -10,6 +10,7 @@ anyhow = "1"
 enquote = "1"
 clap = { version = "3", features = ["derive"] }
 serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 serde_yaml = "0.8.24"
 sv-parser = "0.11.3"
 verilog-filelist-parser = "0.1.2"

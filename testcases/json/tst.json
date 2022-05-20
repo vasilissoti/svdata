@@ -1,0 +1,74 @@
+{
+  "modules": [
+    {
+      "identifier": "Foo",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "i_first",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "i_foo",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "i_bar",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "o_yesvar",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "o_novar",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "o_third",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "o_fourth",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/tst.sv"
+    },
+    {
+      "identifier": "Bar",
+      "parameters": [],
+      "ports": [],
+      "filepath": "testcases/sv/tst.sv"
+    }
+  ],
+  "packages": []
+}
