@@ -20,13 +20,13 @@ fn main() {
     // Output 'test.rs'
     // -------------------------------------------------------------------------------------------------
 
-    let out_test = Path::new(&out_dir).join("tests.rs");
-    let mut out_test = File::create(&out_test).unwrap();
+    let t = Path::new(&out_dir).join("tests.rs");
+    let mut t = File::create(&t).unwrap();
 
     for file_name in &entries {
-        let _ = write!(out_test, "#[test]\n");
-        let _ = write!(out_test, "fn test_{}() {{\n", file_name);
-        let _ = write!(out_test, "    tests(\"{}\");\n", file_name);
-        let _ = writeln!(out_test, "}}\n");
+        write!(t, "#[test]\n").unwrap();
+        write!(t, "fn test_{}() {{\n", file_name).unwrap();
+        write!(t, "    check_against_reference_outputs(\"{}\");\n", file_name).unwrap();
+        write!(t, "}}\n").unwrap();
     }
 }
