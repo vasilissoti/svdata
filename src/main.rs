@@ -508,7 +508,7 @@ mod tests {
     use std::fs::File;
     use std::io::{BufReader, BufWriter, Write};
 
-    fn check_against_reference_outputs(name: &str) {
+    fn check_outputs(name: &str) {
         let out_dir = env::var("OUT_DIR").unwrap();
 
         let sv_path = format!("testcases/sv/{}.sv", name);

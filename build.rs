@@ -26,7 +26,7 @@ fn main() {
     for file_name in &entries {
         write!(t, "#[test]\n").unwrap();
         write!(t, "fn test_{}() {{\n", file_name).unwrap();
-        write!(t, "    check_against_reference_outputs(\"{}\");\n", file_name).unwrap();
+        write!(t, "    check_outputs(\"{}\");\n", file_name).unwrap();
         write!(t, "}}\n").unwrap();
     }
 }
