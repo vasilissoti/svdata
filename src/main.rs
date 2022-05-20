@@ -45,13 +45,8 @@ pub struct Opt {
 pub fn main() {
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
-        Ok(pass) => {
-            if pass {
-                0
-            } else {
-                1
-            }
-        }
+        Ok(Some(_)) => 0,
+        Ok(None) => 1,
         Err(_) => 2,
     };
 
@@ -59,7 +54,7 @@ pub fn main() {
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
+pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -122,7 +117,8 @@ pub fn run_opt(opt: &Opt) -> Result<bool, Error> {
 
     println!("{}", svdata);
 
-    Ok(all_pass)
+    let ret: Option<SvData> = if all_pass { Some(svdata) } else { None };
+    Ok(ret)
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -501,4 +497,40 @@ fn parse_module_declaration_port_ansi(
     }
 
     return ret;
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_yaml;
+    use std::fs;
+    use std::fs::File;
+    use std::io::{BufReader, BufWriter, Write};
+
+    fn tests(name: &str) {
+        let out_dir = env::var("OUT_DIR").unwrap();
+
+        let sv_path = format!("testcases/sv/{}.sv", name);
+        let args = vec!["svdata", &sv_path];
+        let opt = Opt::parse_from(args.iter());
+        let svdata = run_opt(&opt).unwrap();
+
+        let expected_path = format!("testcases/yaml/{}.yaml", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_yaml_value: serde_yaml::Value =
+            serde_yaml::from_reader(expected_file).unwrap();
+
+        let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
+
+        let actual_path = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/yaml")).unwrap();
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_yaml_value, actual_yaml_value);
+    }
+    include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
