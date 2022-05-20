@@ -16,4 +16,4 @@ sv-parser = "0.11.3"
 verilog-filelist-parser = "0.1.2"
 
 [build-dependencies]
-walkdir = "2" 
+walkdir = "2"

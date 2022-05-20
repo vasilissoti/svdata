@@ -518,8 +518,9 @@ mod tests {
 
         let e = format!("testcases/display/{}.txt", name);
         let e = File::open(e).unwrap();
-        let e = BufReader::new(e);
-        let expected_string = e.read_to_string(&mut expected_string);
+        let mut e = BufReader::new(e);
+        let mut expected_string: String = String::new();
+        e.read_to_string(&mut expected_string).unwrap();
 
         let actual_string: String = format!("{}", svdata.clone().unwrap());
 
