@@ -1,0 +1,20 @@
+{
+    "modules": [
+      {
+        "identifier": "Koo",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "x",
+            "direction": "Inout",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "nettype": "Wire",
+            "signedness": "Unsigned"
+          }
+        ],
+        "filepath": "testcases/sv/tst3.sv"
+      }
+    ],
+    "packages": []
+  }
