@@ -1,0 +1,52 @@
+{
+    "modules": [
+      {
+        "identifier": "Boo",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "a",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "nettype": "Tri",
+            "signedness": "Unsigned"
+          },
+          {
+            "identifier": "b",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Reg",
+            "nettype": "Wire",
+            "signedness": "Unsigned"
+          },
+          {
+            "identifier": "c",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "nettype": "Wire",
+            "signedness": "Signed"
+          },
+          {
+            "identifier": "d",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "nettype": "Wire",
+            "signedness": "Signed"
+          },
+          {
+            "identifier": "e",
+            "direction": "Output",
+            "datakind": "Variable",
+            "datatype": "Logic",
+            "nettype": null,
+            "signedness": "Signed"
+          }
+        ],
+        "filepath": "testcases/sv/tst2.sv"
+      }
+    ],
+    "packages": []
+  }
