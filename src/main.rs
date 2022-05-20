@@ -529,7 +529,7 @@ mod tests {
         let a = Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
         let a = File::create(a);
         let mut a = BufWriter::new(a.unwrap());
-        _ = write!(a, "{}", actual_string);
+        write!(a, "{}", actual_string).unwrap();
 
         assert_eq!(expected_string, actual_string);
 
