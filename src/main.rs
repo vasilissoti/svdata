@@ -503,6 +503,7 @@ fn parse_module_declaration_port_ansi(
 mod tests {
     use super::*;
     use serde_json;
+    use serde_yaml;
     use std::fs;
     use std::fs::File;
     use std::io::{BufReader, BufWriter, Write};
@@ -531,6 +532,23 @@ mod tests {
         _ = write!(actual_file, "{}", actual_string);
 
         assert_eq!(expected_json_value, actual_json_value);
+
+        let expected_path = format!("testcases/yaml/{}.yaml", name);
+        let expected_file = File::open(expected_path).unwrap();
+        let expected_file = BufReader::new(expected_file);
+        let expected_yaml_value: serde_yaml::Value =
+            serde_yaml::from_reader(expected_file).unwrap();
+
+        let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&actual_string).unwrap();
+
+        let actual_path = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
+        fs::create_dir_all(Path::new(&out_dir).join("testcases/yaml")).unwrap();
+        let actual_file = File::create(actual_path);
+        let mut actual_file = BufWriter::new(actual_file.unwrap());
+        _ = write!(actual_file, "{}", actual_string);
+
+        assert_eq!(expected_yaml_value, actual_yaml_value);
     }
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }
