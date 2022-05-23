@@ -361,7 +361,12 @@ fn port_nettype_ansi(
 ) -> Option<SvNetType> {
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => {
+            match unwrap_node!(m, PortDirection, DataType, Signing) {
+                Some(_) => return None,
+                _ => return Some(SvNetType::Wire),
+            }
+        }
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
             let dir = unwrap_node!(x, NetType);
@@ -455,12 +460,18 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> SvSignedness {
     }
 }
 
-fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
+fn port_check_inheritance_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    prev_port: &Option<SvPort>,
+) -> bool {
     let datatype = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
 
-    match datatype {
-        Some(_) => false,
-        _ => true,
+    match prev_port {
+        Some(_) => match datatype {
+            Some(_) => false,
+            _ => true,
+        },
+        None => false,
     }
 }
 
@@ -469,7 +480,7 @@ fn parse_module_declaration_port_ansi(
     syntax_tree: &SyntaxTree,
     prev_port: &Option<SvPort>,
 ) -> SvPort {
-    let inherit = port_check_inheritance_ansi(p);
+    let inherit = port_check_inheritance_ansi(p, prev_port);
     let ret: SvPort;
 
     if inherit == false {
