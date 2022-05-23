@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use std::env;
+use std::fmt;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
 use std::path::Path;
@@ -110,11 +111,50 @@ fn main() {
 
     let t = Path::new(&out_dir).join("tests.rs");
     let mut t = File::create(&t).unwrap();
+    let mut t_tmp: String = String::new();
 
     for file_name in &entries {
-        write!(t, "#[test]\n").unwrap();
-        write!(t, "fn test_{}() {{\n", file_name).unwrap();
-        write!(t, "    check_outputs(\"{}\");\n", file_name).unwrap();
-        write!(t, "}}\n").unwrap();
+        let mut run_display_test: bool = true;
+        let mut run_json_test: bool = true;
+        let mut run_yaml_test: bool = true;
+
+        if custom_excluded_files_display.contains(file_name)
+            || format_settings.get(&String::from("Display")).unwrap() == "No"
+        {
+            run_display_test = false;
+        }
+        if custom_excluded_files_json.contains(file_name)
+            || format_settings.get(&String::from("JSON")).unwrap() == "No"
+        {
+            run_json_test = false;
+        }
+        if custom_excluded_files_yaml.contains(file_name)
+            || format_settings.get(&String::from("YAML")).unwrap() == "No"
+        {
+            run_yaml_test = false;
+        }
+
+        if overall_excluded_files.contains(file_name) {
+            continue;
+        } else if run_display_test == false && run_json_test == false && run_yaml_test == false {
+            overall_excluded_files.push(String::from(file_name));
+        } else {
+            fmt::write(&mut t_tmp, format_args!("#[test]\n")).unwrap();
+            fmt::write(&mut t_tmp, format_args!("fn test_{}() {{\n", file_name)).unwrap();
+            fmt::write(
+                &mut t_tmp,
+                format_args!(
+                    "    check_outputs(\"{}\", {}, {}, {});\n",
+                    file_name, run_display_test, run_json_test, run_yaml_test
+                ),
+            )
+            .unwrap();
+            fmt::write(&mut t_tmp, format_args!("}}\n")).unwrap();
+        }
     }
+
+    let _ = write!(t, "// Overall Excluded Files: \n");
+    let _ = write!(t, "/* {:?}", overall_excluded_files);
+    let _ = writeln!(t, " */\n");
+    let _ = writeln!(t, "{}", t_tmp);
 }

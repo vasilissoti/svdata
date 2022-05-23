@@ -527,7 +527,7 @@ mod tests {
     use std::fs;
     use std::io::{BufReader, Read};
 
-    fn check_outputs(name: &str) {
+    fn check_outputs(name: &str, _run_disp: bool, _run_json: bool, _run_yaml: bool) {
         let in_sv = Path::new("testcases")
             .join("sv")
             .join(format!("{}.sv", name));
