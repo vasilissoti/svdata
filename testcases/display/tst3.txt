@@ -1,0 +1,11 @@
+Module:
+  Identifier: Koo
+  Filepath: testcases/sv/tst3.sv
+  Port: 
+    Identifier: x
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+
