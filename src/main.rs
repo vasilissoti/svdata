@@ -10,6 +10,10 @@ use svdata::structures::{
     SvPortDirection, SvSignedness,
 };
 use verilog_filelist_parser;
+use std::fs::File;
+use std::io::{BufWriter, Write};
+use serde_json;
+use serde_yaml;
 
 #[derive(Debug, Parser)]
 #[clap(name = "svdata")]
@@ -44,6 +48,14 @@ pub struct Opt {
     /// Ignore any include
     #[clap(long = "ignore-include")]
     pub ignore_include: bool,
+
+    /// Write output to JSON file
+    #[clap(long = "json")]
+    pub json: Option<PathBuf>,
+
+    /// Write output to YAML file
+    #[clap(long = "yaml")]
+    pub yaml: Option<PathBuf>,
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -118,6 +130,22 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
     }
 
     println!("{}", svdata);
+
+    if let Some(path) = &opt.json {
+        let s: String = serde_json::to_string_pretty(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
+
+    if let Some(path) = &opt.yaml {
+        let s: String = serde_yaml::to_string(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
 
     Ok(svdata)
 }
@@ -503,11 +531,8 @@ fn parse_module_declaration_port_ansi(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serde_json;
-    use serde_yaml;
     use std::fs;
-    use std::fs::File;
-    use std::io::{BufReader, BufWriter, Read, Write};
+    use std::io::{BufReader, Read};
 
     fn check_outputs(name: &str) {
         let out_dir = env::var("OUT_DIR").unwrap();
