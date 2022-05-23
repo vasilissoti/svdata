@@ -50,16 +50,15 @@ pub struct Opt {
 pub fn main() {
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
-        Ok(Some(_)) => 0,
-        Ok(None) => 1,
-        Err(_) => 2,
+        Ok(_) => 0,
+        Err(_) => 1,
     };
 
     process::exit(exit_code);
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
+pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -92,14 +91,12 @@ pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
         (opt.files.clone(), opt.includes.clone())
     };
 
-    let mut all_pass = true;
     let mut svdata = SvData {
         modules: Vec::new(),
         packages: Vec::new(),
     };
 
     for path in &files {
-        let mut pass = true;
         match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
                 sv_to_structure(
@@ -110,20 +107,17 @@ pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
                 defines = new_defines;
             }
             Err(_) => {
-                println!("Parse failed");
-                pass = false;
+                return Err(anyhow::anyhow!(
+                    "failed to parse '{}'",
+                    path.to_string_lossy()
+                ))
             }
-        }
-
-        if !pass {
-            all_pass = false;
         }
     }
 
     println!("{}", svdata);
 
-    let ret: Option<SvData> = if all_pass { Some(svdata) } else { None };
-    Ok(ret)
+    Ok(svdata)
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -527,7 +521,7 @@ mod tests {
         let mut expected_string: String = String::new();
         e.read_to_string(&mut expected_string).unwrap();
 
-        let actual_string: String = format!("{}", svdata.clone().unwrap());
+        let actual_string: String = format!("{}", svdata.clone());
 
         // Write actual display to file for manual inspection.
         fs::create_dir_all(Path::new(&out_dir).join("testcases/display")).unwrap();
@@ -543,7 +537,7 @@ mod tests {
         let e = BufReader::new(e);
         let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
 
-        let s: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let s: String = serde_json::to_string_pretty(&svdata.clone()).unwrap();
         let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
 
         // Write actual JSON to file for manual inspection.
@@ -560,7 +554,7 @@ mod tests {
         let e = BufReader::new(e);
         let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
 
-        let s: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let s: String = serde_yaml::to_string(&svdata.clone()).unwrap();
         let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
 
         // Write actual YAML to file for manual inspection.
