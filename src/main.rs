@@ -1,7 +1,11 @@
 use anyhow::Error;
 use clap::Parser;
 use enquote;
+use serde_json;
+use serde_yaml;
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 use std::{env, process};
 use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
@@ -10,10 +14,6 @@ use svdata::structures::{
     SvPortDirection, SvSignedness,
 };
 use verilog_filelist_parser;
-use std::fs::File;
-use std::io::{BufWriter, Write};
-use serde_json;
-use serde_yaml;
 
 #[derive(Debug, Parser)]
 #[clap(name = "svdata")]
@@ -113,7 +113,13 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
     };
 
     for path in &files {
-        match parse_sv(&path, &defines, &includes, opt.ignore_include.clone(), false) {
+        match parse_sv(
+            &path,
+            &defines,
+            &includes,
+            opt.ignore_include.clone(),
+            false,
+        ) {
             Ok((syntax_tree, new_defines)) => {
                 sv_to_structure(
                     &syntax_tree,
