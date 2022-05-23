@@ -91,13 +91,15 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
         (opt.files.clone(), opt.includes.clone())
     };
 
+    let ignore_include: bool = opt.ignore_include.clone();
+
     let mut svdata = SvData {
         modules: Vec::new(),
         packages: Vec::new(),
     };
 
     for path in &files {
-        match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
+        match parse_sv(&path, &defines, &includes, ignore_include, false) {
             Ok((syntax_tree, new_defines)) => {
                 sv_to_structure(
                     &syntax_tree,
