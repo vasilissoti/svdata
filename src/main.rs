@@ -396,11 +396,15 @@ fn port_datatype_ansi(
 fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &SvPortDirection,
-    syntax_tree: &SyntaxTree,
 ) -> Option<SvNetType> {
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => {
+            match unwrap_node!(m, PortDirection, DataType, Signing) {
+                Some(_) => return None,
+                _ => return Some(SvNetType::Wire),
+            }
+        }
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
             let dir = unwrap_node!(x, NetType);
@@ -444,33 +448,10 @@ fn port_nettype_ansi(
                     SvPortDirection::Inout | SvPortDirection::Input => {
                         return Some(SvNetType::Wire);
                     }
-                    SvPortDirection::Output => {
-                        match unwrap_node!(
-                            m,
-                            IntegerVectorType,
-                            IntegerAtomType,
-                            NonIntegerType,
-                            ClassType,
-                            TypeReference
-                        ) {
-                            Some(_) => return None,
-                            _ => match unwrap_node!(m, DataType) {
-                                Some(x) => match keyword(x, syntax_tree) {
-                                    Some(x) => {
-                                        if x == "string" {
-                                            return None;
-                                        } else {
-                                            println!("{}", x);
-                                            unreachable!();
-                                        }
-                                    }
-
-                                    _ => unreachable!(),
-                                },
-                                _ => return Some(SvNetType::Wire),
-                            },
-                        }
-                    }
+                    SvPortDirection::Output => match unwrap_node!(m, DataType) {
+                        Some(_) => return None,
+                        _ => return Some(SvNetType::Wire),
+                    },
 
                     SvPortDirection::Ref => {
                         return None;
@@ -494,12 +475,18 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> SvSignedness {
     }
 }
 
-fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
+fn port_check_inheritance_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    prev_port: &Option<SvPort>,
+) -> bool {
     let datatype = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
 
-    match datatype {
-        Some(_) => false,
-        _ => true,
+    match prev_port {
+        Some(_) => match datatype {
+            Some(_) => false,
+            _ => true,
+        },
+        None => false,
     }
 }
 
@@ -508,19 +495,15 @@ fn parse_module_declaration_port_ansi(
     syntax_tree: &SyntaxTree,
     prev_port: &Option<SvPort>,
 ) -> SvPort {
-    let inherit = port_check_inheritance_ansi(p);
+    let inherit = port_check_inheritance_ansi(p, prev_port);
     let ret: SvPort;
 
     if inherit == false {
         ret = SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
-            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
-            datakind: port_datakind_ansi(&port_nettype_ansi(
-                p,
-                &port_direction_ansi(p, prev_port),
-                syntax_tree,
-            )),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
+            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
         }
