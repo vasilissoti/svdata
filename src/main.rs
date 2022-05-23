@@ -357,11 +357,15 @@ fn port_datatype_ansi(
 fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &SvPortDirection,
-    syntax_tree: &SyntaxTree,
 ) -> Option<SvNetType> {
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => {
+            match unwrap_node!(m, PortDirection, DataType, Signing) {
+                Some(_) => return None,
+                _ => return Some(SvNetType::Wire),
+            }
+        }
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
             let dir = unwrap_node!(x, NetType);
@@ -405,33 +409,10 @@ fn port_nettype_ansi(
                     SvPortDirection::Inout | SvPortDirection::Input => {
                         return Some(SvNetType::Wire);
                     }
-                    SvPortDirection::Output => {
-                        match unwrap_node!(
-                            m,
-                            IntegerVectorType,
-                            IntegerAtomType,
-                            NonIntegerType,
-                            ClassType,
-                            TypeReference
-                        ) {
-                            Some(_) => return None,
-                            _ => match unwrap_node!(m, DataType) {
-                                Some(x) => match keyword(x, syntax_tree) {
-                                    Some(x) => {
-                                        if x == "string" {
-                                            return None;
-                                        } else {
-                                            println!("{}", x);
-                                            unreachable!();
-                                        }
-                                    }
-
-                                    _ => unreachable!(),
-                                },
-                                _ => return Some(SvNetType::Wire),
-                            },
-                        }
-                    }
+                    SvPortDirection::Output => match unwrap_node!(m, DataType) {
+                        Some(_) => return None,
+                        _ => return Some(SvNetType::Wire),
+                    },
 
                     SvPortDirection::Ref => {
                         return None;
@@ -482,12 +463,8 @@ fn parse_module_declaration_port_ansi(
         ret = SvPort {
             identifier: port_identifier(p, syntax_tree),
             direction: port_direction_ansi(p, prev_port),
-            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
-            datakind: port_datakind_ansi(&port_nettype_ansi(
-                p,
-                &port_direction_ansi(p, prev_port),
-                syntax_tree,
-            )),
+            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
+            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
         }
@@ -535,7 +512,7 @@ mod tests {
         let a = Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
         let a = File::create(a);
         let mut a = BufWriter::new(a.unwrap());
-        _ = write!(a, "{}", actual_string);
+        write!(a, "{}", actual_string).unwrap();
 
         assert_eq!(expected_string, actual_string);
 
