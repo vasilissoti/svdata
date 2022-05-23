@@ -15,12 +15,15 @@ use verilog_filelist_parser;
 #[clap(name = "svdata")]
 #[clap(long_version(option_env!("LONG_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))))]
 pub struct Opt {
+    /// Source file
     #[clap(required_unless_present_any = &["filelist"])]
     pub files: Vec<PathBuf>,
 
+    /// File list
     #[clap(short = 'f', long = "filelist", conflicts_with = "files")]
     pub filelist: Vec<PathBuf>,
 
+    /// Define
     #[clap(
         short = 'd',
         long = "define",
@@ -29,6 +32,7 @@ pub struct Opt {
     )]
     pub defines: Vec<String>,
 
+    /// Include path
     #[clap(
         short = 'i',
         long = "include",
@@ -37,6 +41,7 @@ pub struct Opt {
     )]
     pub includes: Vec<PathBuf>,
 
+    /// Ignore any include
     #[clap(long = "ignore-include")]
     pub ignore_include: bool,
 }
