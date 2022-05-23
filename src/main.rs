@@ -49,6 +49,10 @@ pub struct Opt {
     #[clap(long = "ignore-include")]
     pub ignore_include: bool,
 
+    /// Suppress description on STDOUT
+    #[clap(short = 's', long = "silent")]
+    pub silent: bool,
+
     /// Write output to JSON file
     #[clap(long = "json")]
     pub json: Option<PathBuf>,
@@ -127,7 +131,9 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
         }
     }
 
-    println!("{}", svdata);
+    if !opt.silent.clone() {
+        println!("{}", svdata);
+    }
 
     if let Some(path) = &opt.json {
         let s: String = serde_json::to_string_pretty(&svdata).unwrap();
