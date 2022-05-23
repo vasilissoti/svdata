@@ -527,75 +527,90 @@ mod tests {
     use std::fs;
     use std::io::{BufReader, Read};
 
-    fn check_outputs(name: &str, _run_disp: bool, _run_json: bool, _run_yaml: bool) {
+    fn check_outputs(name: &str, run_display: bool, run_json: bool, run_yaml: bool) {
+        let mut args = vec!["svdata"];
+        let out_json: PathBuf;
+        let out_yaml: PathBuf;
+        let out_display: PathBuf;
+
         let in_sv = Path::new("testcases")
             .join("sv")
             .join(format!("{}.sv", name));
+        args.push(in_sv.to_str().unwrap());
 
         let out_dir = env::var("OUT_DIR").unwrap();
-        let out_json = Path::new(&out_dir)
-            .join("testcases")
-            .join("json")
-            .join(format!("{}.json", name));
-        fs::create_dir_all(out_json.parent().unwrap()).unwrap();
-        let out_yaml = Path::new(&out_dir)
-            .join("testcases")
-            .join("yaml")
-            .join(format!("{}.yaml", name));
-        fs::create_dir_all(out_yaml.parent().unwrap()).unwrap();
 
-        let mut args = vec!["svdata"];
-        args.push(in_sv.to_str().unwrap());
-        args.push("--json");
-        args.push(out_json.to_str().unwrap());
-        args.push("--yaml");
-        args.push(out_yaml.to_str().unwrap());
+        if run_json {
+            out_json = Path::new(&out_dir)
+                .join("testcases")
+                .join("json")
+                .join(format!("{}.json", name));
+            fs::create_dir_all(out_json.parent().unwrap()).unwrap();
+            args.push("--json");
+            args.push(out_json.to_str().unwrap());
+        }
+
+        if run_yaml {
+            out_yaml = Path::new(&out_dir)
+                .join("testcases")
+                .join("yaml")
+                .join(format!("{}.yaml", name));
+            fs::create_dir_all(out_yaml.parent().unwrap()).unwrap();
+            args.push("--yaml");
+            args.push(out_yaml.to_str().unwrap());
+        }
+
         let opt = Opt::parse_from(args.iter());
-
         let svdata = run_opt(&opt).unwrap();
 
-        // Write actual display to file for manual inspection.
-        let actual_string: String = format!("{}", svdata.clone());
-        let out_display = Path::new(&out_dir)
-            .join("testcases")
-            .join("display")
-            .join(format!("{}.txt", name));
-        fs::create_dir_all(out_display.parent().unwrap()).unwrap();
-        let a = File::create(out_display);
-        let mut a = BufWriter::new(a.unwrap());
-        write!(a, "{}", actual_string).unwrap();
+        if run_display {
+            // Write actual display to file for manual inspection.
+            let actual_string: String = format!("{}", svdata.clone());
+            out_display = Path::new(&out_dir)
+                .join("testcases")
+                .join("display")
+                .join(format!("{}.txt", name));
+            fs::create_dir_all(out_display.parent().unwrap()).unwrap();
+            let a = File::create(out_display);
+            let mut a = BufWriter::new(a.unwrap());
+            write!(a, "{}", actual_string).unwrap();
 
-        // Check display against reference.
-        let in_display = Path::new("testcases")
-            .join("display")
-            .join(format!("{}.txt", name));
-        let e = File::open(in_display).unwrap();
-        let mut e = BufReader::new(e);
-        let mut expected_string: String = String::new();
-        e.read_to_string(&mut expected_string).unwrap();
-        assert_eq!(expected_string, actual_string);
+            // Check display against reference.
+            let in_display = Path::new("testcases")
+                .join("display")
+                .join(format!("{}.txt", name));
+            let e = File::open(in_display).unwrap();
+            let mut e = BufReader::new(e);
+            let mut expected_string: String = String::new();
+            e.read_to_string(&mut expected_string).unwrap();
+            assert_eq!(expected_string, actual_string);
+        }
 
-        // Check JSON against reference.
-        let in_json = Path::new("testcases")
-            .join("json")
-            .join(format!("{}.json", name));
-        let e = File::open(in_json).unwrap();
-        let e = BufReader::new(e);
-        let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
-        let s: String = serde_json::to_string_pretty(&svdata.clone()).unwrap();
-        let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
-        assert_eq!(expected_json_value, actual_json_value);
+        if run_json {
+            // Check JSON against reference.
+            let in_json = Path::new("testcases")
+                .join("json")
+                .join(format!("{}.json", name));
+            let e = File::open(in_json).unwrap();
+            let e = BufReader::new(e);
+            let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
+            let s: String = serde_json::to_string_pretty(&svdata.clone()).unwrap();
+            let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
+            assert_eq!(expected_json_value, actual_json_value);
+        }
 
-        // Check YAML against reference.
-        let in_yaml = Path::new("testcases")
-            .join("yaml")
-            .join(format!("{}.yaml", name));
-        let e = File::open(in_yaml).unwrap();
-        let e = BufReader::new(e);
-        let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
-        let s: String = serde_yaml::to_string(&svdata.clone()).unwrap();
-        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
-        assert_eq!(expected_yaml_value, actual_yaml_value);
+        if run_yaml {
+            // Check YAML against reference.
+            let in_yaml = Path::new("testcases")
+                .join("yaml")
+                .join(format!("{}.yaml", name));
+            let e = File::open(in_yaml).unwrap();
+            let e = BufReader::new(e);
+            let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
+            let s: String = serde_yaml::to_string(&svdata.clone()).unwrap();
+            let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
+            assert_eq!(expected_yaml_value, actual_yaml_value);
+        }
     }
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }

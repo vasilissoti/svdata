@@ -26,7 +26,7 @@ fn main() {
     let mut custom_excluded_files_display: Vec<String> = Vec::new();
     let mut custom_excluded_files_json: Vec<String> = Vec::new();
     let mut custom_excluded_files_yaml: Vec<String> = Vec::new();
-    let mut format_settings: HashMap<String, String> = HashMap::new(); // VNotes: keeping the test settings (formats of data tested)
+    let mut format_settings: HashMap<String, String> = HashMap::new();
 
     let settings_file = File::open("testcases/settings.txt");
     let settings_file = BufReader::new(settings_file.unwrap());
