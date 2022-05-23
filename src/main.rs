@@ -361,7 +361,12 @@ fn port_nettype_ansi(
 ) -> Option<SvNetType> {
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
+        Some(RefNode::AnsiPortDeclarationVariable(_)) => {
+            match unwrap_node!(m, PortDirection, DataType, Signing) {
+                Some(_) => return None,
+                _ => return Some(SvNetType::Wire),
+            }
+        }
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
             let dir = unwrap_node!(x, NetType);
