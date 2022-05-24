@@ -1,0 +1,36 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "d",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "e",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "nettype": null,
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "f",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "nettype": null,
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ansi_port_output_var_class.sv"
+    }
+  ],
+  "packages": []
+}

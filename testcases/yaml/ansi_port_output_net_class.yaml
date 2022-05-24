@@ -1,0 +1,25 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: d
+        direction: Output
+        datakind: Net
+        datatype: Class
+        nettype: Tri
+        signedness: Unsigned
+      - identifier: e
+        direction: Output
+        datakind: Net
+        datatype: Class
+        nettype: Wire
+        signedness: Unsigned
+      - identifier: f
+        direction: Output
+        datakind: Net
+        datatype: Class
+        nettype: Wire
+        signedness: Unsigned
+    filepath: testcases/sv/ansi_port_output_net_class.sv
+packages: []

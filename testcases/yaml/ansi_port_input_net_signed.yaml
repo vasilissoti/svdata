@@ -1,0 +1,43 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        nettype: Wire
+        signedness: Signed
+      - identifier: b
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        nettype: Wire
+        signedness: Signed
+      - identifier: c
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        nettype: Wire
+        signedness: Signed
+      - identifier: d
+        direction: Input
+        datakind: Net
+        datatype: Reg
+        nettype: Wire
+        signedness: Signed
+      - identifier: e
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        nettype: Wire
+        signedness: Signed
+      - identifier: f
+        direction: Input
+        datakind: Net
+        datatype: Integer
+        nettype: Tri
+        signedness: Signed
+    filepath: testcases/sv/ansi_port_input_net_signed.sv
+packages: []
