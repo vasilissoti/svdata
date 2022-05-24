@@ -8,18 +8,18 @@ modules:
         datakind: Variable
         datatype: Class
         nettype: ~
-        signedness: Unsigned
+        signedness: ~
       - identifier: e
         direction: Input
         datakind: Variable
         datatype: Class
         nettype: ~
-        signedness: Unsigned
+        signedness: ~
       - identifier: f
         direction: Input
         datakind: Variable
         datatype: Class
         nettype: ~
-        signedness: Unsigned
+        signedness: ~
     filepath: testcases/sv/ansi_port_input_var_class.sv
 packages: []

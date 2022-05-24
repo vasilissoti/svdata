@@ -7,19 +7,19 @@ Module:
     DataKind: Variable
     DataType: Class
     NetType: None
-    Signedness: Unsigned
+    Signedness: None
   Port: 
     Identifier: e
     Direction: Output
     DataKind: Variable
     DataType: Class
     NetType: None
-    Signedness: Unsigned
+    Signedness: None
   Port: 
     Identifier: f
     Direction: Output
     DataKind: Variable
     DataType: Class
     NetType: None
-    Signedness: Unsigned
+    Signedness: None
 

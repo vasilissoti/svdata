@@ -7,19 +7,19 @@ Module:
     DataKind: Net
     DataType: Class
     NetType: Wire
-    Signedness: Unsigned
+    Signedness: None
   Port: 
     Identifier: e
     Direction: Inout
     DataKind: Net
     DataType: Class
     NetType: Wire
-    Signedness: Unsigned
+    Signedness: None
   Port: 
     Identifier: f
     Direction: Inout
     DataKind: Net
     DataType: Class
     NetType: Wire
-    Signedness: Unsigned
+    Signedness: None
 

@@ -10,7 +10,7 @@
           "datakind": "Variable",
           "datatype": "Class",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         },
         {
           "identifier": "e",
@@ -18,7 +18,7 @@
           "datakind": "Variable",
           "datatype": "Class",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         },
         {
           "identifier": "f",
@@ -26,7 +26,7 @@
           "datakind": "Variable",
           "datatype": "Class",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         }
       ],
       "filepath": "testcases/sv/ansi_port_output_var_class.sv"

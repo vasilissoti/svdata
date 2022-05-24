@@ -8,18 +8,18 @@ modules:
         datakind: Net
         datatype: Class
         nettype: Wire
-        signedness: Unsigned
+        signedness: ~
       - identifier: e
         direction: Input
         datakind: Net
         datatype: Class
         nettype: Wire
-        signedness: Unsigned
+        signedness: ~
       - identifier: f
         direction: Input
         datakind: Net
         datatype: Class
         nettype: Wire
-        signedness: Unsigned
+        signedness: ~
     filepath: testcases/sv/ansi_port_input_net_class.sv
 packages: []
