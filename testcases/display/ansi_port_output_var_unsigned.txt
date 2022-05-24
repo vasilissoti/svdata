@@ -1,0 +1,53 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_output_var_unsigned.sv
+  Port: 
+    Identifier: a
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: b
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: c
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: d
+    Direction: Output
+    DataKind: Variable
+    DataType: Reg
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: e
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: f
+    Direction: Output
+    DataKind: Variable
+    DataType: String
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: g
+    Direction: Output
+    DataKind: Variable
+    DataType: Integer
+    NetType: None
+    Signedness: Unsigned
+

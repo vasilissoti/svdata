@@ -1,0 +1,60 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "a",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Signed"
+        },
+        {
+          "identifier": "b",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Signed"
+        },
+        {
+          "identifier": "c",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Signed"
+        },
+        {
+          "identifier": "d",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Reg",
+          "nettype": null,
+          "signedness": "Signed"
+        },
+        {
+          "identifier": "e",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "nettype": null,
+          "signedness": "Signed"
+        },
+        {
+          "identifier": "f",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Integer",
+          "nettype": null,
+          "signedness": "Signed"
+        }
+      ],
+      "filepath": "testcases/sv/ansi_port_input_var_signed.sv"
+    }
+  ],
+  "packages": []
+}

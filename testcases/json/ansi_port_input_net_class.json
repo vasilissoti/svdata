@@ -1,0 +1,36 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "d",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "e",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "f",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ansi_port_input_net_class.sv"
+    }
+  ],
+  "packages": []
+}

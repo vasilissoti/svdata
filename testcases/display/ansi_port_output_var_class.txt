@@ -1,0 +1,25 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_output_var_class.sv
+  Port: 
+    Identifier: d
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: e
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: f
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    NetType: None
+    Signedness: Unsigned
+

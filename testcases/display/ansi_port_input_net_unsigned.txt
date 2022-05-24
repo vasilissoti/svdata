@@ -1,0 +1,53 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_input_net_unsigned.sv
+  Port: 
+    Identifier: a
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: b
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: c
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: d
+    Direction: Input
+    DataKind: Net
+    DataType: Reg
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: e
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: f
+    Direction: Input
+    DataKind: Net
+    DataType: String
+    NetType: Wire
+    Signedness: Unsigned
+  Port: 
+    Identifier: g
+    Direction: Input
+    DataKind: Net
+    DataType: Integer
+    NetType: Tri
+    Signedness: Unsigned
+

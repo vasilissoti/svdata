@@ -1,0 +1,60 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_inout_net_signed.sv
+  Port: 
+    Identifier: a
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: b
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: c
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: d
+    Direction: Inout
+    DataKind: Net
+    DataType: Int
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: e
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: f
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: g
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    NetType: Wire
+    Signedness: Signed
+  Port: 
+    Identifier: h
+    Direction: Inout
+    DataKind: Net
+    DataType: Integer
+    NetType: Tri
+    Signedness: Signed
+
