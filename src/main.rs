@@ -1,7 +1,11 @@
 use anyhow::Error;
 use clap::Parser;
 use enquote;
+use serde_json;
+use serde_yaml;
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 use std::{env, process};
 use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
@@ -15,12 +19,15 @@ use verilog_filelist_parser;
 #[clap(name = "svdata")]
 #[clap(long_version(option_env!("LONG_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))))]
 pub struct Opt {
+    /// Source file
     #[clap(required_unless_present_any = &["filelist"])]
     pub files: Vec<PathBuf>,
 
+    /// File list
     #[clap(short = 'f', long = "filelist", conflicts_with = "files")]
     pub filelist: Vec<PathBuf>,
 
+    /// Define
     #[clap(
         short = 'd',
         long = "define",
@@ -29,6 +36,7 @@ pub struct Opt {
     )]
     pub defines: Vec<String>,
 
+    /// Include path
     #[clap(
         short = 'i',
         long = "include",
@@ -37,24 +45,36 @@ pub struct Opt {
     )]
     pub includes: Vec<PathBuf>,
 
+    /// Ignore any include
     #[clap(long = "ignore-include")]
     pub ignore_include: bool,
+
+    /// Suppress description on STDOUT
+    #[clap(short = 's', long = "silent")]
+    pub silent: bool,
+
+    /// Write output to JSON file
+    #[clap(long = "json")]
+    pub json: Option<PathBuf>,
+
+    /// Write output to YAML file
+    #[clap(long = "yaml")]
+    pub yaml: Option<PathBuf>,
 }
 
 #[cfg_attr(tarpaulin, skip)]
 pub fn main() {
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
-        Ok(Some(_)) => 0,
-        Ok(None) => 1,
-        Err(_) => 2,
+        Ok(_) => 0,
+        Err(_) => 1,
     };
 
     process::exit(exit_code);
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
+pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -87,15 +107,19 @@ pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
         (opt.files.clone(), opt.includes.clone())
     };
 
-    let mut all_pass = true;
     let mut svdata = SvData {
         modules: Vec::new(),
         packages: Vec::new(),
     };
 
     for path in &files {
-        let mut pass = true;
-        match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
+        match parse_sv(
+            &path,
+            &defines,
+            &includes,
+            opt.ignore_include.clone(),
+            false,
+        ) {
             Ok((syntax_tree, new_defines)) => {
                 sv_to_structure(
                     &syntax_tree,
@@ -105,20 +129,35 @@ pub fn run_opt(opt: &Opt) -> Result<Option<SvData>, Error> {
                 defines = new_defines;
             }
             Err(_) => {
-                println!("Parse failed");
-                pass = false;
+                return Err(anyhow::anyhow!(
+                    "failed to parse '{}'",
+                    path.to_string_lossy()
+                ))
             }
-        }
-
-        if !pass {
-            all_pass = false;
         }
     }
 
-    println!("{}", svdata);
+    if !opt.silent.clone() {
+        println!("{}", svdata);
+    }
 
-    let ret: Option<SvData> = if all_pass { Some(svdata) } else { None };
-    Ok(ret)
+    if let Some(path) = &opt.json {
+        let s: String = serde_json::to_string_pretty(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
+
+    if let Some(path) = &opt.yaml {
+        let s: String = serde_yaml::to_string(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
+
+    Ok(svdata)
 }
 
 #[cfg_attr(tarpaulin, skip)]
@@ -485,69 +524,77 @@ fn parse_module_declaration_port_ansi(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serde_json;
-    use serde_yaml;
     use std::fs;
-    use std::fs::File;
-    use std::io::{BufReader, BufWriter, Read, Write};
+    use std::io::{BufReader, Read};
 
     fn check_outputs(name: &str) {
-        let out_dir = env::var("OUT_DIR").unwrap();
+        let in_sv = Path::new("testcases")
+            .join("sv")
+            .join(format!("{}.sv", name));
 
-        let sv_path = format!("testcases/sv/{}.sv", name);
-        let args = vec!["svdata", &sv_path];
+        let out_dir = env::var("OUT_DIR").unwrap();
+        let out_json = Path::new(&out_dir)
+            .join("testcases")
+            .join("json")
+            .join(format!("{}.json", name));
+        fs::create_dir_all(out_json.parent().unwrap()).unwrap();
+        let out_yaml = Path::new(&out_dir)
+            .join("testcases")
+            .join("yaml")
+            .join(format!("{}.yaml", name));
+        fs::create_dir_all(out_yaml.parent().unwrap()).unwrap();
+
+        let mut args = vec!["svdata"];
+        args.push(in_sv.to_str().unwrap());
+        args.push("--json");
+        args.push(out_json.to_str().unwrap());
+        args.push("--yaml");
+        args.push(out_yaml.to_str().unwrap());
         let opt = Opt::parse_from(args.iter());
+
         let svdata = run_opt(&opt).unwrap();
 
-        let e = format!("testcases/display/{}.txt", name);
-        let e = File::open(e).unwrap();
-        let mut e = BufReader::new(e);
-        let mut expected_string: String = String::new();
-        e.read_to_string(&mut expected_string).unwrap();
-
-        let actual_string: String = format!("{}", svdata.clone().unwrap());
-
         // Write actual display to file for manual inspection.
-        fs::create_dir_all(Path::new(&out_dir).join("testcases/display")).unwrap();
-        let a = Path::new(&out_dir).join(format!("testcases/display/{}.txt", name));
-        let a = File::create(a);
+        let actual_string: String = format!("{}", svdata.clone());
+        let out_display = Path::new(&out_dir)
+            .join("testcases")
+            .join("display")
+            .join(format!("{}.txt", name));
+        fs::create_dir_all(out_display.parent().unwrap()).unwrap();
+        let a = File::create(out_display);
         let mut a = BufWriter::new(a.unwrap());
         write!(a, "{}", actual_string).unwrap();
 
+        // Check display against reference.
+        let in_display = Path::new("testcases")
+            .join("display")
+            .join(format!("{}.txt", name));
+        let e = File::open(in_display).unwrap();
+        let mut e = BufReader::new(e);
+        let mut expected_string: String = String::new();
+        e.read_to_string(&mut expected_string).unwrap();
         assert_eq!(expected_string, actual_string);
 
-        let e = format!("testcases/json/{}.json", name);
-        let e = File::open(e).unwrap();
+        // Check JSON against reference.
+        let in_json = Path::new("testcases")
+            .join("json")
+            .join(format!("{}.json", name));
+        let e = File::open(in_json).unwrap();
         let e = BufReader::new(e);
         let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
-
-        let s: String = serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
+        let s: String = serde_json::to_string_pretty(&svdata.clone()).unwrap();
         let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
-
-        // Write actual JSON to file for manual inspection.
-        fs::create_dir_all(Path::new(&out_dir).join("testcases/json")).unwrap();
-        let a = Path::new(&out_dir).join(format!("testcases/json/{}.json", name));
-        let a = File::create(a);
-        let mut a = BufWriter::new(a.unwrap());
-        write!(a, "{}", s).unwrap();
-
         assert_eq!(expected_json_value, actual_json_value);
 
-        let e = format!("testcases/yaml/{}.yaml", name);
-        let e = File::open(e).unwrap();
+        // Check YAML against reference.
+        let in_yaml = Path::new("testcases")
+            .join("yaml")
+            .join(format!("{}.yaml", name));
+        let e = File::open(in_yaml).unwrap();
         let e = BufReader::new(e);
         let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
-
-        let s: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
+        let s: String = serde_yaml::to_string(&svdata.clone()).unwrap();
         let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
-
-        // Write actual YAML to file for manual inspection.
-        fs::create_dir_all(Path::new(&out_dir).join("testcases/yaml")).unwrap();
-        let a = Path::new(&out_dir).join(format!("testcases/yaml/{}.yaml", name));
-        let a = File::create(a);
-        let mut a = BufWriter::new(a.unwrap());
-        write!(a, "{}", s).unwrap();
-
         assert_eq!(expected_yaml_value, actual_yaml_value);
     }
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
