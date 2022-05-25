@@ -7,36 +7,42 @@ modules:
         direction: Input
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Signed
       - identifier: b
         direction: Input
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Signed
       - identifier: c
         direction: Input
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Signed
       - identifier: d
         direction: Input
         datakind: Net
         datatype: Reg
+        classid: ~
         nettype: Wire
         signedness: Signed
       - identifier: e
         direction: Input
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Signed
       - identifier: f
         direction: Input
         datakind: Net
         datatype: Integer
+        classid: ~
         nettype: Tri
         signedness: Signed
     filepath: testcases/sv/ansi_port_input_net_signed.sv

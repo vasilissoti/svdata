@@ -7,18 +7,21 @@ modules:
         direction: Output
         datakind: Net
         datatype: Class
+        classid: my_enum_t
         nettype: Tri
         signedness: Unsigned
       - identifier: e
         direction: Output
         datakind: Net
         datatype: Class
+        classid: my_struct_t
         nettype: Wire
         signedness: Unsigned
       - identifier: f
         direction: Output
         datakind: Net
         datatype: Class
+        classid: my_struct_t
         nettype: Wire
         signedness: Unsigned
     filepath: testcases/sv/ansi_port_output_net_class.sv
