@@ -214,13 +214,13 @@ fn port_packeddim_ansi(
 ) -> Vec<SvPackedDimension> {
     let mut ret: Vec<SvPackedDimension> = Vec::new();
 
-    let mut upper = String::new();
-    let mut lower = String::new();
-
     for node in m {
         match node {
             RefNode::PackedDimension(x) => {
                 let mut div_found: bool = false;
+                let mut upper = String::new();
+                let mut lower = String::new();
+
                 for sub_node in x {
                     match sub_node {
                         RefNode::Symbol(x) => {
