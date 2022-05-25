@@ -1,5 +1,7 @@
-use crate::structures::{SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness};
-use crate::sv_misc::{identifier, keyword};
+use crate::structures::{
+    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
+};
+use crate::sv_misc::{identifier, keyword, number, symbol};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -18,6 +20,7 @@ pub fn port_declaration_ansi(
             datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
             datatype: port_datatype_ansi(p, syntax_tree),
             signedness: port_signedness_ansi(p),
+            packed_dimensions: port_packeddim_ansi(p, syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -27,6 +30,7 @@ pub fn port_declaration_ansi(
             datakind: prev_port.clone().unwrap().datakind,
             datatype: prev_port.clone().unwrap().datatype,
             signedness: prev_port.clone().unwrap().signedness,
+            packed_dimensions: prev_port.clone().unwrap().packed_dimensions,
         };
     }
 
@@ -129,7 +133,7 @@ fn port_nettype_ansi(
     let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match nettype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => {
-            match unwrap_node!(m, PortDirection, DataType, Signing) {
+            match unwrap_node!(m, PortDirection, DataType, Signing, PackedDimension) {
                 Some(_) => return None,
                 _ => return Some(SvNetType::Wire),
             }
@@ -204,11 +208,82 @@ fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> SvSignedness {
     }
 }
 
+fn port_packeddim_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> Vec<SvPackedDimension> {
+    let mut ret: Vec<SvPackedDimension> = Vec::new();
+
+    let mut upper = String::new();
+    let mut lower = String::new();
+
+    for node in m {
+        match node {
+            RefNode::PackedDimension(x) => {
+                let mut div_found: bool = false;
+                for sub_node in x {
+                    match sub_node {
+                        RefNode::Symbol(x) => {
+                            if syntax_tree.get_str(&x.nodes.0).unwrap().to_string() == ":" {
+                                div_found = true;
+                            }
+                        }
+                        RefNode::BinaryOperator(_) => {
+                            if !div_found {
+                                upper.push_str(&symbol(sub_node, syntax_tree).unwrap());
+                            } else {
+                                lower.push_str(&symbol(sub_node, syntax_tree).unwrap());
+                            }
+                        }
+                        RefNode::Identifier(_) => {
+                            if !div_found {
+                                upper.push_str(&identifier(sub_node, syntax_tree).unwrap());
+                            } else {
+                                lower.push_str(&identifier(sub_node, syntax_tree).unwrap());
+                            }
+                        }
+                        RefNode::Number(_) => {
+                            if !div_found {
+                                upper.push_str(&number(sub_node, syntax_tree).unwrap());
+                            } else {
+                                lower.push_str(&number(sub_node, syntax_tree).unwrap());
+                            }
+                        }
+
+                        _ => (),
+                    }
+                }
+                if div_found {
+                    ret.push(SvPackedDimension {
+                        dimension: (upper.clone(), Some(lower.clone())),
+                    });
+                } else {
+                    ret.push(SvPackedDimension {
+                        dimension: (upper.clone(), None),
+                    });
+                }
+            }
+
+            _ => (),
+        }
+    }
+
+    ret
+}
+
 fn port_check_inheritance_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     prev_port: &Option<SvPort>,
 ) -> bool {
-    let datatype = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
+    let datatype = unwrap_node!(
+        m,
+        DataType,
+        Signing,
+        NetType,
+        VarDataType,
+        PortDirection,
+        PackedDimension
+    );
 
     match prev_port {
         Some(_) => match datatype {

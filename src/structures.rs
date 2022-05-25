@@ -91,6 +91,11 @@ pub enum SvNetType {
 }
 
 #[derive(Debug, Serialize, Clone)]
+pub struct SvPackedDimension {
+    pub dimension: (String, Option<String>),
+}
+
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
@@ -98,6 +103,7 @@ pub struct SvPort {
     pub datatype: SvDataType,
     pub nettype: Option<SvNetType>,
     pub signedness: SvSignedness,
+    pub packed_dimensions: Vec<SvPackedDimension>,
 }
 
 impl fmt::Display for SvData {
@@ -139,6 +145,7 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    NetType: {:?}", x)?;
             }
         }
-        writeln!(f, "    Signedness: {:?}", self.signedness)
+        writeln!(f, "    Signedness: {:?}", self.signedness)?;
+        writeln!(f, "    Packed_Dimensions: {:?}", self.packed_dimensions)
     }
 }
