@@ -7,42 +7,49 @@ modules:
         direction: Input
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: b
         direction: Input
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: c
         direction: Input
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: d
         direction: Input
         datakind: Variable
         datatype: Reg
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: e
         direction: Input
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: f
         direction: Input
         datakind: Variable
         datatype: String
+        classid: ~
         nettype: ~
         signedness: Unsigned
       - identifier: g
         direction: Input
         datakind: Variable
         datatype: Integer
+        classid: ~
         nettype: ~
         signedness: Unsigned
     filepath: testcases/sv/ansi_port_input_var_unsigned.sv

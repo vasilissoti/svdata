@@ -7,18 +7,21 @@ modules:
         direction: Input
         datakind: Variable
         datatype: Class
+        classid: my_enum_t
         nettype: ~
         signedness: ~
       - identifier: e
         direction: Input
         datakind: Variable
         datatype: Class
+        classid: my_struct_t
         nettype: ~
         signedness: ~
       - identifier: f
         direction: Input
         datakind: Variable
         datatype: Class
+        classid: my_struct_t
         nettype: ~
         signedness: ~
     filepath: testcases/sv/ansi_port_input_var_class.sv
