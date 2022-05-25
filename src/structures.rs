@@ -146,6 +146,19 @@ impl fmt::Display for SvPort {
             }
         }
         writeln!(f, "    Signedness: {:?}", self.signedness)?;
-        writeln!(f, "    Packed_Dimensions: {:?}", self.packed_dimensions)
+        let mut u: String;
+        let mut l: Option<String>;
+        let mut packeddim_display: Vec<(String, String)> = Vec::new();
+
+        for e in self.packed_dimensions.clone() {
+            (u, l) = e.dimension;
+            match l {
+                Some(x) => packeddim_display.push((u.clone(), x.clone())),
+                None => packeddim_display.push((u.clone(), String::from("None"))),
+            }
+        }
+        writeln!(f, "    PackedDimensions: {:?}", packeddim_display)?;
+
+        writeln!(f, "")
     }
 }
