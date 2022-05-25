@@ -7,36 +7,42 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
       - identifier: b
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
       - identifier: c
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
       - identifier: d
         direction: Output
         datakind: Variable
         datatype: Reg
+        classid: ~
         nettype: ~
         signedness: Signed
       - identifier: e
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
       - identifier: f
         direction: Output
         datakind: Variable
         datatype: Integer
+        classid: ~
         nettype: ~
         signedness: Signed
     filepath: testcases/sv/ansi_port_output_var_signed.sv

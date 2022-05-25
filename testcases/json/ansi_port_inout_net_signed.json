@@ -9,6 +9,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -17,6 +18,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -25,6 +27,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -33,6 +36,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Int",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -41,6 +45,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -49,6 +54,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -57,6 +63,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Signed"
         },
@@ -65,6 +72,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Integer",
+          "classid": null,
           "nettype": "Tri",
           "signedness": "Signed"
         }

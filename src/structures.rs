@@ -96,6 +96,7 @@ pub struct SvPort {
     pub direction: SvPortDirection,
     pub datakind: SvDataKind,
     pub datatype: SvDataType,
+    pub classid: Option<String>,
     pub nettype: Option<SvNetType>,
     pub signedness: SvSignedness,
 }
@@ -131,6 +132,14 @@ impl fmt::Display for SvPort {
         writeln!(f, "    Direction: {:?}", self.direction)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
         writeln!(f, "    DataType: {:?}", self.datatype)?;
+        match self.classid.clone() {
+            None => {
+                writeln!(f, "    ClassIdentifier: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    ClassIdentifier: {}", x)?;
+            }
+        }
         match self.nettype.clone() {
             None => {
                 writeln!(f, "    NetType: None")?;

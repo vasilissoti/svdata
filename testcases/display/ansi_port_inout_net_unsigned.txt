@@ -6,6 +6,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -13,6 +14,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -20,6 +22,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -27,6 +30,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Int
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -34,6 +38,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -41,6 +46,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -48,6 +54,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: String
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -55,6 +62,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
   Port: 
@@ -62,6 +70,7 @@ Module:
     Direction: Inout
     DataKind: Net
     DataType: Integer
+    ClassIdentifier: None
     NetType: Tri
     Signedness: Unsigned
 
