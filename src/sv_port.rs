@@ -202,7 +202,7 @@ fn port_signedness_ansi(
     datatype: &SvDataType,
 ) -> Option<SvSignedness> {
     match datatype {
-        SvDataType::Class => return None,
+        SvDataType::Class => None,
         _ => {
             let signedness = unwrap_node!(m, Signing);
             match signedness {
@@ -212,8 +212,10 @@ fn port_signedness_ansi(
                 Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
                     return Some(SvSignedness::Unsigned)
                 }
-                _ => return Some(SvSignedness::Unsigned),
+                _ => (),
             }
+
+            Some(SvSignedness::Unsigned)
         }
     }
 }
@@ -226,10 +228,10 @@ fn port_classid_ansi(
     match datatype {
         SvDataType::Class => {
             let id = unwrap_node!(m, ClassIdentifier).unwrap();
-            return Some(identifier(id, &syntax_tree).unwrap());
+            Some(identifier(id, &syntax_tree).unwrap())
         }
 
-        _ => return None,
+        _ => None,
     }
 }
 
