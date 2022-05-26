@@ -11,7 +11,7 @@
           "datatype": "Class",
           "classid": "my_enum_t",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         },
         {
           "identifier": "e",
@@ -20,7 +20,7 @@
           "datatype": "Class",
           "classid": "my_struct_t",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         },
         {
           "identifier": "f",
@@ -29,7 +29,7 @@
           "datatype": "Class",
           "classid": "my_struct_t",
           "nettype": null,
-          "signedness": "Unsigned"
+          "signedness": null
         }
       ],
       "filepath": "testcases/sv/ansi_port_input_var_class.sv"

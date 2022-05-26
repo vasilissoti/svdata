@@ -98,7 +98,7 @@ pub struct SvPort {
     pub datatype: SvDataType,
     pub classid: Option<String>,
     pub nettype: Option<SvNetType>,
-    pub signedness: SvSignedness,
+    pub signedness: Option<SvSignedness>,
 }
 
 impl fmt::Display for SvData {
@@ -148,6 +148,13 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    NetType: {:?}", x)?;
             }
         }
-        writeln!(f, "    Signedness: {:?}", self.signedness)
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)
+            }
+        }
     }
 }
