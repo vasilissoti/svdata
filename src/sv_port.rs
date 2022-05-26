@@ -233,50 +233,49 @@ fn port_packeddim_ansi(
     for node in m {
         match node {
             RefNode::PackedDimension(x) => {
-                let mut div_found: bool = false;
+                let mut _div_found: bool = false;
                 let mut upper = String::new();
                 let mut lower = String::new();
 
-                for sub_node in x {
-                    match sub_node {
-                        RefNode::Symbol(x) => {
-                            if syntax_tree.get_str(&x.nodes.0).unwrap().to_string() == ":" {
-                                div_found = true;
+                let range = unwrap_node!(x, ConstantRange);
+                match range {
+                    Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
+                        let (u, _, l) = nodes;
+                        for sub_node in u {
+                            match sub_node {
+                                RefNode::BinaryOperator(_) => {
+                                    upper.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Identifier(_) => {
+                                    upper.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Number(_) => {
+                                    upper.push_str(&number(sub_node, syntax_tree).unwrap())
+                                }
+                                _ => (),
                             }
                         }
-                        RefNode::BinaryOperator(_) => {
-                            if !div_found {
-                                upper.push_str(&symbol(sub_node, syntax_tree).unwrap());
-                            } else {
-                                lower.push_str(&symbol(sub_node, syntax_tree).unwrap());
-                            }
-                        }
-                        RefNode::Identifier(_) => {
-                            if !div_found {
-                                upper.push_str(&identifier(sub_node, syntax_tree).unwrap());
-                            } else {
-                                lower.push_str(&identifier(sub_node, syntax_tree).unwrap());
-                            }
-                        }
-                        RefNode::Number(_) => {
-                            if !div_found {
-                                upper.push_str(&number(sub_node, syntax_tree).unwrap());
-                            } else {
-                                lower.push_str(&number(sub_node, syntax_tree).unwrap());
+                        for sub_node in l {
+                            match sub_node {
+                                RefNode::BinaryOperator(_) => {
+                                    lower.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Identifier(_) => {
+                                    lower.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Number(_) => {
+                                    lower.push_str(&number(sub_node, syntax_tree).unwrap())
+                                }
+                                _ => (),
                             }
                         }
 
-                        _ => (),
+                        ret.push(SvPackedDimension {
+                            dimension: (upper.clone(), Some(lower.clone())),
+                        });
                     }
-                }
-                if div_found {
-                    ret.push(SvPackedDimension {
-                        dimension: (upper.clone(), Some(lower.clone())),
-                    });
-                } else {
-                    ret.push(SvPackedDimension {
-                        dimension: (upper.clone(), None),
-                    });
+
+                    _ => (),
                 }
             }
 
