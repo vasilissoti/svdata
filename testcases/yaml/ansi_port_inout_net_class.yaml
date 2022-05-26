@@ -9,23 +9,20 @@ modules:
         datatype: Class
         classid: my_enum_t
         nettype: Wire
-        signedness: Unsigned
-        packed_dimensions: []
+        signedness: ~
       - identifier: e
         direction: Inout
         datakind: Net
         datatype: Class
         classid: my_struct_t
         nettype: Wire
-        signedness: Unsigned
-        packed_dimensions: []
+        signedness: ~
       - identifier: f
         direction: Inout
         datakind: Net
         datatype: Class
         classid: my_struct_t
         nettype: Wire
-        signedness: Unsigned
-        packed_dimensions: []
+        signedness: ~
     filepath: testcases/sv/ansi_port_inout_net_class.sv
 packages: []

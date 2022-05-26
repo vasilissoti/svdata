@@ -8,9 +8,7 @@ Module:
     DataType: Class
     ClassIdentifier: my_enum_t
     NetType: None
-    Signedness: Unsigned
-    PackedDimensions: []
-
+    Signedness: None
   Port: 
     Identifier: e
     Direction: Output
@@ -18,9 +16,7 @@ Module:
     DataType: Class
     ClassIdentifier: my_struct_t
     NetType: None
-    Signedness: Unsigned
-    PackedDimensions: []
-
+    Signedness: None
   Port: 
     Identifier: f
     Direction: Output
@@ -28,7 +24,5 @@ Module:
     DataType: Class
     ClassIdentifier: my_struct_t
     NetType: None
-    Signedness: Unsigned
-    PackedDimensions: []
-
+    Signedness: None
 

@@ -103,7 +103,7 @@ pub struct SvPort {
     pub datatype: SvDataType,
     pub classid: Option<String>,
     pub nettype: Option<SvNetType>,
-    pub signedness: SvSignedness,
+    pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
 }
 
@@ -154,7 +154,14 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    NetType: {:?}", x)?;
             }
         }
-        writeln!(f, "    Signedness: {:?}", self.signedness)?;
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)
+            }
+        }
         let mut u: String;
         let mut l: Option<String>;
         let mut packeddim_display: Vec<(String, String)> = Vec::new();

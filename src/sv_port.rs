@@ -20,7 +20,7 @@ pub fn port_declaration_ansi(
             datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
             datatype: port_datatype_ansi(p, syntax_tree),
             classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
-            signedness: port_signedness_ansi(p),
+            signedness: port_signedness_ansi(p, &port_datatype_ansi(p, syntax_tree)),
             packed_dimensions: port_packeddim_ansi(p, syntax_tree),
         }
     } else {
@@ -132,8 +132,8 @@ fn port_nettype_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     direction: &SvPortDirection,
 ) -> Option<SvNetType> {
-    let nettype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
-    match nettype {
+    let objecttype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
+    match objecttype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => {
             match unwrap_node!(m, PortDirection, DataType, Signing, PackedDimension) {
                 Some(_) => return None,
@@ -142,9 +142,9 @@ fn port_nettype_ansi(
         }
 
         Some(RefNode::AnsiPortDeclarationNet(x)) => {
-            let dir = unwrap_node!(x, NetType);
+            let nettype = unwrap_node!(x, NetType);
 
-            match dir {
+            match nettype {
                 // "Var" token was not found
                 Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
                     return Some(SvNetType::Supply0)
@@ -201,12 +201,26 @@ fn port_nettype_ansi(
     }
 }
 
-fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> SvSignedness {
-    let signedness = unwrap_node!(m, Signing);
-    match signedness {
-        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => SvSignedness::Signed,
-        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => SvSignedness::Unsigned,
-        _ => SvSignedness::Unsigned,
+fn port_signedness_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    datatype: &SvDataType,
+) -> Option<SvSignedness> {
+    match datatype {
+        SvDataType::Class => None,
+        _ => {
+            let signedness = unwrap_node!(m, Signing);
+            match signedness {
+                Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => {
+                    return Some(SvSignedness::Signed)
+                }
+                Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
+                    return Some(SvSignedness::Unsigned)
+                }
+                _ => (),
+            }
+
+            Some(SvSignedness::Unsigned)
+        }
     }
 }
 
@@ -281,10 +295,10 @@ fn port_classid_ansi(
     match datatype {
         SvDataType::Class => {
             let id = unwrap_node!(m, ClassIdentifier).unwrap();
-            return Some(identifier(id, &syntax_tree).unwrap());
+            Some(identifier(id, &syntax_tree).unwrap())
         }
 
-        _ => return None,
+        _ => None,
     }
 }
 
