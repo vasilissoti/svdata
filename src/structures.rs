@@ -156,10 +156,10 @@ impl fmt::Display for SvPort {
         }
         match self.signedness.clone() {
             None => {
-                writeln!(f, "    Signedness: None")
+                writeln!(f, "    Signedness: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Signedness: {:?}", x)
+                writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
         let mut u: String;
