@@ -9,17 +9,20 @@ modules:
         datatype: Class
         nettype: Tri
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: e
         direction: Output
         datakind: Net
         datatype: Class
         nettype: Wire
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: f
         direction: Output
         datakind: Net
         datatype: Class
         nettype: Wire
         signedness: Unsigned
+        packed_dimensions: []
     filepath: testcases/sv/ansi_port_output_net_class.sv
 packages: []

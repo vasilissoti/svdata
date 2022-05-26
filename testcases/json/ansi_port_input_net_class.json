@@ -10,7 +10,8 @@
           "datakind": "Net",
           "datatype": "Class",
           "nettype": "Wire",
-          "signedness": "Unsigned"
+          "signedness": "Unsigned",
+          "packed_dimensions": []
         },
         {
           "identifier": "e",
@@ -18,7 +19,8 @@
           "datakind": "Net",
           "datatype": "Class",
           "nettype": "Wire",
-          "signedness": "Unsigned"
+          "signedness": "Unsigned",
+          "packed_dimensions": []
         },
         {
           "identifier": "f",
@@ -26,7 +28,8 @@
           "datakind": "Net",
           "datatype": "Class",
           "nettype": "Wire",
-          "signedness": "Unsigned"
+          "signedness": "Unsigned",
+          "packed_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_input_net_class.sv"

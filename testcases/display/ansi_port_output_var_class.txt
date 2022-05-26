@@ -8,6 +8,8 @@ Module:
     DataType: Class
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Output
@@ -15,6 +17,8 @@ Module:
     DataType: Class
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: f
     Direction: Output
@@ -22,4 +26,6 @@ Module:
     DataType: Class
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
 

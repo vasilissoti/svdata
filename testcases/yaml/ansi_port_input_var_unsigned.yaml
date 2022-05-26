@@ -9,41 +9,54 @@ modules:
         datatype: Logic
         nettype: ~
         signedness: Unsigned
+        packed_dimensions:
+          - dimension:
+              - FOO-1
+              - "0"
       - identifier: b
         direction: Input
         datakind: Variable
         datatype: Logic
         nettype: ~
         signedness: Unsigned
+        packed_dimensions:
+          - dimension:
+              - FOO-1
+              - "0"
       - identifier: c
         direction: Input
         datakind: Variable
         datatype: Logic
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: d
         direction: Input
         datakind: Variable
         datatype: Reg
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: e
         direction: Input
         datakind: Variable
         datatype: Logic
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: f
         direction: Input
         datakind: Variable
         datatype: String
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
       - identifier: g
         direction: Input
         datakind: Variable
         datatype: Integer
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
     filepath: testcases/sv/ansi_port_input_var_unsigned.sv
 packages: []

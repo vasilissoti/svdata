@@ -8,6 +8,8 @@ Module:
     DataType: Logic
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+
   Port: 
     Identifier: b
     Direction: Output
@@ -15,6 +17,8 @@ Module:
     DataType: Logic
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+
   Port: 
     Identifier: c
     Direction: Output
@@ -22,6 +26,8 @@ Module:
     DataType: Logic
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: d
     Direction: Output
@@ -29,6 +35,8 @@ Module:
     DataType: Reg
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Output
@@ -36,6 +44,8 @@ Module:
     DataType: Logic
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: f
     Direction: Output
@@ -43,6 +53,8 @@ Module:
     DataType: String
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: g
     Direction: Output
@@ -50,4 +62,6 @@ Module:
     DataType: Integer
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+
 

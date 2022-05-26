@@ -10,7 +10,15 @@
           "datakind": "Net",
           "datatype": "Logic",
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "packed_dimensions": [
+            {
+              "dimension": [
+                "FOO-1",
+                "0"
+              ]
+            }
+          ]
         },
         {
           "identifier": "b",
@@ -18,7 +26,15 @@
           "datakind": "Net",
           "datatype": "Logic",
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "packed_dimensions": [
+            {
+              "dimension": [
+                "FOO-1",
+                "0"
+              ]
+            }
+          ]
         },
         {
           "identifier": "c",
@@ -26,7 +42,15 @@
           "datakind": "Net",
           "datatype": "Logic",
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "packed_dimensions": [
+            {
+              "dimension": [
+                "FOO-1",
+                "0"
+              ]
+            }
+          ]
         },
         {
           "identifier": "d",
@@ -34,7 +58,8 @@
           "datakind": "Net",
           "datatype": "Reg",
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "packed_dimensions": []
         },
         {
           "identifier": "e",
@@ -42,7 +67,8 @@
           "datakind": "Net",
           "datatype": "Integer",
           "nettype": "Tri",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "packed_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_output_net_signed.sv"

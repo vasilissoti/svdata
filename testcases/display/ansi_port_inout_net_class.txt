@@ -8,6 +8,8 @@ Module:
     DataType: Class
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Inout
@@ -15,6 +17,8 @@ Module:
     DataType: Class
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
+
   Port: 
     Identifier: f
     Direction: Inout
@@ -22,4 +26,6 @@ Module:
     DataType: Class
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
+
 
