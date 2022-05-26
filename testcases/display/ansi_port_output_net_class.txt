@@ -6,6 +6,7 @@ Module:
     Direction: Output
     DataKind: Net
     DataType: Class
+    ClassIdentifier: my_enum_t
     NetType: Tri
     Signedness: Unsigned
     PackedDimensions: []
@@ -15,6 +16,7 @@ Module:
     Direction: Output
     DataKind: Net
     DataType: Class
+    ClassIdentifier: my_struct_t
     NetType: Wire
     Signedness: Unsigned
     PackedDimensions: []
@@ -24,6 +26,7 @@ Module:
     Direction: Output
     DataKind: Net
     DataType: Class
+    ClassIdentifier: my_struct_t
     NetType: Wire
     Signedness: Unsigned
     PackedDimensions: []

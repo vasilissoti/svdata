@@ -6,6 +6,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
@@ -15,6 +16,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
@@ -24,6 +26,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
@@ -33,6 +36,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Reg
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
@@ -42,6 +46,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Logic
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
@@ -51,6 +56,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: String
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
@@ -60,6 +66,7 @@ Module:
     Direction: Input
     DataKind: Variable
     DataType: Integer
+    ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []

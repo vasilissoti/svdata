@@ -7,6 +7,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -14,6 +15,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions:
@@ -24,6 +26,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions:
@@ -34,6 +37,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Int
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -41,6 +45,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -48,6 +53,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -55,6 +61,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: String
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -62,6 +69,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Logic
+        classid: ~
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -69,6 +77,7 @@ modules:
         direction: Inout
         datakind: Net
         datatype: Integer
+        classid: ~
         nettype: Tri
         signedness: Unsigned
         packed_dimensions: []

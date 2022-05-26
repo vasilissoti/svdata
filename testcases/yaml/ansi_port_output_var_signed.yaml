@@ -7,6 +7,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions:
@@ -17,6 +18,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions:
@@ -27,6 +29,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions: []
@@ -34,6 +37,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Reg
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions: []
@@ -41,6 +45,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Logic
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions: []
@@ -48,6 +53,7 @@ modules:
         direction: Output
         datakind: Variable
         datatype: Integer
+        classid: ~
         nettype: ~
         signedness: Signed
         packed_dimensions: []

@@ -19,6 +19,7 @@ pub fn port_declaration_ansi(
             nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port)),
             datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port))),
             datatype: port_datatype_ansi(p, syntax_tree),
+            classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
             signedness: port_signedness_ansi(p),
             packed_dimensions: port_packeddim_ansi(p, syntax_tree),
         }
@@ -29,6 +30,7 @@ pub fn port_declaration_ansi(
             nettype: prev_port.clone().unwrap().nettype,
             datakind: prev_port.clone().unwrap().datakind,
             datatype: prev_port.clone().unwrap().datatype,
+            classid: prev_port.clone().unwrap().classid,
             signedness: prev_port.clone().unwrap().signedness,
             packed_dimensions: prev_port.clone().unwrap().packed_dimensions,
         };
@@ -269,6 +271,21 @@ fn port_packeddim_ansi(
     }
 
     ret
+}
+
+fn port_classid_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    datatype: &SvDataType,
+    syntax_tree: &SyntaxTree,
+) -> Option<String> {
+    match datatype {
+        SvDataType::Class => {
+            let id = unwrap_node!(m, ClassIdentifier).unwrap();
+            return Some(identifier(id, &syntax_tree).unwrap());
+        }
+
+        _ => return None,
+    }
 }
 
 fn port_check_inheritance_ansi(

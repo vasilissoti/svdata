@@ -9,6 +9,7 @@
           "direction": "Output",
           "datakind": "Net",
           "datatype": "Class",
+          "classid": "my_enum_t",
           "nettype": "Tri",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -18,6 +19,7 @@
           "direction": "Output",
           "datakind": "Net",
           "datatype": "Class",
+          "classid": "my_struct_t",
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -27,6 +29,7 @@
           "direction": "Output",
           "datakind": "Net",
           "datatype": "Class",
+          "classid": "my_struct_t",
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []

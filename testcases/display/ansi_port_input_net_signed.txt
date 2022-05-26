@@ -6,6 +6,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
@@ -15,6 +16,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
@@ -24,6 +26,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
@@ -33,6 +36,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Reg
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
     PackedDimensions: []
@@ -42,6 +46,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Logic
+    ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
     PackedDimensions: []
@@ -51,6 +56,7 @@ Module:
     Direction: Input
     DataKind: Net
     DataType: Integer
+    ClassIdentifier: None
     NetType: Tri
     Signedness: Signed
     PackedDimensions: []

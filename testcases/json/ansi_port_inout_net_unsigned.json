@@ -9,6 +9,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -18,6 +19,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": [
@@ -34,6 +36,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": [
@@ -50,6 +53,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Int",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -59,6 +63,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -68,6 +73,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -77,6 +83,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "String",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -86,6 +93,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Logic",
+          "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -95,6 +103,7 @@
           "direction": "Inout",
           "datakind": "Net",
           "datatype": "Integer",
+          "classid": null,
           "nettype": "Tri",
           "signedness": "Unsigned",
           "packed_dimensions": []

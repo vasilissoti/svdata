@@ -7,6 +7,7 @@ modules:
         direction: Input
         datakind: Net
         datatype: Class
+        classid: my_enum_t
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -14,6 +15,7 @@ modules:
         direction: Input
         datakind: Net
         datatype: Class
+        classid: my_struct_t
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []
@@ -21,6 +23,7 @@ modules:
         direction: Input
         datakind: Net
         datatype: Class
+        classid: my_struct_t
         nettype: Wire
         signedness: Unsigned
         packed_dimensions: []

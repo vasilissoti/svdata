@@ -9,6 +9,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Logic",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": [
@@ -25,6 +26,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Logic",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": [
@@ -41,6 +43,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Logic",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -50,6 +53,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Reg",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -59,6 +63,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Logic",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -68,6 +73,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "String",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": []
@@ -77,6 +83,7 @@
           "direction": "Output",
           "datakind": "Variable",
           "datatype": "Integer",
+          "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": []
