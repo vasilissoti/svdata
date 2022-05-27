@@ -232,7 +232,7 @@ fn port_packeddim_ansi(
 
     for node in m {
         match node {
-            RefNode::PackedDimension(x) => {
+            RefNode::PackedDimensionRange(x) => {
                 let mut _div_found: bool = false;
                 let mut upper = String::new();
                 let mut lower = String::new();
