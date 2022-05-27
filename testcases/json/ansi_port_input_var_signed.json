@@ -12,7 +12,20 @@
           "classid": null,
           "nettype": null,
           "signedness": "Signed",
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [
+            {
+              "dimension": [
+                "FOO",
+                null
+              ]
+            },
+            {
+              "dimension": [
+                "FOO-1",
+                "0"
+              ]
+            }
+          ]
         },
         {
           "identifier": "b",

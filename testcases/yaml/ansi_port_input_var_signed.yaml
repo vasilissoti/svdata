@@ -10,7 +10,13 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
-        unpacked_dimensions: []
+        unpacked_dimensions:
+          - dimension:
+              - FOO
+              - ~
+          - dimension:
+              - FOO-1
+              - "0"
       - identifier: b
         direction: Input
         datakind: Variable

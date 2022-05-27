@@ -9,7 +9,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
-    UnpackedDimensions: []
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
 
   Port: 
     Identifier: b

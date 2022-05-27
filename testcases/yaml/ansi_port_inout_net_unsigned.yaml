@@ -26,7 +26,13 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Unsigned
-        unpacked_dimensions: []
+        unpacked_dimensions:
+          - dimension:
+              - FOO
+              - ~
+          - dimension:
+              - FOO-1
+              - "0"
       - identifier: d
         direction: Inout
         datakind: Net
