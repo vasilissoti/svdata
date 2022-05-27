@@ -1,5 +1,7 @@
-use crate::structures::{SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness};
-use crate::sv_misc::{identifier, keyword};
+use crate::structures::{
+    SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness, SvUnpackedDimension,
+};
+use crate::sv_misc::{identifier, keyword, number, symbol};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -19,6 +21,7 @@ pub fn port_declaration_ansi(
             datatype: port_datatype_ansi(p, syntax_tree),
             classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
             signedness: port_signedness_ansi(p, &port_datatype_ansi(p, syntax_tree)),
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -29,6 +32,7 @@ pub fn port_declaration_ansi(
             datatype: prev_port.clone().unwrap().datatype,
             classid: prev_port.clone().unwrap().classid,
             signedness: prev_port.clone().unwrap().signedness,
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         };
     }
 
@@ -218,6 +222,89 @@ fn port_signedness_ansi(
             Some(SvSignedness::Unsigned)
         }
     }
+}
+
+fn port_unpackeddim_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> Vec<SvUnpackedDimension> {
+    let mut ret: Vec<SvUnpackedDimension> = Vec::new();
+
+    for node in m {
+        match node {
+            RefNode::UnpackedDimensionRange(x) => {
+                let mut upper = String::new();
+                let mut lower = String::new();
+
+                let range = unwrap_node!(x, ConstantRange);
+                match range {
+                    Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
+                        let (u, _, l) = nodes;
+                        for sub_node in u {
+                            match sub_node {
+                                RefNode::BinaryOperator(_) => {
+                                    upper.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Identifier(_) => {
+                                    upper.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Number(_) => {
+                                    upper.push_str(&number(sub_node, syntax_tree).unwrap())
+                                }
+                                _ => (),
+                            }
+                        }
+                        for sub_node in l {
+                            match sub_node {
+                                RefNode::BinaryOperator(_) => {
+                                    lower.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Identifier(_) => {
+                                    lower.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                }
+                                RefNode::Number(_) => {
+                                    lower.push_str(&number(sub_node, syntax_tree).unwrap())
+                                }
+                                _ => (),
+                            }
+                        }
+
+                        ret.push(SvUnpackedDimension {
+                            dimension: (upper.clone(), Some(lower.clone())),
+                        });
+                    }
+
+                    _ => (),
+                }
+            }
+
+            RefNode::UnpackedDimensionExpression(u) => {
+                let mut upper = String::new();
+                for sub_node in u {
+                    match sub_node {
+                        RefNode::BinaryOperator(_) => {
+                            upper.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                        }
+                        RefNode::Identifier(_) => {
+                            upper.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                        }
+                        RefNode::Number(_) => {
+                            upper.push_str(&number(sub_node, syntax_tree).unwrap())
+                        }
+                        _ => (),
+                    }
+                }
+
+                ret.push(SvUnpackedDimension {
+                    dimension: (upper.clone(), None),
+                });
+            }
+
+            _ => (),
+        }
+    }
+
+    ret
 }
 
 fn port_classid_ansi(

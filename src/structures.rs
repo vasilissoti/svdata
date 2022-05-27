@@ -91,6 +91,11 @@ pub enum SvNetType {
 }
 
 #[derive(Debug, Serialize, Clone)]
+pub struct SvUnpackedDimension {
+    pub dimension: (String, Option<String>),
+}
+
+#[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
@@ -99,6 +104,7 @@ pub struct SvPort {
     pub classid: Option<String>,
     pub nettype: Option<SvNetType>,
     pub signedness: Option<SvSignedness>,
+    pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
 
 impl fmt::Display for SvData {
@@ -150,11 +156,26 @@ impl fmt::Display for SvPort {
         }
         match self.signedness.clone() {
             None => {
-                writeln!(f, "    Signedness: None")
+                writeln!(f, "    Signedness: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Signedness: {:?}", x)
+                writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
+
+        let mut u: String;
+        let mut l: Option<String>;
+        let mut packeddim_display: Vec<(String, String)> = Vec::new();
+
+        for e in self.unpacked_dimensions.clone() {
+            (u, l) = e.dimension;
+            match l {
+                Some(x) => packeddim_display.push((u.clone(), x.clone())),
+                None => packeddim_display.push((u.clone(), String::from("None"))),
+            }
+        }
+        writeln!(f, "    UnpackedDimensions: {:?}", packeddim_display)?;
+
+        writeln!(f, "")
     }
 }
