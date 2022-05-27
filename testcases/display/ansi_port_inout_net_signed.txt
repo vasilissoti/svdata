@@ -9,6 +9,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: b
     Direction: Inout
@@ -17,6 +19,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: c
     Direction: Inout
@@ -25,6 +29,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: d
     Direction: Inout
@@ -33,6 +39,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Inout
@@ -41,6 +49,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: [("FOO-1", "0")]
+
   Port: 
     Identifier: f
     Direction: Inout
@@ -49,6 +59,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: g
     Direction: Inout
@@ -57,6 +69,8 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: h
     Direction: Inout
@@ -65,4 +79,6 @@ Module:
     ClassIdentifier: None
     NetType: Tri
     Signedness: Signed
+    UnpackedDimensions: []
+
 

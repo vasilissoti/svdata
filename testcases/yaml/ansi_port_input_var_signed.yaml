@@ -10,6 +10,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: b
         direction: Input
         datakind: Variable
@@ -17,6 +18,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: c
         direction: Input
         datakind: Variable
@@ -24,6 +26,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: d
         direction: Input
         datakind: Variable
@@ -31,6 +34,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: e
         direction: Input
         datakind: Variable
@@ -38,6 +42,10 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions:
+          - dimension:
+              - FOO-1
+              - "0"
       - identifier: f
         direction: Input
         datakind: Variable
@@ -45,5 +53,6 @@ modules:
         classid: ~
         nettype: ~
         signedness: Signed
+        unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_input_var_signed.sv
 packages: []

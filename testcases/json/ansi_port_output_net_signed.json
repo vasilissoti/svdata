@@ -11,7 +11,8 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "b",
@@ -20,7 +21,8 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "c",
@@ -29,7 +31,8 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "d",
@@ -38,7 +41,8 @@
           "datatype": "Reg",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "e",
@@ -47,7 +51,8 @@
           "datatype": "Integer",
           "classid": null,
           "nettype": "Tri",
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_output_net_signed.sv"

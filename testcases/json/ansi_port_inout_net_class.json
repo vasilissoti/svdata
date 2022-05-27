@@ -11,7 +11,8 @@
           "datatype": "Class",
           "classid": "my_enum_t",
           "nettype": "Wire",
-          "signedness": null
+          "signedness": null,
+          "unpacked_dimensions": []
         },
         {
           "identifier": "e",
@@ -20,7 +21,8 @@
           "datatype": "Class",
           "classid": "my_struct_t",
           "nettype": "Wire",
-          "signedness": null
+          "signedness": null,
+          "unpacked_dimensions": []
         },
         {
           "identifier": "f",
@@ -29,7 +31,8 @@
           "datatype": "Class",
           "classid": "my_struct_t",
           "nettype": "Wire",
-          "signedness": null
+          "signedness": null,
+          "unpacked_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_inout_net_class.sv"

@@ -10,6 +10,7 @@ modules:
         classid: my_enum_t
         nettype: Wire
         signedness: ~
+        unpacked_dimensions: []
       - identifier: e
         direction: Input
         datakind: Net
@@ -17,6 +18,7 @@ modules:
         classid: my_struct_t
         nettype: Wire
         signedness: ~
+        unpacked_dimensions: []
       - identifier: f
         direction: Input
         datakind: Net
@@ -24,5 +26,6 @@ modules:
         classid: my_struct_t
         nettype: Wire
         signedness: ~
+        unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_input_net_class.sv
 packages: []
