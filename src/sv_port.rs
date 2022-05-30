@@ -277,23 +277,23 @@ fn port_unpackeddim_ansi(
             }
 
             RefNode::UnpackedDimensionExpression(u) => {
-                let mut upper = String::new();
+                let mut left = String::new();
                 for sub_node in u {
                     match sub_node {
                         RefNode::BinaryOperator(_) => {
-                            upper.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                            left.push_str(&symbol(sub_node, syntax_tree).unwrap())
                         }
                         RefNode::Identifier(_) => {
-                            upper.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                            left.push_str(&identifier(sub_node, syntax_tree).unwrap())
                         }
                         RefNode::Number(_) => {
-                            upper.push_str(&number(sub_node, syntax_tree).unwrap())
+                            left.push_str(&number(sub_node, syntax_tree).unwrap())
                         }
                         _ => (),
                     }
                 }
 
-                ret.push((upper.clone(), None));
+                ret.push((left.clone(), None));
             }
 
             _ => (),
