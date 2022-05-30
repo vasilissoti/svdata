@@ -1,7 +1,7 @@
 use crate::structures::{
     SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
 };
-use crate::sv_misc::{identifier, keyword, number, symbol};
+use crate::sv_misc::{all_tokens, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -233,41 +233,14 @@ fn port_packeddim_ansi(
     for node in m {
         match node {
             RefNode::PackedDimensionRange(x) => {
-                let mut left = String::new();
-                let mut right = String::new();
-
                 let range = unwrap_node!(x, ConstantRange);
                 match range {
                     Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
                         let (l, _, r) = nodes;
-                        for sub_node in l {
-                            match sub_node {
-                                RefNode::BinaryOperator(_) => {
-                                    left.push_str(&symbol(sub_node, syntax_tree).unwrap())
-                                }
-                                RefNode::Identifier(_) => {
-                                    left.push_str(&identifier(sub_node, syntax_tree).unwrap())
-                                }
-                                RefNode::Number(_) => {
-                                    left.push_str(&number(sub_node, syntax_tree).unwrap())
-                                }
-                                _ => (),
-                            }
-                        }
-                        for sub_node in r {
-                            match sub_node {
-                                RefNode::BinaryOperator(_) => {
-                                    right.push_str(&symbol(sub_node, syntax_tree).unwrap())
-                                }
-                                RefNode::Identifier(_) => {
-                                    right.push_str(&identifier(sub_node, syntax_tree).unwrap())
-                                }
-                                RefNode::Number(_) => {
-                                    right.push_str(&number(sub_node, syntax_tree).unwrap())
-                                }
-                                _ => (),
-                            }
-                        }
+                        let left =
+                            all_tokens(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
+                        let right =
+                            all_tokens(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
 
                         ret.push((left.clone(), Some(right.clone())));
                     }

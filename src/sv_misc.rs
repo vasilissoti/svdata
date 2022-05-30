@@ -26,28 +26,22 @@ pub fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
-pub fn number(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let nu = match unwrap_node!(parent, UnsignedNumber) {
-        Some(RefNode::UnsignedNumber(x)) => Some(x.nodes.0),
+pub fn all_tokens(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let mut all_tokens: String = String::new();
 
-        _ => None,
-    };
+    for node in parent {
+        match node {
+            RefNode::Locate(x) => {
+                all_tokens.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+            }
 
-    match nu {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
+            _ => (),
+        }
     }
-}
 
-pub fn symbol(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let symbol = match unwrap_node!(parent, Symbol) {
-        Some(RefNode::Symbol(x)) => Some(x.nodes.0),
-
-        _ => None,
-    };
-
-    match symbol {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
+    if all_tokens.is_empty() {
+        None
+    } else {
+        Some(all_tokens)
     }
 }
