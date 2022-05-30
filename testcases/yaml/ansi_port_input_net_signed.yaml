@@ -11,9 +11,8 @@ modules:
         nettype: Wire
         signedness: Signed
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: b
         direction: Input
         datakind: Net
@@ -22,9 +21,8 @@ modules:
         nettype: Wire
         signedness: Signed
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: c
         direction: Input
         datakind: Net
@@ -33,9 +31,8 @@ modules:
         nettype: Wire
         signedness: Signed
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: d
         direction: Input
         datakind: Net

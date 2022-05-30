@@ -270,9 +270,7 @@ fn port_packeddim_ansi(
                             }
                         }
 
-                        ret.push(SvPackedDimension {
-                            dimension: (upper.clone(), Some(lower.clone())),
-                        });
+                        ret.push((upper.clone(), Some(lower.clone())));
                     }
 
                     _ => (),

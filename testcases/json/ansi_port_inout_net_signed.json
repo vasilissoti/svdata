@@ -23,12 +23,10 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [
-            {
-              "dimension": [
-                "FOO-1",
-                "0"
-              ]
-            }
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {
@@ -40,12 +38,10 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [
-            {
-              "dimension": [
-                "FOO-1",
-                "0"
-              ]
-            }
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {

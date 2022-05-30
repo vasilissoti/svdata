@@ -11,9 +11,8 @@ modules:
         nettype: ~
         signedness: Signed
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: b
         direction: Input
         datakind: Variable
@@ -22,9 +21,8 @@ modules:
         nettype: ~
         signedness: Signed
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: c
         direction: Input
         datakind: Variable

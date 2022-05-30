@@ -11,9 +11,8 @@ modules:
         nettype: Wire
         signedness: Unsigned
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: b
         direction: Output
         datakind: Net
@@ -22,9 +21,8 @@ modules:
         nettype: Wire
         signedness: Unsigned
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: c
         direction: Output
         datakind: Net
@@ -33,9 +31,8 @@ modules:
         nettype: Wire
         signedness: Unsigned
         packed_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: d
         direction: Output
         datakind: Net

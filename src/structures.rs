@@ -90,10 +90,7 @@ pub enum SvNetType {
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize, Clone)]
-pub struct SvPackedDimension {
-    pub dimension: (String, Option<String>),
-}
+pub type SvPackedDimension = (String, Option<String>);
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
@@ -162,12 +159,10 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
-        let mut u: String;
-        let mut l: Option<String>;
+
         let mut packeddim_display: Vec<(String, String)> = Vec::new();
 
-        for e in self.packed_dimensions.clone() {
-            (u, l) = e.dimension;
+        for (u, l) in self.packed_dimensions.clone() {
             match l {
                 Some(x) => packeddim_display.push((u.clone(), x.clone())),
                 None => packeddim_display.push((u.clone(), String::from("None"))),
