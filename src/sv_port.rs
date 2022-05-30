@@ -233,44 +233,43 @@ fn port_packeddim_ansi(
     for node in m {
         match node {
             RefNode::PackedDimensionRange(x) => {
-                let mut _div_found: bool = false;
-                let mut upper = String::new();
-                let mut lower = String::new();
+                let mut left = String::new();
+                let mut right = String::new();
 
                 let range = unwrap_node!(x, ConstantRange);
                 match range {
                     Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
-                        let (u, _, l) = nodes;
-                        for sub_node in u {
+                        let (l, _, r) = nodes;
+                        for sub_node in l {
                             match sub_node {
                                 RefNode::BinaryOperator(_) => {
-                                    upper.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                    left.push_str(&symbol(sub_node, syntax_tree).unwrap())
                                 }
                                 RefNode::Identifier(_) => {
-                                    upper.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                    left.push_str(&identifier(sub_node, syntax_tree).unwrap())
                                 }
                                 RefNode::Number(_) => {
-                                    upper.push_str(&number(sub_node, syntax_tree).unwrap())
+                                    left.push_str(&number(sub_node, syntax_tree).unwrap())
                                 }
                                 _ => (),
                             }
                         }
-                        for sub_node in l {
+                        for sub_node in r {
                             match sub_node {
                                 RefNode::BinaryOperator(_) => {
-                                    lower.push_str(&symbol(sub_node, syntax_tree).unwrap())
+                                    right.push_str(&symbol(sub_node, syntax_tree).unwrap())
                                 }
                                 RefNode::Identifier(_) => {
-                                    lower.push_str(&identifier(sub_node, syntax_tree).unwrap())
+                                    right.push_str(&identifier(sub_node, syntax_tree).unwrap())
                                 }
                                 RefNode::Number(_) => {
-                                    lower.push_str(&number(sub_node, syntax_tree).unwrap())
+                                    right.push_str(&number(sub_node, syntax_tree).unwrap())
                                 }
                                 _ => (),
                             }
                         }
 
-                        ret.push((upper.clone(), Some(lower.clone())));
+                        ret.push((left.clone(), Some(right.clone())));
                     }
 
                     _ => (),
