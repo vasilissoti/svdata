@@ -239,8 +239,8 @@ fn port_unpackeddim_ansi(
                 let range = unwrap_node!(x, ConstantRange);
                 match range {
                     Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
-                        let (u, _, l) = nodes;
-                        for sub_node in u {
+                        let (l, _, r) = nodes;
+                        for sub_node in l {
                             match sub_node {
                                 RefNode::BinaryOperator(_) => {
                                     left.push_str(&symbol(sub_node, syntax_tree).unwrap())
@@ -254,7 +254,7 @@ fn port_unpackeddim_ansi(
                                 _ => (),
                             }
                         }
-                        for sub_node in l {
+                        for sub_node in r {
                             match sub_node {
                                 RefNode::BinaryOperator(_) => {
                                     right.push_str(&symbol(sub_node, syntax_tree).unwrap())
