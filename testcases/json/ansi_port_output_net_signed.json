@@ -13,18 +13,14 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "unpacked_dimensions": [
-            {
-              "dimension": [
-                "FOO",
-                null
-              ]
-            },
-            {
-              "dimension": [
-                "FOO-1",
-                "0"
-              ]
-            }
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {

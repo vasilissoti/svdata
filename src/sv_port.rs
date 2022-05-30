@@ -269,9 +269,7 @@ fn port_unpackeddim_ansi(
                             }
                         }
 
-                        ret.push(SvUnpackedDimension {
-                            dimension: (upper.clone(), Some(lower.clone())),
-                        });
+                        ret.push((upper.clone(), Some(lower.clone())));
                     }
 
                     _ => (),
@@ -295,9 +293,7 @@ fn port_unpackeddim_ansi(
                     }
                 }
 
-                ret.push(SvUnpackedDimension {
-                    dimension: (upper.clone(), None),
-                });
+                ret.push((upper.clone(), None));
             }
 
             _ => (),

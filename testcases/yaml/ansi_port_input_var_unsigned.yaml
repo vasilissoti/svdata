@@ -11,12 +11,10 @@ modules:
         nettype: ~
         signedness: Unsigned
         unpacked_dimensions:
-          - dimension:
-              - FOO
-              - ~
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
       - identifier: b
         direction: Input
         datakind: Variable
@@ -49,9 +47,8 @@ modules:
         nettype: ~
         signedness: Unsigned
         unpacked_dimensions:
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO-1
+            - "0"
       - identifier: f
         direction: Input
         datakind: Variable

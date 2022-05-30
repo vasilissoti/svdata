@@ -13,18 +13,14 @@
           "nettype": null,
           "signedness": "Signed",
           "unpacked_dimensions": [
-            {
-              "dimension": [
-                "FOO",
-                null
-              ]
-            },
-            {
-              "dimension": [
-                "FOO-1",
-                "0"
-              ]
-            }
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {
@@ -66,12 +62,10 @@
           "nettype": null,
           "signedness": "Signed",
           "unpacked_dimensions": [
-            {
-              "dimension": [
-                "FOO-1",
-                "0"
-              ]
-            }
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {

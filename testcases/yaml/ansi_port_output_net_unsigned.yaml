@@ -11,12 +11,10 @@ modules:
         nettype: Wire
         signedness: Unsigned
         unpacked_dimensions:
-          - dimension:
-              - FOO
-              - ~
-          - dimension:
-              - FOO-1
-              - "0"
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
       - identifier: b
         direction: Output
         datakind: Net
