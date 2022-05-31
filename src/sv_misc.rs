@@ -26,22 +26,18 @@ pub fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
-pub fn all_tokens(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let mut all_tokens: String = String::new();
+pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let mut ret: String = String::new();
 
     for node in parent {
-        match node {
-            RefNode::Locate(x) => {
-                all_tokens.push_str(&syntax_tree.get_str(x).unwrap().to_string());
-            }
-
-            _ => (),
+        if let RefNode::Locate(x) = node {
+            ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
         }
     }
 
-    if all_tokens.is_empty() {
+    if ret.is_empty() {
         None
     } else {
-        Some(all_tokens)
+        Some(ret)
     }
 }
