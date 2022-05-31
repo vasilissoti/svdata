@@ -90,7 +90,7 @@ pub enum SvNetType {
     IMPLICIT,
 }
 
-pub type SvPackedDimension = (String, Option<String>);
+pub type SvPackedDimension = (String, String);
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
@@ -160,15 +160,7 @@ impl fmt::Display for SvPort {
             }
         }
 
-        let mut packeddim_display: Vec<(String, String)> = Vec::new();
-
-        for (u, l) in self.packed_dimensions.clone() {
-            match l {
-                Some(x) => packeddim_display.push((u.clone(), x.clone())),
-                None => packeddim_display.push((u.clone(), String::from("None"))),
-            }
-        }
-        writeln!(f, "    PackedDimensions: {:?}", packeddim_display)?;
+        writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
 
         writeln!(f, "")
     }

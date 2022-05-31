@@ -242,7 +242,7 @@ fn port_packeddim_ansi(
                         let right =
                             get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
 
-                        ret.push((left.clone(), Some(right.clone())));
+                        ret.push((left.clone(), right.clone()));
                     }
 
                     _ => (),
