@@ -1,7 +1,7 @@
 use crate::structures::{
     SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
 };
-use crate::sv_misc::{all_tokens, identifier, keyword};
+use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -238,9 +238,9 @@ fn port_packeddim_ansi(
                     Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
                         let (l, _, r) = nodes;
                         let left =
-                            all_tokens(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
+                            get_string(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
                         let right =
-                            all_tokens(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
+                            get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
 
                         ret.push((left.clone(), Some(right.clone())));
                     }
