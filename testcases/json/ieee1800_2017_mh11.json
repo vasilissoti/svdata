@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "identifier": "mh11",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Ref",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ieee1800_2017_mh11.sv"
+    }
+  ],
+  "packages": []
+}

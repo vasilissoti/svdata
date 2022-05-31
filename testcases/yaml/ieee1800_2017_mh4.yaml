@@ -1,0 +1,14 @@
+---
+modules:
+  - identifier: mh4
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+    filepath: testcases/sv/ieee1800_2017_mh4.sv
+packages: []

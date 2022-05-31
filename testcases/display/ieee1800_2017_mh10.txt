@@ -1,0 +1,12 @@
+Module:
+  Identifier: mh10
+  Filepath: testcases/sv/ieee1800_2017_mh10.sv
+  Port: 
+    Identifier: x
+    Direction: Output
+    DataKind: Variable
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+
