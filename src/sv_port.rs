@@ -1,5 +1,7 @@
-use crate::structures::{SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness};
-use crate::sv_misc::{identifier, keyword};
+use crate::structures::{
+    SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness, SvUnpackedDimension,
+};
+use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -19,6 +21,7 @@ pub fn port_declaration_ansi(
             datatype: port_datatype_ansi(p, syntax_tree),
             classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
             signedness: port_signedness_ansi(p, &port_datatype_ansi(p, syntax_tree)),
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -29,6 +32,7 @@ pub fn port_declaration_ansi(
             datatype: prev_port.clone().unwrap().datatype,
             classid: prev_port.clone().unwrap().classid,
             signedness: prev_port.clone().unwrap().signedness,
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         };
     }
 
@@ -218,6 +222,45 @@ fn port_signedness_ansi(
             Some(SvSignedness::Unsigned)
         }
     }
+}
+
+fn port_unpackeddim_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> Vec<SvUnpackedDimension> {
+    let mut ret: Vec<SvUnpackedDimension> = Vec::new();
+
+    for node in m {
+        match node {
+            RefNode::UnpackedDimensionRange(x) => {
+                let range = unwrap_node!(x, ConstantRange);
+                match range {
+                    Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
+                        let (l, _, r) = nodes;
+                        let left =
+                            get_string(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
+                        let right =
+                            get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
+
+                        ret.push((left.clone(), Some(right.clone())));
+                    }
+
+                    _ => (),
+                }
+            }
+
+            RefNode::UnpackedDimensionExpression(x) => {
+                let range = unwrap_node!(x, ConstantExpression).unwrap();
+                let left = get_string(range, syntax_tree).unwrap();
+
+                ret.push((left.clone(), None));
+            }
+
+            _ => (),
+        }
+    }
+
+    ret
 }
 
 fn port_classid_ansi(

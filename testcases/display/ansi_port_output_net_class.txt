@@ -9,6 +9,8 @@ Module:
     ClassIdentifier: my_enum_t
     NetType: Tri
     Signedness: None
+    UnpackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Output
@@ -17,6 +19,8 @@ Module:
     ClassIdentifier: my_struct_t
     NetType: Wire
     Signedness: None
+    UnpackedDimensions: []
+
   Port: 
     Identifier: f
     Direction: Output
@@ -25,4 +29,6 @@ Module:
     ClassIdentifier: my_struct_t
     NetType: Wire
     Signedness: None
+    UnpackedDimensions: []
+
 

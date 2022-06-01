@@ -9,6 +9,8 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+
   Port: 
     Identifier: b
     Direction: Output
@@ -17,6 +19,8 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: c
     Direction: Output
@@ -25,6 +29,8 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: d
     Direction: Output
@@ -33,6 +39,8 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: []
+
   Port: 
     Identifier: e
     Direction: Output
@@ -41,6 +49,8 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: [("FOO-1", "0")]
+
   Port: 
     Identifier: f
     Direction: Output
@@ -49,4 +59,6 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Signed
+    UnpackedDimensions: []
+
 

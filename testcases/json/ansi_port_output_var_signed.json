@@ -11,7 +11,17 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
+          ]
         },
         {
           "identifier": "b",
@@ -20,7 +30,8 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "c",
@@ -29,7 +40,8 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "d",
@@ -38,7 +50,8 @@
           "datatype": "Reg",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         },
         {
           "identifier": "e",
@@ -47,7 +60,13 @@
           "datatype": "Logic",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ]
         },
         {
           "identifier": "f",
@@ -56,7 +75,8 @@
           "datatype": "Integer",
           "classid": null,
           "nettype": null,
-          "signedness": "Signed"
+          "signedness": "Signed",
+          "unpacked_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_output_var_signed.sv"

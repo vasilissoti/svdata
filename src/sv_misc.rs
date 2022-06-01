@@ -25,3 +25,19 @@ pub fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
         _ => None,
     }
 }
+
+pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let mut ret: String = String::new();
+
+    for node in parent {
+        if let RefNode::Locate(x) = node {
+            ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+        }
+    }
+
+    if ret.is_empty() {
+        None
+    } else {
+        Some(ret)
+    }
+}

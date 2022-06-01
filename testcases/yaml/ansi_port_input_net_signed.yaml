@@ -10,6 +10,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: b
         direction: Input
         datakind: Net
@@ -17,6 +18,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: c
         direction: Input
         datakind: Net
@@ -24,6 +26,11 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        unpacked_dimensions:
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
       - identifier: d
         direction: Input
         datakind: Net
@@ -31,6 +38,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        unpacked_dimensions: []
       - identifier: e
         direction: Input
         datakind: Net
@@ -38,6 +46,9 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        unpacked_dimensions:
+          - - FOO-1
+            - "0"
       - identifier: f
         direction: Input
         datakind: Net
@@ -45,5 +56,6 @@ modules:
         classid: ~
         nettype: Tri
         signedness: Signed
+        unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_input_net_signed.sv
 packages: []
