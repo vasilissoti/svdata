@@ -1,0 +1,21 @@
+---
+modules:
+  - identifier: mh18
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+      - identifier: y
+        direction: Output
+        datakind: Variable
+        datatype: Integer
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+    filepath: testcases/sv/ieee1800_2017_mh18.sv
+packages: []

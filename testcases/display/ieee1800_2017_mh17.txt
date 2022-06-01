@@ -1,0 +1,20 @@
+Module:
+  Identifier: mh17
+  Filepath: testcases/sv/ieee1800_2017_mh17.sv
+  Port: 
+    Identifier: x
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+  Port: 
+    Identifier: y
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+

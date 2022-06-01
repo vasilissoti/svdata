@@ -1,0 +1,21 @@
+---
+modules:
+  - identifier: mh15
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+      - identifier: y
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+    filepath: testcases/sv/ieee1800_2017_mh15.sv
+packages: []
