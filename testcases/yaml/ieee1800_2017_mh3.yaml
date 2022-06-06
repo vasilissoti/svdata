@@ -10,5 +10,9 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Unsigned
+        packed_dimensions:
+          - - "5"
+            - "0"
+        unpacked_dimensions: []
     filepath: testcases/sv/ieee1800_2017_mh3.sv
 packages: []

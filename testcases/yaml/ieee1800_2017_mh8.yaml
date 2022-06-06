@@ -10,5 +10,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
     filepath: testcases/sv/ieee1800_2017_mh8.sv
 packages: []

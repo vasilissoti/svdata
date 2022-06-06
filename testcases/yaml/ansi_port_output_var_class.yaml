@@ -11,6 +11,7 @@ modules:
         nettype: ~
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: e
         direction: Output
         datakind: Variable
@@ -19,6 +20,7 @@ modules:
         nettype: ~
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: f
         direction: Output
         datakind: Variable
@@ -27,5 +29,6 @@ modules:
         nettype: ~
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_output_var_class.sv
 packages: []

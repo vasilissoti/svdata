@@ -10,6 +10,7 @@ Module:
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
 
   Port: 
     Identifier: b
@@ -20,6 +21,7 @@ Module:
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
 
   Port: 
     Identifier: c
@@ -30,6 +32,7 @@ Module:
     NetType: Wire
     Signedness: Signed
     PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
 
   Port: 
     Identifier: d
@@ -40,6 +43,7 @@ Module:
     NetType: Wire
     Signedness: Signed
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: e
@@ -50,5 +54,6 @@ Module:
     NetType: Tri
     Signedness: Signed
     PackedDimensions: []
+    UnpackedDimensions: []
 
 

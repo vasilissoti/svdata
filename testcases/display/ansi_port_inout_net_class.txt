@@ -10,6 +10,7 @@ Module:
     NetType: Wire
     Signedness: None
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: e
@@ -20,6 +21,7 @@ Module:
     NetType: Wire
     Signedness: None
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: f
@@ -30,5 +32,6 @@ Module:
     NetType: Wire
     Signedness: None
     PackedDimensions: []
+    UnpackedDimensions: []
 
 

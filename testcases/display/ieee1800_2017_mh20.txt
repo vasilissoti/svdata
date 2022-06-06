@@ -9,6 +9,9 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: [("5", "0")]
+
   Port: 
     Identifier: y
     Direction: Ref
@@ -17,4 +20,7 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
 

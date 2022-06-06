@@ -10,6 +10,8 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: y
         direction: Input
         datakind: Net
@@ -17,5 +19,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
     filepath: testcases/sv/ieee1800_2017_mh16.sv
 packages: []

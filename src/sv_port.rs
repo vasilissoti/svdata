@@ -1,5 +1,6 @@
 use crate::structures::{
-    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvUnpackedDimension, SvPort, SvPortDirection, SvSignedness,
+    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
+    SvUnpackedDimension,
 };
 use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};

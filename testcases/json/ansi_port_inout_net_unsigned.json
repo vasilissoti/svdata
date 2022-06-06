@@ -12,7 +12,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "b",
@@ -27,7 +28,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "c",
@@ -42,6 +44,16 @@
               "FOO-1",
               "0"
             ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {
@@ -52,7 +64,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "e",
@@ -62,7 +75,13 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ]
         },
         {
           "identifier": "f",
@@ -72,7 +91,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "g",
@@ -82,7 +102,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "h",
@@ -92,7 +113,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "i",
@@ -102,7 +124,8 @@
           "classid": null,
           "nettype": "Tri",
           "signedness": "Unsigned",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_inout_net_unsigned.sv"

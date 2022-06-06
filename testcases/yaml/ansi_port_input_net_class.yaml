@@ -11,6 +11,7 @@ modules:
         nettype: Wire
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: e
         direction: Input
         datakind: Net
@@ -19,6 +20,7 @@ modules:
         nettype: Wire
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: f
         direction: Input
         datakind: Net
@@ -27,5 +29,6 @@ modules:
         nettype: Wire
         signedness: ~
         packed_dimensions: []
+        unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_input_net_class.sv
 packages: []

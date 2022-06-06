@@ -17,6 +17,16 @@
               "FOO-1",
               "0"
             ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
           ]
         },
         {
@@ -32,7 +42,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "c",
@@ -47,7 +58,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "d",
@@ -57,7 +69,8 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Signed",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "e",
@@ -67,7 +80,8 @@
           "classid": null,
           "nettype": "Tri",
           "signedness": "Signed",
-          "packed_dimensions": []
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         }
       ],
       "filepath": "testcases/sv/ansi_port_output_net_signed.sv"

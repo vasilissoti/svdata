@@ -10,6 +10,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
 
   Port: 
     Identifier: b
@@ -20,6 +21,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
 
   Port: 
     Identifier: c
@@ -30,6 +32,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: d
@@ -40,6 +43,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: e
@@ -50,6 +54,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
+    UnpackedDimensions: [("FOO-1", "0")]
 
   Port: 
     Identifier: f
@@ -60,6 +65,7 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
+    UnpackedDimensions: []
 
   Port: 
     Identifier: g
@@ -70,5 +76,6 @@ Module:
     NetType: None
     Signedness: Unsigned
     PackedDimensions: []
+    UnpackedDimensions: []
 
 
