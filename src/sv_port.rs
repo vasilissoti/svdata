@@ -1,5 +1,5 @@
 use crate::structures::{
-    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
+    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvUnpackedDimension, SvPort, SvPortDirection, SvSignedness,
 };
 use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
@@ -22,6 +22,7 @@ pub fn port_declaration_ansi(
             classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
             signedness: port_signedness_ansi(p, &port_datatype_ansi(p, syntax_tree)),
             packed_dimensions: port_packeddim_ansi(p, syntax_tree),
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -33,6 +34,7 @@ pub fn port_declaration_ansi(
             classid: prev_port.clone().unwrap().classid,
             signedness: prev_port.clone().unwrap().signedness,
             packed_dimensions: prev_port.clone().unwrap().packed_dimensions,
+            unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         };
     }
 
@@ -247,6 +249,45 @@ fn port_packeddim_ansi(
 
                     _ => (),
                 }
+            }
+
+            _ => (),
+        }
+    }
+
+    ret
+}
+
+fn port_unpackeddim_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> Vec<SvUnpackedDimension> {
+    let mut ret: Vec<SvUnpackedDimension> = Vec::new();
+
+    for node in m {
+        match node {
+            RefNode::UnpackedDimensionRange(x) => {
+                let range = unwrap_node!(x, ConstantRange);
+                match range {
+                    Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
+                        let (l, _, r) = nodes;
+                        let left =
+                            get_string(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
+                        let right =
+                            get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
+
+                        ret.push((left.clone(), Some(right.clone())));
+                    }
+
+                    _ => (),
+                }
+            }
+
+            RefNode::UnpackedDimensionExpression(x) => {
+                let range = unwrap_node!(x, ConstantExpression).unwrap();
+                let left = get_string(range, syntax_tree).unwrap();
+
+                ret.push((left.clone(), None));
             }
 
             _ => (),

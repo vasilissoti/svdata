@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "identifier": "mh3",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ieee1800_2017_mh3.sv"
+    }
+  ],
+  "packages": []
+}

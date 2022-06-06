@@ -1,0 +1,30 @@
+{
+  "modules": [
+    {
+      "identifier": "mh14",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        },
+        {
+          "identifier": "y",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed"
+        }
+      ],
+      "filepath": "testcases/sv/ieee1800_2017_mh14.sv"
+    }
+  ],
+  "packages": []
+}

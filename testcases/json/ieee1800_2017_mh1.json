@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "identifier": "mh1",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ieee1800_2017_mh1.sv"
+    }
+  ],
+  "packages": []
+}

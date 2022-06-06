@@ -1,0 +1,21 @@
+{
+  "modules": [
+    {
+      "identifier": "mh8",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned"
+        }
+      ],
+      "filepath": "testcases/sv/ieee1800_2017_mh8.sv"
+    }
+  ],
+  "packages": []
+}
