@@ -23,7 +23,17 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
+    pub paramtype: SvParamType,
     pub datatype: String,
+    pub signedness: Option<SvSignedness>,
+    // pub packed_dimensions: Vec<SvPackedDimension>,
+    // pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvParamType {
+    Parameter,
+    LocalParam,
 }
 
 #[derive(Debug, Serialize, Clone)]
