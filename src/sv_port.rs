@@ -222,7 +222,14 @@ fn port_signedness_ansi(
                 _ => (),
             }
 
-            Some(SvSignedness::Unsigned)
+            match datatype {
+                SvDataType::Shortint
+                | SvDataType::Int
+                | SvDataType::Longint
+                | SvDataType::Byte
+                | SvDataType::Integer => Some(SvSignedness::Signed),
+                _ => Some(SvSignedness::Unsigned),
+            }
         }
     }
 }

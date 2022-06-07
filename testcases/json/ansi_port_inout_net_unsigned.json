@@ -63,7 +63,7 @@
           "datatype": "Int",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Unsigned",
+          "signedness": "Signed",
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },

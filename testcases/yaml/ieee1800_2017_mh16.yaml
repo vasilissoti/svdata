@@ -9,7 +9,7 @@ modules:
         datatype: Integer
         classid: ~
         nettype: ~
-        signedness: Unsigned
+        signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: y

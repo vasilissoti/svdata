@@ -20,7 +20,7 @@ modules:
         datatype: Integer
         classid: ~
         nettype: ~
-        signedness: Unsigned
+        signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
     filepath: testcases/sv/ieee1800_2017_mh18.sv
