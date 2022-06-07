@@ -101,7 +101,7 @@
           "datatype": "String",
           "classid": null,
           "nettype": "Wire",
-          "signedness": "Unsigned",
+          "signedness": null,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },

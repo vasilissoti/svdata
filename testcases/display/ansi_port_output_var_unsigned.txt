@@ -63,7 +63,7 @@ Module:
     DataType: String
     ClassIdentifier: None
     NetType: None
-    Signedness: Unsigned
+    Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
 

@@ -90,7 +90,7 @@
           "datatype": "String",
           "classid": null,
           "nettype": null,
-          "signedness": "Unsigned",
+          "signedness": null,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },

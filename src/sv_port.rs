@@ -209,7 +209,7 @@ fn port_signedness_ansi(
     datatype: &SvDataType,
 ) -> Option<SvSignedness> {
     match datatype {
-        SvDataType::Class => None,
+        SvDataType::Class | SvDataType::String | SvDataType::Real => None,
         _ => {
             let signedness = unwrap_node!(m, Signing);
             match signedness {
