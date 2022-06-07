@@ -10,6 +10,9 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
         unpacked_dimensions:
           - - FOO
             - ~
@@ -22,6 +25,9 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
         unpacked_dimensions: []
       - identifier: c
         direction: Output
@@ -30,6 +36,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: d
         direction: Output
@@ -38,6 +45,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
         direction: Output
@@ -46,6 +54,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
         unpacked_dimensions:
           - - FOO-1
             - "0"
@@ -56,6 +65,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: g
         direction: Output
@@ -64,6 +74,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
         unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_output_var_unsigned.sv
 packages: []

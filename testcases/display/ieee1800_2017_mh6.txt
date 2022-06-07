@@ -9,4 +9,7 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
 

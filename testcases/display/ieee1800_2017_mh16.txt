@@ -9,6 +9,9 @@ Module:
     ClassIdentifier: None
     NetType: None
     Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
   Port: 
     Identifier: y
     Direction: Input
@@ -17,4 +20,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
 

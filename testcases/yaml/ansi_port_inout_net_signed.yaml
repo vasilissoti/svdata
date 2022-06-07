@@ -10,6 +10,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
         direction: Inout
@@ -18,6 +19,9 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions:
+          - - FOO-1
+            - "0"
         unpacked_dimensions: []
       - identifier: c
         direction: Inout
@@ -26,6 +30,9 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions:
+          - - FOO-1
+            - "0"
         unpacked_dimensions:
           - - FOO
             - ~
@@ -38,6 +45,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
         direction: Inout
@@ -46,6 +54,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions:
           - - FOO-1
             - "0"
@@ -56,6 +65,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: g
         direction: Inout
@@ -64,6 +74,7 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: h
         direction: Inout
@@ -72,6 +83,7 @@ modules:
         classid: ~
         nettype: Tri
         signedness: Signed
+        packed_dimensions: []
         unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_inout_net_signed.sv
 packages: []

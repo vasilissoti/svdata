@@ -12,6 +12,7 @@
           "classid": "my_enum_t",
           "nettype": "Tri",
           "signedness": null,
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -22,6 +23,7 @@
           "classid": "my_struct_t",
           "nettype": "Wire",
           "signedness": null,
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -32,6 +34,7 @@
           "classid": "my_struct_t",
           "nettype": "Wire",
           "signedness": null,
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         }
       ],

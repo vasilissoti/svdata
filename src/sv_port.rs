@@ -1,5 +1,6 @@
 use crate::structures::{
-    SvDataKind, SvDataType, SvNetType, SvPort, SvPortDirection, SvSignedness, SvUnpackedDimension,
+    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
+    SvUnpackedDimension,
 };
 use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
@@ -21,6 +22,7 @@ pub fn port_declaration_ansi(
             datatype: port_datatype_ansi(p, syntax_tree),
             classid: port_classid_ansi(p, &port_datatype_ansi(p, syntax_tree), syntax_tree),
             signedness: port_signedness_ansi(p, &port_datatype_ansi(p, syntax_tree)),
+            packed_dimensions: port_packeddim_ansi(p, syntax_tree),
             unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         }
     } else {
@@ -32,6 +34,7 @@ pub fn port_declaration_ansi(
             datatype: prev_port.clone().unwrap().datatype,
             classid: prev_port.clone().unwrap().classid,
             signedness: prev_port.clone().unwrap().signedness,
+            packed_dimensions: prev_port.clone().unwrap().packed_dimensions,
             unpacked_dimensions: port_unpackeddim_ansi(p, syntax_tree),
         };
     }
@@ -135,7 +138,7 @@ fn port_nettype_ansi(
     let objecttype = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
     match objecttype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => {
-            match unwrap_node!(m, PortDirection, DataType, Signing) {
+            match unwrap_node!(m, PortDirection, DataType, Signing, PackedDimension) {
                 Some(_) => return None,
                 _ => return Some(SvNetType::Wire),
             }
@@ -224,6 +227,38 @@ fn port_signedness_ansi(
     }
 }
 
+fn port_packeddim_ansi(
+    m: &sv_parser::AnsiPortDeclaration,
+    syntax_tree: &SyntaxTree,
+) -> Vec<SvPackedDimension> {
+    let mut ret: Vec<SvPackedDimension> = Vec::new();
+
+    for node in m {
+        match node {
+            RefNode::PackedDimensionRange(x) => {
+                let range = unwrap_node!(x, ConstantRange);
+                match range {
+                    Some(RefNode::ConstantRange(sv_parser::ConstantRange { nodes })) => {
+                        let (l, _, r) = nodes;
+                        let left =
+                            get_string(RefNode::ConstantExpression(&l), syntax_tree).unwrap();
+                        let right =
+                            get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
+
+                        ret.push((left.clone(), right.clone()));
+                    }
+
+                    _ => (),
+                }
+            }
+
+            _ => (),
+        }
+    }
+
+    ret
+}
+
 fn port_unpackeddim_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     syntax_tree: &SyntaxTree,
@@ -282,7 +317,15 @@ fn port_check_inheritance_ansi(
     m: &sv_parser::AnsiPortDeclaration,
     prev_port: &Option<SvPort>,
 ) -> bool {
-    let datatype = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
+    let datatype = unwrap_node!(
+        m,
+        DataType,
+        Signing,
+        NetType,
+        VarDataType,
+        PortDirection,
+        PackedDimension
+    );
 
     match prev_port {
         Some(_) => match datatype {

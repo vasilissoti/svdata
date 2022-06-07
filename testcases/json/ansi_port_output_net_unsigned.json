@@ -12,6 +12,12 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
           "unpacked_dimensions": [
             [
               "FOO",
@@ -31,6 +37,12 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
           "unpacked_dimensions": []
         },
         {
@@ -41,6 +53,12 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
           "unpacked_dimensions": []
         },
         {
@@ -51,6 +69,7 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -61,6 +80,7 @@
           "classid": null,
           "nettype": "Wire",
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -71,6 +91,7 @@
           "classid": null,
           "nettype": "Tri",
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         }
       ],

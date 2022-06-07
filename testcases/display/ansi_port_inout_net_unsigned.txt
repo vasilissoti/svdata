@@ -9,6 +9,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -19,6 +20,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
     UnpackedDimensions: []
 
   Port: 
@@ -29,6 +31,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
     UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
 
   Port: 
@@ -39,6 +42,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -49,6 +53,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: [("FOO-1", "0")]
 
   Port: 
@@ -59,6 +64,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -69,6 +75,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -79,6 +86,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -89,6 +97,7 @@ Module:
     ClassIdentifier: None
     NetType: Tri
     Signedness: Unsigned
+    PackedDimensions: []
     UnpackedDimensions: []
 
 

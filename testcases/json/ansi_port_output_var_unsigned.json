@@ -12,6 +12,12 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
           "unpacked_dimensions": [
             [
               "FOO",
@@ -31,6 +37,12 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
           "unpacked_dimensions": []
         },
         {
@@ -41,6 +53,7 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -51,6 +64,7 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -61,6 +75,7 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": [
             [
               "FOO-1",
@@ -76,6 +91,7 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
@@ -86,6 +102,7 @@
           "classid": null,
           "nettype": null,
           "signedness": "Unsigned",
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         }
       ],

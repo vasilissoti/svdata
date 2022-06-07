@@ -9,6 +9,7 @@ Module:
     ClassIdentifier: my_enum_t
     NetType: None
     Signedness: None
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -19,6 +20,7 @@ Module:
     ClassIdentifier: my_struct_t
     NetType: None
     Signedness: None
+    PackedDimensions: []
     UnpackedDimensions: []
 
   Port: 
@@ -29,6 +31,7 @@ Module:
     ClassIdentifier: my_struct_t
     NetType: None
     Signedness: None
+    PackedDimensions: []
     UnpackedDimensions: []
 
 

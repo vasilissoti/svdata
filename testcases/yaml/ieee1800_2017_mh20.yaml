@@ -10,6 +10,10 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions:
+          - - "5"
+            - "0"
       - identifier: y
         direction: Ref
         datakind: Variable
@@ -17,5 +21,7 @@ modules:
         classid: ~
         nettype: ~
         signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
     filepath: testcases/sv/ieee1800_2017_mh20.sv
 packages: []

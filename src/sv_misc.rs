@@ -14,13 +14,13 @@ pub fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
 }
 
 pub fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = match unwrap_node!(parent, Keyword) {
+    let kwd = match unwrap_node!(parent, Keyword) {
         Some(RefNode::Keyword(x)) => Some(x.nodes.0),
 
         _ => None,
     };
 
-    match id {
+    match kwd {
         Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
         _ => None,
     }

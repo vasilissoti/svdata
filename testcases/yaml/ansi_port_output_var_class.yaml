@@ -10,6 +10,7 @@ modules:
         classid: my_enum_t
         nettype: ~
         signedness: ~
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
         direction: Output
@@ -18,6 +19,7 @@ modules:
         classid: my_struct_t
         nettype: ~
         signedness: ~
+        packed_dimensions: []
         unpacked_dimensions: []
       - identifier: f
         direction: Output
@@ -26,6 +28,7 @@ modules:
         classid: my_struct_t
         nettype: ~
         signedness: ~
+        packed_dimensions: []
         unpacked_dimensions: []
     filepath: testcases/sv/ansi_port_output_var_class.sv
 packages: []
