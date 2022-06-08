@@ -25,8 +25,11 @@ pub struct SvParameter {
     pub identifier: String,
     pub paramtype: SvParamType,
     pub datatype: Option<String>,
+    pub datatype_status: Option<SvParamStatus>,
     pub signedness: Option<SvSignedness>,
+    pub signedness_status: Option<SvParamStatus>,
     // pub packed_dimensions: Vec<SvPackedDimension>,
+    // pub packed_dimensions
     // pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
 
@@ -34,6 +37,12 @@ pub struct SvParameter {
 pub enum SvParamType {
     Parameter,
     LocalParam,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvParamStatus {
+    Overridable,
+    Fixed,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -205,12 +214,28 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    DataType: {:?}", x)?;
             }
         }
+        match self.datatype_status.clone() {
+            None => {
+                writeln!(f, "    DataTypeStatus: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    DataTypeStatus: {:?}", x)?;
+            }
+        }
         match self.signedness.clone() {
             None => {
                 writeln!(f, "    Signedness: None")?;
             }
             Some(x) => {
                 writeln!(f, "    Signedness: {:?}", x)?;
+            }
+        }
+        match self.signedness_status.clone() {
+            None => {
+                writeln!(f, "    SignednessStatus: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    SignednessStatus: {:?}", x)?;
             }
         }
 
