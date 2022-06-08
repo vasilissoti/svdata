@@ -19,7 +19,7 @@ Module:
     DataType: Integer
     ClassIdentifier: None
     NetType: None
-    Signedness: Unsigned
+    Signedness: Signed
     PackedDimensions: []
     UnpackedDimensions: []
 

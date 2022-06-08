@@ -44,7 +44,7 @@ modules:
         datatype: Int
         classid: ~
         nettype: Wire
-        signedness: Unsigned
+        signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
@@ -73,7 +73,7 @@ modules:
         datatype: String
         classid: ~
         nettype: Wire
-        signedness: Unsigned
+        signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: h

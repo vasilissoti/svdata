@@ -64,7 +64,7 @@ modules:
         datatype: String
         classid: ~
         nettype: ~
-        signedness: Unsigned
+        signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: g

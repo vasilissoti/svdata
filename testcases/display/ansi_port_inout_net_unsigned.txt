@@ -41,7 +41,7 @@ Module:
     DataType: Int
     ClassIdentifier: None
     NetType: Wire
-    Signedness: Unsigned
+    Signedness: Signed
     PackedDimensions: []
     UnpackedDimensions: []
 
@@ -74,7 +74,7 @@ Module:
     DataType: String
     ClassIdentifier: None
     NetType: Wire
-    Signedness: Unsigned
+    Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
 

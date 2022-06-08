@@ -11,7 +11,7 @@
           "datatype": "Integer",
           "classid": null,
           "nettype": null,
-          "signedness": "Unsigned",
+          "signedness": "Signed",
           "packed_dimensions": [],
           "unpacked_dimensions": []
         }
