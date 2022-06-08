@@ -24,12 +24,12 @@ pub struct SvPackageDeclaration {
 pub struct SvParameter {
     pub identifier: String,
     pub paramtype: SvParamType,
-    pub datatype: Option<String>,
-    pub datatype_status: Option<SvParamStatus>,
+    pub datatype: Option<SvDataType>,
+    pub datatype_status: SvParamStatus,
     pub signedness: Option<SvSignedness>,
-    pub signedness_status: Option<SvParamStatus>,
+    pub signedness_status: SvParamStatus,
     // pub packed_dimensions: Vec<SvPackedDimension>,
-    // pub packed_dimensions
+    // pub packed_dimensions_status: SvSignedness,
     // pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
 
@@ -145,9 +145,9 @@ impl fmt::Display for SvModuleDeclaration {
             write!(f, "{}", port)?;
         }
 
-        // for param in self.parameters.clone() {
-        //     write!(f, "{}", param)?;
-        // }
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
+        }
 
         writeln!(f, "")
     }
@@ -214,14 +214,7 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    DataType: {:?}", x)?;
             }
         }
-        match self.datatype_status.clone() {
-            None => {
-                writeln!(f, "    DataTypeStatus: None")?;
-            }
-            Some(x) => {
-                writeln!(f, "    DataTypeStatus: {:?}", x)?;
-            }
-        }
+        writeln!(f, "    DataTypeStatus: {:?}", self.datatype_status)?;
         match self.signedness.clone() {
             None => {
                 writeln!(f, "    Signedness: None")?;
@@ -230,14 +223,7 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
-        match self.signedness_status.clone() {
-            None => {
-                writeln!(f, "    SignednessStatus: None")?;
-            }
-            Some(x) => {
-                writeln!(f, "    SignednessStatus: {:?}", x)?;
-            }
-        }
+        writeln!(f, "    SignednessStatus: {:?}", self.signedness_status)?;
 
         write!(f, "")
     }

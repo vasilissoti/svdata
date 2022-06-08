@@ -45,22 +45,153 @@ pub fn port_declaration_ansi(
 pub fn port_declaration_parameter_ansi(
     p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
-    _common_data: RefNode,
+    common_data: RefNode,
     param_type: &SvParamType,
 ) -> SvParameter {
+    let found_assignment = parameter_check_default(p);
+    let (param_datatype, param_datatype_status) =
+        parameter_datatype_ansi(common_data.clone(), syntax_tree, found_assignment);
+    let (param_signedness, param_signedness_status) =
+        parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
+
     SvParameter {
         identifier: parameter_identifier(p, syntax_tree),
         paramtype: param_type.clone(),
-        datatype: Some(String::from("bar")),
-        datatype_status: Some(SvParamStatus::Overridable),
-        signedness: Some(SvSignedness::Unsigned),
-        signedness_status: Some(SvParamStatus::Overridable),
+        datatype: param_datatype,
+        datatype_status: param_datatype_status,
+        signedness: param_signedness,
+        signedness_status: param_signedness_status,
+    }
+}
+
+fn parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
+    let expression = unwrap_node!(node, ConstantParamExpression);
+    match expression {
+        Some(RefNode::ConstantParamExpression(_)) => true,
+        _ => false,
     }
 }
 
 fn parameter_identifier(node: &sv_parser::ParamAssignment, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(node, ParameterIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
+}
+
+fn parameter_datatype_ansi(
+    node: RefNode,
+    syntax_tree: &SyntaxTree,
+    found_assignment: bool,
+) -> (Option<SvDataType>, SvParamStatus) {
+    let datatype = unwrap_node!(
+        node.clone(),
+        IntegerVectorType,
+        IntegerAtomType,
+        NonIntegerType,
+        ClassType,
+        TypeReference
+    );
+    match datatype {
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
+            (Some(SvDataType::Logic), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
+            (Some(SvDataType::Reg), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
+            (Some(SvDataType::Bit), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
+            (Some(SvDataType::Byte), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
+            (Some(SvDataType::Shortint), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
+            (Some(SvDataType::Int), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
+            (Some(SvDataType::Longint), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
+            (Some(SvDataType::Integer), SvParamStatus::Fixed)
+        }
+        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
+            (Some(SvDataType::Time), SvParamStatus::Fixed)
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
+            (Some(SvDataType::Shortreal), SvParamStatus::Fixed)
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
+            (Some(SvDataType::Realtime), SvParamStatus::Fixed)
+        }
+        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
+            (Some(SvDataType::Real), SvParamStatus::Fixed)
+        }
+        Some(RefNode::ClassType(_)) => (Some(SvDataType::Class), SvParamStatus::Fixed),
+        Some(RefNode::TypeReference(_)) => (Some(SvDataType::TypeRef), SvParamStatus::Fixed),
+        _ => match unwrap_node!(node.clone(), DataType) {
+            Some(x) => match keyword(x, syntax_tree) {
+                Some(x) => {
+                    if x == "string" {
+                        return (Some(SvDataType::String), SvParamStatus::Fixed);
+                    } else {
+                        println!("{}", x);
+                        unreachable!();
+                    }
+                }
+
+                _ => unreachable!(),
+            },
+            _ => {
+                if found_assignment {
+                    return (Some(SvDataType::Logic), SvParamStatus::Overridable);
+                } else {
+                    return (None, SvParamStatus::Overridable);
+                }
+            }
+        },
+    }
+}
+
+fn parameter_signedness_ansi(
+    m: RefNode,
+    datatype: &Option<SvDataType>,
+    found_assignment: bool,
+) -> (Option<SvSignedness>, SvParamStatus) {
+    match datatype {
+        Some(SvDataType::Class) | Some(SvDataType::String) | Some(SvDataType::Real) => {
+            (None, SvParamStatus::Fixed)
+        }
+        _ => {
+            let signedness = unwrap_node!(m, Signing);
+            match signedness {
+                Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => {
+                    return (Some(SvSignedness::Signed), SvParamStatus::Fixed)
+                }
+                Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
+                    return (Some(SvSignedness::Unsigned), SvParamStatus::Fixed)
+                }
+                _ => (),
+            }
+
+            match datatype {
+                Some(SvDataType::Shortint)
+                | Some(SvDataType::Int)
+                | Some(SvDataType::Longint)
+                | Some(SvDataType::Byte)
+                | Some(SvDataType::Integer) => {
+                    (Some(SvSignedness::Signed), SvParamStatus::Overridable)
+                }
+                _ => {
+                    if found_assignment {
+                        (Some(SvSignedness::Unsigned), SvParamStatus::Overridable)
+                    } else {
+                        (None, SvParamStatus::Overridable)
+                    }
+                }
+            }
+        }
+    }
 }
 
 fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {
