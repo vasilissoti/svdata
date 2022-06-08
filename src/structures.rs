@@ -173,6 +173,6 @@ impl fmt::Display for SvPort {
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
 
-        writeln!(f, "")
+        write!(f, "")
     }
 }
