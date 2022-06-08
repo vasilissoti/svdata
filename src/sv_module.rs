@@ -1,6 +1,6 @@
-use crate::structures::{SvModuleDeclaration, SvParamType, SvParameter, SvPort, SvSignedness};
+use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
 use crate::sv_misc::identifier;
-use crate::sv_port::port_declaration_ansi;
+use crate::sv_port::{port_declaration_ansi, port_declaration_parameter_ansi};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
@@ -20,32 +20,37 @@ pub fn module_declaration_ansi(
     for node in m {
         match node {
             RefNode::ParameterPortDeclaration(p) => {
-                let param_type =
-                    unwrap_node!(p, ParameterDeclaration, ParameterPortDeclarationParamList);
-                match param_type {
-                    Some(RefNode::ParameterDeclaration(x)) => ret
-                        .parameters
-                        .push(module_declaration_parameter(x, syntax_tree)),
+                let param_type = unwrap_node!(
+                    p,
+                    ParameterDeclarationParam,
+                    LocalParameterDeclarationParam,
+                    ParameterPortDeclarationParamList
+                );
 
-                    Some(RefNode::ParameterPortDeclarationParamList(x)) => {
-                        let common_data = unwrap_node!(x, DataType).unwrap();
-                        let a = unwrap_node!(x, ListOfParamAssignments);
+                let common_data =
+                    unwrap_node!(param_type.clone().unwrap(), DataType, DataTypeOrImplicit)
+                        .unwrap();
+                let a = unwrap_node!(param_type.clone().unwrap(), ListOfParamAssignments);
 
-                        for param in a.unwrap() {
-                            match param {
-                                RefNode::ParamAssignment(x) => {
-                                    ret.parameters.push(module_declaration_parameter_list(
-                                        x,
-                                        syntax_tree,
-                                        common_data.clone(),
-                                    ))
-                                }
-                                _ => (),
-                            }
-                        }
-                    }
-
+                let param_type = match param_type {
+                    Some(RefNode::LocalParameterDeclarationParam(_)) => SvParamType::LocalParam,
+                    Some(RefNode::ParameterDeclarationParam(_))
+                    | Some(RefNode::ParameterPortDeclarationParamList(_)) => SvParamType::Parameter,
                     _ => unreachable!(),
+                };
+
+                for param in a.unwrap() {
+                    match param {
+                        RefNode::ParamAssignment(x) => {
+                            ret.parameters.push(port_declaration_parameter_ansi(
+                                x,
+                                syntax_tree,
+                                common_data.clone(),
+                                &param_type,
+                            ))
+                        }
+                        _ => (),
+                    }
                 }
             }
             RefNode::AnsiPortDeclaration(p) => {
@@ -77,33 +82,4 @@ pub fn module_declaration_nonansi(
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree)
-}
-
-fn module_declaration_parameter(
-    p: &sv_parser::ParameterDeclaration,
-    _syntax_tree: &SyntaxTree,
-) -> SvParameter {
-    println!("parameter={:?}", p);
-    // TODO
-    SvParameter {
-        identifier: String::from("foo"),
-        paramtype: SvParamType::Parameter,
-        datatype: String::from("bar"),
-        signedness: Some(SvSignedness::Unsigned),
-    }
-}
-
-fn module_declaration_parameter_list(
-    p: &sv_parser::ParamAssignment,
-    _syntax_tree: &SyntaxTree,
-    _common_data: RefNode,
-) -> SvParameter {
-    println!("parameter={:?}", p);
-    // TODO
-    SvParameter {
-        identifier: String::from("foo"),
-        paramtype: SvParamType::Parameter,
-        datatype: String::from("bar"),
-        signedness: Some(SvSignedness::Unsigned),
-    }
 }

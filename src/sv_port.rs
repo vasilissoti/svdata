@@ -1,6 +1,6 @@
 use crate::structures::{
-    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvPort, SvPortDirection, SvSignedness,
-    SvUnpackedDimension,
+    SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvParamType, SvParameter, SvPort,
+    SvPortDirection, SvSignedness, SvUnpackedDimension,
 };
 use crate::sv_misc::{get_string, identifier, keyword};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
@@ -40,6 +40,25 @@ pub fn port_declaration_ansi(
     }
 
     return ret;
+}
+
+pub fn port_declaration_parameter_ansi(
+    p: &sv_parser::ParamAssignment,
+    syntax_tree: &SyntaxTree,
+    _common_data: RefNode,
+    param_type: &SvParamType,
+) -> SvParameter {
+    SvParameter {
+        identifier: parameter_identifier(p, syntax_tree),
+        paramtype: param_type.clone(),
+        datatype: Some(String::from("bar")),
+        signedness: Some(SvSignedness::Unsigned),
+    }
+}
+
+fn parameter_identifier(node: &sv_parser::ParamAssignment, syntax_tree: &SyntaxTree) -> String {
+    let id = unwrap_node!(node, ParameterIdentifier).unwrap();
+    identifier(id, &syntax_tree).unwrap()
 }
 
 fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {

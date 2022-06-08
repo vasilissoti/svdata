@@ -24,7 +24,7 @@ pub struct SvPackageDeclaration {
 pub struct SvParameter {
     pub identifier: String,
     pub paramtype: SvParamType,
-    pub datatype: String,
+    pub datatype: Option<String>,
     pub signedness: Option<SvSignedness>,
     // pub packed_dimensions: Vec<SvPackedDimension>,
     // pub unpacked_dimensions: Vec<SvUnpackedDimension>,
@@ -136,6 +136,10 @@ impl fmt::Display for SvModuleDeclaration {
             write!(f, "{}", port)?;
         }
 
+        // for param in self.parameters.clone() {
+        //     write!(f, "{}", param)?;
+        // }
+
         writeln!(f, "")
     }
 }
@@ -183,6 +187,33 @@ impl fmt::Display for SvPort {
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
 
-        writeln!(f, "")
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvParameter {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "  Parameter: ")?;
+        writeln!(f, "    Identifier: {}", self.identifier)?;
+        writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
+
+        match self.datatype.clone() {
+            None => {
+                writeln!(f, "    DataType: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    DataType: {:?}", x)?;
+            }
+        }
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)?;
+            }
+        }
+
+        write!(f, "")
     }
 }
