@@ -147,21 +147,32 @@ fn parameter_datatype_ansi(
                 if found_assignment {
                     let unsupported_nodes = unwrap_node!(p, ConstantFunctionCall, BinaryOperator);
                     match unsupported_nodes {
-                        Some(_) => return (Some(SvDataType::Unsupported), SvParamStatus::Overridable),
+                        Some(_) => {
+                            return (Some(SvDataType::Unsupported), SvParamStatus::Overridable)
+                        }
                         _ => {
-                            let implicit_type = unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral);
+                            let implicit_type =
+                                unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral);
                             match implicit_type {
-                                Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => return (Some(SvDataType::Integer), SvParamStatus::Overridable),
-                                Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => return (Some(SvDataType::Real), SvParamStatus::Overridable),
-                                Some(RefNode::TimeLiteral(_)) => return (Some(SvDataType::Time), SvParamStatus::Overridable),
-                                Some(RefNode::UnbasedUnsizedLiteral(_)) => (Some(SvDataType::Bit), SvParamStatus::Overridable),
-                                Some(RefNode::StringLiteral(_)) => (Some(SvDataType::String), SvParamStatus::Overridable),
+                                Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
+                                    return (Some(SvDataType::Integer), SvParamStatus::Overridable)
+                                }
+                                Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
+                                    return (Some(SvDataType::Real), SvParamStatus::Overridable)
+                                }
+                                Some(RefNode::TimeLiteral(_)) => {
+                                    return (Some(SvDataType::Time), SvParamStatus::Overridable)
+                                }
+                                Some(RefNode::UnbasedUnsizedLiteral(_)) => {
+                                    (Some(SvDataType::Bit), SvParamStatus::Overridable)
+                                }
+                                Some(RefNode::StringLiteral(_)) => {
+                                    (Some(SvDataType::String), SvParamStatus::Overridable)
+                                }
                                 _ => unreachable!(),
                             }
-
                         }
                     }
-
                 } else {
                     return (None, SvParamStatus::Overridable);
                 }
@@ -202,7 +213,9 @@ fn parameter_signedness_ansi(
                 _ => {
                     if found_assignment {
                         match datatype {
-                            Some(SvDataType::Unsupported) => (Some(SvSignedness::Unsupported), SvParamStatus::Overridable),
+                            Some(SvDataType::Unsupported) => {
+                                (Some(SvSignedness::Unsupported), SvParamStatus::Overridable)
+                            }
                             _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
                         }
                     } else {
