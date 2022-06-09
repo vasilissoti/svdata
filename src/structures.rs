@@ -27,6 +27,7 @@ pub struct SvParameter {
     pub paramtype: SvParamType,
     pub datatype: Option<SvDataType>,
     pub datatype_status: SvParamStatus,
+    pub classid: Option<String>,
     pub signedness: Option<SvSignedness>,
     pub signedness_status: SvParamStatus,
 }
@@ -222,6 +223,14 @@ impl fmt::Display for SvParameter {
             }
         }
         writeln!(f, "    DataTypeStatus: {:?}", self.datatype_status)?;
+        match self.classid.clone() {
+            None => {
+                writeln!(f, "    ClassIdentifier: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    ClassIdentifier: {}", x)?;
+            }
+        }
         match self.signedness.clone() {
             None => {
                 writeln!(f, "    Signedness: None")?;

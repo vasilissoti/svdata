@@ -1,6 +1,6 @@
 use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
 use crate::sv_misc::identifier;
-use crate::sv_port::{port_declaration_ansi, port_declaration_parameter_ansi};
+use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
@@ -42,7 +42,7 @@ pub fn module_declaration_ansi(
                 for param in a.unwrap() {
                     match param {
                         RefNode::ParamAssignment(x) => {
-                            ret.parameters.push(port_declaration_parameter_ansi(
+                            ret.parameters.push(port_parameter_declaration_ansi(
                                 x,
                                 syntax_tree,
                                 common_data.clone(),

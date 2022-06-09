@@ -42,30 +42,31 @@ pub fn port_declaration_ansi(
     return ret;
 }
 
-pub fn port_declaration_parameter_ansi(
+pub fn port_parameter_declaration_ansi(
     p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
     common_data: RefNode,
     param_type: &SvParamType,
 ) -> SvParameter {
-    let found_assignment = parameter_check_default(p);
+    let found_assignment = port_parameter_check_default(p);
     let (param_datatype, param_datatype_status) =
-        parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
+        port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
     let (param_signedness, param_signedness_status) =
-        parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
+        port_parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
 
     SvParameter {
-        identifier: parameter_identifier(p, syntax_tree),
-        value: parameter_value(p, syntax_tree, found_assignment),
+        identifier: port_parameter_identifier(p, syntax_tree),
+        value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
         paramtype: param_type.clone(),
-        datatype: param_datatype,
+        datatype: param_datatype.clone(),
         datatype_status: param_datatype_status,
+        classid: port_parameter_classid_ansi(common_data.clone(), &param_datatype, syntax_tree),
         signedness: param_signedness,
         signedness_status: param_signedness_status,
     }
 }
 
-fn parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
+fn port_parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
     let expression = unwrap_node!(node, ConstantParamExpression);
     match expression {
         Some(RefNode::ConstantParamExpression(_)) => true,
@@ -73,12 +74,15 @@ fn parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
     }
 }
 
-fn parameter_identifier(node: &sv_parser::ParamAssignment, syntax_tree: &SyntaxTree) -> String {
+fn port_parameter_identifier(
+    node: &sv_parser::ParamAssignment,
+    syntax_tree: &SyntaxTree,
+) -> String {
     let id = unwrap_node!(node, ParameterIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
 
-fn parameter_value(
+fn port_parameter_value_ansi(
     node: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
     found_assignment: bool,
@@ -91,7 +95,7 @@ fn parameter_value(
     }
 }
 
-fn parameter_datatype_ansi(
+fn port_parameter_datatype_ansi(
     common_data: RefNode,
     p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
@@ -195,7 +199,7 @@ fn parameter_datatype_ansi(
     }
 }
 
-fn parameter_signedness_ansi(
+fn port_parameter_signedness_ansi(
     m: RefNode,
     datatype: &Option<SvDataType>,
     found_assignment: bool,
@@ -238,6 +242,21 @@ fn parameter_signedness_ansi(
                 }
             }
         }
+    }
+}
+
+fn port_parameter_classid_ansi(
+    m: RefNode,
+    datatype: &Option<SvDataType>,
+    syntax_tree: &SyntaxTree,
+) -> Option<String> {
+    match datatype {
+        Some(SvDataType::Class) => {
+            let id = unwrap_node!(m, ClassIdentifier).unwrap();
+            Some(identifier(id, &syntax_tree).unwrap())
+        }
+
+        _ => None,
     }
 }
 
