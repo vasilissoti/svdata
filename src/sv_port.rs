@@ -50,7 +50,7 @@ pub fn port_declaration_parameter_ansi(
 ) -> SvParameter {
     let found_assignment = parameter_check_default(p);
     let (param_datatype, param_datatype_status) =
-        parameter_datatype_ansi(common_data.clone(), syntax_tree, found_assignment);
+        parameter_datatype_ansi(common_data.clone(), &p, syntax_tree, found_assignment);
     let (param_signedness, param_signedness_status) =
         parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
 
@@ -78,12 +78,13 @@ fn parameter_identifier(node: &sv_parser::ParamAssignment, syntax_tree: &SyntaxT
 }
 
 fn parameter_datatype_ansi(
-    node: RefNode,
+    common_data: RefNode,
+    p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
     found_assignment: bool,
 ) -> (Option<SvDataType>, SvParamStatus) {
     let datatype = unwrap_node!(
-        node.clone(),
+        common_data.clone(),
         IntegerVectorType,
         IntegerAtomType,
         NonIntegerType,
@@ -129,7 +130,7 @@ fn parameter_datatype_ansi(
         }
         Some(RefNode::ClassType(_)) => (Some(SvDataType::Class), SvParamStatus::Fixed),
         Some(RefNode::TypeReference(_)) => (Some(SvDataType::TypeRef), SvParamStatus::Fixed),
-        _ => match unwrap_node!(node.clone(), DataType) {
+        _ => match unwrap_node!(common_data.clone(), DataType) {
             Some(x) => match keyword(x, syntax_tree) {
                 Some(x) => {
                     if x == "string" {
@@ -144,7 +145,23 @@ fn parameter_datatype_ansi(
             },
             _ => {
                 if found_assignment {
-                    return (Some(SvDataType::Logic), SvParamStatus::Overridable);
+                    let unsupported_nodes = unwrap_node!(p, ConstantFunctionCall, BinaryOperator);
+                    match unsupported_nodes {
+                        Some(_) => return (Some(SvDataType::Unsupported), SvParamStatus::Overridable),
+                        _ => {
+                            let implicit_type = unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral);
+                            match implicit_type {
+                                Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => return (Some(SvDataType::Integer), SvParamStatus::Overridable),
+                                Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => return (Some(SvDataType::Real), SvParamStatus::Overridable),
+                                Some(RefNode::TimeLiteral(_)) => return (Some(SvDataType::Time), SvParamStatus::Overridable),
+                                Some(RefNode::UnbasedUnsizedLiteral(_)) => (Some(SvDataType::Bit), SvParamStatus::Overridable),
+                                Some(RefNode::StringLiteral(_)) => (Some(SvDataType::String), SvParamStatus::Overridable),
+                                _ => unreachable!(),
+                            }
+
+                        }
+                    }
+
                 } else {
                     return (None, SvParamStatus::Overridable);
                 }
@@ -184,7 +201,10 @@ fn parameter_signedness_ansi(
                 }
                 _ => {
                     if found_assignment {
-                        (Some(SvSignedness::Unsigned), SvParamStatus::Overridable)
+                        match datatype {
+                            Some(SvDataType::Unsupported) => (Some(SvSignedness::Unsupported), SvParamStatus::Overridable),
+                            _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
+                        }
                     } else {
                         (None, SvParamStatus::Overridable)
                     }

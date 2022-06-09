@@ -65,6 +65,7 @@ pub enum SvDataKind {
 pub enum SvSignedness {
     Signed,
     Unsigned,
+    Unsupported,
     IMPLICIT,
 }
 
@@ -89,6 +90,7 @@ pub enum SvDataType {
     Class,
     TypeRef,
     String,
+    Unsupported,
     IMPLICIT,
 }
 
