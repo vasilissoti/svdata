@@ -23,14 +23,12 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
+    pub value: Option<String>,
     pub paramtype: SvParamType,
     pub datatype: Option<SvDataType>,
     pub datatype_status: SvParamStatus,
     pub signedness: Option<SvSignedness>,
     pub signedness_status: SvParamStatus,
-    // pub packed_dimensions: Vec<SvPackedDimension>,
-    // pub packed_dimensions_status: SvSignedness,
-    // pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -206,8 +204,15 @@ impl fmt::Display for SvParameter {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Parameter: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
+        match self.value.clone() {
+            None => {
+                writeln!(f, "    Value: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Value: {}", x)?;
+            }
+        }
         writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
-
         match self.datatype.clone() {
             None => {
                 writeln!(f, "    DataType: None")?;

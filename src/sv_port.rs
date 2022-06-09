@@ -50,12 +50,13 @@ pub fn port_declaration_parameter_ansi(
 ) -> SvParameter {
     let found_assignment = parameter_check_default(p);
     let (param_datatype, param_datatype_status) =
-        parameter_datatype_ansi(common_data.clone(), &p, syntax_tree, found_assignment);
+        parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
     let (param_signedness, param_signedness_status) =
         parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
 
     SvParameter {
         identifier: parameter_identifier(p, syntax_tree),
+        value: parameter_value(p, syntax_tree, found_assignment),
         paramtype: param_type.clone(),
         datatype: param_datatype,
         datatype_status: param_datatype_status,
@@ -75,6 +76,19 @@ fn parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
 fn parameter_identifier(node: &sv_parser::ParamAssignment, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(node, ParameterIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
+}
+
+fn parameter_value(
+    node: &sv_parser::ParamAssignment,
+    syntax_tree: &SyntaxTree,
+    found_assignment: bool,
+) -> Option<String> {
+    if !found_assignment {
+        return None;
+    } else {
+        let expression = unwrap_node!(node, ConstantExpression);
+        get_string(expression.unwrap(), syntax_tree)
+    }
 }
 
 fn parameter_datatype_ansi(
