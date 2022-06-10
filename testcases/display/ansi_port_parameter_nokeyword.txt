@@ -1,0 +1,59 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_parameter_nokeyword.sv
+  Parameter: 
+    Identifier: a
+    Value: 8'b10101010
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeStatus: Fixed
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessStatus: Fixed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: b
+    Value: 4'b1000
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeStatus: Fixed
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessStatus: Fixed
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: c
+    Value: None
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeStatus: Fixed
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessStatus: Fixed
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: [("4", "0")]
+  Parameter: 
+    Identifier: e
+    Value: 7.5
+    ParameterType: Parameter
+    DataType: Real
+    DataTypeStatus: Fixed
+    ClassIdentifier: None
+    Signedness: None
+    SignednessStatus: Fixed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: f
+    Value: 5
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeStatus: Fixed
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessStatus: Overridable
+    PackedDimensions: []
+    UnpackedDimensions: []
+
