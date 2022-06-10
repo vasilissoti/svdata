@@ -1,0 +1,99 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [
+        {
+          "identifier": "a",
+          "value": "8'b10101010",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_status": "Overridable",
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_status": "Overridable",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "b",
+          "value": "4'b1000",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_status": "Fixed",
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_status": "Fixed",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "c",
+          "value": null,
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_status": "Fixed",
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_status": "Fixed",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "4",
+              "0"
+            ]
+          ]
+        },
+        {
+          "identifier": "d",
+          "value": null,
+          "paramtype": "Parameter",
+          "datatype": "Class",
+          "datatype_status": "Fixed",
+          "classid": "my_struct",
+          "signedness": null,
+          "signedness_status": "Fixed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "e",
+          "value": "7.5",
+          "paramtype": "Parameter",
+          "datatype": "Real",
+          "datatype_status": "Overridable",
+          "classid": null,
+          "signedness": null,
+          "signedness_status": "Fixed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "f",
+          "value": "5",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_status": "Overridable",
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_status": "Overridable",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        }
+      ],
+      "ports": [],
+      "filepath": "testcases/sv/ansi_port_parameter_keyword.sv"
+    }
+  ],
+  "packages": []
+}
