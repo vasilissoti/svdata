@@ -11,9 +11,7 @@
           "datatype_status": "Overridable",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Overridable",
-          "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "signedness_status": "Fixed"
         },
         {
           "identifier": "b",
@@ -23,14 +21,7 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Fixed",
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
-          "unpacked_dimensions": []
+          "signedness_status": "Fixed"
         },
         {
           "identifier": "c",
@@ -40,19 +31,7 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Fixed",
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
-          "unpacked_dimensions": [
-            [
-              "4",
-              "0"
-            ]
-          ]
+          "signedness_status": "Fixed"
         },
         {
           "identifier": "d",
@@ -62,9 +41,7 @@
           "datatype_status": "Fixed",
           "classid": "my_struct",
           "signedness": null,
-          "signedness_status": "Fixed",
-          "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "signedness_status": "Fixed"
         },
         {
           "identifier": "e",
@@ -74,9 +51,7 @@
           "datatype_status": "Overridable",
           "classid": null,
           "signedness": null,
-          "signedness_status": "Fixed",
-          "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "signedness_status": "Overridable"
         },
         {
           "identifier": "f",
@@ -86,9 +61,7 @@
           "datatype_status": "Overridable",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Overridable",
-          "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "signedness_status": "Overridable"
         }
       ],
       "ports": [],

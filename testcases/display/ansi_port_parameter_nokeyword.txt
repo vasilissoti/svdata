@@ -10,8 +10,6 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: Fixed
-    PackedDimensions: []
-    UnpackedDimensions: []
   Parameter: 
     Identifier: b
     Value: 4'b1000
@@ -21,8 +19,6 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: Fixed
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: []
   Parameter: 
     Identifier: c
     Value: None
@@ -32,8 +28,6 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: Fixed
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: [("4", "0")]
   Parameter: 
     Identifier: e
     Value: 7.5
@@ -43,8 +37,6 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessStatus: Fixed
-    PackedDimensions: []
-    UnpackedDimensions: []
   Parameter: 
     Identifier: f
     Value: 5
@@ -54,6 +46,4 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: Overridable
-    PackedDimensions: []
-    UnpackedDimensions: []
 
