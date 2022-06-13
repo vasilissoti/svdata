@@ -59,9 +59,11 @@ pub fn port_parameter_declaration_ansi(
         port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
     let (param_signedness, param_signedness_status) = port_parameter_signedness_ansi(
         common_data.clone(),
+        p,
         &param_datatype,
         found_assignment,
         param_datatype_status.clone(),
+        syntax_tree,
     );
 
     SvParameter {
@@ -213,11 +215,13 @@ fn port_parameter_datatype_ansi(
 
 fn port_parameter_signedness_ansi(
     m: RefNode,
+    p: &sv_parser::ParamAssignment,
     datatype: &Option<SvDataType>,
     found_assignment: bool,
     datatype_status: SvParamStatus,
+    syntax_tree: &SyntaxTree,
 ) -> (Option<SvSignedness>, SvParamStatus) {
-    let signedness = unwrap_node!(m, Signing);
+    let signedness = unwrap_node!(m.clone(), Signing);
     match signedness {
         Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => {
             return (Some(SvSignedness::Signed), SvParamStatus::Fixed)
@@ -239,20 +243,61 @@ fn port_parameter_signedness_ansi(
         Some(SvDataType::Shortint)
         | Some(SvDataType::Int)
         | Some(SvDataType::Longint)
-        | Some(SvDataType::Byte)
-        | Some(SvDataType::Integer) => (Some(SvSignedness::Signed), SvParamStatus::Overridable),
-        _ => {
-            if found_assignment {
-                match datatype {
-                    Some(SvDataType::Unsupported) => {
-                        (Some(SvSignedness::Unsupported), SvParamStatus::Overridable)
-                    }
-                    _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
+        | Some(SvDataType::Byte) => (Some(SvSignedness::Signed), SvParamStatus::Overridable),
+
+        Some(SvDataType::Integer) => {
+            if !found_assignment {
+                return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
+            }
+
+            let integral_type =
+                unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
+            match integral_type {
+                Some(RefNode::DecimalNumber(_)) => {
+                    return (Some(SvSignedness::Signed), SvParamStatus::Overridable)
                 }
-            } else {
-                (None, SvParamStatus::Overridable)
+                _ => {
+                    let base = unwrap_node!(integral_type.unwrap(), BinaryBase, HexBase, OctalBase);
+                    let base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap();
+
+                    match base {
+                        Some(RefNode::BinaryBase(_)) => {
+                            if base_token == "'sb" {
+                                return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
+                            } else {
+                                return (Some(SvSignedness::Unsigned), SvParamStatus::Overridable);
+                            }
+                        }
+
+                        Some(RefNode::HexBase(_)) => {
+                            if base_token == "'sh" {
+                                return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
+                            } else {
+                                return (Some(SvSignedness::Unsigned), SvParamStatus::Overridable);
+                            }
+                        }
+
+                        Some(RefNode::OctalBase(_)) => {
+                            if base_token == "'so" {
+                                return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
+                            } else {
+                                return (Some(SvSignedness::Unsigned), SvParamStatus::Overridable);
+                            }
+                        }
+
+                        _ => unreachable!(),
+                    }
+                }
             }
         }
+
+        _ => match datatype {
+            Some(SvDataType::Unsupported) => {
+                (Some(SvSignedness::Unsupported), SvParamStatus::Overridable)
+            }
+            None => (None, SvParamStatus::Overridable),
+            _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
+        },
     }
 }
 
