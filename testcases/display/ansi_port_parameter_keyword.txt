@@ -3,13 +3,13 @@ Module:
   Filepath: testcases/sv/ansi_port_parameter_keyword.sv
   Parameter: 
     Identifier: a
-    Value: 8'b10101010
+    Value: 8'sb10101010
     ParameterType: Parameter
     DataType: Integer
     DataTypeStatus: Overridable
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Fixed
+    SignednessStatus: Overridable
   Parameter: 
     Identifier: b
     Value: 4'b1000

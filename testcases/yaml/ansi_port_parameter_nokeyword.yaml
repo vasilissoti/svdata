@@ -3,13 +3,13 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        value: "8'b10101010"
+        value: "8'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_status: Fixed
         classid: ~
         signedness: Signed
-        signedness_status: Fixed
+        signedness_status: Overridable
       - identifier: b
         value: "4'b1000"
         paramtype: Parameter

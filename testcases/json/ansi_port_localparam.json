@@ -5,13 +5,13 @@
       "parameters": [
         {
           "identifier": "a",
-          "value": "8'b10101010",
+          "value": "8'sb10101010",
           "paramtype": "LocalParam",
           "datatype": "Integer",
           "datatype_status": "Overridable",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Fixed"
+          "signedness_status": "Overridable"
         },
         {
           "identifier": "b",
