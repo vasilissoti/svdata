@@ -57,17 +57,21 @@ pub fn port_parameter_declaration_ansi(
     let found_assignment = port_parameter_check_default(p);
     let (param_datatype, param_datatype_status) =
         port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
-    let (param_signedness, param_signedness_status) =
-        port_parameter_signedness_ansi(common_data.clone(), &param_datatype, found_assignment);
+    let (param_signedness, param_signedness_status) = port_parameter_signedness_ansi(
+        common_data.clone(),
+        &param_datatype,
+        found_assignment,
+        param_datatype_status.clone(),
+    );
 
     SvParameter {
         identifier: port_parameter_identifier(p, syntax_tree),
         value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
         paramtype: param_type.clone(),
         datatype: param_datatype.clone(),
-        datatype_status: param_datatype_status,
+        datatype_status: param_datatype_status.clone(),
         classid: port_parameter_classid_ansi(common_data.clone(), &param_datatype, syntax_tree),
-        signedness: param_signedness,
+        signedness: param_signedness.clone(),
         signedness_status: param_signedness_status,
         packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
@@ -211,43 +215,42 @@ fn port_parameter_signedness_ansi(
     m: RefNode,
     datatype: &Option<SvDataType>,
     found_assignment: bool,
+    datatype_status: SvParamStatus,
 ) -> (Option<SvSignedness>, SvParamStatus) {
+    let signedness = unwrap_node!(m, Signing);
+    match signedness {
+        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => {
+            return (Some(SvSignedness::Signed), SvParamStatus::Fixed)
+        }
+        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
+            return (Some(SvSignedness::Unsigned), SvParamStatus::Fixed)
+        }
+        _ => (),
+    }
+
     match datatype {
         Some(SvDataType::Class) | Some(SvDataType::String) | Some(SvDataType::Real) => {
-            (None, SvParamStatus::Fixed)
-        }
-        _ => {
-            let signedness = unwrap_node!(m, Signing);
-            match signedness {
-                Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => {
-                    return (Some(SvSignedness::Signed), SvParamStatus::Fixed)
-                }
-                Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
-                    return (Some(SvSignedness::Unsigned), SvParamStatus::Fixed)
-                }
-                _ => (),
+            match datatype_status {
+                SvParamStatus::Overridable => return (None, SvParamStatus::Overridable),
+                SvParamStatus::Fixed => return (None, SvParamStatus::Fixed),
             }
+        }
 
-            match datatype {
-                Some(SvDataType::Shortint)
-                | Some(SvDataType::Int)
-                | Some(SvDataType::Longint)
-                | Some(SvDataType::Byte)
-                | Some(SvDataType::Integer) => {
-                    (Some(SvSignedness::Signed), SvParamStatus::Overridable)
-                }
-                _ => {
-                    if found_assignment {
-                        match datatype {
-                            Some(SvDataType::Unsupported) => {
-                                (Some(SvSignedness::Unsupported), SvParamStatus::Overridable)
-                            }
-                            _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
-                        }
-                    } else {
-                        (None, SvParamStatus::Overridable)
+        Some(SvDataType::Shortint)
+        | Some(SvDataType::Int)
+        | Some(SvDataType::Longint)
+        | Some(SvDataType::Byte)
+        | Some(SvDataType::Integer) => (Some(SvSignedness::Signed), SvParamStatus::Overridable),
+        _ => {
+            if found_assignment {
+                match datatype {
+                    Some(SvDataType::Unsupported) => {
+                        (Some(SvSignedness::Unsupported), SvParamStatus::Overridable)
                     }
+                    _ => (Some(SvSignedness::Unsigned), SvParamStatus::Overridable),
                 }
+            } else {
+                (None, SvParamStatus::Overridable)
             }
         }
     }

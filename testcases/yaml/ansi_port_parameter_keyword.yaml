@@ -9,9 +9,7 @@ modules:
         datatype_status: Overridable
         classid: ~
         signedness: Signed
-        signedness_status: Overridable
-        packed_dimensions: []
-        unpacked_dimensions: []
+        signedness_status: Fixed
       - identifier: b
         value: "4'b1000"
         paramtype: Parameter
@@ -20,10 +18,6 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Fixed
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions: []
       - identifier: c
         value: ~
         paramtype: Parameter
@@ -32,12 +26,6 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Fixed
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions:
-          - - "4"
-            - "0"
       - identifier: d
         value: ~
         paramtype: Parameter
@@ -46,8 +34,6 @@ modules:
         classid: my_struct
         signedness: ~
         signedness_status: Fixed
-        packed_dimensions: []
-        unpacked_dimensions: []
       - identifier: e
         value: "7.5"
         paramtype: Parameter
@@ -55,9 +41,7 @@ modules:
         datatype_status: Overridable
         classid: ~
         signedness: ~
-        signedness_status: Fixed
-        packed_dimensions: []
-        unpacked_dimensions: []
+        signedness_status: Overridable
       - identifier: f
         value: "5"
         paramtype: Parameter
@@ -66,8 +50,6 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Overridable
-        packed_dimensions: []
-        unpacked_dimensions: []
     ports: []
     filepath: testcases/sv/ansi_port_parameter_keyword.sv
 packages: []
