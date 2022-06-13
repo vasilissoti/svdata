@@ -10,6 +10,8 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Fixed
+        packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: b
         value: "4'b1000"
         paramtype: LocalParam
@@ -18,6 +20,10 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Fixed
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
       - identifier: c
         value: ~
         paramtype: LocalParam
@@ -26,6 +32,12 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Fixed
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions:
+          - - "4"
+            - "0"
       - identifier: d
         value: ~
         paramtype: LocalParam
@@ -34,6 +46,8 @@ modules:
         classid: my_struct
         signedness: ~
         signedness_status: Fixed
+        packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: e
         value: "7.5"
         paramtype: LocalParam
@@ -42,6 +56,8 @@ modules:
         classid: ~
         signedness: ~
         signedness_status: Overridable
+        packed_dimensions: []
+        unpacked_dimensions: []
       - identifier: f
         value: "5"
         paramtype: LocalParam
@@ -50,6 +66,8 @@ modules:
         classid: ~
         signedness: Signed
         signedness_status: Overridable
+        packed_dimensions: []
+        unpacked_dimensions: []
     ports: []
     filepath: testcases/sv/ansi_port_localparam.sv
 packages: []
