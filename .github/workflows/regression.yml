@@ -5,6 +5,7 @@ jobs:
   build:
     strategy:
       matrix:
+        #TODO: Re-introduce Windows os: [ubuntu-latest, macOS-latest, windows-latest]
         os: [ubuntu-latest, macOS-latest]
         rust: [stable]
     runs-on: ${{ matrix.os }}
@@ -17,10 +18,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Report Toolchain Versions
+        run: |
+          cargo -V
+          rustc -V
+          rustfmt -V
+
+      - name: Check Formatting
+        run: |
+          cargo fmt --check
+
       - name: Build
         run: |
-          rustc -V
-          cargo -V
           cargo build
 
       - name: Test

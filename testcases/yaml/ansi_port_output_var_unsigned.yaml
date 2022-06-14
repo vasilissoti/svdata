@@ -1,0 +1,80 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Output
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions:
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
+      - identifier: b
+        direction: Output
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions: []
+      - identifier: c
+        direction: Output
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: d
+        direction: Output
+        datakind: Variable
+        datatype: Reg
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: e
+        direction: Output
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions:
+          - - FOO-1
+            - "0"
+      - identifier: f
+        direction: Output
+        datakind: Variable
+        datatype: String
+        classid: ~
+        nettype: ~
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: g
+        direction: Output
+        datakind: Variable
+        datatype: Integer
+        classid: ~
+        nettype: ~
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+    filepath: testcases/sv/ansi_port_output_var_unsigned.sv
+packages: []

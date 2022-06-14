@@ -1,0 +1,14 @@
+Module:
+  Identifier: mh7
+  Filepath: testcases/sv/ieee1800_2017_mh7.sv
+  Port: 
+    Identifier: x
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+

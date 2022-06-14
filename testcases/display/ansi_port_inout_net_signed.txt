@@ -1,0 +1,84 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_inout_net_signed.sv
+  Port: 
+    Identifier: a
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: b
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+  Port: 
+    Identifier: d
+    Direction: Inout
+    DataKind: Net
+    DataType: Int
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: e
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: [("FOO-1", "0")]
+  Port: 
+    Identifier: f
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: g
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: h
+    Direction: Inout
+    DataKind: Net
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: Tri
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+

@@ -1,0 +1,16 @@
+---
+modules:
+  - identifier: mh6
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Input
+        datakind: Variable
+        datatype: Integer
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+    filepath: testcases/sv/ieee1800_2017_mh6.sv
+packages: []

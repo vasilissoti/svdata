@@ -1,0 +1,74 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_output_var_unsigned.sv
+  Port: 
+    Identifier: a
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+  Port: 
+    Identifier: b
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: d
+    Direction: Output
+    DataKind: Variable
+    DataType: Reg
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: e
+    Direction: Output
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: [("FOO-1", "0")]
+  Port: 
+    Identifier: f
+    Direction: Output
+    DataKind: Variable
+    DataType: String
+    ClassIdentifier: None
+    NetType: None
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: g
+    Direction: Output
+    DataKind: Variable
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+

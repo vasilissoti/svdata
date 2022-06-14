@@ -1,0 +1,64 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_output_net_unsigned.sv
+  Port: 
+    Identifier: a
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+  Port: 
+    Identifier: b
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: d
+    Direction: Output
+    DataKind: Net
+    DataType: Reg
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: e
+    Direction: Output
+    DataKind: Net
+    DataType: String
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: f
+    Direction: Output
+    DataKind: Net
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: Tri
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+

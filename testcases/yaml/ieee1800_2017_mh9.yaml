@@ -1,0 +1,18 @@
+---
+modules:
+  - identifier: mh9
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions:
+          - - "5"
+            - "0"
+        unpacked_dimensions: []
+    filepath: testcases/sv/ieee1800_2017_mh9.sv
+packages: []

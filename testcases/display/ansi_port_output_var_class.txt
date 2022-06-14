@@ -1,0 +1,34 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_output_var_class.sv
+  Port: 
+    Identifier: d
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    ClassIdentifier: my_enum_t
+    NetType: None
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: e
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    ClassIdentifier: my_struct_t
+    NetType: None
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: f
+    Direction: Output
+    DataKind: Variable
+    DataType: Class
+    ClassIdentifier: my_struct_t
+    NetType: None
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+

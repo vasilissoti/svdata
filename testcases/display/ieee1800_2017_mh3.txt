@@ -1,0 +1,14 @@
+Module:
+  Identifier: mh3
+  Filepath: testcases/sv/ieee1800_2017_mh3.sv
+  Port: 
+    Identifier: x
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("5", "0")]
+    UnpackedDimensions: []
+

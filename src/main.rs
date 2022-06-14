@@ -1,11 +1,16 @@
 use anyhow::Error;
 use clap::Parser;
 use enquote;
+use serde_json;
+use serde_yaml;
 use std::collections::HashMap;
+use std::fs::File;
+use std::io::{BufWriter, Write};
 use std::path::{Path, PathBuf};
 use std::{env, process};
-use sv_parser::{parse_sv, unwrap_node, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
-use svdata::structures;
+use sv_parser::{parse_sv, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
+use svdata::structures::SvData;
+use svdata::sv_module::{module_declaration_ansi, module_declaration_nonansi};
 use verilog_filelist_parser;
 
 // Clap is used for accepting arguments through command prompt
@@ -14,12 +19,15 @@ use verilog_filelist_parser;
 #[clap(name = "svdata")]
 #[clap(long_version(option_env!("LONG_VERSION").unwrap_or(env!("CARGO_PKG_VERSION"))))]
 pub struct Opt {
+    /// Source file
     #[clap(required_unless_present_any = &["filelist"])]
     pub files: Vec<PathBuf>,
 
+    /// File list
     #[clap(short = 'f', long = "filelist", conflicts_with = "files")]
     pub filelist: Vec<PathBuf>,
 
+    /// Define
     #[clap(
         short = 'd',
         long = "define",
@@ -28,6 +36,7 @@ pub struct Opt {
     )]
     pub defines: Vec<String>,
 
+    /// Include path
     #[clap(
         short = 'i',
         long = "include",
@@ -36,30 +45,36 @@ pub struct Opt {
     )]
     pub includes: Vec<PathBuf>,
 
+    /// Ignore any include
     #[clap(long = "ignore-include")]
     pub ignore_include: bool,
+
+    /// Suppress description on STDOUT
+    #[clap(short = 's', long = "silent")]
+    pub silent: bool,
+
+    /// Write output to JSON file
+    #[clap(long = "json")]
+    pub json: Option<PathBuf>,
+
+    /// Write output to YAML file
+    #[clap(long = "yaml")]
+    pub yaml: Option<PathBuf>,
 }
 
 #[cfg_attr(tarpaulin, skip)]
 pub fn main() {
     let opt = Parser::parse(); // This is from clap
     let exit_code = match run_opt(&opt) {
-        Ok((pass, _)) => {
-            if pass {
-                0
-            } else {
-                1
-            }
-        }
-        Err(_) => 2,
+        Ok(_) => 0,
+        Err(_) => 1,
     };
 
     process::exit(exit_code);
 }
 
 #[cfg_attr(tarpaulin, skip)]
-pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> {
-    // VNotes: The run opt will return [Err] if something didn't go well or otherwise will return [Ok]
+pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
     let mut defines = HashMap::new();
     for define in &opt.defines {
         let mut define = define.splitn(2, '=');
@@ -92,51 +107,57 @@ pub fn run_opt(opt: &Opt) -> Result<(bool, Option<structures::SvData>), Error> {
         (opt.files.clone(), opt.includes.clone())
     };
 
-    let mut all_pass = true;
-    let mut svdata = structures::SvData {
-        // VNotes
+    let mut svdata = SvData {
         modules: Vec::new(),
         packages: Vec::new(),
     };
 
     for path in &files {
-        // println!("");
-        // println!("The current path is: {}", path.to_string_lossy().into_owned()); // VNotes
-        // println!("");
-
-        let mut pass = true;
-        match parse_sv(&path, &defines, &includes, opt.ignore_include, false) {
+        match parse_sv(
+            &path,
+            &defines,
+            &includes,
+            opt.ignore_include.clone(),
+            false,
+        ) {
             Ok((syntax_tree, new_defines)) => {
                 sv_to_structure(
                     &syntax_tree,
                     &path.to_string_lossy().into_owned(),
                     &mut svdata,
-                ); // VNotes
+                );
                 defines = new_defines;
             }
             Err(_) => {
-                println!("Parse failed");
-                pass = false;
+                return Err(anyhow::anyhow!(
+                    "failed to parse '{}'",
+                    path.to_string_lossy()
+                ))
             }
         }
-
-        if !pass {
-            all_pass = false;
-        }
     }
 
-    print!("{}", svdata);
-
-    let ret: Option<structures::SvData>; // VNotes
-    if all_pass {
-        // VNotes
-        ret = Some(svdata);
-    } else {
-        // VNotes
-        ret = None;
+    if !opt.silent.clone() {
+        println!("{}", svdata);
     }
 
-    Ok((all_pass, ret)) // VNotes
+    if let Some(path) = &opt.json {
+        let s: String = serde_json::to_string_pretty(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
+
+    if let Some(path) = &opt.yaml {
+        let s: String = serde_yaml::to_string(&svdata).unwrap();
+        let f = Path::new(path);
+        let f = File::create(f);
+        let mut f = BufWriter::new(f.unwrap());
+        write!(f, "{}", s).unwrap();
+    }
+
+    Ok(svdata)
 }
 
 // In case that the system verilog files are given in the format of a filelist
@@ -171,15 +192,7 @@ fn parse_filelist(
     Ok((filelist.files, filelist.incdirs, defines))
 }
 
-// Take it for granted up to here
-// The following function is responsible for storing the data to the corresponding structs
-
-fn sv_to_structure(
-    syntax_tree: &SyntaxTree,
-    filepath: &str,
-    svdata: &mut structures::SvData,
-) -> () {
-    // VNotes
+fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut SvData) -> () {
     for event in syntax_tree.into_iter().event() {
         let enter_not_leave = match event {
             NodeEvent::Enter(_) => true,
@@ -193,547 +206,94 @@ fn sv_to_structure(
 
         if enter_not_leave {
             match node {
-                RefNode::ModuleDeclarationAnsi(x) => {
-                    //let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
-                    //println!("ENTER ANSI module: {}", id);
-
-                    let d = parse_module_declaration_ansi(node, x, &syntax_tree, filepath);
+                RefNode::ModuleDeclarationAnsi(_) => {
+                    let d = module_declaration_ansi(node, &syntax_tree, filepath);
                     svdata.modules.push(d.clone());
-                    //println!("{}", d); // VNotes: Used for debugging deplay trait
                 }
-                RefNode::ModuleDeclarationNonansi(x) => {
-                    let id = module_identifier(node.clone(), &syntax_tree).unwrap(); // VNotes: To be removed
-                    println!("ENTER non-ANSI module: {}", id);
-
-                    let d = parse_module_declaration_nonansi(node, x, &syntax_tree);
-                    println!("  {:?}", d);
-                }
-                _ => (),
-            }
-        } else {
-            match node {
-                RefNode::ModuleDeclarationAnsi(_) | RefNode::ModuleDeclarationNonansi(_) => {
-                    //let id = module_identifier(node, &syntax_tree).unwrap();
-                    //println!("LEAVE module: {}", id);
+                RefNode::ModuleDeclarationNonansi(_) => {
+                    let _d = module_declaration_nonansi(node, &syntax_tree, filepath);
                 }
                 _ => (),
             }
         }
     }
 }
-
-fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = match unwrap_node!(parent, SimpleIdentifier, EscapedIdentifier) {
-        Some(RefNode::SimpleIdentifier(x)) => Some(x.nodes.0),
-        Some(RefNode::EscapedIdentifier(x)) => Some(x.nodes.0),
-        _ => None,
-    };
-
-    match id {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
-    }
-}
-
-// VNotes: For future implementations
-fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = match unwrap_node!(parent, Keyword) {
-        Some(RefNode::Keyword(x)) => Some(x.nodes.0),
-
-        _ => None,
-    };
-
-    match id {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
-    }
-}
-
-fn _datatype(parent: RefNode, _syntax_tree: &SyntaxTree) -> Option<String> {
-    let t = match unwrap_node!(parent, DataType) {
-        /*
-        Some(RefNode::DataType(x)) => {
-            println!("HERE x={:?}", x);
-            Some(String::from("TODO"))
-        }
-        */
-        Some(x) => {
-            println!("HERE x={:?}", x);
-            Some(String::from("TODO"))
-        }
-        _ => None,
-    };
-
-    /*
-    match t {
-        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
-        _ => None,
-    }
-    */
-    t
-}
-
-// VNotes: Used for debugging
-// fn print_type_of<T>(_: &T) {
-//     println!("{}", std::any::type_name::<T>())
-// }
-
-fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = unwrap_node!(node, ModuleIdentifier).unwrap();
-    identifier(id, &syntax_tree)
-}
-
-// XXX: `ref` is unsupported.
-// FIXME: `ref` is unsupported, it's a bug.
-// TODO: `ref` is unsupported, but will be later.
-
-// This is the core of the parsed data into structures for the ansi models
-
-fn parse_module_declaration_ansi(
-    node: RefNode,
-    m: &sv_parser::ModuleDeclarationAnsi,
-    syntax_tree: &SyntaxTree,
-    filepath: &str, // VNotes
-) -> structures::SvModuleDeclaration {
-    let mut ret = structures::SvModuleDeclaration {
-        identifier: module_identifier(node, syntax_tree).unwrap(),
-        parameters: Vec::new(),
-        ports: Vec::new(),
-        filepath: String::from(filepath), // VNotes
-        declaration_type: structures::SvModuleDeclarationType::Ansi, // VNotes
-    };
-
-    let mut prev_port: Option<structures::SvPort> = None;
-
-    for node in m {
-        match node {
-            RefNode::ParameterDeclarationParam(p) => ret
-                .parameters
-                .push(parse_module_declaration_ansi_parameter(p, syntax_tree)),
-            RefNode::AnsiPortDeclaration(p) => {
-                let parsed_port: structures::SvPort =
-                    parse_module_declaration_ansi_port(p, node, syntax_tree, &prev_port.clone());
-                ret.ports.push(parsed_port.clone());
-                prev_port = Some(parsed_port.clone());
-            }
-            _ => (),
-        }
-    }
-    ret
-}
-
-fn parse_module_declaration_nonansi(
-    _node: RefNode,
-    _m: &sv_parser::ModuleDeclarationNonansi,
-    _syntax_tree: &SyntaxTree,
-) -> structures::SvModuleDeclaration {
-    let ret = structures::SvModuleDeclaration {
-        identifier: module_identifier(_node, _syntax_tree).unwrap(),
-        parameters: Vec::new(),
-        ports: Vec::new(),
-        filepath: String::new(), // VNotes
-        declaration_type: structures::SvModuleDeclarationType::NonAnsi, // VNotes
-    };
-    // TODO
-    ret
-}
-
-fn parse_module_declaration_ansi_parameter(
-    p: &sv_parser::ParameterDeclarationParam,
-    _syntax_tree: &SyntaxTree,
-) -> structures::SvParameter {
-    println!("parameter={:?}", p);
-    structures::SvParameter {
-        identifier: String::from("foo"),
-        datatype: String::from("bar"),
-    }
-}
-
-fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {
-    let id = unwrap_node!(node, PortIdentifier).unwrap();
-    identifier(id, &syntax_tree).unwrap()
-}
-
-fn port_direction_ansi(
-    // VNotes
-    node: &sv_parser::AnsiPortDeclaration,
-    prev_port: &Option<structures::SvPort>,
-) -> structures::SvPortDirection {
-    let dir = unwrap_node!(node, PortDirection);
-    match dir {
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Inout(_))) => {
-            structures::SvPortDirection::Inout
-        }
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Input(_))) => {
-            structures::SvPortDirection::Input
-        }
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Output(_))) => {
-            structures::SvPortDirection::Output
-        }
-        Some(RefNode::PortDirection(sv_parser::PortDirection::Ref(_))) => {
-            structures::SvPortDirection::Ref
-        }
-        _ => match prev_port {
-            Some(_) => prev_port.clone().unwrap().direction, // If not the first port, take the previous port's direction
-            None => structures::SvPortDirection::Inout,      // VNotes: Default case
-        },
-    }
-}
-
-fn port_datakind_ansi(
-    // VNotes
-    nettype: &Option<structures::SvNetType>,
-) -> structures::SvDataKind {
-    match nettype {
-        None => structures::SvDataKind::Variable,
-
-        Some(_) => structures::SvDataKind::Net,
-    }
-}
-
-fn port_datatype_ansi(
-    // VNotes
-    node: RefNode,
-    syntax_tree: &SyntaxTree,
-) -> structures::SvDataType {
-    let dir = unwrap_node!(
-        node.clone(),
-        IntegerVectorType,
-        IntegerAtomType,
-        NonIntegerType,
-        ClassType,
-        TypeReference
-    );
-    match dir {
-        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
-            structures::SvDataType::Logic
-        }
-        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
-            structures::SvDataType::Reg
-        }
-        Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
-            structures::SvDataType::Bit
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
-            structures::SvDataType::Byte
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
-            structures::SvDataType::Shortint
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
-            structures::SvDataType::Int
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
-            structures::SvDataType::Longint
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
-            structures::SvDataType::Integer
-        }
-        Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
-            structures::SvDataType::Time
-        }
-        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
-            structures::SvDataType::Shortreal
-        }
-        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
-            structures::SvDataType::Realtime
-        }
-        Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
-            structures::SvDataType::Real
-        }
-        Some(RefNode::ClassType(_)) => structures::SvDataType::Class,
-        Some(RefNode::TypeReference(_)) => structures::SvDataType::TypeRef,
-        _ => {
-            match unwrap_node!(node.clone(), DataType) {
-                Some(x) => {
-                    match keyword(x, syntax_tree) {
-                        Some(x) => {
-                            if x == "string" {
-                                return structures::SvDataType::String;
-                            } else {
-                                println!("{}", x);
-                                unreachable!(); // VNotes: This is a more strict measure in order to ensure that we haven't forgotten any data type
-                            }
-                        }
-
-                        _ => unreachable!(), //VNotes: We should never end up here!
-                    }
-                }
-                _ => return structures::SvDataType::Logic,
-            }
-        }
-    }
-}
-
-fn port_nettype_ansi(
-    m: &sv_parser::AnsiPortDeclaration,
-    direction: &structures::SvPortDirection,
-    syntax_tree: &SyntaxTree
-) -> Option<structures::SvNetType> {
-    let dir = unwrap_node!(m, AnsiPortDeclarationVariable, AnsiPortDeclarationNet);
-    match dir {
-        Some(RefNode::AnsiPortDeclarationVariable(_)) => return None, // "Var" token was found
-
-        Some(RefNode::AnsiPortDeclarationNet(x)) => {
-            let dir = unwrap_node!(x, NetType);
-
-            match dir {
-                // "Var" token was not found
-                Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
-                    return Some(structures::SvNetType::Supply0)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => {
-                    return Some(structures::SvNetType::Supply1)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => {
-                    return Some(structures::SvNetType::Triand)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => {
-                    return Some(structures::SvNetType::Trior)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => {
-                    return Some(structures::SvNetType::Trireg)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => {
-                    return Some(structures::SvNetType::Tri0)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => {
-                    return Some(structures::SvNetType::Tri1)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => {
-                    return Some(structures::SvNetType::Tri)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => {
-                    return Some(structures::SvNetType::Uwire)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => {
-                    return Some(structures::SvNetType::Wire)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => {
-                    return Some(structures::SvNetType::Wand)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => {
-                    return Some(structures::SvNetType::Wor)
-                }
-
-                _ => match direction {
-                    // Explicit net type was not found
-                    structures::SvPortDirection::Inout | structures::SvPortDirection::Input => {
-                        return Some(structures::SvNetType::Wire);
-                    }
-                    structures::SvPortDirection::Output => {
-                        match unwrap_node!(
-                            m,
-                            IntegerVectorType,
-                            IntegerAtomType,
-                            NonIntegerType,
-                            ClassType,
-                            TypeReference
-                        ) {
-                            // VNotes Add array enum, struct, class!
-                            Some(_) => return None, // For output with explicit data type, default: variable
-                            _ => {
-                                match unwrap_node!(m, DataType) {
-                                    Some(x) => {
-                                        match keyword(x, syntax_tree) {
-                                            Some(x) => {
-                                                if x == "string" {
-                                                    return None;
-                                                } else {
-                                                    println!("{}", x);
-                                                    unreachable!();
-                                                }
-                                            }
-                    
-                                            _ => unreachable!(),
-                                        }
-                                    }
-                                    _ => return Some(structures::SvNetType::Wire),
-                                }
-                            }
-                        }
-                    }
-
-                    structures::SvPortDirection::Ref => {
-                        return None; // For ref, default/always: variable
-                    }
-
-                    _ => unreachable!(), // Should never get here - IMPLICIT should never be used by ANSI
-                },
-            }
-        }
-
-        _ => unreachable!(), // VNotes: Should never get here - Always one of the two must be available
-    }
-}
-
-fn port_signedness_ansi(m: &sv_parser::AnsiPortDeclaration) -> structures::SvSignedness {
-    let dir = unwrap_node!(m, Signing);
-    match dir {
-        Some(RefNode::Signing(sv_parser::Signing::Signed(_))) => structures::SvSignedness::Signed,
-        Some(RefNode::Signing(sv_parser::Signing::Unsigned(_))) => {
-            structures::SvSignedness::Unsigned
-        }
-        _ => structures::SvSignedness::Unsigned, // VNotes: The default is signed
-    }
-}
-
-fn port_check_inheritance_ansi(m: &sv_parser::AnsiPortDeclaration) -> bool {
-    let dir = unwrap_node!(m, DataType, Signing, NetType, VarDataType, PortDirection);
-
-    match dir {
-        Some(_) => false, // Do not inherit signedness, data_type, data_kind and direction from last port
-        _ => true,        // Inherit them
-    }
-}
-
-fn parse_module_declaration_ansi_port(
-    p: &sv_parser::AnsiPortDeclaration,
-    node: RefNode,
-    syntax_tree: &SyntaxTree,
-    prev_port: &Option<structures::SvPort>,
-) -> structures::SvPort {
-    //println!("port={:?}", p);
-
-    let vet1 = structures::SvUnpackedDimensions {
-        // VNotes {TEMP}
-        dimensions: vec![String::from("Not supported yet")],
-    };
-
-    let vet2 = structures::SvPackedDimensions {
-        // VNotes {TEMP}
-        dimensions: vec![String::from("Not supported yet")],
-    };
-
-    // VNotes complete inheritance
-
-    let inherit = port_check_inheritance_ansi(p);
-    let ret: structures::SvPort;
-
-    if inherit == false {
-        ret = structures::SvPort {
-            // VNotes: Attention order of compilation in the following lines matters!
-            identifier: port_identifier(p, syntax_tree),
-            direction: port_direction_ansi(p, prev_port),
-            nettype: port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree),
-            datakind: port_datakind_ansi(&port_nettype_ansi(p, &port_direction_ansi(p, prev_port), syntax_tree)),
-            datatype: port_datatype_ansi(node, syntax_tree),
-            signedness: port_signedness_ansi(p),
-            unpacked_dim: vet1,
-            packed_dim: vet2,
-            port_expression: String::from("Same"),
-        };
-    } else {
-        ret = structures::SvPort {
-            identifier: port_identifier(p, syntax_tree),
-            direction: prev_port.clone().unwrap().direction,
-            nettype: prev_port.clone().unwrap().nettype,
-            datakind: prev_port.clone().unwrap().datakind,
-            datatype: prev_port.clone().unwrap().datatype,
-            signedness: prev_port.clone().unwrap().signedness,
-            unpacked_dim: vet1,
-            packed_dim: vet2,
-            port_expression: String::from("Same"),
-        };
-    }
-
-    //println!("{:?}", ret); // VNotes: Used for debugging
-
-    return ret;
-}
-
-/*
-fn parse_package_declaration() -> structures::SvPackageDeclaration {
-}
-
-fn parse_package_declaration_parameter() -> structures::SvParameter {
-}
-*/
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use serde_json;
     use std::fs;
-    use std::fs::File;
-    use std::io::{BufReader, BufWriter, Read, Write};
+    use std::io::{BufReader, Read};
 
-    fn tests(name: &str, run_display_test: bool, run_json_test: bool, run_yaml_test: bool) {
+    fn check_outputs(name: &str) {
+        let in_sv = Path::new("testcases")
+            .join("sv")
+            .join(format!("{}.sv", name));
+
         let out_dir = env::var("OUT_DIR").unwrap();
+        let out_json = Path::new(&out_dir)
+            .join("testcases")
+            .join("json")
+            .join(format!("{}.json", name));
+        fs::create_dir_all(out_json.parent().unwrap()).unwrap();
+        let out_yaml = Path::new(&out_dir)
+            .join("testcases")
+            .join("yaml")
+            .join(format!("{}.yaml", name));
+        fs::create_dir_all(out_yaml.parent().unwrap()).unwrap();
 
-        let sv_path = format!("testcases/sv_files/{}.sv", name);
-        let args = vec!["svdata", &sv_path];
+        let mut args = vec!["svdata"];
+        args.push(in_sv.to_str().unwrap());
+        args.push("--json");
+        args.push(out_json.to_str().unwrap());
+        args.push("--yaml");
+        args.push(out_yaml.to_str().unwrap());
         let opt = Opt::parse_from(args.iter());
-        let (_, svdata) = run_opt(&opt).unwrap();
 
-        if run_display_test {
-            let expected_path = format!("testcases/testcases_display_format/expected/{}.txt", name);
-            let expected_file = File::open(expected_path).unwrap();
-            let mut expected_file = BufReader::new(expected_file);
-            let mut expected_string = String::new();
-            let _ = expected_file.read_to_string(&mut expected_string);
+        let svdata = run_opt(&opt).unwrap();
 
-            let actual_string: String = format!("{}", svdata.clone().unwrap());
+        // Write actual display to file for manual inspection.
+        let actual_string: String = format!("{}", svdata.clone());
+        let out_display = Path::new(&out_dir)
+            .join("testcases")
+            .join("display")
+            .join(format!("{}.txt", name));
+        fs::create_dir_all(out_display.parent().unwrap()).unwrap();
+        let a = File::create(out_display);
+        let mut a = BufWriter::new(a.unwrap());
+        write!(a, "{}", actual_string).unwrap();
 
-            // VNotes: In order to enable visualization of the obtained values
-            let actual_path =
-                Path::new(&out_dir).join(format!("testcases_display_format/obtained/{}.txt", name));
-            fs::create_dir_all(Path::new(&out_dir).join("testcases_display_format/obtained"))
-                .unwrap();
-            //let actual_path = format!("testcases/testcases_display_format/obtained/{}.txt", name);
-            let actual_file = File::create(actual_path);
-            let mut actual_file = BufWriter::new(actual_file.unwrap());
-            _ = write!(actual_file, "{}", actual_string);
+        // Check display against reference.
+        let in_display = Path::new("testcases")
+            .join("display")
+            .join(format!("{}.txt", name));
+        let e = File::open(in_display).unwrap();
+        let mut e = BufReader::new(e);
+        let mut expected_string: String = String::new();
+        e.read_to_string(&mut expected_string).unwrap();
+        assert_eq!(expected_string, actual_string);
 
-            assert_eq!(expected_string, actual_string); // Testing: Display format
-        }
+        // Check JSON against reference.
+        let in_json = Path::new("testcases")
+            .join("json")
+            .join(format!("{}.json", name));
+        let e = File::open(in_json).unwrap();
+        let e = BufReader::new(e);
+        let expected_json_value: serde_json::Value = serde_json::from_reader(e).unwrap();
+        let s: String = serde_json::to_string_pretty(&svdata.clone()).unwrap();
+        let actual_json_value: serde_json::Value = serde_json::from_str(&s).unwrap();
+        assert_eq!(expected_json_value, actual_json_value);
 
-        if run_json_test {
-            let expected_path = format!("testcases/testcases_json_format/expected/{}.json", name);
-            let expected_file = File::open(expected_path).unwrap();
-            let expected_file = BufReader::new(expected_file);
-            let expected_json_value: serde_json::Value =
-                serde_json::from_reader(expected_file).unwrap(); // VNotes: Interpret as JSON string to ensure that if the structure is correct, text appearance doesn't matter
-
-            let actual_string: String =
-                serde_json::to_string_pretty(&svdata.clone().unwrap()).unwrap();
-            let actual_json_value: serde_json::Value =
-                serde_json::from_str(&actual_string).unwrap();
-
-            let actual_path =
-                Path::new(&out_dir).join(format!("testcases_json_format/obtained/{}.json", name));
-            fs::create_dir_all(Path::new(&out_dir).join("testcases_json_format/obtained")).unwrap();
-            // VNotes: Uncomment the next line and add path directories to store the obtained result in testcases directory
-            //let actual_path = format!("testcases/testcases_json_format/obtained/{}.json", name);
-            let actual_file = File::create(actual_path);
-            let mut actual_file = BufWriter::new(actual_file.unwrap());
-            _ = write!(actual_file, "{}", actual_string);
-
-            assert_eq!(expected_json_value, actual_json_value); // Testing: JSON format
-        }
-
-        if run_yaml_test {
-            let expected_path = format!("testcases/testcases_yaml_format/expected/{}.yaml", name);
-            let expected_file = File::open(expected_path).unwrap();
-            let expected_file = BufReader::new(expected_file);
-            let expected_yaml_value: serde_yaml::Value =
-                serde_yaml::from_reader(expected_file).unwrap(); // VNotes: Interpret as YAML string to ensure that if the structure is correct, text appearance doesn't matter
-
-            let actual_string: String = serde_yaml::to_string(&svdata.clone().unwrap()).unwrap();
-            let actual_yaml_value: serde_yaml::Value =
-                serde_yaml::from_str(&actual_string).unwrap();
-
-            let actual_path =
-                Path::new(&out_dir).join(format!("testcases_yaml_format/obtained/{}.yaml", name));
-            fs::create_dir_all(Path::new(&out_dir).join("testcases_yaml_format/obtained")).unwrap();
-            //let actual_path = format!("testcases/testcases_yaml_format/obtained/{}.yaml", name);
-            let actual_file = File::create(actual_path);
-            let mut actual_file = BufWriter::new(actual_file.unwrap());
-            _ = write!(actual_file, "{}", actual_string);
-
-            assert_eq!(expected_yaml_value, actual_yaml_value); // Testing: YAML format
-        }
+        // Check YAML against reference.
+        let in_yaml = Path::new("testcases")
+            .join("yaml")
+            .join(format!("{}.yaml", name));
+        let e = File::open(in_yaml).unwrap();
+        let e = BufReader::new(e);
+        let expected_yaml_value: serde_yaml::Value = serde_yaml::from_reader(e).unwrap();
+        let s: String = serde_yaml::to_string(&svdata.clone()).unwrap();
+        let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
+        assert_eq!(expected_yaml_value, actual_yaml_value);
     }
-
-    include!(concat!(env!("OUT_DIR"), "/tests.rs")); // VNotes: The rust script contains the individual functions - Within each of these functions there is a call to the above tests fn
+    include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }

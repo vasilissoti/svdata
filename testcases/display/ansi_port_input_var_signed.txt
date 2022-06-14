@@ -1,0 +1,64 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_input_var_signed.sv
+  Port: 
+    Identifier: a
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+  Port: 
+    Identifier: b
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: d
+    Direction: Input
+    DataKind: Variable
+    DataType: Reg
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: e
+    Direction: Input
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: [("FOO-1", "0")]
+  Port: 
+    Identifier: f
+    Direction: Input
+    DataKind: Variable
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+

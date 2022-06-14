@@ -13,7 +13,6 @@ pub struct SvModuleDeclaration {
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
     pub filepath: String,
-    pub declaration_type: SvModuleDeclarationType,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -26,17 +25,6 @@ pub struct SvParameter {
     pub identifier: String,
     pub datatype: String,
 }
-
-#[derive(Debug, Serialize, Clone)]
-pub enum SvModuleDeclarationType {
-    Ansi,
-    NonAnsi,
-}
-
-// "IMPLICIT" is only used for NON-ANSI since in ANSI it will either be explicit or the default (and for both we would be able to immediately know the explicit category)
-// In case of an NON-ANSI declaration then IMPLICIT means default except if it is explicitly defined through an internal data object later in the script (default is replaced by explicit)
-// "IMPLICIT" should never be left in the end of a full parse (1st phase) - For Non-Ansi models and during phase 1 an "IMPLICIT handler function will be responsible for placing the default
-// entries based on what is left IMPLICIT and what is not
 
 #[derive(Debug, Serialize, Clone)]
 pub enum SvPortDirection {
@@ -55,6 +43,13 @@ pub enum SvDataKind {
 }
 
 #[derive(Debug, Serialize, Clone)]
+pub enum SvSignedness {
+    Signed,
+    Unsigned,
+    IMPLICIT,
+}
+
+#[derive(Debug, Serialize, Clone)]
 pub enum SvDataType {
     Logic,
     Reg,
@@ -68,12 +63,12 @@ pub enum SvDataType {
     Real,
     Shortreal,
     Realtime,
-    Array,  //
-    Enum,   // Class?
-    Struct, //Class?
-    Union,  // Class?
+    Array,
+    Enum,
+    Struct,
+    Union,
     Class,
-    TypeRef, // VNotes: That means whatever the datatype of reference is
+    TypeRef,
     String,
     IMPLICIT,
 }
@@ -92,41 +87,24 @@ pub enum SvNetType {
     Tri1,
     Supply0,
     Supply1,
-    NA, // In not SVDataKind != Net
     IMPLICIT,
 }
 
-#[derive(Debug, Serialize, Clone)]
-pub enum SvSignedness {
-    Signed,
-    Unsigned,
-    IMPLICIT,
-}
-
-#[derive(Debug, Serialize, Clone)]
-pub struct SvUnpackedDimensions {
-    pub dimensions: Vec<String>,
-}
-
-#[derive(Debug, Serialize, Clone)]
-pub struct SvPackedDimensions {
-    pub dimensions: Vec<String>,
-}
+pub type SvPackedDimension = (String, String);
+pub type SvUnpackedDimension = (String, Option<String>);
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPort {
     pub identifier: String,
     pub direction: SvPortDirection,
-    pub port_expression: String, // Identifier of the internal object connected to the port (allows e.g: .a(i))
     pub datakind: SvDataKind,
     pub datatype: SvDataType,
+    pub classid: Option<String>,
     pub nettype: Option<SvNetType>,
-    pub signedness: SvSignedness,
-    pub unpacked_dim: SvUnpackedDimensions,
-    pub packed_dim: SvPackedDimensions,
+    pub signedness: Option<SvSignedness>,
+    pub packed_dimensions: Vec<SvPackedDimension>,
+    pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
-
-// VNotes: Packages, and Port_Parameters are not yet supported
 
 impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
@@ -140,9 +118,8 @@ impl fmt::Display for SvData {
 
 impl fmt::Display for SvModuleDeclaration {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        writeln!(f, "Module:")?; // VNotes: In the future that will be implemented within the display of SvData (similar to SvPort and "Port")
+        writeln!(f, "Module:")?;
         writeln!(f, "  Identifier: {}", self.identifier)?;
-        writeln!(f, "  Type: {:?}", self.declaration_type)?;
         writeln!(f, "  Filepath: {}", self.filepath)?;
 
         for port in self.ports.clone() {
@@ -158,9 +135,16 @@ impl fmt::Display for SvPort {
         writeln!(f, "  Port: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
         writeln!(f, "    Direction: {:?}", self.direction)?;
-        writeln!(f, "    Expression: {}", self.port_expression)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
         writeln!(f, "    DataType: {:?}", self.datatype)?;
+        match self.classid.clone() {
+            None => {
+                writeln!(f, "    ClassIdentifier: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    ClassIdentifier: {}", x)?;
+            }
+        }
         match self.nettype.clone() {
             None => {
                 writeln!(f, "    NetType: None")?;
@@ -169,27 +153,25 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    NetType: {:?}", x)?;
             }
         }
-        writeln!(f, "    Signedness: {:?}", self.signedness)?;
-        writeln!(f, "    Unpacked Dim: {}", self.unpacked_dim)?;
-        writeln!(f, "    Packed Dim: {}", self.packed_dim)
-    }
-}
-
-impl fmt::Display for SvPackedDimensions {
-    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        for dim in self.dimensions.clone() {
-            write!(f, "{}", dim)?;
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)?;
+            }
         }
 
-        write!(f, "")
-    }
-}
+        writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
+        let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 
-impl fmt::Display for SvUnpackedDimensions {
-    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        for dim in self.dimensions.clone() {
-            write!(f, "{}", dim)?;
+        for (u, l) in self.unpacked_dimensions.clone() {
+            match l {
+                Some(x) => unpackeddim_display.push((u.clone(), x.clone())),
+                None => unpackeddim_display.push((u.clone(), String::from("None"))),
+            }
         }
+        writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
 
         write!(f, "")
     }

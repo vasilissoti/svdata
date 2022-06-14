@@ -1,0 +1,27 @@
+---
+modules:
+  - identifier: mh14
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Inout
+        datakind: Net
+        datatype: Integer
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: y
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions:
+          - - "5"
+            - "0"
+        unpacked_dimensions: []
+    filepath: testcases/sv/ieee1800_2017_mh14.sv
+packages: []
