@@ -66,7 +66,7 @@ pub fn port_parameter_declaration_ansi(
         syntax_tree,
     );
 
-    SvParameter {
+    let ret = SvParameter {
         identifier: port_parameter_identifier(p, syntax_tree),
         value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
         paramtype: param_type.clone(),
@@ -77,7 +77,11 @@ pub fn port_parameter_declaration_ansi(
         signedness_status: param_signedness_status,
         packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
-    }
+    };
+
+    port_parameter_check_syntax(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
+
+    ret
 }
 
 fn port_parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
@@ -85,6 +89,35 @@ fn port_parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
     match expression {
         Some(RefNode::ConstantParamExpression(_)) => true,
         _ => false,
+    }
+}
+
+fn port_parameter_check_syntax(
+    datatype: &Option<SvDataType>,
+    signedness: &Option<SvSignedness>,
+    packed_dimensions: &Vec<SvPackedDimension>,
+) {
+    if !packed_dimensions.is_empty() {
+        match datatype {
+            Some(SvDataType::Integer) => {
+                panic!("Cannot combine packed dimensions with an integer!")
+            }
+            Some(SvDataType::Real) => panic!("Cannot combine packed dimensions with a real!"),
+            Some(SvDataType::String) => panic!("Cannot combine packed dimensions with a string!"),
+            Some(SvDataType::Time) => panic!("Cannot combine packed dimensions with time!"),
+            _ => (),
+        }
+    }
+
+    match signedness {
+        Some(SvSignedness::Signed) | Some(SvSignedness::Unsigned) => match datatype {
+            Some(SvDataType::Real) => panic!("Reals cannot have signedness!"),
+            Some(SvDataType::String) => panic!("Strings cannot have signedness!"),
+            Some(SvDataType::Time) => panic!("Time cannot have signedness!"),
+            _ => (),
+        },
+
+        _ => (),
     }
 }
 
@@ -183,8 +216,13 @@ fn port_parameter_datatype_ansi(
                             return (Some(SvDataType::Unsupported), SvParamStatus::Overridable)
                         }
                         _ => {
-                            let implicit_type =
-                                unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral);
+                            let implicit_type = unwrap_node!(
+                                p,
+                                Number,
+                                TimeLiteral,
+                                UnbasedUnsizedLiteral,
+                                StringLiteral
+                            );
                             match implicit_type {
                                 Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
                                     return (Some(SvDataType::Integer), SvParamStatus::Overridable)
@@ -233,12 +271,13 @@ fn port_parameter_signedness_ansi(
     }
 
     match datatype {
-        Some(SvDataType::Class) | Some(SvDataType::String) | Some(SvDataType::Real) => {
-            match datatype_status {
-                SvParamStatus::Overridable => return (None, SvParamStatus::Overridable),
-                SvParamStatus::Fixed => return (None, SvParamStatus::Fixed),
-            }
-        }
+        Some(SvDataType::Class)
+        | Some(SvDataType::String)
+        | Some(SvDataType::Real)
+        | Some(SvDataType::Time) => match datatype_status {
+            SvParamStatus::Overridable => return (None, SvParamStatus::Overridable),
+            SvParamStatus::Fixed => return (None, SvParamStatus::Fixed),
+        },
 
         Some(SvDataType::Shortint)
         | Some(SvDataType::Int)
@@ -483,7 +522,7 @@ fn port_signedness_ansi(
     datatype: &SvDataType,
 ) -> Option<SvSignedness> {
     match datatype {
-        SvDataType::Class | SvDataType::String | SvDataType::Real => None,
+        SvDataType::Class | SvDataType::String | SvDataType::Real | SvDataType::Time => None,
         _ => {
             let signedness = unwrap_node!(m, Signing);
             match signedness {
