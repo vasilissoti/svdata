@@ -54,7 +54,7 @@ pub fn port_parameter_declaration_ansi(
     common_data: RefNode,
     param_type: &SvParamType,
 ) -> SvParameter {
-    let found_assignment = port_parameter_check_default(p);
+    let found_assignment = port_parameter_check_default_ansi(p);
     let (param_datatype, param_datatype_status) =
         port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
     let (param_signedness, param_signedness_status) = port_parameter_signedness_ansi(
@@ -67,8 +67,7 @@ pub fn port_parameter_declaration_ansi(
     );
 
     let ret = SvParameter {
-        identifier: port_parameter_identifier(p, syntax_tree),
-        value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
+        identifier: port_parameter_identifier_ansi(p, syntax_tree),
         paramtype: param_type.clone(),
         datatype: param_datatype.clone(),
         datatype_status: param_datatype_status.clone(),
@@ -77,14 +76,15 @@ pub fn port_parameter_declaration_ansi(
         signedness_status: param_signedness_status,
         packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
+        value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
     };
 
-    port_parameter_check_syntax(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
+    port_parameter_syntax_ansi(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
 
     ret
 }
 
-fn port_parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
+fn port_parameter_check_default_ansi(node: &sv_parser::ParamAssignment) -> bool {
     let expression = unwrap_node!(node, ConstantParamExpression);
     match expression {
         Some(RefNode::ConstantParamExpression(_)) => true,
@@ -92,7 +92,7 @@ fn port_parameter_check_default(node: &sv_parser::ParamAssignment) -> bool {
     }
 }
 
-fn port_parameter_check_syntax(
+fn port_parameter_syntax_ansi(
     datatype: &Option<SvDataType>,
     signedness: &Option<SvSignedness>,
     packed_dimensions: &Vec<SvPackedDimension>,
@@ -121,15 +121,63 @@ fn port_parameter_check_syntax(
     }
 }
 
-fn port_parameter_resolver_needed(node: &sv_parser::ParamAssignment) -> bool {
-    let expression = unwrap_node!(node, ConstantFunctionCall, BinaryOperator);
+fn parameter_resolver_needed_ansi(node: &sv_parser::ParamAssignment) -> bool {
+    let expression = unwrap_node!(
+        node,
+        ConstantFunctionCall,
+        BinaryOperator,
+        ConstantConcatenation
+    );
     match expression {
         Some(_) => true,
         _ => false,
     }
 }
 
-fn port_parameter_identifier(
+fn parameter_datatype_resolver_ansi(node: &sv_parser::ParamAssignment) -> SvDataType {
+    let datatype = unwrap_node!(
+        node,
+        Number,
+        TimeLiteral,
+        UnbasedUnsizedLiteral,
+        StringLiteral
+    );
+    match datatype {
+        Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
+            let subtype = unwrap_node!(node, RealNumber);
+            match subtype {
+                Some(_) => return SvDataType::Real,
+                _ => return SvDataType::Integer,
+            }
+        }
+
+        Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
+            return SvDataType::Real;
+        }
+        Some(RefNode::TimeLiteral(_)) => {
+            let subtype = unwrap_node!(node, RealNumber, IntegralNumber);
+            match subtype {
+                Some(RefNode::RealNumber(_)) => return SvDataType::Real,
+                Some(RefNode::IntegralNumber(_)) => return SvDataType::Integer,
+                _ => return SvDataType::Time,
+            }
+        }
+        Some(RefNode::UnbasedUnsizedLiteral(_)) => {
+            let subtype = unwrap_node!(node, RealNumber, IntegralNumber);
+            match subtype {
+                Some(RefNode::RealNumber(_)) => return SvDataType::Real,
+                Some(RefNode::IntegralNumber(_)) => return SvDataType::Integer,
+                _ => return SvDataType::Bit,
+            }
+        }
+        Some(RefNode::StringLiteral(_)) => {
+            return SvDataType::String;
+        }
+        _ => unreachable!(),
+    }
+}
+
+fn port_parameter_identifier_ansi(
     node: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
 ) -> String {
@@ -218,8 +266,18 @@ fn port_parameter_datatype_ansi(
             },
             _ => {
                 if found_assignment {
-                    if port_parameter_resolver_needed(p) {
-                        return (Some(SvDataType::Unsupported), SvParamStatus::Overridable);
+                    if parameter_resolver_needed_ansi(p) {
+                        match unwrap_node!(p, ConstantFunctionCall, ConstantConcatenation) {
+                            Some(_) => {
+                                return (Some(SvDataType::Unsupported), SvParamStatus::Overridable)
+                            }
+                            _ => {
+                                return (
+                                    Some(parameter_datatype_resolver_ansi(p)),
+                                    SvParamStatus::Overridable,
+                                )
+                            }
+                        }
                     } else {
                         let implicit_type = unwrap_node!(
                             p,
@@ -291,7 +349,7 @@ fn port_parameter_signedness_ansi(
         Some(SvDataType::Integer) => {
             if !found_assignment {
                 return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
-            } else if port_parameter_resolver_needed(p) {
+            } else if parameter_resolver_needed_ansi(p) {
                 return (Some(SvSignedness::Unsupported), SvParamStatus::Overridable);
             } else {
                 let integral_type =
