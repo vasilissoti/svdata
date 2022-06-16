@@ -126,7 +126,8 @@ fn parameter_resolver_needed_ansi(node: &sv_parser::ParamAssignment) -> bool {
         node,
         ConstantFunctionCall,
         BinaryOperator,
-        ConstantConcatenation
+        ConstantConcatenation,
+        ConditionalExpression
     );
     match expression {
         Some(_) => true,
@@ -267,15 +268,15 @@ fn port_parameter_datatype_ansi(
             _ => {
                 if found_assignment {
                     if parameter_resolver_needed_ansi(p) {
-                        match unwrap_node!(p, ConstantFunctionCall, ConstantConcatenation) {
+                        match unwrap_node!(p, BinaryOperator) {
                             Some(_) => {
-                                return (Some(SvDataType::Unsupported), SvParamStatus::Overridable)
-                            }
-                            _ => {
                                 return (
                                     Some(parameter_datatype_resolver_ansi(p)),
                                     SvParamStatus::Overridable,
                                 )
+                            }
+                            _ => {
+                                return (Some(SvDataType::Unsupported), SvParamStatus::Overridable)
                             }
                         }
                     } else {
