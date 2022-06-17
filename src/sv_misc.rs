@@ -26,6 +26,19 @@ pub fn keyword(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
+pub fn symbol(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let symbol = match unwrap_node!(parent, Symbol) {
+        Some(RefNode::Symbol(x)) => Some(x.nodes.0),
+
+        _ => None,
+    };
+
+    match symbol {
+        Some(x) => Some(syntax_tree.get_str(&x).unwrap().to_string()),
+        _ => None,
+    }
+}
+
 pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let mut ret: String = String::new();
 

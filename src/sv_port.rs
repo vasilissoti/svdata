@@ -2,7 +2,7 @@ use crate::structures::{
     SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvParamStatus, SvParamType, SvParameter,
     SvPort, SvPortDirection, SvSignedness, SvUnpackedDimension,
 };
-use crate::sv_misc::{get_string, identifier, keyword};
+use crate::sv_misc::{get_string, identifier, keyword, symbol};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -178,6 +178,77 @@ fn parameter_datatype_resolver_ansi(node: &sv_parser::ParamAssignment) -> SvData
     }
 }
 
+fn parameter_signedness_resolver_ansi(
+    node: &sv_parser::ParamAssignment,
+    datatype: &Option<SvDataType>,
+    syntax_tree: &SyntaxTree,
+) -> Option<SvSignedness> {
+    match datatype {
+        Some(SvDataType::String) => return None,
+        _ => (),
+    }
+
+    for sub_node in node {
+        match sub_node {
+            RefNode::Number(sv_parser::Number::IntegralNumber(_)) => {
+                let integral_type = unwrap_node!(sub_node, BinaryNumber, HexNumber, OctalNumber);
+                match integral_type {
+                    Some(RefNode::BinaryNumber(_))
+                    | Some(RefNode::HexNumber(_))
+                    | Some(RefNode::OctalNumber(_)) => {
+                        let base =
+                            unwrap_node!(integral_type.unwrap(), BinaryBase, HexBase, OctalBase);
+                        let base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap();
+
+                        match base {
+                            Some(RefNode::BinaryBase(_)) => {
+                                if base_token != "'sb" {
+                                    return Some(SvSignedness::Unsigned);
+                                }
+                            }
+
+                            Some(RefNode::HexBase(_)) => {
+                                if base_token != "'sh" {
+                                    return Some(SvSignedness::Unsigned);
+                                }
+                            }
+
+                            Some(RefNode::OctalBase(_)) => {
+                                if base_token != "'so" {
+                                    return Some(SvSignedness::Unsigned);
+                                }
+                            }
+
+                            _ => unreachable!(),
+                        }
+                    }
+
+                    _ => (),
+                }
+            }
+
+            RefNode::Number(sv_parser::Number::RealNumber(_)) => {
+                return None;
+            }
+
+            RefNode::TimeLiteral(_) => {
+                return Some(SvSignedness::Unsigned);
+            }
+
+            RefNode::BinaryOperator(_) => {
+                let symbol_token = symbol(sub_node, syntax_tree).unwrap();
+                if symbol_token == ">>" {
+                    return Some(SvSignedness::Unsigned);
+                }
+            }
+
+            _ => (),
+        }
+    }
+
+    Some(SvSignedness::Signed)
+}
+
 fn port_parameter_identifier_ansi(
     node: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
@@ -351,7 +422,15 @@ fn port_parameter_signedness_ansi(
             if !found_assignment {
                 return (Some(SvSignedness::Signed), SvParamStatus::Overridable);
             } else if parameter_resolver_needed_ansi(p) {
-                return (Some(SvSignedness::Unsupported), SvParamStatus::Overridable);
+                match unwrap_node!(p, BinaryOperator) {
+                    Some(_) => {
+                        return (
+                            parameter_signedness_resolver_ansi(p, datatype, syntax_tree),
+                            SvParamStatus::Overridable,
+                        )
+                    }
+                    _ => return (Some(SvSignedness::Unsupported), SvParamStatus::Overridable),
+                }
             } else {
                 let integral_type =
                     unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
