@@ -3,7 +3,7 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        value: "8'sb10101010"
+        value: "8'sb10101010 + 6'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_status: Overridable
@@ -13,43 +13,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
-        value: "4'b1000"
-        paramtype: Parameter
-        datatype: Logic
-        datatype_status: Fixed
-        classid: ~
-        signedness: Signed
-        signedness_status: Fixed
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions: []
-      - identifier: c
-        value: ~
-        paramtype: Parameter
-        datatype: Logic
-        datatype_status: Fixed
-        classid: ~
-        signedness: Signed
-        signedness_status: Fixed
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions:
-          - - "4"
-            - "0"
-      - identifier: d
-        value: ~
-        paramtype: Parameter
-        datatype: Class
-        datatype_status: Fixed
-        classid: my_struct
-        signedness: ~
-        signedness_status: Fixed
-        packed_dimensions: []
-        unpacked_dimensions: []
-      - identifier: e
-        value: "7.5"
+        value: "4'b1000 + 3.5 -2"
         paramtype: Parameter
         datatype: Real
         datatype_status: Overridable
@@ -58,8 +22,8 @@ modules:
         signedness_status: Overridable
         packed_dimensions: []
         unpacked_dimensions: []
-      - identifier: f
-        value: "5"
+      - identifier: c
+        value: "-2 + 3 + 5 + 8'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_status: Overridable
@@ -68,10 +32,20 @@ modules:
         signedness_status: Overridable
         packed_dimensions: []
         unpacked_dimensions: []
-      - identifier: g
-        value: "\"hello\""
+      - identifier: e
+        value: "-2 + 3 + 5 + 8'b10101010"
         paramtype: Parameter
-        datatype: String
+        datatype: Integer
+        datatype_status: Overridable
+        classid: ~
+        signedness: Unsigned
+        signedness_status: Overridable
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: f
+        value: "-2.5 + 3.5 + 4.5"
+        paramtype: Parameter
+        datatype: Real
         datatype_status: Overridable
         classid: ~
         signedness: ~
@@ -79,5 +53,5 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
     ports: []
-    filepath: testcases/sv/ansi_port_parameter_keyword.sv
+    filepath: testcases/sv/parameter_resolver_binary_operations0.sv
 packages: []

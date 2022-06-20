@@ -67,4 +67,15 @@ Module:
     SignednessStatus: Overridable
     PackedDimensions: []
     UnpackedDimensions: []
+  Parameter: 
+    Identifier: g
+    Value: "hello"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeStatus: Overridable
+    ClassIdentifier: None
+    Signedness: None
+    SignednessStatus: Overridable
+    PackedDimensions: []
+    UnpackedDimensions: []
 

@@ -77,6 +77,18 @@
           "signedness_status": "Overridable",
           "packed_dimensions": [],
           "unpacked_dimensions": []
+        },
+        {
+          "identifier": "g",
+          "value": "\"hello\"",
+          "paramtype": "Parameter",
+          "datatype": "String",
+          "datatype_status": "Fixed",
+          "classid": null,
+          "signedness": null,
+          "signedness_status": "Fixed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         }
       ],
       "ports": [],

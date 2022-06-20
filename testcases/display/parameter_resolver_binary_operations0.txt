@@ -1,9 +1,9 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/ansi_port_parameter_keyword.sv
+  Filepath: testcases/sv/parameter_resolver_binary_operations0.sv
   Parameter: 
     Identifier: a
-    Value: 8'sb10101010
+    Value: 8'sb10101010 + 6'sb10101010
     ParameterType: Parameter
     DataType: Integer
     DataTypeStatus: Overridable
@@ -14,40 +14,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: b
-    Value: 4'b1000
-    ParameterType: Parameter
-    DataType: Logic
-    DataTypeStatus: Fixed
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessStatus: Fixed
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: []
-  Parameter: 
-    Identifier: c
-    Value: None
-    ParameterType: Parameter
-    DataType: Logic
-    DataTypeStatus: Fixed
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessStatus: Fixed
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: [("4", "0")]
-  Parameter: 
-    Identifier: d
-    Value: None
-    ParameterType: Parameter
-    DataType: Class
-    DataTypeStatus: Fixed
-    ClassIdentifier: my_struct
-    Signedness: None
-    SignednessStatus: Fixed
-    PackedDimensions: []
-    UnpackedDimensions: []
-  Parameter: 
-    Identifier: e
-    Value: 7.5
+    Value: 4'b1000 + 3.5 -2
     ParameterType: Parameter
     DataType: Real
     DataTypeStatus: Overridable
@@ -57,8 +24,8 @@ Module:
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
-    Identifier: f
-    Value: 5
+    Identifier: c
+    Value: -2 + 3 + 5 + 8'sb10101010
     ParameterType: Parameter
     DataType: Integer
     DataTypeStatus: Overridable
@@ -68,10 +35,21 @@ Module:
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
-    Identifier: g
-    Value: "hello"
+    Identifier: e
+    Value: -2 + 3 + 5 + 8'b10101010
     ParameterType: Parameter
-    DataType: String
+    DataType: Integer
+    DataTypeStatus: Overridable
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessStatus: Overridable
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: f
+    Value: -2.5 + 3.5 + 4.5
+    ParameterType: Parameter
+    DataType: Real
     DataTypeStatus: Overridable
     ClassIdentifier: None
     Signedness: None

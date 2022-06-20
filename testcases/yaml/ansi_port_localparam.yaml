@@ -68,6 +68,16 @@ modules:
         signedness_status: Overridable
         packed_dimensions: []
         unpacked_dimensions: []
+      - identifier: g
+        value: "\"hello\""
+        paramtype: LocalParam
+        datatype: String
+        datatype_status: Overridable
+        classid: ~
+        signedness: ~
+        signedness_status: Overridable
+        packed_dimensions: []
+        unpacked_dimensions: []
     ports: []
     filepath: testcases/sv/ansi_port_localparam.sv
 packages: []
