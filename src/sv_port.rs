@@ -238,10 +238,9 @@ fn parameter_signedness_resolver_ansi(
             RefNode::BinaryOperator(_) => {
                 let symbol_token = symbol(sub_node, syntax_tree).unwrap();
                 match symbol_token.as_str() {
-                    "&" | "~&" | "|" | "~|" | "^" | "~^" | "<" | "<=" | ">" | ">=" | "==" | "=!" =>
-                        return Some(SvSignedness::Unsigned),
+                    "&" | "~&" | "|" | "~|" | "^" | "~^" | "<" | "<=" | ">" | ">=" | "=="
+                    | "=!" => return Some(SvSignedness::Unsigned),
                     _ => (),
-
                 }
             }
 
