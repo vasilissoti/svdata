@@ -8,7 +8,7 @@ Module:
     DataType: Integer
     DataTypeStatus: Overridable
     ClassIdentifier: None
-    Signedness: Unsigned
+    Signedness: Signed
     SignednessStatus: Overridable
     PackedDimensions: []
     UnpackedDimensions: []

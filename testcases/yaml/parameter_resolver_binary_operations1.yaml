@@ -8,7 +8,7 @@ modules:
         datatype: Integer
         datatype_status: Overridable
         classid: ~
-        signedness: Unsigned
+        signedness: Signed
         signedness_status: Overridable
         packed_dimensions: []
         unpacked_dimensions: []

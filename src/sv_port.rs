@@ -235,13 +235,6 @@ fn parameter_signedness_resolver_ansi(
                 return Some(SvSignedness::Unsigned);
             }
 
-            RefNode::BinaryOperator(_) => {
-                let symbol_token = symbol(sub_node, syntax_tree).unwrap();
-                if symbol_token == ">>" {
-                    return Some(SvSignedness::Unsigned);
-                }
-            }
-
             _ => (),
         }
     }
