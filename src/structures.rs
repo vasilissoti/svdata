@@ -23,7 +23,25 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
-    pub datatype: String,
+    pub value: Option<String>,
+    pub paramtype: SvParamType,
+    pub datatype: Option<SvDataType>,
+    pub datatype_status: SvParamStatus,
+    pub classid: Option<String>,
+    pub signedness: Option<SvSignedness>,
+    pub signedness_status: SvParamStatus,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvParamType {
+    Parameter,
+    LocalParam,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvParamStatus {
+    Overridable,
+    Fixed,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -46,6 +64,7 @@ pub enum SvDataKind {
 pub enum SvSignedness {
     Signed,
     Unsigned,
+    Unsupported,
     IMPLICIT,
 }
 
@@ -70,6 +89,7 @@ pub enum SvDataType {
     Class,
     TypeRef,
     String,
+    Unsupported,
     IMPLICIT,
 }
 
@@ -126,6 +146,10 @@ impl fmt::Display for SvModuleDeclaration {
             write!(f, "{}", port)?;
         }
 
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
+        }
+
         writeln!(f, "")
     }
 }
@@ -172,6 +196,50 @@ impl fmt::Display for SvPort {
             }
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
+
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvParameter {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "  Parameter: ")?;
+        writeln!(f, "    Identifier: {}", self.identifier)?;
+        match self.value.clone() {
+            None => {
+                writeln!(f, "    Value: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Value: {}", x)?;
+            }
+        }
+        writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
+        match self.datatype.clone() {
+            None => {
+                writeln!(f, "    DataType: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    DataType: {:?}", x)?;
+            }
+        }
+        writeln!(f, "    DataTypeStatus: {:?}", self.datatype_status)?;
+        match self.classid.clone() {
+            None => {
+                writeln!(f, "    ClassIdentifier: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    ClassIdentifier: {}", x)?;
+            }
+        }
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)?;
+            }
+        }
+        writeln!(f, "    SignednessStatus: {:?}", self.signedness_status)?;
 
         write!(f, "")
     }

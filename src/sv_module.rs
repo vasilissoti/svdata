@@ -1,6 +1,6 @@
-use crate::structures::{SvModuleDeclaration, SvParameter, SvPort};
+use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
 use crate::sv_misc::identifier;
-use crate::sv_port::port_declaration_ansi;
+use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
@@ -19,9 +19,40 @@ pub fn module_declaration_ansi(
 
     for node in m {
         match node {
-            RefNode::ParameterDeclarationParam(p) => ret
-                .parameters
-                .push(parse_module_declaration_parameter(p, syntax_tree)),
+            RefNode::ParameterPortDeclaration(p) => {
+                let param_type = unwrap_node!(
+                    p,
+                    ParameterDeclarationParam,
+                    LocalParameterDeclarationParam,
+                    ParameterPortDeclarationParamList
+                );
+
+                let common_data =
+                    unwrap_node!(param_type.clone().unwrap(), DataType, DataTypeOrImplicit)
+                        .unwrap();
+                let a = unwrap_node!(param_type.clone().unwrap(), ListOfParamAssignments);
+
+                let param_type = match param_type {
+                    Some(RefNode::LocalParameterDeclarationParam(_)) => SvParamType::LocalParam,
+                    Some(RefNode::ParameterDeclarationParam(_))
+                    | Some(RefNode::ParameterPortDeclarationParamList(_)) => SvParamType::Parameter,
+                    _ => unreachable!(),
+                };
+
+                for param in a.unwrap() {
+                    match param {
+                        RefNode::ParamAssignment(x) => {
+                            ret.parameters.push(port_parameter_declaration_ansi(
+                                x,
+                                syntax_tree,
+                                common_data.clone(),
+                                &param_type,
+                            ))
+                        }
+                        _ => (),
+                    }
+                }
+            }
             RefNode::AnsiPortDeclaration(p) => {
                 let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());
@@ -51,16 +82,4 @@ pub fn module_declaration_nonansi(
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree)
-}
-
-fn parse_module_declaration_parameter(
-    p: &sv_parser::ParameterDeclarationParam,
-    _syntax_tree: &SyntaxTree,
-) -> SvParameter {
-    println!("parameter={:?}", p);
-    // TODO
-    SvParameter {
-        identifier: String::from("foo"),
-        datatype: String::from("bar"),
-    }
 }

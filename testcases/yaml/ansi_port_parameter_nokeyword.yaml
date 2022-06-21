@@ -1,0 +1,47 @@
+---
+modules:
+  - identifier: TestModule
+    parameters:
+      - identifier: a
+        value: "8'sb10101010"
+        paramtype: Parameter
+        datatype: Integer
+        datatype_status: Fixed
+        classid: ~
+        signedness: Signed
+        signedness_status: Overridable
+      - identifier: b
+        value: "4'b1000"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_status: Fixed
+        classid: ~
+        signedness: Signed
+        signedness_status: Fixed
+      - identifier: c
+        value: ~
+        paramtype: Parameter
+        datatype: Logic
+        datatype_status: Fixed
+        classid: ~
+        signedness: Signed
+        signedness_status: Fixed
+      - identifier: e
+        value: "7.5"
+        paramtype: Parameter
+        datatype: Real
+        datatype_status: Fixed
+        classid: ~
+        signedness: ~
+        signedness_status: Fixed
+      - identifier: f
+        value: "5"
+        paramtype: Parameter
+        datatype: Integer
+        datatype_status: Fixed
+        classid: ~
+        signedness: Signed
+        signedness_status: Overridable
+    ports: []
+    filepath: testcases/sv/ansi_port_parameter_nokeyword.sv
+packages: []
