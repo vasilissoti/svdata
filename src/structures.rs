@@ -30,6 +30,8 @@ pub struct SvParameter {
     pub classid: Option<String>,
     pub signedness: Option<SvSignedness>,
     pub signedness_status: SvParamStatus,
+    pub packed_dimensions: Vec<SvPackedDimension>,
+    pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -240,6 +242,16 @@ impl fmt::Display for SvParameter {
             }
         }
         writeln!(f, "    SignednessStatus: {:?}", self.signedness_status)?;
+        writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
+        let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
+
+        for (u, l) in self.unpacked_dimensions.clone() {
+            match l {
+                Some(x) => unpackeddim_display.push((u.clone(), x.clone())),
+                None => unpackeddim_display.push((u.clone(), String::from("None"))),
+            }
+        }
+        writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
 
         write!(f, "")
     }

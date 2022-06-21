@@ -11,7 +11,9 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Overridable"
+          "signedness_status": "Overridable",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "b",
@@ -21,7 +23,14 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Fixed"
+          "signedness_status": "Fixed",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "c",
@@ -31,7 +40,19 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Fixed"
+          "signedness_status": "Fixed",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "4",
+              "0"
+            ]
+          ]
         },
         {
           "identifier": "e",
@@ -41,7 +62,9 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": null,
-          "signedness_status": "Fixed"
+          "signedness_status": "Fixed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         },
         {
           "identifier": "f",
@@ -51,7 +74,9 @@
           "datatype_status": "Fixed",
           "classid": null,
           "signedness": "Signed",
-          "signedness_status": "Overridable"
+          "signedness_status": "Overridable",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
         }
       ],
       "ports": [],
