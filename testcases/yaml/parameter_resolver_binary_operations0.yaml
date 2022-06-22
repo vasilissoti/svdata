@@ -5,7 +5,7 @@ modules:
       - identifier: a
         expression: "8'sb10101010 + 6'sb10101010"
         paramtype: Parameter
-        datatype: Integer
+        datatype: Logic
         datatype_overridable: true
         classid: ~
         signedness: Signed
@@ -25,7 +25,7 @@ modules:
       - identifier: c
         expression: "-2 + 3 + 5 + 8'sb10101010"
         paramtype: Parameter
-        datatype: Integer
+        datatype: Logic
         datatype_overridable: true
         classid: ~
         signedness: Signed
@@ -35,7 +35,7 @@ modules:
       - identifier: e
         expression: "-2 + 3 + 5 + 8'b10101010"
         paramtype: Parameter
-        datatype: Integer
+        datatype: Logic
         datatype_overridable: true
         classid: ~
         signedness: Unsigned

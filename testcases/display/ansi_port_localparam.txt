@@ -5,7 +5,7 @@ Module:
     Identifier: a
     Value: 8'sb10101010
     ParameterType: LocalParam
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -60,7 +60,7 @@ Module:
     Identifier: f
     Value: 5
     ParameterType: LocalParam
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed

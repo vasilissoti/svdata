@@ -5,7 +5,7 @@ Module:
     Identifier: a
     Value: 8'sb10101010 >> 1
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -16,7 +16,7 @@ Module:
     Identifier: b
     Value: 9'sb10101010 << 1
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -27,7 +27,7 @@ Module:
     Identifier: c
     Value: 9'sb10101010 <<< 1
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -38,7 +38,7 @@ Module:
     Identifier: e
     Value: 9'sb10101010 >>> 1
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -49,7 +49,7 @@ Module:
     Identifier: e
     Value: 9'b10101010 >>> 1
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Unsigned

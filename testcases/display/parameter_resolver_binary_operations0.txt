@@ -5,7 +5,7 @@ Module:
     Identifier: a
     Value: 8'sb10101010 + 6'sb10101010
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -27,7 +27,7 @@ Module:
     Identifier: c
     Value: -2 + 3 + 5 + 8'sb10101010
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
@@ -38,7 +38,7 @@ Module:
     Identifier: e
     Value: -2 + 3 + 5 + 8'b10101010
     ParameterType: Parameter
-    DataType: Integer
+    DataType: Logic
     DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Unsigned
