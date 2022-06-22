@@ -23,7 +23,7 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
-    pub value: Option<String>,
+    pub expression: Option<String>,
     pub paramtype: SvParamType,
     pub datatype: Option<SvDataType>,
     pub datatype_overridable: bool,

@@ -76,7 +76,7 @@ pub fn port_parameter_declaration_ansi(
         signedness_overridable: param_signedness_status,
         packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
-        value: port_parameter_value_ansi(p, syntax_tree, found_assignment),
+        expression: port_parameter_value_ansi(p, syntax_tree, found_assignment),
     };
 
     port_parameter_syntax_ansi(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
