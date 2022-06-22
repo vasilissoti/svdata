@@ -6,10 +6,10 @@ Module:
     Value: 8'sb10101010
     ParameterType: LocalParam
     DataType: Integer
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -17,10 +17,10 @@ Module:
     Value: 4'b1000
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: Fixed
+    DataTypeStatus: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Fixed
+    SignednessStatus: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
   Parameter: 
@@ -28,10 +28,10 @@ Module:
     Value: None
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: Fixed
+    DataTypeStatus: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Fixed
+    SignednessStatus: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
   Parameter: 
@@ -39,10 +39,10 @@ Module:
     Value: None
     ParameterType: LocalParam
     DataType: Class
-    DataTypeStatus: Fixed
+    DataTypeStatus: false
     ClassIdentifier: my_struct
     Signedness: None
-    SignednessStatus: Fixed
+    SignednessStatus: false
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -50,10 +50,10 @@ Module:
     Value: 7.5
     ParameterType: LocalParam
     DataType: Real
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -61,10 +61,10 @@ Module:
     Value: 5
     ParameterType: LocalParam
     DataType: Integer
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -72,10 +72,10 @@ Module:
     Value: "hello"
     ParameterType: LocalParam
     DataType: String
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
 

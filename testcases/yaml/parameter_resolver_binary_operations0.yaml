@@ -6,50 +6,50 @@ modules:
         value: "8'sb10101010 + 6'sb10101010"
         paramtype: Parameter
         datatype: Integer
-        datatype_status: Overridable
+        datatype_overridable: true
         classid: ~
         signedness: Signed
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
         value: "4'b1000 + 3.5 -2"
         paramtype: Parameter
         datatype: Real
-        datatype_status: Overridable
+        datatype_overridable: true
         classid: ~
         signedness: ~
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: c
         value: "-2 + 3 + 5 + 8'sb10101010"
         paramtype: Parameter
         datatype: Integer
-        datatype_status: Overridable
+        datatype_overridable: true
         classid: ~
         signedness: Signed
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
         value: "-2 + 3 + 5 + 8'b10101010"
         paramtype: Parameter
         datatype: Integer
-        datatype_status: Overridable
+        datatype_overridable: true
         classid: ~
         signedness: Unsigned
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: f
         value: "-2.5 + 3.5 + 4.5"
         paramtype: Parameter
         datatype: Real
-        datatype_status: Overridable
+        datatype_overridable: true
         classid: ~
         signedness: ~
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
     ports: []

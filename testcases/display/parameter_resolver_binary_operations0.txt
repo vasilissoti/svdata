@@ -6,10 +6,10 @@ Module:
     Value: 8'sb10101010 + 6'sb10101010
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -17,10 +17,10 @@ Module:
     Value: 4'b1000 + 3.5 -2
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -28,10 +28,10 @@ Module:
     Value: -2 + 3 + 5 + 8'sb10101010
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -39,10 +39,10 @@ Module:
     Value: -2 + 3 + 5 + 8'b10101010
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: Unsigned
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -50,10 +50,10 @@ Module:
     Value: -2.5 + 3.5 + 4.5
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: Overridable
+    DataTypeStatus: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: Overridable
+    SignednessStatus: true
     PackedDimensions: []
     UnpackedDimensions: []
 
