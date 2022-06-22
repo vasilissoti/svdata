@@ -5,7 +5,7 @@
       "parameters": [
         {
           "identifier": "a",
-          "value": "8'sb10101010 >> 1",
+          "expression": "8'sb10101010 >> 1",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -17,7 +17,7 @@
         },
         {
           "identifier": "b",
-          "value": "9'sb10101010 << 1",
+          "expression": "9'sb10101010 << 1",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -29,7 +29,7 @@
         },
         {
           "identifier": "c",
-          "value": "9'sb10101010 <<< 1",
+          "expression": "9'sb10101010 <<< 1",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -41,7 +41,7 @@
         },
         {
           "identifier": "e",
-          "value": "9'sb10101010 >>> 1",
+          "expression": "9'sb10101010 >>> 1",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -53,7 +53,7 @@
         },
         {
           "identifier": "e",
-          "value": "9'b10101010 >>> 1",
+          "expression": "9'b10101010 >>> 1",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": true,

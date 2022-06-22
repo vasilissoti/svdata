@@ -201,7 +201,7 @@ impl fmt::Display for SvParameter {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Parameter: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
-        match self.value.clone() {
+        match self.expression.clone() {
             None => {
                 writeln!(f, "    Value: None")?;
             }

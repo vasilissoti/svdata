@@ -3,7 +3,7 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        value: "8'sb10101010"
+        expression: "8'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: false
@@ -13,7 +13,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
-        value: "4'b1000"
+        expression: "4'b1000"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: false
@@ -25,7 +25,7 @@ modules:
             - "0"
         unpacked_dimensions: []
       - identifier: c
-        value: ~
+        expression: ~
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: false
@@ -39,7 +39,7 @@ modules:
           - - "4"
             - "0"
       - identifier: e
-        value: "7.5"
+        expression: "7.5"
         paramtype: Parameter
         datatype: Real
         datatype_overridable: false
@@ -49,7 +49,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: f
-        value: "5"
+        expression: "5"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: false
@@ -59,7 +59,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: g
-        value: "\"hello\""
+        expression: "\"hello\""
         paramtype: Parameter
         datatype: String
         datatype_overridable: false

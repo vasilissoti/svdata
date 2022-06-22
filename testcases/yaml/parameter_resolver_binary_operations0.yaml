@@ -3,7 +3,7 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        value: "8'sb10101010 + 6'sb10101010"
+        expression: "8'sb10101010 + 6'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: true
@@ -13,7 +13,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
-        value: "4'b1000 + 3.5 -2"
+        expression: "4'b1000 + 3.5 -2"
         paramtype: Parameter
         datatype: Real
         datatype_overridable: true
@@ -23,7 +23,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: c
-        value: "-2 + 3 + 5 + 8'sb10101010"
+        expression: "-2 + 3 + 5 + 8'sb10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: true
@@ -33,7 +33,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
-        value: "-2 + 3 + 5 + 8'b10101010"
+        expression: "-2 + 3 + 5 + 8'b10101010"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: true
@@ -43,7 +43,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: f
-        value: "-2.5 + 3.5 + 4.5"
+        expression: "-2.5 + 3.5 + 4.5"
         paramtype: Parameter
         datatype: Real
         datatype_overridable: true

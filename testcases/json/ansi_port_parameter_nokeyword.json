@@ -5,7 +5,7 @@
       "parameters": [
         {
           "identifier": "a",
-          "value": "8'sb10101010",
+          "expression": "8'sb10101010",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": false,
@@ -17,7 +17,7 @@
         },
         {
           "identifier": "b",
-          "value": "4'b1000",
+          "expression": "4'b1000",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": false,
@@ -34,7 +34,7 @@
         },
         {
           "identifier": "c",
-          "value": null,
+          "expression": null,
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": false,
@@ -56,7 +56,7 @@
         },
         {
           "identifier": "e",
-          "value": "7.5",
+          "expression": "7.5",
           "paramtype": "Parameter",
           "datatype": "Real",
           "datatype_overridable": false,
@@ -68,7 +68,7 @@
         },
         {
           "identifier": "f",
-          "value": "5",
+          "expression": "5",
           "paramtype": "Parameter",
           "datatype": "Integer",
           "datatype_overridable": false,
@@ -80,7 +80,7 @@
         },
         {
           "identifier": "g",
-          "value": "\"hello\"",
+          "expression": "\"hello\"",
           "paramtype": "Parameter",
           "datatype": "String",
           "datatype_overridable": false,

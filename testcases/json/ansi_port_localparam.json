@@ -5,7 +5,7 @@
       "parameters": [
         {
           "identifier": "a",
-          "value": "8'sb10101010",
+          "expression": "8'sb10101010",
           "paramtype": "LocalParam",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -17,7 +17,7 @@
         },
         {
           "identifier": "b",
-          "value": "4'b1000",
+          "expression": "4'b1000",
           "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
@@ -34,7 +34,7 @@
         },
         {
           "identifier": "c",
-          "value": null,
+          "expression": null,
           "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
@@ -56,7 +56,7 @@
         },
         {
           "identifier": "d",
-          "value": null,
+          "expression": null,
           "paramtype": "LocalParam",
           "datatype": "Class",
           "datatype_overridable": false,
@@ -68,7 +68,7 @@
         },
         {
           "identifier": "e",
-          "value": "7.5",
+          "expression": "7.5",
           "paramtype": "LocalParam",
           "datatype": "Real",
           "datatype_overridable": true,
@@ -80,7 +80,7 @@
         },
         {
           "identifier": "f",
-          "value": "5",
+          "expression": "5",
           "paramtype": "LocalParam",
           "datatype": "Integer",
           "datatype_overridable": true,
@@ -92,7 +92,7 @@
         },
         {
           "identifier": "g",
-          "value": "\"hello\"",
+          "expression": "\"hello\"",
           "paramtype": "LocalParam",
           "datatype": "String",
           "datatype_overridable": true,
