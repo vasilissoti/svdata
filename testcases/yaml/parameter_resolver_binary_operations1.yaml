@@ -10,6 +10,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        bit_num: 404
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
@@ -20,6 +21,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        bit_num: 404
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: c
@@ -30,6 +32,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        bit_num: 404
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
@@ -40,6 +43,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        bit_num: 404
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: e
@@ -50,6 +54,7 @@ modules:
         classid: ~
         signedness: Unsigned
         signedness_overridable: true
+        bit_num: 404
         packed_dimensions: []
         unpacked_dimensions: []
     ports: []

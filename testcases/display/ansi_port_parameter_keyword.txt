@@ -10,6 +10,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 8
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -21,6 +22,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: false
+    BitNum: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
   Parameter: 
@@ -32,6 +34,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: false
+    BitNum: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
   Parameter: 
@@ -43,6 +46,7 @@ Module:
     ClassIdentifier: my_struct
     Signedness: None
     SignednessStatus: false
+    BitNum: None
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -54,6 +58,7 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessStatus: true
+    BitNum: 64
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -65,6 +70,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 32
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -76,6 +82,7 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessStatus: true
+    BitNum: 40
     PackedDimensions: []
     UnpackedDimensions: []
 

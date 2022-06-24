@@ -10,6 +10,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -21,6 +22,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -32,6 +34,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -43,6 +46,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessStatus: true
+    BitNum: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -54,6 +58,7 @@ Module:
     ClassIdentifier: None
     Signedness: Unsigned
     SignednessStatus: true
+    BitNum: 404
     PackedDimensions: []
     UnpackedDimensions: []
 
