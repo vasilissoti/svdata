@@ -218,7 +218,11 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    DataType: {:?}", x)?;
             }
         }
-        writeln!(f, "    DataTypeStatus: {:?}", self.datatype_overridable)?;
+        writeln!(
+            f,
+            "    DataTypeOverridable: {:?}",
+            self.datatype_overridable
+        )?;
         match self.classid.clone() {
             None => {
                 writeln!(f, "    ClassIdentifier: None")?;
@@ -235,7 +239,11 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
-        writeln!(f, "    SignednessStatus: {:?}", self.signedness_overridable)?;
+        writeln!(
+            f,
+            "    SignednessOverridable: {:?}",
+            self.signedness_overridable
+        )?;
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
         let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 

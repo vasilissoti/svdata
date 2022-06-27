@@ -6,10 +6,10 @@ Module:
     Expression: 8'sb10101010 + 6'sb10101010
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -17,10 +17,10 @@ Module:
     Expression: 4'b1000 + 3.5 -2
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: true
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -28,10 +28,10 @@ Module:
     Expression: -2 + 3 + 5 + 8'sb10101010
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -39,10 +39,10 @@ Module:
     Expression: -2 + 3 + 5 + 8'b10101010
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Unsigned
-    SignednessStatus: true
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -50,10 +50,10 @@ Module:
     Expression: -2.5 + 3.5 + 4.5
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: true
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
 
