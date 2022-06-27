@@ -205,8 +205,13 @@ fn parameter_signedness_resolver_ansi(
                     Some(RefNode::BinaryNumber(_))
                     | Some(RefNode::HexNumber(_))
                     | Some(RefNode::OctalNumber(_)) => {
-                        let base =
-                            unwrap_node!(integral_type.unwrap(), BinaryBase, HexBase, OctalBase);
+                        let base = unwrap_node!(
+                            integral_type.unwrap(),
+                            BinaryBase,
+                            HexBase,
+                            OctalBase,
+                            DecimalNumberBaseUnsigned
+                        );
                         let base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap();
 
                         match base {
@@ -224,6 +229,12 @@ fn parameter_signedness_resolver_ansi(
 
                             Some(RefNode::OctalBase(_)) => {
                                 if base_token != "'so" {
+                                    return Some(SvSignedness::Unsigned);
+                                }
+                            }
+
+                            Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
+                                if base_token != "'sd" {
                                     return Some(SvSignedness::Unsigned);
                                 }
                             }
@@ -441,15 +452,16 @@ fn port_parameter_signedness_ansi(
                     let integral_type =
                         unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
                     match integral_type {
-                        Some(RefNode::DecimalNumber(_)) => {
-                            return (Some(SvSignedness::Signed), true)
-                        }
+                        Some(RefNode::DecimalNumber(sv_parser::DecimalNumber::UnsignedNumber(
+                            _,
+                        ))) => return (Some(SvSignedness::Signed), true),
                         _ => {
                             let base = unwrap_node!(
                                 integral_type.unwrap(),
                                 BinaryBase,
                                 HexBase,
-                                OctalBase
+                                OctalBase,
+                                DecimalNumberBaseUnsigned
                             );
                             let base_token =
                                 get_string(base.clone().unwrap(), syntax_tree).unwrap();
@@ -473,6 +485,14 @@ fn port_parameter_signedness_ansi(
 
                                 Some(RefNode::OctalBase(_)) => {
                                     if base_token == "'so" {
+                                        return (Some(SvSignedness::Signed), true);
+                                    } else {
+                                        return (Some(SvSignedness::Unsigned), true);
+                                    }
+                                }
+
+                                Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
+                                    if base_token == "'sd" {
                                         return (Some(SvSignedness::Signed), true);
                                     } else {
                                         return (Some(SvSignedness::Unsigned), true);
@@ -568,7 +588,7 @@ fn port_parameter_bits_ansi(
 
                 Some(SvDataType::Reg) | Some(SvDataType::Logic) => {
                     if !found_assignment {
-                        return Some(0);
+                        return None;
                     } else {
                         let fixed_size = unwrap_node!(p, Size);
 
@@ -583,7 +603,23 @@ fn port_parameter_bits_ansi(
                                 return Some(ret);
                             }
 
-                            _ => return Some(32),
+                            _ => {
+                                return Some(32);
+
+                                // let integral_type =
+                                // unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
+
+                                // match integral_type {
+
+                                //     Some(RefNode::DecimalNumber(_)) => {
+                                //         let base = unwrap_node!(integral_type, UnsignedNumber, DecimalNumberBaseUnsigned);
+
+                                //         match base {
+
+                                //         }
+                                //     }
+                                // }
+                            }
                         }
                     }
                 }
