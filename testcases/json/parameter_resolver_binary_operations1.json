@@ -12,7 +12,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 404,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -25,7 +25,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 404,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -38,7 +38,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 404,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -51,7 +51,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 404,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -64,7 +64,7 @@
           "classid": null,
           "signedness": "Unsigned",
           "signedness_overridable": true,
-          "bit_num": 404,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         }

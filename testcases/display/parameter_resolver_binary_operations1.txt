@@ -6,11 +6,11 @@ Module:
     Expression: 8'sb10101010 >> 1
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 404
+    SignednessOverridable: true
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -18,11 +18,11 @@ Module:
     Expression: 9'sb10101010 << 1
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 404
+    SignednessOverridable: true
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -30,11 +30,11 @@ Module:
     Expression: 9'sb10101010 <<< 1
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 404
+    SignednessOverridable: true
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -42,11 +42,11 @@ Module:
     Expression: 9'sb10101010 >>> 1
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 404
+    SignednessOverridable: true
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -54,11 +54,11 @@ Module:
     Expression: 9'b10101010 >>> 1
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Unsigned
-    SignednessStatus: true
-    BitNum: 404
+    SignednessOverridable: true
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
 

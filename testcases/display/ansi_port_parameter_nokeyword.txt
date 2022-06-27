@@ -6,11 +6,11 @@ Module:
     Expression: 8'sb10101010
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 32
+    SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -18,11 +18,11 @@ Module:
     Expression: 4'b1000
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: false
-    BitNum: 4
+    SignednessOverridable: false
+    NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
   Parameter: 
@@ -30,11 +30,11 @@ Module:
     Expression: None
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: false
-    BitNum: 4
+    SignednessOverridable: false
+    NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
   Parameter: 
@@ -42,11 +42,11 @@ Module:
     Expression: 7.5
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: false
-    BitNum: 64
+    SignednessOverridable: false
+    NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -54,11 +54,11 @@ Module:
     Expression: 5
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 32
+    SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -66,11 +66,11 @@ Module:
     Expression: "hello"
     ParameterType: Parameter
     DataType: String
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: false
-    BitNum: 40
+    SignednessOverridable: false
+    NumBits: 40
     PackedDimensions: []
     UnpackedDimensions: []
 

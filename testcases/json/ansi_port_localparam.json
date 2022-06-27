@@ -12,7 +12,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 8,
+          "num_bits": 8,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -25,7 +25,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "bit_num": 4,
+          "num_bits": 4,
           "packed_dimensions": [
             [
               "3",
@@ -43,7 +43,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "bit_num": 4,
+          "num_bits": 4,
           "packed_dimensions": [
             [
               "3",
@@ -66,7 +66,7 @@
           "classid": "my_struct",
           "signedness": null,
           "signedness_overridable": false,
-          "bit_num": null,
+          "num_bits": null,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -79,7 +79,7 @@
           "classid": null,
           "signedness": null,
           "signedness_overridable": true,
-          "bit_num": 64,
+          "num_bits": 64,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -92,7 +92,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "bit_num": 32,
+          "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
@@ -105,7 +105,7 @@
           "classid": null,
           "signedness": null,
           "signedness_overridable": true,
-          "bit_num": 40,
+          "num_bits": 40,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         }

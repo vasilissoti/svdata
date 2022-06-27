@@ -6,11 +6,11 @@ Module:
     Expression: 8'sb10101010
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 8
+    SignednessOverridable: true
+    NumBits: 8
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -18,11 +18,11 @@ Module:
     Expression: 4'b1000
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: false
-    BitNum: 4
+    SignednessOverridable: false
+    NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
   Parameter: 
@@ -30,11 +30,11 @@ Module:
     Expression: None
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: false
-    BitNum: 4
+    SignednessOverridable: false
+    NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
   Parameter: 
@@ -42,11 +42,11 @@ Module:
     Expression: None
     ParameterType: LocalParam
     DataType: Class
-    DataTypeStatus: false
+    DataTypeOverridable: false
     ClassIdentifier: my_struct
     Signedness: None
-    SignednessStatus: false
-    BitNum: None
+    SignednessOverridable: false
+    NumBits: None
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -54,11 +54,11 @@ Module:
     Expression: 7.5
     ParameterType: LocalParam
     DataType: Real
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: true
-    BitNum: 64
+    SignednessOverridable: true
+    NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -66,11 +66,11 @@ Module:
     Expression: 5
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: true
-    BitNum: 32
+    SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
@@ -78,11 +78,11 @@ Module:
     Expression: "hello"
     ParameterType: LocalParam
     DataType: String
-    DataTypeStatus: true
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: true
-    BitNum: 40
+    SignednessOverridable: true
+    NumBits: 40
     PackedDimensions: []
     UnpackedDimensions: []
 

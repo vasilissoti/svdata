@@ -30,7 +30,7 @@ pub struct SvParameter {
     pub classid: Option<String>,
     pub signedness: Option<SvSignedness>,
     pub signedness_overridable: bool,
-    pub bit_num: Option<u64>,
+    pub num_bits: Option<u64>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
@@ -219,7 +219,11 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    DataType: {:?}", x)?;
             }
         }
-        writeln!(f, "    DataTypeStatus: {:?}", self.datatype_overridable)?;
+        writeln!(
+            f,
+            "    DataTypeOverridable: {:?}",
+            self.datatype_overridable
+        )?;
         match self.classid.clone() {
             None => {
                 writeln!(f, "    ClassIdentifier: None")?;
@@ -236,13 +240,17 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
-        writeln!(f, "    SignednessStatus: {:?}", self.signedness_overridable)?;
-        match self.bit_num.clone() {
+        writeln!(
+            f,
+            "    SignednessOverridable: {:?}",
+            self.signedness_overridable
+        )?;
+        match self.num_bits.clone() {
             None => {
-                writeln!(f, "    BitNum: None")?;
+                writeln!(f, "    NumBits: None")?;
             }
             Some(x) => {
-                writeln!(f, "    BitNum: {}", x)?;
+                writeln!(f, "    NumBits: {}", x)?;
             }
         }
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
