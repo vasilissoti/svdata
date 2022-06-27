@@ -203,10 +203,10 @@ impl fmt::Display for SvParameter {
         writeln!(f, "    Identifier: {}", self.identifier)?;
         match self.expression.clone() {
             None => {
-                writeln!(f, "    Value: None")?;
+                writeln!(f, "    Expression: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Value: {}", x)?;
+                writeln!(f, "    Expression: {}", x)?;
             }
         }
         writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
