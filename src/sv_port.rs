@@ -55,14 +55,14 @@ pub fn port_parameter_declaration_ansi(
     param_type: &SvParamType,
 ) -> SvParameter {
     let found_assignment = port_parameter_check_default_ansi(p);
-    let (param_datatype, param_datatype_status) =
+    let (param_datatype, param_datatype_overridable) =
         port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
-    let (param_signedness, param_signedness_status) = port_parameter_signedness_ansi(
+    let (param_signedness, param_signedness_overridable) = port_parameter_signedness_ansi(
         common_data.clone(),
         p,
         &param_datatype,
         found_assignment,
-        param_datatype_status.clone(),
+        param_datatype_overridable.clone(),
         syntax_tree,
     );
 
@@ -70,11 +70,11 @@ pub fn port_parameter_declaration_ansi(
         identifier: port_parameter_identifier_ansi(p, syntax_tree),
         paramtype: param_type.clone(),
         datatype: param_datatype.clone(),
-        datatype_overridable: param_datatype_status.clone(),
+        datatype_overridable: param_datatype_overridable.clone(),
         classid: port_parameter_classid_ansi(common_data.clone(), &param_datatype, syntax_tree),
         signedness: param_signedness.clone(),
-        signedness_overridable: param_signedness_status,
-        packed_dimensions: port_packeddim_ansi(common_data.clone(), syntax_tree),
+        signedness_overridable: param_signedness_overridable,
+        packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
         expression: port_parameter_value_ansi(p, syntax_tree, found_assignment),
         bit_num: port_parameter_bits_ansi(

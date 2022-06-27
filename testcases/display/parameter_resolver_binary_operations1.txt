@@ -3,7 +3,7 @@ Module:
   Filepath: testcases/sv/parameter_resolver_binary_operations1.sv
   Parameter: 
     Identifier: a
-    Value: 8'sb10101010 >> 1
+    Expression: 8'sb10101010 >> 1
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -15,7 +15,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: b
-    Value: 9'sb10101010 << 1
+    Expression: 9'sb10101010 << 1
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -27,7 +27,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: c
-    Value: 9'sb10101010 <<< 1
+    Expression: 9'sb10101010 <<< 1
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -39,7 +39,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: e
-    Value: 9'sb10101010 >>> 1
+    Expression: 9'sb10101010 >>> 1
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -51,7 +51,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: e
-    Value: 9'b10101010 >>> 1
+    Expression: 9'b10101010 >>> 1
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true

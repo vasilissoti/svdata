@@ -3,7 +3,7 @@ Module:
   Filepath: testcases/sv/ansi_port_parameter_keyword.sv
   Parameter: 
     Identifier: a
-    Value: 8'sb10101010
+    Expression: 8'sb10101010
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -15,7 +15,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: b
-    Value: 4'b1000
+    Expression: 4'b1000
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: false
@@ -27,7 +27,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: c
-    Value: None
+    Expression: None
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: false
@@ -39,7 +39,7 @@ Module:
     UnpackedDimensions: [("4", "0")]
   Parameter: 
     Identifier: d
-    Value: None
+    Expression: None
     ParameterType: Parameter
     DataType: Class
     DataTypeStatus: false
@@ -51,7 +51,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: e
-    Value: 7.5
+    Expression: 7.5
     ParameterType: Parameter
     DataType: Real
     DataTypeStatus: true
@@ -63,7 +63,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: f
-    Value: 5
+    Expression: 5
     ParameterType: Parameter
     DataType: Logic
     DataTypeStatus: true
@@ -75,7 +75,7 @@ Module:
     UnpackedDimensions: []
   Parameter: 
     Identifier: g
-    Value: "hello"
+    Expression: "hello"
     ParameterType: Parameter
     DataType: String
     DataTypeStatus: true
