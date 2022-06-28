@@ -3,35 +3,35 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        value: "8'sb10101010"
+        expression: "8'sb10101010"
         paramtype: Parameter
         datatype: Integer
-        datatype_status: Fixed
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_status: Overridable
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: b
-        value: "4'b1000"
+        expression: "4'b1000"
         paramtype: Parameter
         datatype: Logic
-        datatype_status: Fixed
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_status: Fixed
+        signedness_overridable: false
         packed_dimensions:
           - - "3"
             - "0"
         unpacked_dimensions: []
       - identifier: c
-        value: ~
+        expression: ~
         paramtype: Parameter
         datatype: Logic
-        datatype_status: Fixed
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_status: Fixed
+        signedness_overridable: false
         packed_dimensions:
           - - "3"
             - "0"
@@ -39,23 +39,33 @@ modules:
           - - "4"
             - "0"
       - identifier: e
-        value: "7.5"
+        expression: "7.5"
         paramtype: Parameter
         datatype: Real
-        datatype_status: Fixed
+        datatype_overridable: false
         classid: ~
         signedness: ~
-        signedness_status: Fixed
+        signedness_overridable: false
         packed_dimensions: []
         unpacked_dimensions: []
       - identifier: f
-        value: "5"
+        expression: "5"
         paramtype: Parameter
         datatype: Integer
-        datatype_status: Fixed
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_status: Overridable
+        signedness_overridable: true
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: g
+        expression: "\"hello\""
+        paramtype: Parameter
+        datatype: String
+        datatype_overridable: false
+        classid: ~
+        signedness: ~
+        signedness_overridable: false
         packed_dimensions: []
         unpacked_dimensions: []
     ports: []

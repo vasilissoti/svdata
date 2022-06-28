@@ -3,57 +3,68 @@ Module:
   Filepath: testcases/sv/ansi_port_parameter_nokeyword.sv
   Parameter: 
     Identifier: a
-    Value: 8'sb10101010
+    Expression: 8'sb10101010
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: Fixed
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
     Identifier: b
-    Value: 4'b1000
+    Expression: 4'b1000
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: Fixed
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Fixed
+    SignednessOverridable: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
   Parameter: 
     Identifier: c
-    Value: None
+    Expression: None
     ParameterType: Parameter
     DataType: Logic
-    DataTypeStatus: Fixed
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Fixed
+    SignednessOverridable: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
   Parameter: 
     Identifier: e
-    Value: 7.5
+    Expression: 7.5
     ParameterType: Parameter
     DataType: Real
-    DataTypeStatus: Fixed
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: None
-    SignednessStatus: Fixed
+    SignednessOverridable: false
     PackedDimensions: []
     UnpackedDimensions: []
   Parameter: 
     Identifier: f
-    Value: 5
+    Expression: 5
     ParameterType: Parameter
     DataType: Integer
-    DataTypeStatus: Fixed
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessStatus: Overridable
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: Parameter
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
     PackedDimensions: []
     UnpackedDimensions: []
 

@@ -5,7 +5,7 @@
       "parameters": [
         {
           "identifier": "a",
-          "expression": "8'sb10101010",
+          "expression": "8'sb10101010 >> 1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -17,70 +17,31 @@
         },
         {
           "identifier": "b",
-          "expression": "4'b1000",
+          "expression": "9'sb10101010 << 1",
           "paramtype": "Parameter",
           "datatype": "Logic",
-          "datatype_overridable": false,
+          "datatype_overridable": true,
           "classid": null,
           "signedness": "Signed",
-          "signedness_overridable": false,
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
+          "signedness_overridable": true,
+          "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
           "identifier": "c",
-          "expression": null,
+          "expression": "9'sb10101010 <<< 1",
           "paramtype": "Parameter",
           "datatype": "Logic",
-          "datatype_overridable": false,
+          "datatype_overridable": true,
           "classid": null,
           "signedness": "Signed",
-          "signedness_overridable": false,
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
-          "unpacked_dimensions": [
-            [
-              "4",
-              "0"
-            ]
-          ]
-        },
-        {
-          "identifier": "d",
-          "expression": null,
-          "paramtype": "Parameter",
-          "datatype": "Class",
-          "datatype_overridable": false,
-          "classid": "my_struct",
-          "signedness": null,
-          "signedness_overridable": false,
+          "signedness_overridable": true,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         },
         {
           "identifier": "e",
-          "expression": "7.5",
-          "paramtype": "Parameter",
-          "datatype": "Real",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": null,
-          "signedness_overridable": true,
-          "packed_dimensions": [],
-          "unpacked_dimensions": []
-        },
-        {
-          "identifier": "f",
-          "expression": "5",
+          "expression": "9'sb10101010 >>> 1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -91,20 +52,20 @@
           "unpacked_dimensions": []
         },
         {
-          "identifier": "g",
-          "expression": "\"hello\"",
+          "identifier": "e",
+          "expression": "9'b10101010 >>> 1",
           "paramtype": "Parameter",
-          "datatype": "String",
+          "datatype": "Logic",
           "datatype_overridable": true,
           "classid": null,
-          "signedness": null,
+          "signedness": "Unsigned",
           "signedness_overridable": true,
           "packed_dimensions": [],
           "unpacked_dimensions": []
         }
       ],
       "ports": [],
-      "filepath": "testcases/sv/ansi_port_parameter_keyword.sv"
+      "filepath": "testcases/sv/parameter_resolver_binary_operations1.sv"
     }
   ],
   "packages": []

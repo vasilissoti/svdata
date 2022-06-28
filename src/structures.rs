@@ -23,13 +23,13 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
-    pub value: Option<String>,
+    pub expression: Option<String>,
     pub paramtype: SvParamType,
     pub datatype: Option<SvDataType>,
-    pub datatype_status: SvParamStatus,
+    pub datatype_overridable: bool,
     pub classid: Option<String>,
     pub signedness: Option<SvSignedness>,
-    pub signedness_status: SvParamStatus,
+    pub signedness_overridable: bool,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
 }
@@ -38,12 +38,6 @@ pub struct SvParameter {
 pub enum SvParamType {
     Parameter,
     LocalParam,
-}
-
-#[derive(Debug, Serialize, Clone)]
-pub enum SvParamStatus {
-    Overridable,
-    Fixed,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -207,12 +201,12 @@ impl fmt::Display for SvParameter {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Parameter: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
-        match self.value.clone() {
+        match self.expression.clone() {
             None => {
-                writeln!(f, "    Value: None")?;
+                writeln!(f, "    Expression: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Value: {}", x)?;
+                writeln!(f, "    Expression: {}", x)?;
             }
         }
         writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
@@ -224,7 +218,11 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    DataType: {:?}", x)?;
             }
         }
-        writeln!(f, "    DataTypeStatus: {:?}", self.datatype_status)?;
+        writeln!(
+            f,
+            "    DataTypeOverridable: {:?}",
+            self.datatype_overridable
+        )?;
         match self.classid.clone() {
             None => {
                 writeln!(f, "    ClassIdentifier: None")?;
@@ -241,7 +239,11 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Signedness: {:?}", x)?;
             }
         }
-        writeln!(f, "    SignednessStatus: {:?}", self.signedness_status)?;
+        writeln!(
+            f,
+            "    SignednessOverridable: {:?}",
+            self.signedness_overridable
+        )?;
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
         let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 
