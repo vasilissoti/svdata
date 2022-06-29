@@ -11,7 +11,8 @@ use std::{env, process};
 use sv_parser::{parse_sv, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
 use svdata::structures::SvData;
 use svdata::sv_module::{module_declaration_ansi, module_declaration_nonansi};
-use verilog_filelist_parser;
+use svdata::sv_primaryliteral::SvPrimaryLiteral;
+use verilog_filelist_parser; // DBG
 
 #[derive(Debug, Parser)]
 #[clap(name = "svdata")]
@@ -62,6 +63,14 @@ pub struct Opt {
 
 #[cfg_attr(tarpaulin, skip)]
 pub fn main() {
+    let mut test = SvPrimaryLiteral {
+        data01: vec![0, 9223372036854775808],
+        num_bits: 192,
+        signed: false,
+    };
+
+    test.usize_add(9223372036854775808);
+
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
         Ok(_) => 0,
