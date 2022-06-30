@@ -13,7 +13,8 @@
           "signedness": "Signed",
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "b",
@@ -30,7 +31,8 @@
               "0"
             ]
           ],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "c",
@@ -52,7 +54,8 @@
               "4",
               "0"
             ]
-          ]
+          ],
+          "comment": null
         },
         {
           "identifier": "d",
@@ -64,7 +67,8 @@
           "signedness": null,
           "signedness_overridable": false,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
@@ -76,7 +80,8 @@
           "signedness": null,
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "f",
@@ -88,7 +93,8 @@
           "signedness": "Signed",
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "g",
@@ -100,7 +106,8 @@
           "signedness": null,
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "ports": [],

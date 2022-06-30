@@ -12,6 +12,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: b
         expression: "4'b1000"
         paramtype: Parameter
@@ -24,6 +25,7 @@ modules:
           - - "3"
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         expression: ~
         paramtype: Parameter
@@ -38,6 +40,7 @@ modules:
         unpacked_dimensions:
           - - "4"
             - "0"
+        comment: ~
       - identifier: e
         expression: "7.5"
         paramtype: Parameter
@@ -48,6 +51,7 @@ modules:
         signedness_overridable: false
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: f
         expression: "5"
         paramtype: Parameter
@@ -58,6 +62,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: g
         expression: "\"hello\""
         paramtype: Parameter
@@ -68,6 +73,7 @@ modules:
         signedness_overridable: false
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     ports: []
     filepath: testcases/sv/ansi_port_parameter_nokeyword.sv
 packages: []

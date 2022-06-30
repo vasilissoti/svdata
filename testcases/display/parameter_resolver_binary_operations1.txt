@@ -12,6 +12,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: b
     Expression: 9'sb10101010<<1
@@ -23,6 +24,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: c
     Expression: 9'sb10101010<<<1
@@ -34,6 +36,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: e
     Expression: 9'sb10101010>>>1
@@ -45,6 +48,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: e
     Expression: 9'b10101010>>>1
@@ -56,4 +60,5 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 

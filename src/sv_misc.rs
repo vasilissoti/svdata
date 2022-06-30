@@ -63,3 +63,28 @@ pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
         Some(ret)
     }
 }
+
+pub fn get_comment(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let mut ret: String = String::new();
+    let mut extract_comment: bool = false;
+
+    for node in parent.into_iter().event() {
+        match node {
+            NodeEvent::Enter(RefNode::Comment(_)) => extract_comment = true,
+            NodeEvent::Leave(RefNode::Comment(_)) => extract_comment = false,
+            NodeEvent::Enter(RefNode::Locate(x)) => {
+                if extract_comment {
+                    ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+                }
+            }
+
+            _ => (),
+        }
+    }
+
+    if ret.is_empty() {
+        None
+    } else {
+        Some(ret)
+    }
+}

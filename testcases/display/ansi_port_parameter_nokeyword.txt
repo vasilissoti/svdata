@@ -12,6 +12,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: b
     Expression: 4'b1000
@@ -23,6 +24,7 @@ Module:
     SignednessOverridable: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: c
     Expression: None
@@ -34,6 +36,7 @@ Module:
     SignednessOverridable: false
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
+    Comment: None
   Parameter: 
     Identifier: e
     Expression: 7.5
@@ -45,6 +48,7 @@ Module:
     SignednessOverridable: false
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: f
     Expression: 5
@@ -56,6 +60,7 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: g
     Expression: "hello"
@@ -67,4 +72,5 @@ Module:
     SignednessOverridable: false
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 

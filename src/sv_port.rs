@@ -2,7 +2,7 @@ use crate::structures::{
     SvDataKind, SvDataType, SvNetType, SvPackedDimension, SvParamType, SvParameter, SvPort,
     SvPortDirection, SvSignedness, SvUnpackedDimension,
 };
-use crate::sv_misc::{get_string, identifier, keyword, symbol};
+use crate::sv_misc::{get_comment, get_string, identifier, keyword, symbol};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn port_declaration_ansi(
@@ -77,6 +77,7 @@ pub fn port_parameter_declaration_ansi(
         packed_dimensions: port_packeddim_ansi(common_data, syntax_tree),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
         expression: port_parameter_value_ansi(p, syntax_tree, found_assignment),
+        comment: get_comment(RefNode::ParamAssignment(p), syntax_tree),
     };
 
     port_parameter_syntax_ansi(&ret.datatype, &ret.signedness, &ret.packed_dimensions);

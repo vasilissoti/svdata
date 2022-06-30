@@ -12,6 +12,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: b
         expression: "9'sb10101010<<1"
         paramtype: Parameter
@@ -22,6 +23,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         expression: "9'sb10101010<<<1"
         paramtype: Parameter
@@ -32,6 +34,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         expression: "9'sb10101010>>>1"
         paramtype: Parameter
@@ -42,6 +45,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         expression: "9'b10101010>>>1"
         paramtype: Parameter
@@ -52,6 +56,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     ports: []
     filepath: testcases/sv/parameter_resolver_binary_operations1.sv
 packages: []

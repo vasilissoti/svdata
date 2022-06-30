@@ -13,7 +13,8 @@
           "signedness": "Signed",
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "b",
@@ -25,7 +26,8 @@
           "signedness": null,
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "c",
@@ -37,7 +39,8 @@
           "signedness": "Signed",
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
@@ -49,7 +52,8 @@
           "signedness": "Unsigned",
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "f",
@@ -61,7 +65,8 @@
           "signedness": null,
           "signedness_overridable": true,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "ports": [],
