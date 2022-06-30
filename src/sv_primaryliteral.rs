@@ -1,3 +1,4 @@
+#[derive(Debug, Clone)]
 pub struct SvPrimaryLiteral {
     pub data01: Vec<usize>,
     pub num_bits: usize,
@@ -35,8 +36,62 @@ impl SvPrimaryLiteral {
                 }
             }
 
-            new_num_bits =
-                (64 - self.data01[0].leading_zeros() as usize) + (self.data01.len() - 1) * 64;
+            new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                + (self.data01.len() - 1) * usize::BITS as usize;
+            self.num_bits = new_num_bits;
+
+            println!("The new data01 is:");
+            for x in 0..self.data01.len() {
+                println!("{:b}", self.data01[x]);
+            }
+            println!("The new num of bits is: {} \n", self.num_bits);
+        }
+    }
+
+    pub fn prim_lit_add(&mut self, mut right_nu: SvPrimaryLiteral) {
+        if self.signed == false || right_nu.signed == false {
+            let left_size = self.num_bits;
+            let right_size = right_nu.num_bits;
+
+            // Ensure that their total nu of vector elements is the same in left and right
+            if left_size > right_size {
+                let diff: usize = (left_size - right_size) / usize::BITS as usize;
+
+                for _x in 0..diff {
+                    right_nu.data01.insert(0, 0);
+                }
+            } else if left_size < right_size {
+                let diff: usize = (right_size - left_size) / usize::BITS as usize;
+
+                for _x in 0..diff {
+                    self.data01.insert(0, 0);
+                }
+            }
+
+            let mut carry_flag: bool = false;
+
+            for x in (0..self.data01.len()).rev() {
+                let left_nu: usize = self.data01[x];
+                self.data01[x] = left_nu.wrapping_add(right_nu.data01[x]);
+
+                if carry_flag {
+                    self.data01[x] = self.data01[x].wrapping_add(1);
+                }
+
+                if self.data01[x] >= left_nu && self.data01[x] >= right_nu.data01[x] {
+                    carry_flag = false;
+                } else {
+                    carry_flag = true;
+                }
+            }
+
+            if carry_flag {
+                self.data01.insert(0, 1);
+            }
+
+            let new_num_bits: usize = (usize::BITS as usize
+                - self.data01[0].leading_zeros() as usize)
+                + (self.data01.len() - 1) * usize::BITS as usize;
             self.num_bits = new_num_bits;
 
             println!("The new data01 is:");
