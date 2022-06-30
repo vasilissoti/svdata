@@ -1,0 +1,64 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/sv/ansi_port_parameter_comment1.sv
+  Parameter: 
+    Identifier: a
+    Expression: (8'sb10101010+"hello")
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* A0 */
+  Parameter: 
+    Identifier: b
+    Expression: 3
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: c
+    Expression: 1
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* B1 */
+  Parameter: 
+    Identifier: d
+    Expression: 6
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: e
+    Expression: None
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
