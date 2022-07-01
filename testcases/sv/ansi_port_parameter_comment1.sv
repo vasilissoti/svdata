@@ -1,5 +1,5 @@
 module TestModule
-#(integer a = (8'sb10101010 + "hello") /* A0 */, b = 3, // A1
-/* B0 */ c = 1 /* B1 */, d = 6, e)
+#(integer a = (8'sb10101010 + "hello") /* A0 */, b = 3, // OUT-OF-SCOPE
+/* OUT-OF-SCOPE */ c = 1 /* C0 */, d = 6, e)
 (); 
 endmodule

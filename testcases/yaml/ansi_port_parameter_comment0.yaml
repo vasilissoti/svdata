@@ -34,7 +34,7 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /* B1 */
+        comment: /* C0 */
       - identifier: d
         expression: "6"
         paramtype: Parameter
