@@ -39,13 +39,67 @@ impl SvPrimaryLiteral {
             new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
                 + (self.data01.len() - 1) * usize::BITS as usize;
             self.num_bits = new_num_bits;
+        } else {
+            let mut left_neg: bool = false;
+            let mut right_neg: bool = false;
 
-            println!("The new data01 is:");
-            for x in 0..self.data01.len() {
-                println!("{:b}", self.data01[x]);
+            let l_leading_plus_one: usize = usize::BITS as usize
+                - (self.num_bits - 1 - (self.data01.len() - 1) * usize::BITS as usize);
+
+            let r_leading: usize = right_nu.leading_zeros() as usize;
+
+            if !self.data01[0].leading_zeros() as usize == l_leading_plus_one {
+                left_neg = true;
             }
-            println!("The new num of bits is: {} \n", self.num_bits);
+
+            if r_leading == 0 {
+                right_neg = true;
+            }
+
+            if !left_neg && !right_neg {
+                let new_num_bits: usize;
+                let last_index = self.data01.len() - 1;
+                let left_nu: usize = self.data01[last_index];
+                self.data01[last_index] = left_nu.wrapping_add(right_nu);
+
+                if (self.data01[last_index] < left_nu) || (self.data01[last_index] < right_nu) {
+                    if self.data01.len() == 1 {
+                        self.data01.insert(0, 1);
+                    } else {
+                        let mut carry_flag: bool = true;
+
+                        for x in (0..self.data01.len() - 1).rev() {
+                            let left_nu: usize = self.data01[x];
+                            self.data01[x] = left_nu.wrapping_add(1);
+
+                            if self.data01[x] >= left_nu {
+                                carry_flag = false;
+                                break;
+                            }
+                        }
+
+                        if carry_flag {
+                            self.data01.insert(0, 1);
+                        }
+                    }
+                }
+
+                if self.data01[0].leading_zeros() == 0 {
+                    self.data01.insert(0, 0);
+                }
+
+                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+
+                self.num_bits = new_num_bits;
+            }
         }
+
+        println!("The new data01 is:");
+        for x in 0..self.data01.len() {
+            println!("{:b}", self.data01[x]);
+        }
+        println!("The new num of bits is: {} \n", self.num_bits);
     }
 
     pub fn prim_lit_add(&mut self, mut right_nu: SvPrimaryLiteral) {

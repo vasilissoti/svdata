@@ -75,6 +75,14 @@ pub fn main() {
         signed: false,
     };
 
+    let mut test3 = SvPrimaryLiteral {
+        data01: vec![4611686018427387904],
+        num_bits: 64,
+        signed: true,
+    };
+
+    test3.usize_add(4611686018427387904);
+
     test2.prim_lit_add(test1.clone());
 
     test1.usize_add(9223372036854775808);
