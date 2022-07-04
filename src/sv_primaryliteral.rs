@@ -80,7 +80,30 @@ impl SvPrimaryLiteral {
         }
     }
 
-    pub fn _signed_sign_inversion(&mut self, from_negative: bool) {
+    pub fn _signed_is_negative(&mut self) -> bool {
+        let leading_plus_one: usize = usize::BITS as usize
+            - (self.num_bits - 1 - (self.data01.len() - 1) * usize::BITS as usize);
+
+        if !self.data01[0].leading_zeros() as usize == leading_plus_one {
+            true
+        } else {
+            false
+        }
+    }
+
+    pub fn _signed_matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteral) {
+        let _left_neg: bool = self._signed_is_negative();
+        let _right_neg: bool = right_nu._signed_is_negative();
+
+        self._prim_lit_vec_elmnt_match(right_nu);
+
+        unimplemented!();
+        // TODO
+    }
+
+    pub fn _signed_sign_inversion(&mut self) {
+        let from_negative: bool = self._signed_is_negative();
+
         for x in (0..self.data01.len()).rev() {
             self.data01[x] = !self.data01[x];
         }
@@ -151,18 +174,9 @@ impl SvPrimaryLiteral {
                 + (self.data01.len() - 1) * usize::BITS as usize;
             self.num_bits = new_num_bits;
         } else {
-            let mut left_neg: bool = false;
+            let left_neg: bool = self._signed_is_negative();
             let mut right_neg: bool = false;
-
-            let l_leading_plus_one: usize = usize::BITS as usize
-                - (self.num_bits - 1 - (self.data01.len() - 1) * usize::BITS as usize);
-
             let r_leading: usize = right_nu.leading_zeros() as usize;
-
-            if !self.data01[0].leading_zeros() as usize == l_leading_plus_one {
-                left_neg = true;
-            }
-
             if r_leading == 0 {
                 right_neg = true;
             }
@@ -188,12 +202,10 @@ impl SvPrimaryLiteral {
                     signed: true,
                 };
 
-                self._signed_sign_inversion(true);
-                right_nu._signed_sign_inversion(true);
-
+                self._signed_sign_inversion();
+                right_nu._signed_sign_inversion();
                 self._unsigned_prim_lit_add(right_nu.clone());
-
-                self._signed_sign_inversion(false);
+                self._signed_sign_inversion();
             }
         }
 
