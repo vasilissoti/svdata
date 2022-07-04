@@ -85,7 +85,7 @@ pub fn port_parameter_declaration_ansi(
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
         expression: port_parameter_value_ansi(p, syntax_tree, found_assignment),
         num_bits: port_parameter_bits_ansi(
-            port_packeddim_ansi(common_data.clone(), syntax_tree).clone(),
+            param_packeddim.clone(),
             p,
             &param_datatype,
             param_datatype_overridable,
@@ -645,6 +645,8 @@ fn port_parameter_bits_ansi(
                         }
                     }
                 }
+
+                None => None,
 
                 _ => unreachable!(),
             }
