@@ -3,7 +3,7 @@ Module:
   Filepath: testcases/sv/parameter_resolver_binary_operations1.sv
   Parameter: 
     Identifier: a
-    Expression: 8'sb10101010 >> 1
+    Expression: 8'sb10101010>>1
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -13,9 +13,10 @@ Module:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: b
-    Expression: 9'sb10101010 << 1
+    Expression: 9'sb10101010<<1
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -25,9 +26,10 @@ Module:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: c
-    Expression: 9'sb10101010 <<< 1
+    Expression: 9'sb10101010<<<1
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -37,9 +39,10 @@ Module:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: e
-    Expression: 9'sb10101010 >>> 1
+    Expression: 9'sb10101010>>>1
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -49,9 +52,10 @@ Module:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: e
-    Expression: 9'b10101010 >>> 1
+    Expression: 9'b10101010>>>1
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -61,4 +65,5 @@ Module:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 

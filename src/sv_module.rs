@@ -1,7 +1,7 @@
 use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
 use crate::sv_misc::identifier;
 use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
-use sv_parser::{unwrap_node, RefNode, SyntaxTree};
+use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
     m: RefNode,
@@ -19,40 +19,88 @@ pub fn module_declaration_ansi(
 
     for node in m {
         match node {
-            RefNode::ParameterPortDeclaration(p) => {
-                let param_type = unwrap_node!(
-                    p,
-                    ParameterDeclarationParam,
-                    LocalParameterDeclarationParam,
-                    ParameterPortDeclarationParamList
-                );
+            RefNode::ParameterPortList(p) => {
+                let mut common_scope_found: bool = false;
+                let mut param_type: RefNode = node.clone();
 
-                let common_data =
-                    unwrap_node!(param_type.clone().unwrap(), DataType, DataTypeOrImplicit)
-                        .unwrap();
-                let a = unwrap_node!(param_type.clone().unwrap(), ListOfParamAssignments);
-
-                let param_type = match param_type {
-                    Some(RefNode::LocalParameterDeclarationParam(_)) => SvParamType::LocalParam,
-                    Some(RefNode::ParameterDeclarationParam(_))
-                    | Some(RefNode::ParameterPortDeclarationParamList(_)) => SvParamType::Parameter,
-                    _ => unreachable!(),
-                };
-
-                for param in a.unwrap() {
-                    match param {
-                        RefNode::ParamAssignment(x) => {
-                            ret.parameters.push(port_parameter_declaration_ansi(
-                                x,
-                                syntax_tree,
-                                common_data.clone(),
-                                &param_type,
-                            ))
+                for sub_node in p.into_iter().event() {
+                    match sub_node {
+                        NodeEvent::Enter(RefNode::ParameterDeclarationParam(x)) => {
+                            common_scope_found = true;
+                            param_type = RefNode::ParameterDeclarationParam(x);
                         }
+
+                        NodeEvent::Enter(RefNode::LocalParameterDeclarationParam(x)) => {
+                            common_scope_found = true;
+                            param_type = RefNode::LocalParameterDeclarationParam(x);
+                        }
+
+                        NodeEvent::Enter(RefNode::ParameterPortDeclarationParamList(x)) => {
+                            common_scope_found = true;
+                            param_type = RefNode::ParameterPortDeclarationParamList(x);
+                        }
+
+                        NodeEvent::Leave(RefNode::LocalParameterDeclarationParam(_))
+                        | NodeEvent::Leave(RefNode::ParameterDeclarationParam(_))
+                        | NodeEvent::Leave(RefNode::ParameterPortDeclarationParamList(_)) => {
+                            common_scope_found = false;
+                        }
+
+                        NodeEvent::Enter(RefNode::ListOfParamAssignments(a)) => {
+                            if !common_scope_found {
+                                let common_data = None;
+                                let param_type = SvParamType::Parameter;
+
+                                for param in a {
+                                    match param {
+                                        RefNode::ParamAssignment(x) => {
+                                            ret.parameters.push(port_parameter_declaration_ansi(
+                                                x,
+                                                syntax_tree,
+                                                common_data.clone(),
+                                                &param_type,
+                                            ))
+                                        }
+                                        _ => (),
+                                    }
+                                }
+                            } else {
+                                let common_data =
+                                    unwrap_node!(param_type.clone(), DataType, DataTypeOrImplicit);
+                                let a = unwrap_node!(param_type.clone(), ListOfParamAssignments);
+
+                                let param_type = match param_type {
+                                    RefNode::LocalParameterDeclarationParam(_) => {
+                                        SvParamType::LocalParam
+                                    }
+                                    RefNode::ParameterDeclarationParam(_)
+                                    | RefNode::ParameterPortDeclarationParamList(_) => {
+                                        SvParamType::Parameter
+                                    }
+                                    _ => unreachable!(),
+                                };
+
+                                for param in a.unwrap() {
+                                    match param {
+                                        RefNode::ParamAssignment(x) => {
+                                            ret.parameters.push(port_parameter_declaration_ansi(
+                                                x,
+                                                syntax_tree,
+                                                common_data.clone(),
+                                                &param_type,
+                                            ))
+                                        }
+                                        _ => (),
+                                    }
+                                }
+                            }
+                        }
+
                         _ => (),
                     }
                 }
             }
+
             RefNode::AnsiPortDeclaration(p) => {
                 let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port.clone());
                 ret.ports.push(parsed_port.clone());

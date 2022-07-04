@@ -13,6 +13,7 @@ modules:
         num_bits: 8
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: b
         expression: "4'b1000"
         paramtype: LocalParam
@@ -26,6 +27,7 @@ modules:
           - - "3"
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         expression: ~
         paramtype: LocalParam
@@ -41,6 +43,7 @@ modules:
         unpacked_dimensions:
           - - "4"
             - "0"
+        comment: ~
       - identifier: d
         expression: ~
         paramtype: LocalParam
@@ -52,6 +55,7 @@ modules:
         num_bits: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         expression: "7.5"
         paramtype: LocalParam
@@ -63,6 +67,7 @@ modules:
         num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: f
         expression: "5"
         paramtype: LocalParam
@@ -74,6 +79,7 @@ modules:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: g
         expression: "\"hello\""
         paramtype: LocalParam
@@ -85,6 +91,7 @@ modules:
         num_bits: 40
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     ports: []
     filepath: testcases/sv/ansi_port_localparam.sv
 packages: []

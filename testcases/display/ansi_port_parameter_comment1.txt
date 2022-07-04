@@ -1,68 +1,63 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+  Filepath: testcases/sv/ansi_port_parameter_comment1.sv
   Parameter: 
     Identifier: a
-    Expression: 8'sb10101010+6'sb10101010
+    Expression: (8'sb10101010+"hello")
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
+    DataType: Integer
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
-    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /* A0 */
   Parameter: 
     Identifier: b
-    Expression: 4'b1000+3.5-2
+    Expression: 3
     ParameterType: Parameter
-    DataType: Real
-    DataTypeOverridable: true
+    DataType: Integer
+    DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: None
+    Signedness: Signed
     SignednessOverridable: true
-    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
     Identifier: c
-    Expression: -2+3+5+8'sb10101010
+    Expression: 1
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
+    DataType: Integer
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
-    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* C0 */
+  Parameter: 
+    Identifier: d
+    Expression: 6
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
     Identifier: e
-    Expression: -2+3+5+8'b10101010
+    Expression: None
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
+    DataType: Integer
+    DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: Unsigned
+    Signedness: Signed
     SignednessOverridable: true
-    NumBits: 404
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: f
-    Expression: -2.5+3.5+4.5
-    ParameterType: Parameter
-    DataType: Real
-    DataTypeOverridable: true
-    ClassIdentifier: None
-    Signedness: None
-    SignednessOverridable: true
-    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None

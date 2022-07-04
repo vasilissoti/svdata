@@ -33,6 +33,7 @@ pub struct SvParameter {
     pub num_bits: Option<u64>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+    pub comment: Option<String>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -263,6 +264,15 @@ impl fmt::Display for SvParameter {
             }
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
+
+        match self.comment.clone() {
+            None => {
+                writeln!(f, "    Comment: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Comment: {}", x)?;
+            }
+        }
 
         write!(f, "")
     }

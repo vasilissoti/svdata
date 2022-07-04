@@ -3,65 +3,60 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        expression: "8'sb10101010+6'sb10101010"
-        paramtype: Parameter
+        expression: "(8'sb10101010+\"hello\")"
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: true
         classid: ~
         signedness: Signed
         signedness_overridable: true
-        num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /* A0 */
       - identifier: b
-        expression: "4'b1000+3.5-2"
-        paramtype: Parameter
-        datatype: Real
+        expression: "3"
+        paramtype: LocalParam
+        datatype: Logic
         datatype_overridable: true
         classid: ~
-        signedness: ~
+        signedness: Signed
         signedness_overridable: true
-        num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
       - identifier: c
-        expression: "-2+3+5+8'sb10101010"
+        expression: "1"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: true
         classid: ~
         signedness: Signed
         signedness_overridable: true
-        num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: e
-        expression: "-2+3+5+8'b10101010"
+        comment: /* C0 */
+      - identifier: d
+        expression: "6"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: true
         classid: ~
-        signedness: Unsigned
+        signedness: Signed
         signedness_overridable: true
-        num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: f
-        expression: "-2.5+3.5+4.5"
+      - identifier: e
+        expression: ~
         paramtype: Parameter
-        datatype: Real
+        datatype: ~
         datatype_overridable: true
         classid: ~
         signedness: ~
         signedness_overridable: true
-        num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
     ports: []
-    filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+    filepath: testcases/sv/ansi_port_parameter_comment0.sv
 packages: []

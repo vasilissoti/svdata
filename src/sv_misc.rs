@@ -1,4 +1,4 @@
-use sv_parser::{unwrap_node, RefNode, SyntaxTree};
+use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
 
 pub fn identifier(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = match unwrap_node!(parent, SimpleIdentifier, EscapedIdentifier) {
@@ -41,10 +41,44 @@ pub fn symbol(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
 
 pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let mut ret: String = String::new();
+    let mut skip_whitespace: bool = false;
 
-    for node in parent {
-        if let RefNode::Locate(x) = node {
-            ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+    for node in parent.into_iter().event() {
+        match node {
+            NodeEvent::Enter(RefNode::WhiteSpace(_)) => skip_whitespace = true,
+            NodeEvent::Leave(RefNode::WhiteSpace(_)) => skip_whitespace = false,
+            NodeEvent::Enter(RefNode::Locate(x)) => {
+                if !skip_whitespace {
+                    ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+                }
+            }
+
+            _ => (),
+        }
+    }
+
+    if ret.is_empty() {
+        None
+    } else {
+        Some(ret)
+    }
+}
+
+pub fn get_comment(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
+    let mut ret: String = String::new();
+    let mut extract_comment: bool = false;
+
+    for node in parent.into_iter().event() {
+        match node {
+            NodeEvent::Enter(RefNode::Comment(_)) => extract_comment = true,
+            NodeEvent::Leave(RefNode::Comment(_)) => extract_comment = false,
+            NodeEvent::Enter(RefNode::Locate(x)) => {
+                if extract_comment {
+                    ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+                }
+            }
+
+            _ => (),
         }
     }
 

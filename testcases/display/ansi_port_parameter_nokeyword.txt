@@ -13,6 +13,7 @@ Module:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: b
     Expression: 4'b1000
@@ -25,6 +26,7 @@ Module:
     NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: c
     Expression: None
@@ -37,6 +39,7 @@ Module:
     NumBits: 4
     PackedDimensions: [("3", "0")]
     UnpackedDimensions: [("4", "0")]
+    Comment: None
   Parameter: 
     Identifier: e
     Expression: 7.5
@@ -49,6 +52,7 @@ Module:
     NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: f
     Expression: 5
@@ -61,6 +65,7 @@ Module:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Parameter: 
     Identifier: g
     Expression: "hello"
@@ -73,4 +78,5 @@ Module:
     NumBits: 40
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 

@@ -5,7 +5,7 @@
       "parameters": [
         {
           "identifier": "a",
-          "expression": "8'sb10101010 >> 1",
+          "expression": "8'sb10101010>>1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -14,11 +14,12 @@
           "signedness_overridable": true,
           "num_bits": 404,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "b",
-          "expression": "9'sb10101010 << 1",
+          "expression": "9'sb10101010<<1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -27,11 +28,12 @@
           "signedness_overridable": true,
           "num_bits": 404,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "c",
-          "expression": "9'sb10101010 <<< 1",
+          "expression": "9'sb10101010<<<1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -40,11 +42,12 @@
           "signedness_overridable": true,
           "num_bits": 404,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
-          "expression": "9'sb10101010 >>> 1",
+          "expression": "9'sb10101010>>>1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -53,11 +56,12 @@
           "signedness_overridable": true,
           "num_bits": 404,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
-          "expression": "9'b10101010 >>> 1",
+          "expression": "9'b10101010>>>1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
@@ -66,7 +70,8 @@
           "signedness_overridable": true,
           "num_bits": 404,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "ports": [],

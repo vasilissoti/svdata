@@ -5,77 +5,72 @@
       "parameters": [
         {
           "identifier": "a",
-          "expression": "8'sb10101010+6'sb10101010",
-          "paramtype": "Parameter",
+          "expression": "(8'sb10101010+\"hello\")",
+          "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": true,
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": null
+          "comment": "/* A0 */"
         },
         {
           "identifier": "b",
-          "expression": "4'b1000+3.5-2",
-          "paramtype": "Parameter",
-          "datatype": "Real",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
           "datatype_overridable": true,
           "classid": null,
-          "signedness": null,
+          "signedness": "Signed",
           "signedness_overridable": true,
-          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         },
         {
           "identifier": "c",
-          "expression": "-2+3+5+8'sb10101010",
+          "expression": "1",
           "paramtype": "Parameter",
           "datatype": "Logic",
           "datatype_overridable": true,
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "num_bits": 404,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/* C0 */"
+        },
+        {
+          "identifier": "d",
+          "expression": "6",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         },
         {
           "identifier": "e",
-          "expression": "-2+3+5+8'b10101010",
+          "expression": null,
           "paramtype": "Parameter",
-          "datatype": "Logic",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": "Unsigned",
-          "signedness_overridable": true,
-          "num_bits": 404,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
-          "identifier": "f",
-          "expression": "-2.5+3.5+4.5",
-          "paramtype": "Parameter",
-          "datatype": "Real",
+          "datatype": null,
           "datatype_overridable": true,
           "classid": null,
           "signedness": null,
           "signedness_overridable": true,
-          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         }
       ],
       "ports": [],
-      "filepath": "testcases/sv/parameter_resolver_binary_operations0.sv"
+      "filepath": "testcases/sv/ansi_port_parameter_comment0.sv"
     }
   ],
   "packages": []
