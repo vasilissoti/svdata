@@ -87,7 +87,8 @@ pub fn main() {
         signed: true,
     };
 
-    println!("Is the value negative: {}", test4._signed_is_negative());
+    test4._signed_sign_inversion();
+    println!("Converted test 4: \n{}", test4);
 
     test3.usize_add(4611686018427387904);
 

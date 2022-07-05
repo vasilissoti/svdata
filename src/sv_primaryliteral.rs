@@ -1,3 +1,5 @@
+use std::fmt;
+
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteral {
     pub data01: Vec<usize>,
@@ -141,27 +143,48 @@ impl SvPrimaryLiteral {
         right_nu.num_bits = right_nu.data01.len() * usize::BITS as usize;
     }
 
+    pub fn _signed_sign_extension(&mut self) {
+        let left_neg: bool = self._signed_is_negative();
+
+        if left_neg {
+            let mut last_element: bool = false;
+
+            for x in 0..self.data01.len() {
+                let left_leading = self.data01[x].leading_zeros();
+
+                if left_leading != usize::BITS {
+                    last_element = true;
+                }
+
+                for y in 0..left_leading {
+                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                }
+
+                if last_element {
+                    break;
+                }
+            }
+        }
+
+        self.num_bits = self.data01.len() * usize::BITS as usize;
+    }
+
     pub fn _signed_sign_inversion(&mut self) {
         let from_negative: bool = self._signed_is_negative();
+        self._signed_sign_extension();
 
         for x in (0..self.data01.len()).rev() {
             self.data01[x] = !self.data01[x];
         }
 
         if from_negative {
-            let pre_inv: SvPrimaryLiteral = self.clone();
             self._unsigned_usize_add(1);
 
             self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
                 + (self.data01.len() - 1) * usize::BITS as usize;
 
-            if self.data01 == pre_inv.data01 && self.num_bits == pre_inv.num_bits {
-                if self.data01[0].leading_zeros() == 0 {
-                    self.data01.insert(0, 0);
-                    self.num_bits = self.num_bits + 1;
-                } else {
-                    self.num_bits = self.num_bits + 1;
-                }
+            if self.data01[0].leading_zeros() == 0 {
+                self.data01.insert(0, 0);
             }
         } else {
             self._unsigned_usize_add(1);
@@ -179,7 +202,7 @@ impl SvPrimaryLiteral {
             while !min_num_found {
                 let pre_leading = self.data01[x].leading_zeros();
                 let minimized_value: usize =
-                    self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1);
+                    self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
                 let post_leading = minimized_value.leading_zeros();
 
                 if (post_leading != pre_leading - 1)
@@ -201,6 +224,27 @@ impl SvPrimaryLiteral {
 
         for _x in 0..vec_elements_to_rm {
             self.data01.remove(0);
+        }
+    }
+
+    pub fn _truncate_size(&mut self, num_bits: usize) {
+        if self.num_bits >= num_bits {
+            let elmnts_to_be_rm: usize = num_bits / usize::BITS as usize;
+            let bits_to_be_rm: usize = usize::BITS as usize - num_bits % usize::BITS as usize;
+
+            for _x in 0..elmnts_to_be_rm {
+                self.data01.remove(0);
+            }
+
+            for x in 0..bits_to_be_rm {
+                if (self.data01[0].leading_zeros() as usize) < (x + 1) {
+                    self.data01[0] = self.data01[0] - 2usize.pow(usize::BITS - x as u32 - 1);
+                }
+            }
+
+            self.num_bits = num_bits;
+        } else {
+            panic!("The original number of bits is smaller than the requested one!");
         }
     }
 
@@ -253,11 +297,7 @@ impl SvPrimaryLiteral {
             }
         }
 
-        println!("The new data01 is:");
-        for x in 0..self.data01.len() {
-            println!("{:b}", self.data01[x]);
-        }
-        println!("The new num of bits is: {} \n", self.num_bits);
+        println!("{}", self);
     }
 
     pub fn prim_lit_add(&mut self, right_nu: SvPrimaryLiteral) {
@@ -270,10 +310,21 @@ impl SvPrimaryLiteral {
             self.num_bits = new_num_bits;
         }
 
-        println!("The new data01 is:");
+        println!("{}", self);
+    }
+}
+
+impl fmt::Display for SvPrimaryLiteral {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        write!(f, "Data01: ")?;
+
         for x in 0..self.data01.len() {
-            println!("{:b}", self.data01[x]);
+            write!(f, "{:b} ", self.data01[x])?;
         }
-        println!("The new num of bits is: {} \n", self.num_bits);
+
+        write!(f, "\n")?;
+
+        writeln!(f, "NumBits: {}", self.num_bits)?;
+        writeln!(f, "Signed: {}", self.signed)
     }
 }
