@@ -92,13 +92,53 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _signed_matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteral) {
-        let _left_neg: bool = self._signed_is_negative();
-        let _right_neg: bool = right_nu._signed_is_negative();
+        let left_neg: bool = self._signed_is_negative();
+        let right_neg: bool = right_nu._signed_is_negative();
 
         self._prim_lit_vec_elmnt_match(right_nu);
 
-        unimplemented!();
-        // TODO
+        if left_neg {
+            let mut last_element: bool = false;
+
+            for x in 0..self.data01.len() {
+                let left_leading = self.data01[x].leading_zeros();
+
+                if left_leading != usize::BITS {
+                    last_element = true;
+                }
+
+                for y in 0..left_leading {
+                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                }
+
+                if last_element {
+                    break;
+                }
+            }
+        }
+
+        if right_neg {
+            let mut last_element: bool = false;
+
+            for x in 0..right_nu.data01.len() {
+                let left_leading = right_nu.data01[x].leading_zeros();
+
+                if left_leading != usize::BITS {
+                    last_element = true;
+                }
+
+                for y in 0..left_leading {
+                    right_nu.data01[x] = right_nu.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                }
+
+                if last_element {
+                    break;
+                }
+            }
+        }
+
+        self.num_bits = self.data01.len() * usize::BITS as usize;
+        right_nu.num_bits = right_nu.data01.len() * usize::BITS as usize;
     }
 
     pub fn _signed_sign_inversion(&mut self) {
@@ -195,17 +235,21 @@ impl SvPrimaryLiteral {
 
                 self.num_bits = new_num_bits;
             } else if left_neg && right_neg {
-                // Make both operands +ve
+                let new_num_bits: usize;
                 let mut right_nu = SvPrimaryLiteral {
                     data01: vec![right_nu],
                     num_bits: usize::BITS as usize,
                     signed: true,
                 };
 
-                self._signed_sign_inversion();
-                right_nu._signed_sign_inversion();
+                self._signed_matched_sign_extension(&mut right_nu);
                 self._unsigned_prim_lit_add(right_nu.clone());
-                self._signed_sign_inversion();
+
+                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.num_bits = new_num_bits;
+
+                self._neg_value_num_bit_minimizer();
             }
         }
 
