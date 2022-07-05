@@ -81,10 +81,10 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _signed_is_negative(&mut self) -> bool {
-        let leading_plus_one: usize = usize::BITS as usize
-            - (self.num_bits - 1 - (self.data01.len() - 1) * usize::BITS as usize);
+        let leading_zeros: usize =
+            usize::BITS as usize - (self.num_bits - (self.data01.len() - 1) * usize::BITS as usize);
 
-        if !self.data01[0].leading_zeros() as usize == leading_plus_one {
+        if self.data01[0].leading_zeros() as usize == leading_zeros {
             true
         } else {
             false

@@ -81,6 +81,14 @@ pub fn main() {
         signed: true,
     };
 
+    let mut test4 = SvPrimaryLiteral {
+        data01: vec![4611686018427387904],
+        num_bits: 64,
+        signed: true,
+    };
+
+    println!("Is the value negative: {}", test4._signed_is_negative());
+
     test3.usize_add(4611686018427387904);
 
     test2.prim_lit_add(test1.clone());
