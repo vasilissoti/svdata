@@ -283,17 +283,38 @@ impl SvPrimaryLiteral {
                 self.num_bits = 1;
             }
         } else {
-            let left_neg: bool = self._signed_is_negative();
-            let mut right_neg: bool = false;
-            let r_leading: usize = right_nu.leading_zeros() as usize;
-            if r_leading == 0 {
-                right_neg = true;
+            let right_nu = SvPrimaryLiteral {
+                data01: vec![right_nu],
+                num_bits: usize::BITS as usize,
+                signed: true,
+            };
+
+            self.prim_lit_add(right_nu.clone());
+        }
+
+        println!("{}", self);
+    }
+
+    pub fn prim_lit_add(&mut self, mut right_nu: SvPrimaryLiteral) {
+        if self.signed == false || right_nu.signed == false {
+            self._unsigned_prim_lit_add(right_nu.clone());
+
+            let new_num_bits: usize;
+            if !self._is_zero() {
+                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.num_bits = new_num_bits;
+            } else {
+                self.num_bits = 1;
             }
+        } else {
+            let left_neg: bool = self._signed_is_negative();
+            let right_neg: bool = right_nu._signed_is_negative();
 
             if !left_neg && !right_neg {
                 let new_num_bits: usize;
 
-                self._unsigned_usize_add(right_nu);
+                self._unsigned_prim_lit_add(right_nu.clone());
 
                 if self.data01[0].leading_zeros() == 0 {
                     self.data01.insert(0, 0);
@@ -305,11 +326,6 @@ impl SvPrimaryLiteral {
                 self.num_bits = new_num_bits;
             } else if left_neg && right_neg {
                 let new_num_bits: usize;
-                let mut right_nu = SvPrimaryLiteral {
-                    data01: vec![right_nu],
-                    num_bits: usize::BITS as usize,
-                    signed: true,
-                };
 
                 self._signed_matched_sign_extension(&mut right_nu);
                 self._unsigned_prim_lit_add(right_nu.clone());
@@ -321,11 +337,6 @@ impl SvPrimaryLiteral {
                 self._neg_value_num_bit_minimizer();
             } else {
                 let new_num_bits: usize;
-                let mut right_nu = SvPrimaryLiteral {
-                    data01: vec![right_nu],
-                    num_bits: usize::BITS as usize,
-                    signed: true,
-                };
 
                 self._signed_matched_sign_extension(&mut right_nu);
                 self._unsigned_prim_lit_add(right_nu.clone());
@@ -342,23 +353,6 @@ impl SvPrimaryLiteral {
                         + (self.data01.len() - 1) * usize::BITS as usize;
                     self.num_bits = new_num_bits;
                 }
-            }
-        }
-
-        println!("{}", self);
-    }
-
-    pub fn prim_lit_add(&mut self, right_nu: SvPrimaryLiteral) {
-        if self.signed == false || right_nu.signed == false {
-            self._unsigned_prim_lit_add(right_nu.clone());
-
-            let new_num_bits: usize;
-            if !self._is_zero() {
-                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
-                self.num_bits = new_num_bits;
-            } else {
-                self.num_bits = 1;
             }
         }
 
