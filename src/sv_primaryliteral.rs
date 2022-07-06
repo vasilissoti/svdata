@@ -83,6 +83,10 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _signed_is_negative(&mut self) -> bool {
+        if self.signed != true {
+            panic!("Expected signed SvPrimaryLiteral but found unsigned!");
+        }
+
         let leading_zeros: usize =
             usize::BITS as usize - (self.num_bits - (self.data01.len() - 1) * usize::BITS as usize);
 
@@ -93,7 +97,19 @@ impl SvPrimaryLiteral {
         }
     }
 
+    pub fn _is_zero(&mut self) -> bool {
+        if self.data01.len() == 1 && self.data01[0].leading_zeros() == usize::BITS {
+            true
+        } else {
+            false
+        }
+    }
+
     pub fn _signed_matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteral) {
+        if self.signed != true || right_nu.signed != true {
+            panic!("Expected signed SvPrimaryLiterals but found unsigned!");
+        }
+
         let left_neg: bool = self._signed_is_negative();
         let right_neg: bool = right_nu._signed_is_negative();
 
@@ -170,6 +186,12 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _signed_sign_inversion(&mut self) {
+        if self._is_zero() {
+            return;
+        } else if self.signed != true {
+            panic!("Expected signed SvPrimaryLiteral but found unsigned!");
+        }
+
         let from_negative: bool = self._signed_is_negative();
         self._signed_sign_extension();
 
@@ -253,10 +275,13 @@ impl SvPrimaryLiteral {
             let new_num_bits: usize;
 
             self._unsigned_usize_add(right_nu);
-
-            new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                + (self.data01.len() - 1) * usize::BITS as usize;
-            self.num_bits = new_num_bits;
+            if !self._is_zero() {
+                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.num_bits = new_num_bits;
+            } else {
+                self.num_bits = 1;
+            }
         } else {
             let left_neg: bool = self._signed_is_negative();
             let mut right_neg: bool = false;
@@ -294,6 +319,29 @@ impl SvPrimaryLiteral {
                 self.num_bits = new_num_bits;
 
                 self._neg_value_num_bit_minimizer();
+            } else {
+                let new_num_bits: usize;
+                let mut right_nu = SvPrimaryLiteral {
+                    data01: vec![right_nu],
+                    num_bits: usize::BITS as usize,
+                    signed: true,
+                };
+
+                self._signed_matched_sign_extension(&mut right_nu);
+                self._unsigned_prim_lit_add(right_nu.clone());
+                self._truncate_size(self.num_bits);
+
+                if self._signed_is_negative() {
+                    self._neg_value_num_bit_minimizer();
+                } else if self._is_zero() {
+                    self._truncate_size(usize::BITS as usize);
+                    self.num_bits = 1;
+                } else {
+                    new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize
+                        + 1)
+                        + (self.data01.len() - 1) * usize::BITS as usize;
+                    self.num_bits = new_num_bits;
+                }
             }
         }
 
@@ -304,10 +352,14 @@ impl SvPrimaryLiteral {
         if self.signed == false || right_nu.signed == false {
             self._unsigned_prim_lit_add(right_nu.clone());
 
-            let new_num_bits: usize = (usize::BITS as usize
-                - self.data01[0].leading_zeros() as usize)
-                + (self.data01.len() - 1) * usize::BITS as usize;
-            self.num_bits = new_num_bits;
+            let new_num_bits: usize;
+            if !self._is_zero() {
+                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.num_bits = new_num_bits;
+            } else {
+                self.num_bits = 1;
+            }
         }
 
         println!("{}", self);
