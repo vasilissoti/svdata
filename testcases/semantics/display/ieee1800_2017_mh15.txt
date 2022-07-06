@@ -1,0 +1,24 @@
+Module:
+  Identifier: mh15
+  Filepath: testcases/semantics/sv/ieee1800_2017_mh15.sv
+  Port: 
+    Identifier: x
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("5", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: y
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+

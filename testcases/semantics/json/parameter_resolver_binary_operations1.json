@@ -1,0 +1,72 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [
+        {
+          "identifier": "a",
+          "expression": "8'sb10101010 >> 1",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "b",
+          "expression": "9'sb10101010 << 1",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "c",
+          "expression": "9'sb10101010 <<< 1",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "e",
+          "expression": "9'sb10101010 >>> 1",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "e",
+          "expression": "9'b10101010 >>> 1",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        }
+      ],
+      "ports": [],
+      "filepath": "testcases/semantics/sv/parameter_resolver_binary_operations1.sv"
+    }
+  ],
+  "packages": []
+}

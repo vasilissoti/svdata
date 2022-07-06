@@ -1,0 +1,111 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [
+        {
+          "identifier": "a",
+          "expression": "8'sb10101010",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "b",
+          "expression": "4'b1000",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "c",
+          "expression": null,
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "4",
+              "0"
+            ]
+          ]
+        },
+        {
+          "identifier": "d",
+          "expression": null,
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "my_struct",
+          "signedness": null,
+          "signedness_overridable": false,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "e",
+          "expression": "7.5",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "f",
+          "expression": "5",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        },
+        {
+          "identifier": "g",
+          "expression": "\"hello\"",
+          "paramtype": "LocalParam",
+          "datatype": "String",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        }
+      ],
+      "ports": [],
+      "filepath": "testcases/semantics/sv/ansi_port_localparam.sv"
+    }
+  ],
+  "packages": []
+}

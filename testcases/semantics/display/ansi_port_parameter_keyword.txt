@@ -1,0 +1,81 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/semantics/sv/ansi_port_parameter_keyword.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: b
+    Expression: 4'b1000
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: c
+    Expression: None
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: [("4", "0")]
+  Parameter: 
+    Identifier: d
+    Expression: None
+    ParameterType: Parameter
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: my_struct
+    Signedness: None
+    SignednessOverridable: false
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: e
+    Expression: 7.5
+    ParameterType: Parameter
+    DataType: Real
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: Parameter
+    DataType: String
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+

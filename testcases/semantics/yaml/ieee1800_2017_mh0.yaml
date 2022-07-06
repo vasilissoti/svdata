@@ -1,0 +1,16 @@
+---
+modules:
+  - identifier: mh0
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+    filepath: testcases/semantics/sv/ieee1800_2017_mh0.sv
+packages: []

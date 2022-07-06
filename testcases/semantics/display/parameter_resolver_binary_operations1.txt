@@ -1,0 +1,59 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/semantics/sv/parameter_resolver_binary_operations1.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010 >> 1
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: b
+    Expression: 9'sb10101010 << 1
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: c
+    Expression: 9'sb10101010 <<< 1
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: e
+    Expression: 9'sb10101010 >>> 1
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Parameter: 
+    Identifier: e
+    Expression: 9'b10101010 >>> 1
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+
