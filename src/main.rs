@@ -331,5 +331,32 @@ mod tests {
         let actual_yaml_value: serde_yaml::Value = serde_yaml::from_str(&s).unwrap();
         assert_eq!(expected_yaml_value, actual_yaml_value);
     }
+
+    fn check_primaryliterals(name: &str, actual_string: String) {
+        let out_dir = env::var("OUT_DIR").unwrap();
+
+        // Write actual display to file for manual inspection.
+        let out_display = Path::new(&out_dir)
+            .join("testcases")
+            .join("primaryliterals")
+            .join("display")
+            .join(format!("{}.txt", name));
+        fs::create_dir_all(out_display.parent().unwrap()).unwrap();
+        let a = File::create(out_display);
+        let mut a = BufWriter::new(a.unwrap());
+        write!(a, "{}", actual_string).unwrap();
+
+        // Check display against reference.
+        let in_display = Path::new("testcases")
+            .join("primaryliterals")
+            .join("display")
+            .join(format!("{}.txt", name));
+        let e = File::open(in_display).unwrap();
+        let mut e = BufReader::new(e);
+        let mut expected_string: String = String::new();
+        e.read_to_string(&mut expected_string).unwrap();
+        assert_eq!(expected_string, actual_string);
+    }
+
     include!(concat!(env!("OUT_DIR"), "/tests.rs"));
 }

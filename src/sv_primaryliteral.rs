@@ -291,8 +291,6 @@ impl SvPrimaryLiteral {
 
             self.prim_lit_add(right_nu.clone());
         }
-
-        println!("{}", self);
     }
 
     pub fn prim_lit_add(&mut self, mut right_nu: SvPrimaryLiteral) {
@@ -355,8 +353,6 @@ impl SvPrimaryLiteral {
                 }
             }
         }
-
-        println!("{}", self);
     }
 }
 
@@ -371,6 +367,6 @@ impl fmt::Display for SvPrimaryLiteral {
         write!(f, "\n")?;
 
         writeln!(f, "NumBits: {}", self.num_bits)?;
-        writeln!(f, "Signed: {}", self.signed)
+        write!(f, "Signed: {}", self.signed)
     }
 }
