@@ -254,19 +254,22 @@ mod tests {
     use std::fs;
     use std::io::{BufReader, Read};
 
-    fn check_outputs(name: &str) {
+    fn check_semantics(name: &str) {
         let in_sv = Path::new("testcases")
+            .join("semantics")
             .join("sv")
             .join(format!("{}.sv", name));
 
         let out_dir = env::var("OUT_DIR").unwrap();
         let out_json = Path::new(&out_dir)
             .join("testcases")
+            .join("semantics")
             .join("json")
             .join(format!("{}.json", name));
         fs::create_dir_all(out_json.parent().unwrap()).unwrap();
         let out_yaml = Path::new(&out_dir)
             .join("testcases")
+            .join("semantics")
             .join("yaml")
             .join(format!("{}.yaml", name));
         fs::create_dir_all(out_yaml.parent().unwrap()).unwrap();
@@ -285,6 +288,7 @@ mod tests {
         let actual_string: String = format!("{}", svdata.clone());
         let out_display = Path::new(&out_dir)
             .join("testcases")
+            .join("semantics")
             .join("display")
             .join(format!("{}.txt", name));
         fs::create_dir_all(out_display.parent().unwrap()).unwrap();
@@ -294,6 +298,7 @@ mod tests {
 
         // Check display against reference.
         let in_display = Path::new("testcases")
+            .join("semantics")
             .join("display")
             .join(format!("{}.txt", name));
         let e = File::open(in_display).unwrap();
@@ -304,6 +309,7 @@ mod tests {
 
         // Check JSON against reference.
         let in_json = Path::new("testcases")
+            .join("semantics")
             .join("json")
             .join(format!("{}.json", name));
         let e = File::open(in_json).unwrap();
@@ -315,6 +321,7 @@ mod tests {
 
         // Check YAML against reference.
         let in_yaml = Path::new("testcases")
+            .join("semantics")
             .join("yaml")
             .join(format!("{}.yaml", name));
         let e = File::open(in_yaml).unwrap();

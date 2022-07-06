@@ -1,0 +1,23 @@
+{
+  "modules": [
+    {
+      "identifier": "mh7",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": []
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ieee1800_2017_mh7.sv"
+    }
+  ],
+  "packages": []
+}

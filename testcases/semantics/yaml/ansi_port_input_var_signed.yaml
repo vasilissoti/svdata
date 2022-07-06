@@ -1,0 +1,71 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Input
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions:
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
+      - identifier: b
+        direction: Input
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions: []
+      - identifier: c
+        direction: Input
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: d
+        direction: Input
+        datakind: Variable
+        datatype: Reg
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+      - identifier: e
+        direction: Input
+        datakind: Variable
+        datatype: Logic
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions:
+          - - FOO-1
+            - "0"
+      - identifier: f
+        direction: Input
+        datakind: Variable
+        datatype: Integer
+        classid: ~
+        nettype: ~
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+    filepath: testcases/semantics/sv/ansi_port_input_var_signed.sv
+packages: []
