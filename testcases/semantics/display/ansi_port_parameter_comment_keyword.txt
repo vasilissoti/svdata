@@ -1,6 +1,6 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/ansi_port_parameter_comment_keyword.sv
+  Filepath: testcases/semantics/sv/ansi_port_parameter_comment_keyword.sv
   Parameter: 
     Identifier: a
     Expression: None
@@ -10,6 +10,7 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessOverridable: true
+    NumBits: None
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /*post*/
@@ -22,6 +23,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /* id/eq *//*eq/val*//* post */
@@ -34,6 +36,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /*post*/
@@ -46,6 +49,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /*id/eq*//*eq/val*//*post*/
@@ -58,6 +62,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /* id/eq *//*eq/val*//* post */
@@ -70,6 +75,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: /*id/eq*//*eq/val*//*post*/

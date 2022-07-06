@@ -75,7 +75,7 @@
         }
       ],
       "ports": [],
-      "filepath": "testcases/sv/ansi_port_parameter_comment_inheritance1.sv"
+      "filepath": "testcases/semantics/sv/ansi_port_parameter_comment_inheritance1.sv"
     }
   ],
   "packages": []

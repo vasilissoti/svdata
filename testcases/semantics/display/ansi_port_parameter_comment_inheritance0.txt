@@ -1,6 +1,6 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/ansi_port_parameter_comment_inheritance0.sv
+  Filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance0.sv
   Parameter: 
     Identifier: a
     Expression: (8'sb10101010+"hello")

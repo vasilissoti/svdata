@@ -10,6 +10,7 @@ modules:
         classid: ~
         signedness: ~
         signedness_overridable: true
+        num_bits: ~
         packed_dimensions: []
         unpacked_dimensions: []
         comment: /*post*/
@@ -21,6 +22,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
         comment: /*id/eq*//*eq/val*//*post*/
@@ -32,6 +34,7 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
         comment: /*post*/
@@ -43,9 +46,10 @@ modules:
         classid: ~
         signedness: Signed
         signedness_overridable: true
+        num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
         comment: /* id/eq *//*eq/val*//*post*/
     ports: []
-    filepath: testcases/sv/ansi_port_parameter_comment_nokeyword.sv
+    filepath: testcases/semantics/sv/ansi_port_parameter_comment_nokeyword.sv
 packages: []
