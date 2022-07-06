@@ -1,12 +1,12 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/ansi_port_parameter_comment1.sv
+  Filepath: testcases/sv/ansi_port_parameter_comment_inheritance0.sv
   Parameter: 
     Identifier: a
     Expression: (8'sb10101010+"hello")
-    ParameterType: Parameter
-    DataType: Integer
-    DataTypeOverridable: false
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
@@ -17,9 +17,9 @@ Module:
   Parameter: 
     Identifier: b
     Expression: 3
-    ParameterType: Parameter
-    DataType: Integer
-    DataTypeOverridable: false
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
@@ -31,8 +31,8 @@ Module:
     Identifier: c
     Expression: 1
     ParameterType: Parameter
-    DataType: Integer
-    DataTypeOverridable: false
+    DataType: Logic
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
@@ -44,8 +44,8 @@ Module:
     Identifier: d
     Expression: 6
     ParameterType: Parameter
-    DataType: Integer
-    DataTypeOverridable: false
+    DataType: Logic
+    DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
@@ -57,12 +57,12 @@ Module:
     Identifier: e
     Expression: None
     ParameterType: Parameter
-    DataType: Integer
-    DataTypeOverridable: false
+    DataType: None
+    DataTypeOverridable: true
     ClassIdentifier: None
-    Signedness: Signed
+    Signedness: None
     SignednessOverridable: true
-    NumBits: 32
+    NumBits: None
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None

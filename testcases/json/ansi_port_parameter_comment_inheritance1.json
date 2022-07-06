@@ -1,0 +1,82 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [
+        {
+          "identifier": "a",
+          "expression": "(8'sb10101010+\"hello\")",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "num_bits": 404,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/* A0 */"
+        },
+        {
+          "identifier": "b",
+          "expression": "3",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c",
+          "expression": "1",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/* C0 */"
+        },
+        {
+          "identifier": "d",
+          "expression": "6",
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "e",
+          "expression": null,
+          "paramtype": "Parameter",
+          "datatype": "Integer",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "ports": [],
+      "filepath": "testcases/sv/ansi_port_parameter_comment_inheritance1.sv"
+    }
+  ],
+  "packages": []
+}
