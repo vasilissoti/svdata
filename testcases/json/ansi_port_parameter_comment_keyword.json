@@ -5,58 +5,6 @@
       "parameters": [
         {
           "identifier": "a",
-          "expression": "(8'sb10101010+\"hello\")",
-          "paramtype": "LocalParam",
-          "datatype": "Logic",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": "Signed",
-          "signedness_overridable": true,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": "/* A0 */"
-        },
-        {
-          "identifier": "b",
-          "expression": "3",
-          "paramtype": "LocalParam",
-          "datatype": "Logic",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": "Signed",
-          "signedness_overridable": true,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
-          "identifier": "c",
-          "expression": "1",
-          "paramtype": "Parameter",
-          "datatype": "Logic",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": "Signed",
-          "signedness_overridable": true,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": "/* C0 */"
-        },
-        {
-          "identifier": "d",
-          "expression": "6",
-          "paramtype": "Parameter",
-          "datatype": "Logic",
-          "datatype_overridable": true,
-          "classid": null,
-          "signedness": "Signed",
-          "signedness_overridable": true,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
-          "identifier": "e",
           "expression": null,
           "paramtype": "Parameter",
           "datatype": null,
@@ -66,11 +14,76 @@
           "signedness_overridable": true,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": null
+          "comment": "/*post*/"
+        },
+        {
+          "identifier": "b",
+          "expression": "5",
+          "paramtype": "Parameter",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/* id/eq *//*eq/val*//* post */"
+        },
+        {
+          "identifier": "c",
+          "expression": null,
+          "paramtype": "Parameter",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*post*/"
+        },
+        {
+          "identifier": "d",
+          "expression": "5",
+          "paramtype": "Parameter",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*id/eq*//*eq/val*//*post*/"
+        },
+        {
+          "identifier": "e",
+          "expression": "5",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": true,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/* id/eq *//*eq/val*//* post */"
+        },
+        {
+          "identifier": "f",
+          "expression": "5",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": true,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*id/eq*//*eq/val*//*post*/"
         }
       ],
       "ports": [],
-      "filepath": "testcases/sv/ansi_port_parameter_comment0.sv"
+      "filepath": "testcases/sv/ansi_port_parameter_comment_keyword.sv"
     }
   ],
   "packages": []

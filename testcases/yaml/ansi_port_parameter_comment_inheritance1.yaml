@@ -4,9 +4,9 @@ modules:
     parameters:
       - identifier: a
         expression: "(8'sb10101010+\"hello\")"
-        paramtype: LocalParam
-        datatype: Logic
-        datatype_overridable: true
+        paramtype: Parameter
+        datatype: Integer
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
@@ -15,9 +15,9 @@ modules:
         comment: /* A0 */
       - identifier: b
         expression: "3"
-        paramtype: LocalParam
-        datatype: Logic
-        datatype_overridable: true
+        paramtype: Parameter
+        datatype: Integer
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
@@ -27,8 +27,8 @@ modules:
       - identifier: c
         expression: "1"
         paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
+        datatype: Integer
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
@@ -38,8 +38,8 @@ modules:
       - identifier: d
         expression: "6"
         paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
+        datatype: Integer
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
@@ -49,14 +49,14 @@ modules:
       - identifier: e
         expression: ~
         paramtype: Parameter
-        datatype: ~
-        datatype_overridable: true
+        datatype: Integer
+        datatype_overridable: false
         classid: ~
-        signedness: ~
+        signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
     ports: []
-    filepath: testcases/sv/ansi_port_parameter_comment0.sv
+    filepath: testcases/sv/ansi_port_parameter_comment_inheritance1.sv
 packages: []
