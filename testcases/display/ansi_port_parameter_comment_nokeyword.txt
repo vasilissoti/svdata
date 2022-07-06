@@ -1,21 +1,21 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/parameter_resolver_binary_operations1.sv
+  Filepath: testcases/sv/ansi_port_parameter_comment_nokeyword.sv
   Parameter: 
     Identifier: a
-    Expression: 8'sb10101010>>1
+    Expression: None
     ParameterType: Parameter
-    DataType: Logic
+    DataType: None
     DataTypeOverridable: true
     ClassIdentifier: None
-    Signedness: Signed
+    Signedness: None
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /*post*/
   Parameter: 
     Identifier: b
-    Expression: 9'sb10101010<<1
+    Expression: 5
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -24,41 +24,29 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /*id/eq*//*eq/val*//*post*/
   Parameter: 
     Identifier: c
-    Expression: 9'sb10101010<<<1
+    Expression: None
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
+    DataType: Int
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /*post*/
   Parameter: 
-    Identifier: e
-    Expression: 9'sb10101010>>>1
+    Identifier: d
+    Expression: 5
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
+    DataType: Int
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: e
-    Expression: 9'b10101010>>>1
-    ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: true
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
+    Comment: /* id/eq *//*eq/val*//*post*/
 

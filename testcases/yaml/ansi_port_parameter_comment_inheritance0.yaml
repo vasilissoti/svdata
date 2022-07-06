@@ -3,8 +3,19 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        expression: "8'sb10101010+6'sb10101010"
-        paramtype: Parameter
+        expression: "(8'sb10101010+\"hello\")"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: true
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /* A0 */
+      - identifier: b
+        expression: "3"
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: true
         classid: ~
@@ -13,19 +24,19 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: b
-        expression: "4'b1000+3.5-2"
+      - identifier: c
+        expression: "1"
         paramtype: Parameter
-        datatype: Real
+        datatype: Logic
         datatype_overridable: true
         classid: ~
-        signedness: ~
+        signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: c
-        expression: "-2+3+5+8'sb10101010"
+        comment: /* C0 */
+      - identifier: d
+        expression: "6"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: true
@@ -36,20 +47,9 @@ modules:
         unpacked_dimensions: []
         comment: ~
       - identifier: e
-        expression: "-2+3+5+8'b10101010"
+        expression: ~
         paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
-        classid: ~
-        signedness: Unsigned
-        signedness_overridable: true
-        packed_dimensions: []
-        unpacked_dimensions: []
-        comment: ~
-      - identifier: f
-        expression: "-2.5+3.5+4.5"
-        paramtype: Parameter
-        datatype: Real
+        datatype: ~
         datatype_overridable: true
         classid: ~
         signedness: ~
@@ -58,5 +58,5 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
-    filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+    filepath: testcases/sv/ansi_port_parameter_comment_inheritance0.sv
 packages: []

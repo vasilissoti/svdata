@@ -1,33 +1,21 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+  Filepath: testcases/sv/ansi_port_parameter_comment_keyword.sv
   Parameter: 
     Identifier: a
-    Expression: 8'sb10101010+6'sb10101010
+    Expression: None
     ParameterType: Parameter
-    DataType: Logic
+    DataType: None
     DataTypeOverridable: true
     ClassIdentifier: None
-    Signedness: Signed
+    Signedness: None
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /*post*/
   Parameter: 
     Identifier: b
-    Expression: 4'b1000+3.5-2
-    ParameterType: Parameter
-    DataType: Real
-    DataTypeOverridable: true
-    ClassIdentifier: None
-    Signedness: None
-    SignednessOverridable: true
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: c
-    Expression: -2+3+5+8'sb10101010
+    Expression: 5
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -36,29 +24,53 @@ Module:
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /* id/eq *//*eq/val*//* post */
+  Parameter: 
+    Identifier: c
+    Expression: None
+    ParameterType: Parameter
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*post*/
+  Parameter: 
+    Identifier: d
+    Expression: 5
+    ParameterType: Parameter
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*id/eq*//*eq/val*//*post*/
   Parameter: 
     Identifier: e
-    Expression: -2+3+5+8'b10101010
-    ParameterType: Parameter
+    Expression: 5
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: true
     ClassIdentifier: None
-    Signedness: Unsigned
+    Signedness: Signed
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /* id/eq *//*eq/val*//* post */
   Parameter: 
     Identifier: f
-    Expression: -2.5+3.5+4.5
-    ParameterType: Parameter
-    DataType: Real
-    DataTypeOverridable: true
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: None
+    Signedness: Signed
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /*id/eq*//*eq/val*//*post*/
 

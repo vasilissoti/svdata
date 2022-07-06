@@ -1,10 +1,22 @@
 Module:
   Identifier: TestModule
-  Filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+  Filepath: testcases/sv/ansi_port_parameter_comment_inheritance0.sv
   Parameter: 
     Identifier: a
-    Expression: 8'sb10101010+6'sb10101010
-    ParameterType: Parameter
+    Expression: (8'sb10101010+"hello")
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* A0 */
+  Parameter: 
+    Identifier: b
+    Expression: 3
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: true
     ClassIdentifier: None
@@ -14,20 +26,20 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: b
-    Expression: 4'b1000+3.5-2
+    Identifier: c
+    Expression: 1
     ParameterType: Parameter
-    DataType: Real
+    DataType: Logic
     DataTypeOverridable: true
     ClassIdentifier: None
-    Signedness: None
+    Signedness: Signed
     SignednessOverridable: true
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: None
+    Comment: /* C0 */
   Parameter: 
-    Identifier: c
-    Expression: -2+3+5+8'sb10101010
+    Identifier: d
+    Expression: 6
     ParameterType: Parameter
     DataType: Logic
     DataTypeOverridable: true
@@ -39,21 +51,9 @@ Module:
     Comment: None
   Parameter: 
     Identifier: e
-    Expression: -2+3+5+8'b10101010
+    Expression: None
     ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: true
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: f
-    Expression: -2.5+3.5+4.5
-    ParameterType: Parameter
-    DataType: Real
+    DataType: None
     DataTypeOverridable: true
     ClassIdentifier: None
     Signedness: None

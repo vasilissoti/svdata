@@ -3,29 +3,18 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        expression: "8'sb10101010+6'sb10101010"
+        expression: ~
         paramtype: Parameter
-        datatype: Logic
+        datatype: ~
         datatype_overridable: true
         classid: ~
-        signedness: Signed
+        signedness: ~
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /*post*/
       - identifier: b
-        expression: "4'b1000+3.5-2"
-        paramtype: Parameter
-        datatype: Real
-        datatype_overridable: true
-        classid: ~
-        signedness: ~
-        signedness_overridable: true
-        packed_dimensions: []
-        unpacked_dimensions: []
-        comment: ~
-      - identifier: c
-        expression: "-2+3+5+8'sb10101010"
+        expression: "5"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: true
@@ -34,29 +23,51 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: e
-        expression: "-2+3+5+8'b10101010"
+        comment: /* id/eq *//*eq/val*//* post */
+      - identifier: c
+        expression: ~
         paramtype: Parameter
+        datatype: Int
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*post*/
+      - identifier: d
+        expression: "5"
+        paramtype: Parameter
+        datatype: Int
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*id/eq*//*eq/val*//*post*/
+      - identifier: e
+        expression: "5"
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: true
         classid: ~
-        signedness: Unsigned
+        signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /* id/eq *//*eq/val*//* post */
       - identifier: f
-        expression: "-2.5+3.5+4.5"
-        paramtype: Parameter
-        datatype: Real
-        datatype_overridable: true
+        expression: "5"
+        paramtype: LocalParam
+        datatype: Int
+        datatype_overridable: false
         classid: ~
-        signedness: ~
+        signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /*id/eq*//*eq/val*//*post*/
     ports: []
-    filepath: testcases/sv/parameter_resolver_binary_operations0.sv
+    filepath: testcases/sv/ansi_port_parameter_comment_keyword.sv
 packages: []

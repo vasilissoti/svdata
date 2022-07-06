@@ -3,7 +3,7 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        expression: "8'sb10101010"
+        expression: "(8'sb10101010+\"hello\")"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: false
@@ -12,48 +12,31 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /* A0 */
       - identifier: b
-        expression: "4'b1000"
+        expression: "3"
         paramtype: Parameter
-        datatype: Logic
+        datatype: Integer
         datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: false
-        packed_dimensions:
-          - - "3"
-            - "0"
+        signedness_overridable: true
+        packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
       - identifier: c
-        expression: ~
+        expression: "1"
         paramtype: Parameter
-        datatype: Logic
+        datatype: Integer
         datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: false
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions:
-          - - "4"
-            - "0"
-        comment: ~
-      - identifier: e
-        expression: "7.5"
-        paramtype: Parameter
-        datatype: Real
-        datatype_overridable: false
-        classid: ~
-        signedness: ~
-        signedness_overridable: false
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: f
-        expression: "5"
+        comment: /* C0 */
+      - identifier: d
+        expression: "6"
         paramtype: Parameter
         datatype: Integer
         datatype_overridable: false
@@ -63,17 +46,17 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: g
-        expression: "\"hello\""
+      - identifier: e
+        expression: ~
         paramtype: Parameter
-        datatype: String
+        datatype: Integer
         datatype_overridable: false
         classid: ~
-        signedness: ~
-        signedness_overridable: false
+        signedness: Signed
+        signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
     ports: []
-    filepath: testcases/sv/ansi_port_parameter_nokeyword.sv
+    filepath: testcases/sv/ansi_port_parameter_comment_inheritance1.sv
 packages: []

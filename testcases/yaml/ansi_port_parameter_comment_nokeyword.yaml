@@ -3,18 +3,18 @@ modules:
   - identifier: TestModule
     parameters:
       - identifier: a
-        expression: "8'sb10101010>>1"
+        expression: ~
         paramtype: Parameter
-        datatype: Logic
+        datatype: ~
         datatype_overridable: true
         classid: ~
-        signedness: Signed
+        signedness: ~
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /*post*/
       - identifier: b
-        expression: "9'sb10101010<<1"
+        expression: "5"
         paramtype: Parameter
         datatype: Logic
         datatype_overridable: true
@@ -23,40 +23,29 @@ modules:
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
+        comment: /*id/eq*//*eq/val*//*post*/
       - identifier: c
-        expression: "9'sb10101010<<<1"
+        expression: ~
         paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
+        datatype: Int
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: e
-        expression: "9'sb10101010>>>1"
+        comment: /*post*/
+      - identifier: d
+        expression: "5"
         paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
+        datatype: Int
+        datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: true
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: ~
-      - identifier: e
-        expression: "9'b10101010>>>1"
-        paramtype: Parameter
-        datatype: Logic
-        datatype_overridable: true
-        classid: ~
-        signedness: Unsigned
-        signedness_overridable: true
-        packed_dimensions: []
-        unpacked_dimensions: []
-        comment: ~
+        comment: /* id/eq *//*eq/val*//*post*/
     ports: []
-    filepath: testcases/sv/parameter_resolver_binary_operations1.sv
+    filepath: testcases/sv/ansi_port_parameter_comment_nokeyword.sv
 packages: []
