@@ -82,12 +82,12 @@ pub fn main() {
     };
 
     let mut test4 = SvPrimaryLiteral {
-        data01: vec![4611686018427387904],
-        num_bits: 64,
+        data01: vec![0, 4611686018427387904],
+        num_bits: 66,
         signed: true,
     };
 
-    test4._signed_sign_inversion();
+    test4._truncate_size(64);
     println!("Converted test 4: \n{}", test4);
 
     test3.usize_add(4611686018427387904);

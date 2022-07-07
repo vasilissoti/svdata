@@ -256,17 +256,29 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _truncate_size(&mut self, num_bits: usize) {
-        if self.num_bits >= num_bits {
-            let elmnts_to_be_rm: usize = num_bits / usize::BITS as usize;
-            let bits_to_be_rm: usize = usize::BITS as usize - num_bits % usize::BITS as usize;
+        if num_bits == 0 {
+            panic!("Cannot truncate the value to zero bits!");
+        } else if self.num_bits >= num_bits {
+            let elmnts_to_be_rm: usize = self.data01.len() - num_bits / usize::BITS as usize;
+            println!("{}", elmnts_to_be_rm);
+            let bits_to_be_rm: usize = (self.num_bits - num_bits) % usize::BITS as usize;
+            println!("{}", bits_to_be_rm);
+
+            let locator: usize;
+            if elmnts_to_be_rm == 0 {
+                locator = usize::BITS as usize - self.num_bits;
+            } else {
+                locator = usize::BITS as usize;
+            }
+            println!("{}", locator);
 
             for _x in 0..elmnts_to_be_rm {
                 self.data01.remove(0);
             }
 
-            for x in 0..bits_to_be_rm {
-                if (self.data01[0].leading_zeros() as usize) < (x + 1) {
-                    self.data01[0] = self.data01[0] - 2usize.pow(usize::BITS - x as u32 - 1);
+            for x in locator..(locator - bits_to_be_rm) {
+                if (self.data01[0].leading_zeros() as usize) == (usize::BITS as usize - x) {
+                    self.data01[0] = self.data01[0] - 2usize.pow(x as u32 - 1);
                 }
             }
 
@@ -302,6 +314,7 @@ impl SvPrimaryLiteral {
     pub fn prim_lit_add(&mut self, mut right_nu: SvPrimaryLiteral) {
         if self.signed == false || right_nu.signed == false {
             self._unsigned_prim_lit_add(right_nu.clone());
+            self.signed = false;
 
             let new_num_bits: usize;
             if !self._is_zero() {
