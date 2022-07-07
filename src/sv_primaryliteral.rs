@@ -223,13 +223,19 @@ impl SvPrimaryLiteral {
         for x in 0..self.data01.len() {
             while !min_num_found {
                 let pre_leading = self.data01[x].leading_zeros();
+
                 let minimized_value: usize =
                     self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
                 let post_leading = minimized_value.leading_zeros();
 
-                if (post_leading != (pre_leading + 1))
-                    || (post_leading == usize::BITS && (x == (self.data01.len() - 1)))
-                {
+                if post_leading == usize::BITS {
+                    if x == (self.data01.len() - 1) || self.data01[x + 1].leading_zeros() != 0 {
+                        min_num_found = true;
+                        break;
+                    }
+                }
+
+                if post_leading != (pre_leading + 1) {
                     min_num_found = true;
                     break;
                 } else {
