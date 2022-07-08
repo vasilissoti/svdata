@@ -198,7 +198,16 @@ impl SvPrimaryLiteral {
         self._signed_sign_extension();
 
         for x in (0..self.data01.len()).rev() {
-            self.data01[x] = !self.data01[x];
+            let mut lsl: usize = self.data01[x];
+            for y in 0..usize::BITS {
+                if lsl.leading_zeros() == 0 {
+                    self.data01[x] = self.data01[x] - 2usize.pow(usize::BITS - y - 1);
+                } else {
+                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                }
+
+                lsl = lsl << 1;
+            }
         }
 
         if from_negative {
