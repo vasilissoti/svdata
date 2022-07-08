@@ -63,18 +63,18 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _prim_lit_vec_elmnt_match(&mut self, right_nu: &mut SvPrimaryLiteral) {
-        let left_size = self.num_bits;
-        let right_size = right_nu.num_bits;
+        let left_size = self.data01.len();
+        let right_size = right_nu.data01.len();
 
         // Ensure that their total nu of vector elements is the same in left and right
         if left_size > right_size {
-            let diff: usize = (left_size - right_size) / usize::BITS as usize;
+            let diff: usize = left_size - right_size;
 
             for _x in 0..diff {
                 right_nu.data01.insert(0, 0);
             }
         } else if left_size < right_size {
-            let diff: usize = (right_size - left_size) / usize::BITS as usize;
+            let diff: usize = right_size - left_size;
 
             for _x in 0..diff {
                 self.data01.insert(0, 0);
