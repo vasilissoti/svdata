@@ -98,11 +98,13 @@ impl SvPrimaryLiteral {
     }
 
     pub fn _is_zero(&mut self) -> bool {
-        if self.data01.len() == 1 && self.data01[0].leading_zeros() == usize::BITS {
-            true
-        } else {
-            false
+        for x in 0..self.data01.len() {
+            if self.data01[x].leading_zeros() != usize::BITS {
+                return false;
+            }
         }
+
+        true
     }
 
     pub fn _signed_matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteral) {
