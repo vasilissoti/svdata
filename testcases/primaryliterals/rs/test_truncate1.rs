@@ -4,6 +4,6 @@ let mut a = SvPrimaryLiteral {
     signed: true,
 };
 
-a._truncate_size(5);
+a._truncate(5);
 
 let actual_string = format!("{}", a);

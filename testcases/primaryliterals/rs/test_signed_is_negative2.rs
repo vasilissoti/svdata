@@ -4,4 +4,4 @@ let mut a = SvPrimaryLiteral {
     signed: true,
 };
 
-let actual_string = format!("{}", a._signed_is_negative());
+let actual_string = format!("{}", a.is_negative());

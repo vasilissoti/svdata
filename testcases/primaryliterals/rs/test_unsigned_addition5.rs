@@ -10,6 +10,6 @@ let b = SvPrimaryLiteral {
     signed: false,
 };
 
-a.prim_lit_add(b.clone());
+a.add_primlit(b.clone());
 
 let actual_string = format!("{}", a);

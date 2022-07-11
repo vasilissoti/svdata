@@ -11,7 +11,6 @@ use std::{env, process};
 use sv_parser::{parse_sv, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
 use svdata::structures::SvData;
 use svdata::sv_module::{module_declaration_ansi, module_declaration_nonansi};
-use svdata::sv_primaryliteral::SvPrimaryLiteral;
 use verilog_filelist_parser; // DBG
 
 #[derive(Debug, Parser)]
@@ -63,39 +62,6 @@ pub struct Opt {
 
 #[cfg_attr(tarpaulin, skip)]
 pub fn main() {
-    let mut test1 = SvPrimaryLiteral {
-        data01: vec![0, 9223372036854775808],
-        num_bits: 192,
-        signed: false,
-    };
-
-    let mut test2 = SvPrimaryLiteral {
-        data01: vec![9223372036854775808, 9223372036854775808],
-        num_bits: 192,
-        signed: false,
-    };
-
-    let mut test3 = SvPrimaryLiteral {
-        data01: vec![4611686018427387904],
-        num_bits: 64,
-        signed: true,
-    };
-
-    let mut test4 = SvPrimaryLiteral {
-        data01: vec![0, 4611686018427387904],
-        num_bits: 66,
-        signed: true,
-    };
-
-    test4._truncate_size(64);
-    println!("Converted test 4: \n{}", test4);
-
-    test3.usize_add(4611686018427387904);
-
-    test2.prim_lit_add(test1.clone());
-
-    test1.usize_add(9223372036854775808);
-
     let opt = Parser::parse();
     let exit_code = match run_opt(&opt) {
         Ok(_) => 0,

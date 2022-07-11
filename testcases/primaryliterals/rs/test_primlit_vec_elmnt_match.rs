@@ -10,6 +10,6 @@ let mut b = SvPrimaryLiteral {
     signed: true,
 };
 
-a._prim_lit_vec_elmnt_match(&mut b);
+a._primlit_vec_elmnt_match(&mut b);
 
 let actual_string = format!("{}", a);
