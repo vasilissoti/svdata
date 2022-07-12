@@ -229,7 +229,7 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives a signed primary literal and returns a primary literal with its inverted value. */
+    /* Receives a signed primary literal and returns a primary literal with its inverted value. The final number of bits remains the same as the original one.*/
     pub fn inv(&self) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
@@ -249,68 +249,86 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives a signed primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
+    /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
-        if self.signed != true {
-            panic!("Expected signed SvPrimaryLiteral but found unsigned!");
-        }
-
-        let mut min_num_found: bool = false;
-        let mut vec_elements_to_rm: usize = 0;
-
-        if self.is_negative() {
-            for x in 0..self.data01.len() {
-                while !min_num_found {
-                    let pre_leading = self.data01[x].leading_zeros();
-
-                    let minimized_value: usize =
-                        self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
-                    let post_leading = minimized_value.leading_zeros();
-
-                    if post_leading == usize::BITS {
-                        if x == (self.data01.len() - 1) || self.data01[x + 1].leading_zeros() != 0 {
-                            min_num_found = true;
-                            break;
-                        }
-                    }
-
-                    if post_leading != (pre_leading + 1) {
-                        min_num_found = true;
-                        break;
-                    } else {
-                        self.data01[x] = minimized_value;
-                        self.num_bits = self.num_bits - 1;
-
-                        if post_leading == usize::BITS {
-                            vec_elements_to_rm = vec_elements_to_rm + 1;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            for _x in 0..vec_elements_to_rm {
-                self.data01.remove(0);
-            }
-        } else if self.is_zero() {
-            for _x in 0..self.data01.len() {
-                self.data01.remove(0);
-            }
-            self.data01.push(0);
-            self.num_bits = 1;
-        } else {
-            for _x in 0..self.data01.len() {
-                if self.data01[0] == 0 {
+        if !self.signed {
+            if self.is_zero() {
+                for _x in 0..self.data01.len() {
                     self.data01.remove(0);
                 }
-            }
+                self.data01.push(0);
+                self.num_bits = 1;
+            } else {
+                for _x in 0..self.data01.len() {
+                    if self.data01[0] == 0 {
+                        self.data01.remove(0);
+                    }
+                }
 
-            if self.data01[0].leading_zeros() == 0 {
-                self.data01.insert(0, 0);
+                self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
             }
+        } else {
+            let mut min_num_found: bool = false;
+            let mut vec_elements_to_rm: usize = 0;
 
-            self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
-                + (self.data01.len() - 1) * usize::BITS as usize;
+            if self.is_negative() {
+                for x in 0..self.data01.len() {
+                    while !min_num_found {
+                        let pre_leading = self.data01[x].leading_zeros();
+
+                        let minimized_value: usize =
+                            self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
+                        let post_leading = minimized_value.leading_zeros();
+
+                        if post_leading == usize::BITS {
+                            if x == (self.data01.len() - 1)
+                                || self.data01[x + 1].leading_zeros() != 0
+                            {
+                                min_num_found = true;
+                                break;
+                            }
+                        }
+
+                        if post_leading != (pre_leading + 1) {
+                            min_num_found = true;
+                            break;
+                        } else {
+                            self.data01[x] = minimized_value;
+                            self.num_bits = self.num_bits - 1;
+
+                            if post_leading == usize::BITS {
+                                vec_elements_to_rm = vec_elements_to_rm + 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                for _x in 0..vec_elements_to_rm {
+                    self.data01.remove(0);
+                }
+            } else if self.is_zero() {
+                for _x in 0..self.data01.len() {
+                    self.data01.remove(0);
+                }
+                self.data01.push(0);
+                self.num_bits = 1;
+            } else {
+                for _x in 0..self.data01.len() {
+                    if self.data01[0] == 0 {
+                        self.data01.remove(0);
+                    }
+                }
+
+                if self.data01[0].leading_zeros() == 0 {
+                    self.data01.insert(0, 0);
+                }
+
+                self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize
+                    + 1)
+                    + (self.data01.len() - 1) * usize::BITS as usize;
+            }
         }
     }
 
@@ -357,16 +375,8 @@ impl SvPrimaryLiteral {
     pub fn add_usize(&self, right_nu: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         if !ret.signed {
-            let new_num_bits: usize;
-
             ret._unsigned_usize_add(right_nu);
-            if !ret.is_zero() {
-                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
-                    + (ret.data01.len() - 1) * usize::BITS as usize;
-                ret.num_bits = new_num_bits;
-            } else {
-                ret.num_bits = 1;
-            }
+            ret._minimum_width();
             ret
         } else {
             let right_nu = SvPrimaryLiteral {
