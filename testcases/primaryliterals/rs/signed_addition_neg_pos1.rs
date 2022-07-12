@@ -1,4 +1,4 @@
-let mut a = SvPrimaryLiteral {
+let a = SvPrimaryLiteral {
     data01: vec![4611686018427387904],
     num_bits: 63,
     signed: true,
@@ -10,6 +10,6 @@ let b = SvPrimaryLiteral {
     signed: true,
 };
 
-a.add_primlit(b.clone());
+let c: SvPrimaryLiteral = a.add_primlit(b.clone());
 
-let actual_string = format!("{}", a);
+let actual_string = format!("{}", c);

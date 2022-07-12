@@ -346,18 +346,20 @@ impl SvPrimaryLiteral {
         }
     }
 
-    pub fn add_usize(&mut self, right_nu: usize) {
-        if !self.signed {
+    pub fn add_usize(&self, right_nu: usize) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        if !ret.signed {
             let new_num_bits: usize;
 
-            self._unsigned_usize_add(right_nu);
-            if !self.is_zero() {
-                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
-                self.num_bits = new_num_bits;
+            ret._unsigned_usize_add(right_nu);
+            if !ret.is_zero() {
+                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
+                    + (ret.data01.len() - 1) * usize::BITS as usize;
+                ret.num_bits = new_num_bits;
             } else {
-                self.num_bits = 1;
+                ret.num_bits = 1;
             }
+            ret
         } else {
             let right_nu = SvPrimaryLiteral {
                 data01: vec![right_nu],
@@ -365,71 +367,73 @@ impl SvPrimaryLiteral {
                 signed: true,
             };
 
-            self.add_primlit(right_nu.clone());
+            ret.add_primlit(right_nu.clone())
         }
     }
 
-    pub fn add_primlit(&mut self, mut right_nu: SvPrimaryLiteral) {
-        if self.signed == false || right_nu.signed == false {
-            self._unsigned_primlit_add(right_nu.clone());
-            self.signed = false;
+    pub fn add_primlit(&self, mut right_nu: SvPrimaryLiteral) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        if ret.signed == false || right_nu.signed == false {
+            ret._unsigned_primlit_add(right_nu.clone());
+            ret.signed = false;
 
             let new_num_bits: usize;
-            if !self.is_zero() {
-                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
-                self.num_bits = new_num_bits;
+            if !ret.is_zero() {
+                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
+                    + (ret.data01.len() - 1) * usize::BITS as usize;
+                ret.num_bits = new_num_bits;
             } else {
-                self.num_bits = 1;
+                ret.num_bits = 1;
             }
         } else {
-            let left_neg: bool = self.is_negative();
+            let left_neg: bool = ret.is_negative();
             let right_neg: bool = right_nu.is_negative();
 
             if !left_neg && !right_neg {
                 let new_num_bits: usize;
 
-                self._unsigned_primlit_add(right_nu.clone());
+                ret._unsigned_primlit_add(right_nu.clone());
 
-                if self.data01[0].leading_zeros() == 0 {
-                    self.data01.insert(0, 0);
+                if ret.data01[0].leading_zeros() == 0 {
+                    ret.data01.insert(0, 0);
                 }
 
-                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
+                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
+                    + (ret.data01.len() - 1) * usize::BITS as usize;
 
-                self.num_bits = new_num_bits;
+                ret.num_bits = new_num_bits;
             } else if left_neg && right_neg {
                 let new_num_bits: usize;
 
-                self._matched_sign_extension(&mut right_nu);
-                self._unsigned_primlit_add(right_nu.clone());
+                ret._matched_sign_extension(&mut right_nu);
+                ret._unsigned_primlit_add(right_nu.clone());
 
-                new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
-                self.num_bits = new_num_bits;
+                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
+                    + (ret.data01.len() - 1) * usize::BITS as usize;
+                ret.num_bits = new_num_bits;
 
-                self._minimum_width();
+                ret._minimum_width();
             } else {
                 let new_num_bits: usize;
 
-                self._matched_sign_extension(&mut right_nu);
-                self._unsigned_primlit_add(right_nu.clone());
-                self._truncate(self.num_bits);
+                ret._matched_sign_extension(&mut right_nu);
+                ret._unsigned_primlit_add(right_nu.clone());
+                ret._truncate(ret.num_bits);
 
-                if self.is_negative() {
-                    self._minimum_width();
-                } else if self.is_zero() {
-                    self._truncate(usize::BITS as usize);
-                    self.num_bits = 1;
+                if ret.is_negative() {
+                    ret._minimum_width();
+                } else if ret.is_zero() {
+                    ret._truncate(usize::BITS as usize);
+                    ret.num_bits = 1;
                 } else {
-                    new_num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize
+                    new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize
                         + 1)
-                        + (self.data01.len() - 1) * usize::BITS as usize;
-                    self.num_bits = new_num_bits;
+                        + (ret.data01.len() - 1) * usize::BITS as usize;
+                    ret.num_bits = new_num_bits;
                 }
             }
         }
+        ret
     }
 }
 
