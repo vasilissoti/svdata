@@ -10,6 +10,6 @@ let mut b = SvPrimaryLiteral {
     signed: true,
 };
 
-a._signed_matched_sign_extension(&mut b);
+a._matched_sign_extension(&mut b);
 
 let actual_string = format!("{}", a);

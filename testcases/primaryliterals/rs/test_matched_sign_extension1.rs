@@ -1,6 +1,6 @@
 let mut a = SvPrimaryLiteral {
-    data01: vec![9223372036854775808],
-    num_bits: 64,
+    data01: vec![9223372036854775808, 9223372036854775808],
+    num_bits: 128,
     signed: true,
 };
 
@@ -10,6 +10,6 @@ let mut b = SvPrimaryLiteral {
     signed: true,
 };
 
-a._signed_matched_sign_extension(&mut b);
+a._matched_sign_extension(&mut b);
 
 let actual_string = format!("{}", a);

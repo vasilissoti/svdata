@@ -4,6 +4,6 @@ let mut a = SvPrimaryLiteral {
     signed: true,
 };
 
-a._signed_sign_inversion();
+a._neg();
 
 let actual_string = format!("{}", a);
