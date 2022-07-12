@@ -395,14 +395,7 @@ impl SvPrimaryLiteral {
             ret._unsigned_primlit_add(right_nu.clone());
             ret.signed = false;
 
-            let new_num_bits: usize;
-            if !ret.is_zero() {
-                new_num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
-                    + (ret.data01.len() - 1) * usize::BITS as usize;
-                ret.num_bits = new_num_bits;
-            } else {
-                ret.num_bits = 1;
-            }
+            ret._minimum_width();
         } else {
             let left_neg: bool = ret.is_negative();
             let right_neg: bool = right_nu.is_negative();
