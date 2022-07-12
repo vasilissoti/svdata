@@ -209,6 +209,30 @@ impl SvPrimaryLiteral {
         let from_negative: bool = ret.is_negative();
         ret._sign_extension();
 
+        ret = ret.inv();
+
+        ret._unsigned_usize_add(1);
+
+        if from_negative {
+            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
+                + (ret.data01.len() - 1) * usize::BITS as usize;
+
+            if ret.data01[0].leading_zeros() == 0 {
+                ret.data01.insert(0, 0);
+            }
+        } else {
+            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
+                + (ret.data01.len() - 1) * usize::BITS as usize;
+            ret._minimum_width();
+        }
+
+        ret
+    }
+
+    /* Receives a signed primary literal and returns a primary literal with its inverted value. */
+    pub fn inv(&self) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+
         for x in (0..ret.data01.len()).rev() {
             let mut lsl: usize = ret.data01[x];
             for y in 0..usize::BITS {
@@ -220,22 +244,6 @@ impl SvPrimaryLiteral {
 
                 lsl = lsl << 1;
             }
-        }
-
-        if from_negative {
-            ret._unsigned_usize_add(1);
-
-            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
-                + (ret.data01.len() - 1) * usize::BITS as usize;
-
-            if ret.data01[0].leading_zeros() == 0 {
-                ret.data01.insert(0, 0);
-            }
-        } else {
-            ret._unsigned_usize_add(1);
-            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
-                + (ret.data01.len() - 1) * usize::BITS as usize;
-            ret._minimum_width();
         }
 
         ret
