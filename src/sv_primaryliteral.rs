@@ -197,24 +197,25 @@ impl SvPrimaryLiteral {
         self.num_bits = self.data01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and derives its opposite signed primary literal (i.e +ve -> -ve and vice versa). The correct final number of bits is set to the argument. */
-    pub fn _neg(&mut self) {
-        if self.is_zero() {
-            return;
-        } else if self.signed != true {
+    /* Receives a signed primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa). The correct final number of bits is set to the argument. */
+    pub fn neg(&self) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        if ret.is_zero() {
+            return ret;
+        } else if ret.signed != true {
             panic!("Expected signed SvPrimaryLiteral but found unsigned!");
         }
 
-        let from_negative: bool = self.is_negative();
-        self._sign_extension();
+        let from_negative: bool = ret.is_negative();
+        ret._sign_extension();
 
-        for x in (0..self.data01.len()).rev() {
-            let mut lsl: usize = self.data01[x];
+        for x in (0..ret.data01.len()).rev() {
+            let mut lsl: usize = ret.data01[x];
             for y in 0..usize::BITS {
                 if lsl.leading_zeros() == 0 {
-                    self.data01[x] = self.data01[x] - 2usize.pow(usize::BITS - y - 1);
+                    ret.data01[x] = ret.data01[x] - 2usize.pow(usize::BITS - y - 1);
                 } else {
-                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                    ret.data01[x] = ret.data01[x] + 2usize.pow(usize::BITS - y - 1);
                 }
 
                 lsl = lsl << 1;
@@ -222,20 +223,22 @@ impl SvPrimaryLiteral {
         }
 
         if from_negative {
-            self._unsigned_usize_add(1);
+            ret._unsigned_usize_add(1);
 
-            self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
-                + (self.data01.len() - 1) * usize::BITS as usize;
+            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
+                + (ret.data01.len() - 1) * usize::BITS as usize;
 
-            if self.data01[0].leading_zeros() == 0 {
-                self.data01.insert(0, 0);
+            if ret.data01[0].leading_zeros() == 0 {
+                ret.data01.insert(0, 0);
             }
         } else {
-            self._unsigned_usize_add(1);
-            self.num_bits = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                + (self.data01.len() - 1) * usize::BITS as usize;
-            self._minimum_width();
+            ret._unsigned_usize_add(1);
+            ret.num_bits = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
+                + (ret.data01.len() - 1) * usize::BITS as usize;
+            ret._minimum_width();
         }
+
+        ret
     }
 
     /* Receives a signed primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
