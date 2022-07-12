@@ -246,6 +246,10 @@ impl SvPrimaryLiteral {
             }
         }
 
+        let initial_num_bits = ret.num_bits;
+        ret.num_bits = ret.data01.len() * usize::BITS as usize;
+        ret._truncate(initial_num_bits);
+
         ret
     }
 
@@ -359,7 +363,7 @@ impl SvPrimaryLiteral {
             }
 
             if bits_to_be_rm != 0 {
-                for x in ((locator - bits_to_be_rm)..(locator + 1)).rev() {
+                for x in ((locator - bits_to_be_rm + 1)..(usize::BITS as usize + 1)).rev() {
                     if self.data01[0].leading_zeros() == (usize::BITS - x as u32) {
                         self.data01[0] = self.data01[0] - 2usize.pow(x as u32 - 1);
                     }
