@@ -316,13 +316,24 @@ impl SvPrimaryLiteral {
         let last_index = ret.data01.len() - 1;
 
         for _x in 0..positions {
-            let leading_one: bool = ret.data01[0].leading_zeros() == 0;
-            ret.lsl(1);
-            ret._truncate(ret.num_bits);
+            println!("INITIAL {}: ", ret);
+            let previous_size = ret.num_bits;
+            let leading_one: bool;
 
+            if previous_size % usize::BITS as usize == 0 {
+                leading_one = ret.data01[0].leading_zeros() == 0;
+            } else {
+                leading_one = ret.data01[0].leading_zeros() as usize
+                    == (usize::BITS as usize - (ret.num_bits % usize::BITS as usize));
+            }
+
+            ret = ret.lsl(1);
+            ret._truncate(previous_size);
+            println!("LSL {}: ", ret);
             if leading_one {
                 ret.data01[last_index] = ret.data01[last_index] + 1;
             }
+            println!("ADDED {}: ", ret);
         }
 
         ret
@@ -335,7 +346,7 @@ impl SvPrimaryLiteral {
 
         for _x in 0..positions {
             let trailing_one: bool = ret.data01[last_index].trailing_zeros() == 0;
-            ret.lsr(1);
+            ret = ret.lsr(1);
 
             if trailing_one {
                 ret.data01[0] = ret.data01[0] + 2usize.pow(usize::BITS - 1);
@@ -434,20 +445,14 @@ impl SvPrimaryLiteral {
             panic!("Cannot truncate the value to zero bits!");
         } else if self.num_bits >= num_bits {
             let elmnts_to_be_rm: usize;
+            let bits_to_be_rm: usize;
 
             if (num_bits % usize::BITS as usize) == 0 {
                 elmnts_to_be_rm = self.data01.len() - num_bits / usize::BITS as usize;
+                bits_to_be_rm = 0;
             } else {
                 elmnts_to_be_rm = self.data01.len() - (num_bits / usize::BITS as usize) - 1;
-            }
-
-            let bits_to_be_rm: usize = (self.num_bits - num_bits) % usize::BITS as usize;
-
-            let locator: usize;
-            if self.num_bits % usize::BITS as usize == 0 {
-                locator = usize::BITS as usize;
-            } else {
-                locator = self.num_bits % usize::BITS as usize;
+                bits_to_be_rm = usize::BITS as usize - num_bits % usize::BITS as usize;
             }
 
             for _x in 0..elmnts_to_be_rm {
@@ -455,7 +460,9 @@ impl SvPrimaryLiteral {
             }
 
             if bits_to_be_rm != 0 {
-                for x in ((locator - bits_to_be_rm + 1)..(usize::BITS as usize + 1)).rev() {
+                for x in
+                    ((usize::BITS as usize - bits_to_be_rm + 1)..(usize::BITS as usize + 1)).rev()
+                {
                     if self.data01[0].leading_zeros() == (usize::BITS - x as u32) {
                         self.data01[0] = self.data01[0] - 2usize.pow(x as u32 - 1);
                     }
