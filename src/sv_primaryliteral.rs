@@ -253,6 +253,98 @@ impl SvPrimaryLiteral {
         ret
     }
 
+    /* Receives the number of shift positions and implemenents logical shifting to the left. For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted. If an explicit range is defined, _truncate can be used afterwards.*/
+    pub fn lsl(&self, positions: usize) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+
+        for _x in 0..positions {
+            let mut leading_one: bool = false;
+            ret.num_bits = ret.num_bits + 1;
+
+            for y in (0..ret.data01.len()).rev() {
+                let pre_mod = ret.data01[y];
+
+                if leading_one {
+                    ret.data01[y] = (ret.data01[y] << 1) + 1;
+                    leading_one = false;
+                } else {
+                    ret.data01[y] = ret.data01[y] << 1;
+                }
+
+                if pre_mod.leading_zeros() == 0 {
+                    leading_one = true;
+                }
+            }
+
+            if leading_one {
+                ret.data01.insert(0, 1);
+            }
+        }
+
+        ret
+    }
+
+    /* Receives the number of shift positions and implemenents logical shifting to the right. The initial number of bits is preserved. */
+    pub fn lsr(&self, positions: usize) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+
+        for _x in 0..positions {
+            let mut trailing_one: bool = false;
+
+            for y in 0..ret.data01.len() {
+                let pre_mod = ret.data01[y];
+
+                if trailing_one {
+                    ret.data01[y] = (ret.data01[y] >> 1) + 2usize.pow(usize::BITS - 1);
+                    trailing_one = false;
+                } else {
+                    ret.data01[y] = ret.data01[y] >> 1;
+                }
+
+                if pre_mod.trailing_zeros() == 0 {
+                    trailing_one = true;
+                }
+            }
+        }
+
+        ret
+    }
+
+    /* Receives the number of shift positions and shifts the value to the left without changing the number of bits. The dropped bits are shifted in the RHS of the value. */
+    pub fn rol(&self, positions: usize) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        let last_index = ret.data01.len() - 1;
+
+        for _x in 0..positions {
+            let leading_one: bool = ret.data01[0].leading_zeros() == 0;
+            ret.lsl(1);
+            ret._truncate(ret.num_bits);
+
+            if leading_one {
+                ret.data01[last_index] = ret.data01[last_index] + 1;
+            }
+        }
+
+        ret
+    }
+
+    /* Receives the number of shift positions and shifts the value to the right without changing the number of bits. The dropped bits are shifted in the LHS of the value. */
+    pub fn ror(&self, positions: usize) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        let last_index = ret.data01.len() - 1;
+
+        for _x in 0..positions {
+            let trailing_one: bool = ret.data01[last_index].trailing_zeros() == 0;
+            ret.lsr(1);
+
+            if trailing_one {
+                ret.data01[0] = ret.data01[0] + 2usize.pow(usize::BITS - 1);
+            }
+        }
+
+        ret
+    }
+
     /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
         if !self.signed {
