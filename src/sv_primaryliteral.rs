@@ -379,7 +379,9 @@ impl SvPrimaryLiteral {
                     left_nu._minimum_width();
                     right_nu._minimum_width();
 
-                    if left_nu.num_bits < right_nu.num_bits {
+                    if (left_nu.num_bits < right_nu.num_bits) && !left_nu.is_negative() {
+                        return true;
+                    } else if (left_nu.num_bits > right_nu.num_bits) && left_nu.is_negative() {
                         return true;
                     }
                 }
@@ -420,7 +422,9 @@ impl SvPrimaryLiteral {
                 left_nu._minimum_width();
                 right_nu._minimum_width();
 
-                if left_nu.num_bits > right_nu.num_bits {
+                if (left_nu.num_bits > right_nu.num_bits) && !left_nu.is_negative() {
+                    return true;
+                } else if (left_nu.num_bits < right_nu.num_bits) && left_nu.is_negative() {
                     return true;
                 }
             }
