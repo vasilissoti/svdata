@@ -367,18 +367,15 @@ impl SvPrimaryLiteral {
     pub fn lt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
         if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
-        }
-        else {
+        } else {
             let mut left_nu = self.clone();
 
             if self.signed {
                 if left_nu.is_negative() && !right_nu.is_negative() {
                     return true;
-                }
-                else if !left_nu.is_negative() && right_nu.is_negative() {
+                } else if !left_nu.is_negative() && right_nu.is_negative() {
                     return false;
-                }
-                else {
+                } else {
                     left_nu._minimum_width();
                     right_nu._minimum_width();
 
@@ -386,9 +383,7 @@ impl SvPrimaryLiteral {
                         return true;
                     }
                 }
-            }
-
-            else {
+            } else {
                 left_nu._minimum_width();
                 right_nu._minimum_width();
 
@@ -405,18 +400,15 @@ impl SvPrimaryLiteral {
     pub fn gt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
         if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
-        }
-        else {
+        } else {
             let mut left_nu = self.clone();
 
             if self.signed {
                 if left_nu.is_negative() && !right_nu.is_negative() {
                     return false;
-                }
-                else if !left_nu.is_negative() && right_nu.is_negative() {
+                } else if !left_nu.is_negative() && right_nu.is_negative() {
                     return true;
-                }
-                else {
+                } else {
                     left_nu._minimum_width();
                     right_nu._minimum_width();
 
@@ -424,9 +416,7 @@ impl SvPrimaryLiteral {
                         return true;
                     }
                 }
-            }
-
-            else {
+            } else {
                 left_nu._minimum_width();
                 right_nu._minimum_width();
 
@@ -443,18 +433,15 @@ impl SvPrimaryLiteral {
     pub fn eq(&self, mut right_nu: SvPrimaryLiteral) -> bool {
         if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
-        }
-        else {
+        } else {
             let mut left_nu = self.clone();
 
             if self.signed {
                 if left_nu.is_negative() && !right_nu.is_negative() {
                     return false;
-                }
-                else if !left_nu.is_negative() && right_nu.is_negative() {
+                } else if !left_nu.is_negative() && right_nu.is_negative() {
                     return false;
-                }
-                else {
+                } else {
                     left_nu._minimum_width();
                     right_nu._minimum_width();
 
@@ -462,9 +449,7 @@ impl SvPrimaryLiteral {
                         return true;
                     }
                 }
-            }
-
-            else {
+            } else {
                 left_nu._minimum_width();
                 right_nu._minimum_width();
 
