@@ -316,7 +316,6 @@ impl SvPrimaryLiteral {
         let last_index = ret.data01.len() - 1;
 
         for _x in 0..positions {
-            println!("INITIAL {}: ", ret);
             let previous_size = ret.num_bits;
             let leading_one: bool;
 
@@ -329,11 +328,9 @@ impl SvPrimaryLiteral {
 
             ret = ret.lsl(1);
             ret._truncate(previous_size);
-            println!("LSL {}: ", ret);
             if leading_one {
                 ret.data01[last_index] = ret.data01[last_index] + 1;
             }
-            println!("ADDED {}: ", ret);
         }
 
         ret
@@ -354,6 +351,130 @@ impl SvPrimaryLiteral {
         }
 
         ret
+    }
+
+    /* Receives two primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's num_bits and adds them) and returns a SvPrimaryLiteral with the final value. */
+    pub fn cat(&self, right_nu: SvPrimaryLiteral) -> SvPrimaryLiteral {
+        let mut ret: SvPrimaryLiteral = self.clone();
+        ret = ret.lsl(right_nu.num_bits);
+        ret._unsigned_primlit_add(right_nu.clone());
+        ret.num_bits = self.num_bits + right_nu.num_bits;
+
+        ret
+    }
+
+    /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true. Otherwise it returns false. */
+    pub fn lt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
+        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+            panic!("Cannot compare signed with unsigned!");
+        }
+        else {
+            let mut left_nu = self.clone();
+
+            if self.signed {
+                if left_nu.is_negative() && !right_nu.is_negative() {
+                    return true;
+                }
+                else if !left_nu.is_negative() && right_nu.is_negative() {
+                    return false;
+                }
+                else {
+                    left_nu._minimum_width();
+                    right_nu._minimum_width();
+
+                    if left_nu.num_bits < right_nu.num_bits {
+                        return true;
+                    }
+                }
+            }
+
+            else {
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                if left_nu.num_bits < right_nu.num_bits {
+                    return true;
+                }
+            }
+
+            false
+        }
+    }
+
+    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true. Otherwise it returns false. */
+    pub fn gt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
+        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+            panic!("Cannot compare signed with unsigned!");
+        }
+        else {
+            let mut left_nu = self.clone();
+
+            if self.signed {
+                if left_nu.is_negative() && !right_nu.is_negative() {
+                    return false;
+                }
+                else if !left_nu.is_negative() && right_nu.is_negative() {
+                    return true;
+                }
+                else {
+                    left_nu._minimum_width();
+                    right_nu._minimum_width();
+
+                    if left_nu.num_bits > right_nu.num_bits {
+                        return true;
+                    }
+                }
+            }
+
+            else {
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                if left_nu.num_bits > right_nu.num_bits {
+                    return true;
+                }
+            }
+
+            false
+        }
+    }
+
+    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true. Otherwise it returns false. */
+    pub fn eq(&self, mut right_nu: SvPrimaryLiteral) -> bool {
+        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+            panic!("Cannot compare signed with unsigned!");
+        }
+        else {
+            let mut left_nu = self.clone();
+
+            if self.signed {
+                if left_nu.is_negative() && !right_nu.is_negative() {
+                    return false;
+                }
+                else if !left_nu.is_negative() && right_nu.is_negative() {
+                    return false;
+                }
+                else {
+                    left_nu._minimum_width();
+                    right_nu._minimum_width();
+
+                    if left_nu.num_bits == right_nu.num_bits {
+                        return true;
+                    }
+                }
+            }
+
+            else {
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                if left_nu.num_bits == right_nu.num_bits {
+                    return true;
+                }
+            }
+
+            false
+        }
     }
 
     /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
