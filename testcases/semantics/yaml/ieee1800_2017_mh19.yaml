@@ -14,6 +14,7 @@ modules:
           - - "5"
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: y
         direction: Ref
         datakind: Variable
@@ -25,5 +26,6 @@ modules:
           - - "5"
             - "0"
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ieee1800_2017_mh19.sv
 packages: []

@@ -18,6 +18,7 @@ modules:
             - ~
           - - FOO-1
             - "0"
+        comment: ~
       - identifier: b
         direction: Input
         datakind: Variable
@@ -29,6 +30,7 @@ modules:
           - - FOO-1
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         direction: Input
         datakind: Variable
@@ -38,6 +40,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: d
         direction: Input
         datakind: Variable
@@ -47,6 +50,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         direction: Input
         datakind: Variable
@@ -58,6 +62,7 @@ modules:
         unpacked_dimensions:
           - - FOO-1
             - "0"
+        comment: ~
       - identifier: f
         direction: Input
         datakind: Variable
@@ -67,6 +72,7 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: g
         direction: Input
         datakind: Variable
@@ -76,5 +82,6 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ansi_port_input_var_unsigned.sv
 packages: []

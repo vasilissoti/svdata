@@ -13,7 +13,8 @@
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ieee1800_2017_mh7.sv"

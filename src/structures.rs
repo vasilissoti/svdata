@@ -122,6 +122,7 @@ pub struct SvPort {
     pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+    pub comment: Option<String>,
 }
 
 impl fmt::Display for SvData {

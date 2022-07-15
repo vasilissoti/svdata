@@ -12,6 +12,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: b
         direction: Inout
         datakind: Net
@@ -23,6 +24,7 @@ modules:
           - - FOO-1
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         direction: Inout
         datakind: Net
@@ -38,6 +40,7 @@ modules:
             - ~
           - - FOO-1
             - "0"
+        comment: ~
       - identifier: d
         direction: Inout
         datakind: Net
@@ -47,6 +50,7 @@ modules:
         signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         direction: Inout
         datakind: Net
@@ -58,6 +62,7 @@ modules:
         unpacked_dimensions:
           - - FOO-1
             - "0"
+        comment: ~
       - identifier: f
         direction: Inout
         datakind: Net
@@ -67,6 +72,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: g
         direction: Inout
         datakind: Net
@@ -76,6 +82,7 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: h
         direction: Inout
         datakind: Net
@@ -85,6 +92,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: i
         direction: Inout
         datakind: Net
@@ -94,5 +102,6 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ansi_port_inout_net_unsigned.sv
 packages: []

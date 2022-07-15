@@ -18,6 +18,7 @@ modules:
             - ~
           - - FOO-1
             - "0"
+        comment: ~
       - identifier: b
         direction: Output
         datakind: Net
@@ -29,6 +30,7 @@ modules:
           - - FOO-1
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: c
         direction: Output
         datakind: Net
@@ -40,6 +42,7 @@ modules:
           - - FOO-1
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: d
         direction: Output
         datakind: Net
@@ -49,6 +52,7 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         direction: Output
         datakind: Net
@@ -58,6 +62,7 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: f
         direction: Output
         datakind: Net
@@ -67,5 +72,6 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ansi_port_output_net_unsigned.sv
 packages: []

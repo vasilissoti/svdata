@@ -27,6 +27,7 @@ pub fn port_declaration_ansi(
                 RefNode::AnsiPortDeclaration(p),
                 syntax_tree,
             ),
+            comment: get_comment(RefNode::AnsiPortDeclaration(p), syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -42,6 +43,7 @@ pub fn port_declaration_ansi(
                 RefNode::AnsiPortDeclaration(p),
                 syntax_tree,
             ),
+            comment: get_comment(RefNode::AnsiPortDeclaration(p), syntax_tree),
         };
     }
 

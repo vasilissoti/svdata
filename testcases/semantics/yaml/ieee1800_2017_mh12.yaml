@@ -14,5 +14,6 @@ modules:
         unpacked_dimensions:
           - - "5"
             - "0"
+        comment: ~
     filepath: testcases/semantics/sv/ieee1800_2017_mh12.sv
 packages: []

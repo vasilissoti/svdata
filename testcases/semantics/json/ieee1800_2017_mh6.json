@@ -13,7 +13,8 @@
           "nettype": null,
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ieee1800_2017_mh6.sv"

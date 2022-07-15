@@ -14,6 +14,7 @@ modules:
           - - "5"
             - "0"
         unpacked_dimensions: []
+        comment: ~
       - identifier: y
         direction: Inout
         datakind: Net
@@ -23,5 +24,6 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ieee1800_2017_mh15.sv
 packages: []

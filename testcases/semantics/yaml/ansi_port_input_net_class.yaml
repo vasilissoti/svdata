@@ -12,6 +12,7 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: e
         direction: Input
         datakind: Net
@@ -21,6 +22,7 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: f
         direction: Input
         datakind: Net
@@ -30,5 +32,6 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ansi_port_input_net_class.sv
 packages: []

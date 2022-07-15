@@ -13,7 +13,8 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "b",
@@ -29,7 +30,8 @@
               "0"
             ]
           ],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "c",
@@ -54,7 +56,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "comment": null
         },
         {
           "identifier": "d",
@@ -65,7 +68,8 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
@@ -81,7 +85,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "comment": null
         },
         {
           "identifier": "f",
@@ -92,7 +97,8 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "g",
@@ -103,7 +109,8 @@
           "nettype": "Wire",
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "h",
@@ -114,7 +121,8 @@
           "nettype": "Tri",
           "signedness": "Signed",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ansi_port_inout_net_signed.sv"

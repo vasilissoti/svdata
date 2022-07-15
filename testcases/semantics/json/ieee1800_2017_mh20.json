@@ -18,7 +18,8 @@
               "5",
               "0"
             ]
-          ]
+          ],
+          "comment": null
         },
         {
           "identifier": "y",
@@ -29,7 +30,8 @@
           "nettype": null,
           "signedness": "Unsigned",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ieee1800_2017_mh20.sv"

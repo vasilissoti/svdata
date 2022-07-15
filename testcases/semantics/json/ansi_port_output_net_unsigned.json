@@ -27,7 +27,8 @@
               "FOO-1",
               "0"
             ]
-          ]
+          ],
+          "comment": null
         },
         {
           "identifier": "b",
@@ -43,7 +44,8 @@
               "0"
             ]
           ],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "c",
@@ -59,7 +61,8 @@
               "0"
             ]
           ],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "d",
@@ -70,7 +73,8 @@
           "nettype": "Wire",
           "signedness": "Unsigned",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
@@ -81,7 +85,8 @@
           "nettype": "Wire",
           "signedness": null,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "f",
@@ -92,7 +97,8 @@
           "nettype": "Tri",
           "signedness": "Unsigned",
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ansi_port_output_net_unsigned.sv"

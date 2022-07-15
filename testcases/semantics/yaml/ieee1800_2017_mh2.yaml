@@ -12,5 +12,6 @@ modules:
         signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ieee1800_2017_mh2.sv
 packages: []

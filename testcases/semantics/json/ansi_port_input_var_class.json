@@ -13,7 +13,8 @@
           "nettype": null,
           "signedness": null,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "e",
@@ -24,7 +25,8 @@
           "nettype": null,
           "signedness": null,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         },
         {
           "identifier": "f",
@@ -35,7 +37,8 @@
           "nettype": null,
           "signedness": null,
           "packed_dimensions": [],
-          "unpacked_dimensions": []
+          "unpacked_dimensions": [],
+          "comment": null
         }
       ],
       "filepath": "testcases/semantics/sv/ansi_port_input_var_class.sv"

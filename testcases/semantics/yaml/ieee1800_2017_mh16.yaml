@@ -12,6 +12,7 @@ modules:
         signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
       - identifier: y
         direction: Input
         datakind: Net
@@ -21,5 +22,6 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
+        comment: ~
     filepath: testcases/semantics/sv/ieee1800_2017_mh16.sv
 packages: []
