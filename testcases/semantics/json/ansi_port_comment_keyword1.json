@@ -1,0 +1,112 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "a",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*dir*//*ty*//*sign*//*post*/"
+        },
+        {
+          "identifier": "b",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*dir*//*kind*//*ty*//*sign*//*post*/"
+        },
+        {
+          "identifier": "c",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "comment": "/*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/"
+        },
+        {
+          "identifier": "d",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*dir*//*ty*//*sign*//*post*/"
+        },
+        {
+          "identifier": "e",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": "/*dir*//*kind*//*ty*//*sign*//*post*/"
+        },
+        {
+          "identifier": "f",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "comment": "/*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/"
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ansi_port_comment_keyword1.sv"
+    }
+  ],
+  "packages": []
+}
