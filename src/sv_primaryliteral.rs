@@ -660,14 +660,14 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    pub fn mul_unsigned(&self, right_nu: SvPrimaryLiteral) -> SvPrimaryLiteral {
+    pub fn mul_unsigned(&self, mut right_nu: SvPrimaryLiteral) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral;
         let mut left_nu: SvPrimaryLiteral = self.clone();
         let mut add_ver: Vec<SvPrimaryLiteral> = Vec::new();
         let last_index = right_nu.data01.len() - 1;
 
         for x in 0..right_nu.num_bits {
-            if right_nu.data01[last_index].trailing_zeros() != 0 {
+            if right_nu.data01[last_index].trailing_zeros() == 0 {
                 if x == 0 {
                     add_ver.push(left_nu.clone());
                 } else {
@@ -677,6 +677,8 @@ impl SvPrimaryLiteral {
             } else if x != 0 {
                 left_nu = left_nu.lsl(1);
             }
+
+            right_nu = right_nu.lsr(1);
         }
         ret = SvPrimaryLiteral {
             data01: vec![0],
@@ -712,7 +714,6 @@ impl SvPrimaryLiteral {
             if left_neg && right_neg {
                 left_nu = left_nu.neg();
                 right_nu = right_nu.neg();
-
                 result_neg = false;
             } else if left_neg || right_neg {
                 if left_neg {
@@ -736,6 +737,7 @@ impl SvPrimaryLiteral {
             ret.signed = true;
 
             if result_neg {
+                ret.num_bits = ret.num_bits + 1;
                 ret = ret.neg();
             } else {
                 ret.num_bits = ret.num_bits + 1;
