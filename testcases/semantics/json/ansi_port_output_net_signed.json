@@ -1,0 +1,96 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "a",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "b",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "d",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Reg",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Signed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "e",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": "Tri",
+          "signedness": "Signed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ansi_port_output_net_signed.sv"
+    }
+  ],
+  "packages": []
+}

@@ -1,0 +1,36 @@
+{
+  "modules": [
+    {
+      "identifier": "mh16",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Signed",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "y",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ieee1800_2017_mh16.sv"
+    }
+  ],
+  "packages": []
+}

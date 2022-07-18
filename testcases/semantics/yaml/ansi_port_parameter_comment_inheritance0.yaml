@@ -1,0 +1,67 @@
+---
+modules:
+  - identifier: TestModule
+    parameters:
+      - identifier: a
+        expression: "(8'sb10101010+\"hello\")"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: true
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        num_bits: 404
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /* A0 */
+      - identifier: b
+        expression: "3"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: true
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: c
+        expression: "1"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_overridable: true
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /* C0 */
+      - identifier: d
+        expression: "6"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_overridable: true
+        classid: ~
+        signedness: Signed
+        signedness_overridable: true
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: e
+        expression: ~
+        paramtype: Parameter
+        datatype: ~
+        datatype_overridable: true
+        classid: ~
+        signedness: ~
+        signedness_overridable: true
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    ports: []
+    filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance0.sv
+packages: []

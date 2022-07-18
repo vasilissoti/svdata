@@ -1,0 +1,82 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/semantics/sv/ansi_port_parameter_comment_keyword.sv
+  Parameter: 
+    Identifier: a
+    Expression: None
+    ParameterType: Parameter
+    DataType: None
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: true
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*post*/
+  Parameter: 
+    Identifier: b
+    Expression: 5
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* id/eq *//*eq/val*//* post */
+  Parameter: 
+    Identifier: c
+    Expression: None
+    ParameterType: Parameter
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*post*/
+  Parameter: 
+    Identifier: d
+    Expression: 5
+    ParameterType: Parameter
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*id/eq*//*eq/val*//*post*/
+  Parameter: 
+    Identifier: e
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* id/eq *//*eq/val*//* post */
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*id/eq*//*eq/val*//*post*/
+

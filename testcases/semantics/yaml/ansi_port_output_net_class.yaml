@@ -1,0 +1,37 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: d
+        direction: Output
+        datakind: Net
+        datatype: Class
+        classid: my_enum_t
+        nettype: Tri
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: e
+        direction: Output
+        datakind: Net
+        datatype: Class
+        classid: my_struct_t
+        nettype: Wire
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: f
+        direction: Output
+        datakind: Net
+        datatype: Class
+        classid: my_struct_t
+        nettype: Wire
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/ansi_port_output_net_class.sv
+packages: []

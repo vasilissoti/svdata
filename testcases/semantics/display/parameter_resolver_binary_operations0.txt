@@ -1,0 +1,69 @@
+Module:
+  Identifier: TestModule
+  Filepath: testcases/semantics/sv/parameter_resolver_binary_operations0.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010+6'sb10101010
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b
+    Expression: 4'b1000+3.5-2
+    ParameterType: Parameter
+    DataType: Real
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: true
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: c
+    Expression: -2+3+5+8'sb10101010
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: e
+    Expression: -2+3+5+8'b10101010
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: true
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: f
+    Expression: -2.5+3.5+4.5
+    ParameterType: Parameter
+    DataType: Real
+    DataTypeOverridable: true
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: true
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+

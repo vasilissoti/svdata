@@ -1,0 +1,48 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "d",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "classid": "my_enum_t",
+          "nettype": null,
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "e",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "classid": "my_struct_t",
+          "nettype": null,
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "f",
+          "direction": "Output",
+          "datakind": "Variable",
+          "datatype": "Class",
+          "classid": "my_struct_t",
+          "nettype": null,
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ansi_port_output_var_class.sv"
+    }
+  ],
+  "packages": []
+}

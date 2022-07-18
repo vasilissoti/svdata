@@ -1,0 +1,3 @@
+Data01: 11 
+NumBits: 2
+Signed: false

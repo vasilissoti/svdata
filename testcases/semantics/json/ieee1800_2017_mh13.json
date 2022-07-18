@@ -1,0 +1,41 @@
+{
+  "modules": [
+    {
+      "identifier": "mh13",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "x",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "y",
+          "direction": "Inout",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "7",
+              "0"
+            ]
+          ],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ieee1800_2017_mh13.sv"
+    }
+  ],
+  "packages": []
+}

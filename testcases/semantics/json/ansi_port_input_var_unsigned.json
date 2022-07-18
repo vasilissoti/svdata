@@ -1,0 +1,120 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "a",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [
+            [
+              "FOO",
+              null
+            ],
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "b",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "d",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Reg",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "e",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "FOO-1",
+              "0"
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "f",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "String",
+          "classid": null,
+          "nettype": null,
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "g",
+          "direction": "Input",
+          "datakind": "Variable",
+          "datatype": "Integer",
+          "classid": null,
+          "nettype": null,
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ansi_port_input_var_unsigned.sv"
+    }
+  ],
+  "packages": []
+}

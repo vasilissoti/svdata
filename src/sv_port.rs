@@ -27,6 +27,7 @@ pub fn port_declaration_ansi(
                 RefNode::AnsiPortDeclaration(p),
                 syntax_tree,
             ),
+            comment: get_comment(RefNode::AnsiPortDeclaration(p), syntax_tree),
         }
     } else {
         ret = SvPort {
@@ -42,6 +43,7 @@ pub fn port_declaration_ansi(
                 RefNode::AnsiPortDeclaration(p),
                 syntax_tree,
             ),
+            comment: get_comment(RefNode::AnsiPortDeclaration(p), syntax_tree),
         };
     }
 
@@ -84,6 +86,15 @@ pub fn port_parameter_declaration_ansi(
         packed_dimensions: param_packeddim.clone(),
         unpacked_dimensions: port_unpackeddim_ansi(RefNode::ParamAssignment(p), syntax_tree),
         expression: port_parameter_value_ansi(p, syntax_tree, found_assignment),
+        num_bits: port_parameter_bits_ansi(
+            param_packeddim.clone(),
+            p,
+            &param_datatype,
+            param_datatype_overridable,
+            found_assignment,
+            &port_parameter_value_ansi(p, syntax_tree, found_assignment),
+            syntax_tree,
+        ),
         comment: get_comment(RefNode::ParamAssignment(p), syntax_tree),
     };
 
@@ -204,8 +215,13 @@ fn parameter_signedness_resolver_ansi(
                     Some(RefNode::BinaryNumber(_))
                     | Some(RefNode::HexNumber(_))
                     | Some(RefNode::OctalNumber(_)) => {
-                        let base =
-                            unwrap_node!(integral_type.unwrap(), BinaryBase, HexBase, OctalBase);
+                        let base = unwrap_node!(
+                            integral_type.unwrap(),
+                            BinaryBase,
+                            HexBase,
+                            OctalBase,
+                            DecimalNumberBaseUnsigned
+                        );
                         let base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap();
 
                         match base {
@@ -223,6 +239,12 @@ fn parameter_signedness_resolver_ansi(
 
                             Some(RefNode::OctalBase(_)) => {
                                 if base_token != "'so" {
+                                    return Some(SvSignedness::Unsigned);
+                                }
+                            }
+
+                            Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
+                                if base_token != "'sd" {
                                     return Some(SvSignedness::Unsigned);
                                 }
                             }
@@ -454,15 +476,16 @@ fn port_parameter_signedness_ansi(
                     let integral_type =
                         unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
                     match integral_type {
-                        Some(RefNode::DecimalNumber(_)) => {
-                            return (Some(SvSignedness::Signed), true)
-                        }
+                        Some(RefNode::DecimalNumber(sv_parser::DecimalNumber::UnsignedNumber(
+                            _,
+                        ))) => return (Some(SvSignedness::Signed), true),
                         _ => {
                             let base = unwrap_node!(
                                 integral_type.unwrap(),
                                 BinaryBase,
                                 HexBase,
-                                OctalBase
+                                OctalBase,
+                                DecimalNumberBaseUnsigned
                             );
                             let base_token =
                                 get_string(base.clone().unwrap(), syntax_tree).unwrap();
@@ -486,6 +509,14 @@ fn port_parameter_signedness_ansi(
 
                                 Some(RefNode::OctalBase(_)) => {
                                     if base_token == "'so" {
+                                        return (Some(SvSignedness::Signed), true);
+                                    } else {
+                                        return (Some(SvSignedness::Unsigned), true);
+                                    }
+                                }
+
+                                Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
+                                    if base_token == "'sd" {
                                         return (Some(SvSignedness::Signed), true);
                                     } else {
                                         return (Some(SvSignedness::Unsigned), true);
@@ -520,6 +551,108 @@ fn port_parameter_classid_ansi(
         }
 
         _ => None,
+    }
+}
+
+fn port_parameter_bits_ansi(
+    mut packed_dimensions: Vec<SvPackedDimension>,
+    p: &sv_parser::ParamAssignment,
+    datatype: &Option<SvDataType>,
+    _datatype_overridable: bool,
+    found_assignment: bool,
+    expression: &Option<String>,
+    syntax_tree: &SyntaxTree,
+) -> Option<u64> {
+    if !packed_dimensions.is_empty() {
+        let mut nu_bits: u64 = 0;
+        packed_dimensions.reverse();
+
+        for dim in packed_dimensions {
+            let (left, right) = dim;
+            let left_num: u64 = left.as_str().parse().unwrap();
+            let right_num: u64 = right.as_str().parse().unwrap();
+
+            if nu_bits == 0 {
+                nu_bits = left_num - right_num + 1;
+            } else {
+                nu_bits = nu_bits * (left_num - right_num + 1);
+            }
+        }
+
+        Some(nu_bits)
+    } else {
+        if parameter_resolver_needed_ansi(p) {
+            return Some(404); // TODO
+        } else {
+            match datatype {
+                Some(SvDataType::Class) => return None,
+
+                Some(SvDataType::Bit) => return Some(1),
+
+                Some(SvDataType::Byte) => return Some(8),
+
+                Some(SvDataType::Integer) | Some(SvDataType::Int) | Some(SvDataType::Shortreal) => {
+                    return Some(32)
+                }
+
+                Some(SvDataType::Shortint) => Some(16),
+
+                Some(SvDataType::Longint)
+                | Some(SvDataType::Time)
+                | Some(SvDataType::Real)
+                | Some(SvDataType::Realtime) => return Some(64),
+
+                Some(SvDataType::String) => {
+                    if !found_assignment {
+                        return None;
+                    } else {
+                        return Some((expression.clone().unwrap().len() as u64 - 2) * 8);
+                    }
+                }
+
+                Some(SvDataType::Reg) | Some(SvDataType::Logic) => {
+                    if !found_assignment {
+                        return None;
+                    } else {
+                        let fixed_size = unwrap_node!(p, Size);
+
+                        match fixed_size {
+                            Some(_) => {
+                                let ret: u64;
+                                ret = get_string(fixed_size.clone().unwrap(), syntax_tree)
+                                    .unwrap()
+                                    .as_str()
+                                    .parse()
+                                    .unwrap();
+                                return Some(ret);
+                            }
+
+                            _ => {
+                                return Some(32);
+
+                                // let integral_type =
+                                // unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
+
+                                // match integral_type {
+
+                                //     Some(RefNode::DecimalNumber(_)) => {
+                                //         let base = unwrap_node!(integral_type, UnsignedNumber, DecimalNumberBaseUnsigned);
+
+                                //         match base {
+
+                                //         }
+                                //     }
+                                // }
+                            }
+                        }
+                    }
+                }
+
+                None => None,
+
+                _ => unreachable!(),
+            }
+        }
     }
 }
 

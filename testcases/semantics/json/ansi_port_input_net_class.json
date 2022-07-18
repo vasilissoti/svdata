@@ -1,0 +1,48 @@
+{
+  "modules": [
+    {
+      "identifier": "TestModule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "d",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "classid": "my_enum_t",
+          "nettype": "Wire",
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "e",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "classid": "my_struct_t",
+          "nettype": "Wire",
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "f",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Class",
+          "classid": "my_struct_t",
+          "nettype": "Wire",
+          "signedness": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/ansi_port_input_net_class.sv"
+    }
+  ],
+  "packages": []
+}

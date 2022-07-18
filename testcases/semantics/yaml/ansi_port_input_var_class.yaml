@@ -1,0 +1,37 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: d
+        direction: Input
+        datakind: Variable
+        datatype: Class
+        classid: my_enum_t
+        nettype: ~
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: e
+        direction: Input
+        datakind: Variable
+        datatype: Class
+        classid: my_struct_t
+        nettype: ~
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: f
+        direction: Input
+        datakind: Variable
+        datatype: Class
+        classid: my_struct_t
+        nettype: ~
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/ansi_port_input_var_class.sv
+packages: []

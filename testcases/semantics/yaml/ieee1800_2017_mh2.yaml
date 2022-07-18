@@ -1,0 +1,17 @@
+---
+modules:
+  - identifier: mh2
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Inout
+        datakind: Net
+        datatype: Integer
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/ieee1800_2017_mh2.sv
+packages: []

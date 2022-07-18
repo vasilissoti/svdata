@@ -30,6 +30,7 @@ pub struct SvParameter {
     pub classid: Option<String>,
     pub signedness: Option<SvSignedness>,
     pub signedness_overridable: bool,
+    pub num_bits: Option<u64>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
     pub comment: Option<String>,
@@ -121,6 +122,7 @@ pub struct SvPort {
     pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+    pub comment: Option<String>,
 }
 
 impl fmt::Display for SvData {
@@ -245,6 +247,14 @@ impl fmt::Display for SvParameter {
             "    SignednessOverridable: {:?}",
             self.signedness_overridable
         )?;
+        match self.num_bits.clone() {
+            None => {
+                writeln!(f, "    NumBits: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    NumBits: {}", x)?;
+            }
+        }
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
         let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 
