@@ -11,6 +11,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: b
     Direction: Input
@@ -21,6 +22,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: c
     Direction: Input
@@ -31,6 +33,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: [("FOO-1", "0")]
     UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+    Comment: None
   Port: 
     Identifier: d
     Direction: Input
@@ -41,6 +44,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: e
     Direction: Input
@@ -51,6 +55,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: [("FOO-1", "0")]
+    Comment: None
   Port: 
     Identifier: f
     Direction: Input
@@ -61,6 +66,7 @@ Module:
     Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: g
     Direction: Input
@@ -71,4 +77,5 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 

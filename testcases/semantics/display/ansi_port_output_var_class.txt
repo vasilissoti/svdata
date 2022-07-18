@@ -11,6 +11,7 @@ Module:
     Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: e
     Direction: Output
@@ -21,6 +22,7 @@ Module:
     Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: f
     Direction: Output
@@ -31,4 +33,5 @@ Module:
     Signedness: None
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 
