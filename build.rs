@@ -1,9 +1,9 @@
 use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
+use std::iter::zip;
 use std::path::Path;
 use walkdir::WalkDir;
-use std::iter::zip;
 
 fn main() {
     let out_dir = env::var("OUT_DIR").unwrap();
