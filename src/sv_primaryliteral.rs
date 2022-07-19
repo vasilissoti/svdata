@@ -251,7 +251,7 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives the number of shift positions and implemenents logical shifting to the left.
+    /* Receives the number of shift positions and implements logical shifting to the left.
     For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted.
     If an explicit range is defined, _truncate can be used afterwards.*/
     pub fn lsl(&self, n: usize) -> SvPrimaryLiteral {
@@ -370,7 +370,7 @@ impl SvPrimaryLiteral {
     /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. */
     pub fn lt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
@@ -406,7 +406,7 @@ impl SvPrimaryLiteral {
     /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
     Otherwise it returns false. */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
@@ -442,7 +442,7 @@ impl SvPrimaryLiteral {
     /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
     pub fn eq(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
