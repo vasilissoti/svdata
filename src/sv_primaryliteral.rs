@@ -242,22 +242,11 @@ impl SvPrimaryLiteral {
     pub fn inv(&self) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for x in (0..ret.data01.len()).rev() {
-            let mut lsl: usize = ret.data01[x];
-            for y in 0..usize::BITS {
-                if lsl.leading_zeros() == 0 {
-                    ret.data01[x] = ret.data01[x] - 2usize.pow(usize::BITS - y - 1);
-                } else {
-                    ret.data01[x] = ret.data01[x] + 2usize.pow(usize::BITS - y - 1);
-                }
-
-                lsl = lsl << 1;
-            }
+        for x in 0..ret.data01.len() {
+            ret.data01[x] = !ret.data01[x];
         }
 
-        let initial_num_bits = ret.num_bits;
-        ret.num_bits = ret.data01.len() * usize::BITS as usize;
-        ret._truncate(initial_num_bits);
+        ret._truncate(ret.num_bits);
 
         ret
     }
