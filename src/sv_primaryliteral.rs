@@ -254,10 +254,10 @@ impl SvPrimaryLiteral {
     /* Receives the number of shift positions and implemenents logical shifting to the left.
     For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted.
     If an explicit range is defined, _truncate can be used afterwards.*/
-    pub fn lsl(&self, positions: usize) -> SvPrimaryLiteral {
+    pub fn lsl(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let mut leading_one: bool = false;
             ret.num_bits = ret.num_bits + 1;
 
@@ -286,10 +286,10 @@ impl SvPrimaryLiteral {
 
     /* Receives the number of shift positions and implements logical shifting to the right.
     The initial number of bits is preserved. */
-    pub fn lsr(&self, positions: usize) -> SvPrimaryLiteral {
+    pub fn lsr(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let mut trailing_one: bool = false;
 
             for y in 0..ret.data01.len() {
@@ -313,11 +313,11 @@ impl SvPrimaryLiteral {
 
     /* Receives the number of shift positions and shifts the value to the left without changing the number of bits.
     The dropped bits are shifted in the RHS of the value. */
-    pub fn rol(&self, positions: usize) -> SvPrimaryLiteral {
+    pub fn rol(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         let last_index = ret.data01.len() - 1;
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let previous_size = ret.num_bits;
             let leading_one: bool;
 
@@ -340,11 +340,11 @@ impl SvPrimaryLiteral {
 
     /* Receives the number of shift positions and shifts the value to the right without changing the number of bits.
     The dropped bits are shifted in the LHS of the value. */
-    pub fn ror(&self, positions: usize) -> SvPrimaryLiteral {
+    pub fn ror(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         let last_index = ret.data01.len() - 1;
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let trailing_one: bool = ret.data01[last_index].trailing_zeros() == 0;
             ret = ret.lsr(1);
 
