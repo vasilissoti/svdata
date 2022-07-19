@@ -6,4 +6,12 @@ let mut a = SvPrimaryLiteral {
 
 a._truncate(1);
 
+let exp = SvPrimaryLiteral {
+    data01: vec![1],
+    num_bits: 1,
+    signed: false,
+};
+
+assert_eq!(a, exp);
+
 let actual_string = format!("{}", a);

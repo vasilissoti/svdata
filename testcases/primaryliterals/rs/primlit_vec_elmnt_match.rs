@@ -12,4 +12,12 @@ let mut b = SvPrimaryLiteral {
 
 a._primlit_vec_elmnt_match(&mut b);
 
+let exp = SvPrimaryLiteral {
+    data01: vec![0, 9223372036854775808],
+    num_bits: 64,
+    signed: false,
+};
+
+assert_eq!(a, exp);
+
 let actual_string = format!("{}", a);

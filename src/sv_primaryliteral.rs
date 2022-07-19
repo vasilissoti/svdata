@@ -1,6 +1,6 @@
 use std::fmt;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SvPrimaryLiteral {
     pub data01: Vec<usize>,
     pub num_bits: usize,
