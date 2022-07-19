@@ -774,10 +774,8 @@ impl fmt::Display for SvPrimaryLiteral {
         write!(f, "Data01: ")?;
 
         for x in 0..self.data01.len() {
-            write!(f, "{:b} ", self.data01[x])?;
+            writeln!(f, "{:b} ", self.data01[x])?;
         }
-
-        write!(f, "\n")?;
 
         writeln!(f, "NumBits: {}", self.num_bits)?;
         write!(f, "Signed: {}", self.signed)

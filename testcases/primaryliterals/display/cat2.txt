@@ -1,3 +1,4 @@
-Data01: 100 11 
+Data01: 100 
+11 
 NumBits: 68
 Signed: true
