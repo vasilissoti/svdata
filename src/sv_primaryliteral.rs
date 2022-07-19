@@ -771,13 +771,13 @@ pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteral {
 
 impl fmt::Display for SvPrimaryLiteral {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "NumBits: {}", self.num_bits)?;
+        writeln!(f, "Signed: {}", self.signed)?;
         write!(f, "Data01: ")?;
 
         for x in 0..self.data01.len() {
             writeln!(f, "{:b} ", self.data01[x])?;
         }
-
-        writeln!(f, "NumBits: {}", self.num_bits)?;
-        write!(f, "Signed: {}", self.signed)
+        write!(f, "")
     }
 }

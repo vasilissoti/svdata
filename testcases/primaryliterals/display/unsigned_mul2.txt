@@ -1,6 +1,6 @@
+NumBits: 196
+Signed: false
 Data01: 1000 
 1000 
 0 
 10000 
-NumBits: 196
-Signed: false
