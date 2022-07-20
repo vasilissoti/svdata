@@ -1,6 +1,7 @@
+use std::cmp::Ordering;
 use std::fmt;
 
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone)]
 pub struct SvPrimaryLiteral {
     pub data01: Vec<usize>,
     pub num_bits: usize,
@@ -755,6 +756,18 @@ impl SvPrimaryLiteral {
 
         ret
     }
+
+    // pub fn cmp(&self, right_nu: SvPrimaryLiteral) -> Ordering {
+    //     if self.eq(right_nu.clone()) {
+    //         return Ordering::Equal;
+    //     }
+    //     else if self.lt(right_nu.clone()) {
+    //         return Ordering::Less
+    //     }
+    //     else {
+    //         Ordering::Greater
+    //     }
+    // }
 }
 
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteral {
@@ -781,3 +794,29 @@ impl fmt::Display for SvPrimaryLiteral {
         write!(f, "")
     }
 }
+
+impl Ord for SvPrimaryLiteral {
+    fn cmp(&self, other: &Self) -> Ordering {
+        if self.eq(other.clone()) {
+            return Ordering::Equal;
+        } else if self.lt(other.clone()) {
+            return Ordering::Less;
+        } else {
+            Ordering::Greater
+        }
+    }
+}
+
+impl PartialOrd for SvPrimaryLiteral {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for SvPrimaryLiteral {
+    fn eq(&self, other: &Self) -> bool {
+        self.eq(other.clone())
+    }
+}
+
+impl Eq for SvPrimaryLiteral {}
