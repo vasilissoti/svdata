@@ -4,6 +4,7 @@ use std::fmt;
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
     pub data01: Vec<usize>,
+    pub dataXZ: Option<Vec<usize>>,
     pub size: usize,
     pub signed: bool,
 }
@@ -603,6 +604,7 @@ impl SvPrimaryLiteralIntegral {
         } else {
             let right_nu = SvPrimaryLiteralIntegral {
                 data01: vec![right_nu],
+                dataXZ: None,
                 size: usize::BITS as usize,
                 signed: true,
             };
@@ -690,6 +692,7 @@ impl SvPrimaryLiteralIntegral {
         }
         ret = SvPrimaryLiteralIntegral {
             data01: vec![0],
+            dataXZ: None,
             signed: false,
             size: 1,
         };
@@ -759,6 +762,7 @@ impl SvPrimaryLiteralIntegral {
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     let mut ret = SvPrimaryLiteralIntegral {
         data01: vec![value],
+        dataXZ: None,
         size: usize::BITS as usize,
         signed: true,
     };
