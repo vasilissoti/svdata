@@ -551,8 +551,7 @@ impl SvPrimaryLiteral {
                     self.data01.insert(0, 0);
                 }
 
-                self.size = (usize::BITS as usize - self.data01[0].leading_zeros() as usize
-                    + 1)
+                self.size = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
                     + (self.data01.len() - 1) * usize::BITS as usize;
             }
         }
@@ -660,8 +659,7 @@ impl SvPrimaryLiteral {
                     ret._truncate(usize::BITS as usize);
                     ret.size = 1;
                 } else {
-                    new_size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize
-                        + 1)
+                    new_size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
                         + (ret.data01.len() - 1) * usize::BITS as usize;
                     ret.size = new_size;
                 }
