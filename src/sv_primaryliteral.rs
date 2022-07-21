@@ -756,18 +756,6 @@ impl SvPrimaryLiteral {
 
         ret
     }
-
-    // pub fn cmp(&self, right_nu: SvPrimaryLiteral) -> Ordering {
-    //     if self.eq(right_nu.clone()) {
-    //         return Ordering::Equal;
-    //     }
-    //     else if self.lt(right_nu.clone()) {
-    //         return Ordering::Less
-    //     }
-    //     else {
-    //         Ordering::Greater
-    //     }
-    // }
 }
 
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteral {
