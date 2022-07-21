@@ -1,6 +1,6 @@
 let mut a = SvPrimaryLiteral {
     data01: vec![1, 0],
-    num_bits: 65,
+    size: 65,
     signed: true,
 };
 

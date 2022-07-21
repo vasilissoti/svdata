@@ -1,12 +1,12 @@
 let a = SvPrimaryLiteral {
     data01: vec![9223372036854775808, 9223372036854775808, 1],
-    num_bits: 192,
+    size: 192,
     signed: false,
 };
 
 let b = SvPrimaryLiteral {
     data01: vec![16],
-    num_bits: 5,
+    size: 5,
     signed: false,
 };
 
@@ -14,7 +14,7 @@ let c: SvPrimaryLiteral = a.mul(b.clone());
 
 let exp = SvPrimaryLiteral {
     data01: vec![8, 8, 0, 16],
-    num_bits: 196,
+    size: 196,
     signed: false,
 };
 
