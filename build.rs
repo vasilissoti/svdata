@@ -20,7 +20,7 @@ fn main() {
     let mut entries_primlits = Vec::new();
     let mut entries_primlits_contents: Vec<Vec<String>> = Vec::new();
 
-    for entry in WalkDir::new("testcases/primaryliterals/rs") {
+    for entry in WalkDir::new("testcases/primaryliterals/integral/rs") {
         let entry = entry.unwrap();
         if entry.file_type().is_file() {
             let file_name = String::from(entry.path().file_stem().unwrap().to_string_lossy());
