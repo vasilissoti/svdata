@@ -1,12 +1,12 @@
-let a = SvPrimaryLiteral {
+let a = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 65,
     signed: true,
 };
 
-let b: SvPrimaryLiteral = a.inv();
+let b: SvPrimaryLiteralIntegral = a.inv();
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![1, 9223372036854775807],
     size: 65,
     signed: true,

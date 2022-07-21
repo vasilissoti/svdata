@@ -1,10 +1,10 @@
-let mut a = SvPrimaryLiteral {
+let mut a = SvPrimaryLiteralIntegral {
     data01: vec![9223372036854775808],
     size: 64,
     signed: false,
 };
 
-let mut b = SvPrimaryLiteral {
+let mut b = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 65,
     signed: true,
@@ -12,7 +12,7 @@ let mut b = SvPrimaryLiteral {
 
 a._primlit_vec_elmnt_match(&mut b);
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 64,
     signed: false,

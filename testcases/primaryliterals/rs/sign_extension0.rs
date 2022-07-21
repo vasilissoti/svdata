@@ -1,4 +1,4 @@
-let mut a = SvPrimaryLiteral {
+let mut a = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 65,
     signed: true,
@@ -6,7 +6,7 @@ let mut a = SvPrimaryLiteral {
 
 a._sign_extension();
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 128,
     signed: true,

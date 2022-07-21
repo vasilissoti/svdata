@@ -1,4 +1,4 @@
-let mut a = SvPrimaryLiteral {
+let mut a = SvPrimaryLiteralIntegral {
     data01: vec![4611686018427387904],
     size: 64,
     signed: true,

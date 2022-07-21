@@ -1,18 +1,18 @@
-let a = SvPrimaryLiteral {
+let a = SvPrimaryLiteralIntegral {
     data01: vec![9223372036854775808],
     size: 64,
     signed: true,
 };
 
-let b = SvPrimaryLiteral {
+let b = SvPrimaryLiteralIntegral {
     data01: vec![9223372036854775808],
     size: 64,
     signed: false,
 };
 
-let c: SvPrimaryLiteral = a.add_primlit(b.clone());
+let c: SvPrimaryLiteralIntegral = a.add_primlit(b.clone());
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![1, 0],
     size: 65,
     signed: false,

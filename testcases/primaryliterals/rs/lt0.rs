@@ -1,10 +1,10 @@
-let a = SvPrimaryLiteral {
+let a = SvPrimaryLiteralIntegral {
     data01: vec![4611686018427387904],
     size: 63,
     signed: false,
 };
 
-let b = SvPrimaryLiteral {
+let b = SvPrimaryLiteralIntegral {
     data01: vec![9223372036854775808],
     size: 64,
     signed: false,

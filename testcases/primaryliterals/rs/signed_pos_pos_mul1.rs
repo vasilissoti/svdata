@@ -1,18 +1,18 @@
-let a = SvPrimaryLiteral {
+let a = SvPrimaryLiteralIntegral {
     data01: vec![0, 9223372036854775808],
     size: 64,
     signed: true,
 };
 
-let b = SvPrimaryLiteral {
+let b = SvPrimaryLiteralIntegral {
     data01: vec![4],
     size: 4,
     signed: true,
 };
 
-let c: SvPrimaryLiteral = a.mul(b.clone());
+let c: SvPrimaryLiteralIntegral = a.mul(b.clone());
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![2, 0],
     size: 66,
     signed: true,

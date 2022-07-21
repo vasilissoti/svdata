@@ -40,11 +40,7 @@ fn main() {
     let t = Path::new(&out_dir).join("tests.rs");
     let mut t = File::create(&t).unwrap();
 
-    writeln!(
-        t,
-        "use svdata::sv_primaryliteral::{{SvPrimaryLiteral, usize_to_primlit}};\n"
-    )
-    .unwrap();
+    writeln!(t, "use svdata::sv_primlit_integral::*;\n").unwrap();
 
     for file_name in &entries_semantics {
         write!(t, "#[test]\n").unwrap();

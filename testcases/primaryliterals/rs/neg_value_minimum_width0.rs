@@ -1,4 +1,4 @@
-let mut a = SvPrimaryLiteral {
+let mut a = SvPrimaryLiteralIntegral {
     data01: vec![65533],
     size: 16,
     signed: true,
@@ -6,7 +6,7 @@ let mut a = SvPrimaryLiteral {
 
 a._minimum_width();
 
-let exp = SvPrimaryLiteral {
+let exp = SvPrimaryLiteralIntegral {
     data01: vec![5],
     size: 3,
     signed: true,
