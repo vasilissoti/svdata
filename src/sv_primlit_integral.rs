@@ -762,7 +762,7 @@ impl SvPrimaryLiteralIntegral {
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     let mut ret = SvPrimaryLiteralIntegral {
         data_01: vec![value],
-        data_xz: None,
+        data_xz: Some(vec![0]),
         size: usize::BITS as usize,
         signed: true,
     };
