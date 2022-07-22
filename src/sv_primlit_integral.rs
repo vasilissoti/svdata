@@ -776,10 +776,22 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "NumBits: {}", self.size)?;
         writeln!(f, "Signed: {}", self.signed)?;
-        write!(f, "data_01: ")?;
+        write!(f, "Data_01: ")?;
 
         for x in 0..self.data_01.len() {
-            writeln!(f, "{:b} ", self.data_01[x])?;
+            writeln!(f, "{:b}", self.data_01[x])?;
+        }
+
+        write!(f, "Data_XZ: ")?;
+        match self.data_xz.clone() {
+            None => {
+                writeln!(f, "None")?;
+            }
+            Some(vec) => {
+                for x in vec {
+                    writeln!(f, "{:b}", x)?;
+                }
+            }
         }
         write!(f, "")
     }

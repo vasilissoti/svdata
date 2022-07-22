@@ -1,3 +1,4 @@
 NumBits: 1
 Signed: false
-data_01: 1 
+Data_01: 1
+Data_XZ: None

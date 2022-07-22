@@ -1,5 +1,6 @@
 NumBits: 130
 Signed: true
-data_01: 10 
-10 
-0 
+Data_01: 10
+10
+0
+Data_XZ: None
