@@ -2,4 +2,5 @@ NumBits: 65
 Signed: false
 Data_01: 1
 0
-Data_XZ: None
+Data_XZ: 0
+0

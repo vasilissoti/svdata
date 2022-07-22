@@ -196,7 +196,7 @@ impl SvPrimaryLiteralIntegral {
         right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed integral primary literal and sign extends the value in the existing number of vector elements.
+    /* Receives a signed integral primary literal and sign extends the value in the existing number of data_01 vector elements.
     The correct final number of bits is set to the argument. */
     pub fn _sign_extension(&mut self) {
         if self.signed != true {
@@ -622,74 +622,109 @@ impl SvPrimaryLiteralIntegral {
         if !ret.signed {
             ret._unsigned_usize_add(right_nu);
             ret._minimum_width();
-            ret
+            ret.data_xz = Some(vec![0]);
         } else {
             let right_nu = SvPrimaryLiteralIntegral {
                 data_01: vec![right_nu],
-                data_xz: None,
+                data_xz: Some(vec![0]),
                 size: usize::BITS as usize,
                 signed: true,
             };
 
-            ret.add_primlit(right_nu.clone())
+            ret = ret.add_primlit(right_nu.clone());
         }
+
+        if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
+            for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
+                let mut new_vec = ret.data_xz.clone().unwrap();
+                new_vec.insert(0, 0);
+                ret.data_xz = Some(new_vec);
+            }
+        }
+
+        ret
     }
 
     pub fn add_primlit(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        if ret.signed == false || right_nu.signed == false {
-            ret._unsigned_primlit_add(right_nu.clone());
-            ret.signed = false;
 
-            ret._minimum_width();
-        } else {
-            let left_neg: bool = ret.is_negative();
-            let right_neg: bool = right_nu.is_negative();
+        if ret.is_4state() != right_nu.is_4state() {
+            if !ret.is_4state() {
+                ret.data_xz = Some(vec![0]);
+            } else {
+                right_nu.data_xz = Some(vec![0]);
+            }
+        }
 
-            if !left_neg && !right_neg {
-                let new_size: usize;
-
+        if !ret.contains_nonbinary() && !right_nu.contains_nonbinary() {
+            if ret.signed == false || right_nu.signed == false {
                 ret._unsigned_primlit_add(right_nu.clone());
-
-                if ret.data_01[0].leading_zeros() == 0 {
-                    ret.data_01.insert(0, 0);
-                }
-
-                new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
-                    + (ret.data_01.len() - 1) * usize::BITS as usize;
-
-                ret.size = new_size;
-            } else if left_neg && right_neg {
-                let new_size: usize;
-
-                ret._matched_sign_extension(&mut right_nu);
-                ret._unsigned_primlit_add(right_nu.clone());
-
-                new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
-                    + (ret.data_01.len() - 1) * usize::BITS as usize;
-                ret.size = new_size;
+                ret.signed = false;
 
                 ret._minimum_width();
             } else {
-                let new_size: usize;
+                let left_neg: bool = ret.is_negative();
+                let right_neg: bool = right_nu.is_negative();
 
-                ret._matched_sign_extension(&mut right_nu);
-                ret._unsigned_primlit_add(right_nu.clone());
-                ret._truncate(ret.size);
+                if !left_neg && !right_neg {
+                    let new_size: usize;
 
-                if ret.is_negative() {
-                    ret._minimum_width();
-                } else if ret.is_zero() {
-                    ret._truncate(usize::BITS as usize);
-                    ret.size = 1;
-                } else {
+                    ret._unsigned_primlit_add(right_nu.clone());
+
+                    if ret.data_01[0].leading_zeros() == 0 {
+                        ret.data_01.insert(0, 0);
+                    }
+
                     new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
                         + (ret.data_01.len() - 1) * usize::BITS as usize;
+
                     ret.size = new_size;
+                } else if left_neg && right_neg {
+                    let new_size: usize;
+
+                    ret._matched_sign_extension(&mut right_nu);
+                    ret._unsigned_primlit_add(right_nu.clone());
+
+                    new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
+                        + (ret.data_01.len() - 1) * usize::BITS as usize;
+                    ret.size = new_size;
+
+                    ret._minimum_width();
+                } else {
+                    let new_size: usize;
+
+                    ret._matched_sign_extension(&mut right_nu);
+                    ret._unsigned_primlit_add(right_nu.clone());
+                    ret._truncate(ret.size);
+
+                    if ret.is_negative() {
+                        ret._minimum_width();
+                    } else if ret.is_zero() {
+                        ret._truncate(usize::BITS as usize);
+                        ret.size = 1;
+                    } else {
+                        new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize
+                            + 1)
+                            + (ret.data_01.len() - 1) * usize::BITS as usize;
+                        ret.size = new_size;
+                    }
                 }
             }
+
+            if ret.is_4state() {
+                if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
+                    for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
+                        let mut new_vec = ret.data_xz.clone().unwrap();
+                        new_vec.insert(0, 0);
+                        ret.data_xz = Some(new_vec);
+                    }
+                }
+            }
+
+            ret
+        } else {
+            unimplemented!();
         }
-        ret
     }
 
     pub fn mul_unsigned(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
@@ -730,50 +765,73 @@ impl SvPrimaryLiteralIntegral {
         let mut left_nu: SvPrimaryLiteralIntegral = self.clone();
         let mut ret: SvPrimaryLiteralIntegral;
 
-        if !left_nu.signed || !right_nu.signed {
-            left_nu.signed = false;
-            right_nu.signed = false;
-
-            left_nu._minimum_width();
-            right_nu._minimum_width();
-
-            ret = left_nu.mul_unsigned(right_nu.clone());
-            ret._minimum_width();
-        } else {
-            let left_neg: bool = left_nu.is_negative();
-            let right_neg: bool = right_nu.is_negative();
-            let result_neg: bool;
-
-            if left_neg && right_neg {
-                left_nu = left_nu.neg();
-                right_nu = right_nu.neg();
-                result_neg = false;
-            } else if left_neg || right_neg {
-                if left_neg {
-                    left_nu = left_nu.neg();
-                } else {
-                    right_nu = right_nu.neg();
-                }
-                result_neg = true;
+        if left_nu.is_4state() != right_nu.is_4state() {
+            if !left_nu.is_4state() {
+                left_nu.data_xz = Some(vec![0]);
             } else {
-                result_neg = false;
+                right_nu.data_xz = Some(vec![0]);
             }
+        }
 
-            left_nu.signed = false;
-            right_nu.signed = false;
+        if !left_nu.contains_nonbinary() && !right_nu.contains_nonbinary() {
+            if !left_nu.signed || !right_nu.signed {
+                left_nu.signed = false;
+                right_nu.signed = false;
 
-            left_nu._minimum_width();
-            right_nu._minimum_width();
+                left_nu._minimum_width();
+                right_nu._minimum_width();
 
-            ret = left_nu.mul_unsigned(right_nu.clone());
-            ret._minimum_width();
-            ret.signed = true;
-
-            if result_neg {
-                ret.size = ret.size + 1;
-                ret = ret.neg();
+                ret = left_nu.mul_unsigned(right_nu.clone());
+                ret._minimum_width();
             } else {
-                ret.size = ret.size + 1;
+                let left_neg: bool = left_nu.is_negative();
+                let right_neg: bool = right_nu.is_negative();
+                let result_neg: bool;
+
+                if left_neg && right_neg {
+                    left_nu = left_nu.neg();
+                    right_nu = right_nu.neg();
+                    result_neg = false;
+                } else if left_neg || right_neg {
+                    if left_neg {
+                        left_nu = left_nu.neg();
+                    } else {
+                        right_nu = right_nu.neg();
+                    }
+                    result_neg = true;
+                } else {
+                    result_neg = false;
+                }
+
+                left_nu.signed = false;
+                right_nu.signed = false;
+
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                ret = left_nu.mul_unsigned(right_nu.clone());
+                ret._minimum_width();
+                ret.signed = true;
+
+                if result_neg {
+                    ret.size = ret.size + 1;
+                    ret = ret.neg();
+                } else {
+                    ret.size = ret.size + 1;
+                }
+            }
+        } else {
+            unimplemented!();
+        }
+
+        ret.data_xz = left_nu.data_xz.clone();
+        if ret.is_4state() {
+            if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
+                for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
+                    let mut new_vec = ret.data_xz.clone().unwrap();
+                    new_vec.insert(0, 0);
+                    ret.data_xz = Some(new_vec);
+                }
             }
         }
 
