@@ -305,6 +305,7 @@ mod tests {
         let out_display = Path::new(&out_dir)
             .join("testcases")
             .join("primaryliterals")
+            .join("integral")
             .join("display")
             .join(format!("{}.txt", name));
         fs::create_dir_all(out_display.parent().unwrap()).unwrap();
@@ -315,6 +316,7 @@ mod tests {
         // Check display against reference.
         let in_display = Path::new("testcases")
             .join("primaryliterals")
+            .join("integral")
             .join("display")
             .join(format!("{}.txt", name));
         let e = File::open(in_display).unwrap();
