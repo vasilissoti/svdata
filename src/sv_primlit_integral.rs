@@ -697,17 +697,7 @@ impl SvPrimaryLiteralIntegral {
                     ret._unsigned_primlit_add(right_nu.clone());
                     ret._truncate(ret.size);
 
-                    if ret.is_negative() {
-                        ret._minimum_width();
-                    } else if ret.is_zero() {
-                        ret._truncate(usize::BITS as usize);
-                        ret.size = 1;
-                    } else {
-                        new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize
-                            + 1)
-                            + (ret.data_01.len() - 1) * usize::BITS as usize;
-                        ret.size = new_size;
-                    }
+                    ret._minimum_width();
                 }
             }
 
