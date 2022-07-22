@@ -11,7 +11,7 @@ pub struct SvPrimaryLiteralIntegral {
 
 // The following functions should be replaced by the build in methods once they become stable
 impl SvPrimaryLiteralIntegral {
-    /* Unsigned addition between a primary literal and usize.
+    /* Unsigned addition between an integral primary literal and usize.
     It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
     Instead it must be explicitly implemented according the context that the function is used. */
     pub fn _unsigned_usize_add(&mut self, right_nu: usize) {
@@ -42,7 +42,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Unsigned addition between two primary literals.
+    /* Unsigned addition between two integral primary literals.
     Both data_01 vector dimensions (i.e nu of elements) are matched.
     It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
     Instead it must be explicitly implemented according the context that the function is used. */
@@ -71,7 +71,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Accepts two primary literals and ensures that both data_01 vector dimensions (i.e nu of elements) are matched. */
+    /* Accepts two integral primary literals and ensures that both data_01 vector dimensions (i.e nu of elements) are matched. */
     pub fn _primlit_vec_elmnt_match(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
         let left_size = self.data_01.len();
         let right_size = right_nu.data_01.len();
@@ -91,7 +91,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives a signed primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
+    /* Receives a signed integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
     pub fn is_negative(&mut self) -> bool {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
@@ -107,7 +107,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives a primary literal as an argument and deduces whether the stored value is zero. */
+    /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
         for x in 0..self.data_01.len() {
             if self.data_01[x].leading_zeros() != usize::BITS {
@@ -118,7 +118,21 @@ impl SvPrimaryLiteralIntegral {
         true
     }
 
-    /* Accepts two signed primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
+    /* Receives an integral primary literal as an argument and deduces whether it contains X(s) or Z(s). */
+    pub fn contains_nonbinary(&mut self) -> bool {
+        match self.data_xz {
+            None => return false,
+            Some(vec) => {
+                for x in 0..self.data_xz.len() {
+                    if self.data_01[x].leading_zeros() != usize::BITS {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Accepts two signed integral primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
     The correct final number of bits is set to both arguments. */
     pub fn _matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
         if self.signed != true || right_nu.signed != true {
@@ -174,7 +188,7 @@ impl SvPrimaryLiteralIntegral {
         right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and sign extends the value in the existing number of vector elements.
+    /* Receives a signed integral primary literal and sign extends the value in the existing number of vector elements.
     The correct final number of bits is set to the argument. */
     pub fn _sign_extension(&mut self) {
         if self.signed != true {
@@ -206,7 +220,7 @@ impl SvPrimaryLiteralIntegral {
         self.size = self.data_01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
+    /* Receives a signed integral primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
     The correct final number of bits is set to the argument. */
     pub fn neg(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
@@ -239,7 +253,7 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    /* Receives a signed primary literal and returns a primary literal with its inverted value.
+    /* Receives a signed integral primary literal and returns a primary literal with its inverted value.
     The final number of bits remains the same as the original one.*/
     pub fn inv(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
@@ -254,7 +268,7 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Receives the number of shift positions and implements logical shifting to the left.
-    For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted.
+    For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the integral primlit is dynamically adjusted.
     If an explicit range is defined, _truncate can be used afterwards.*/
     pub fn lsl(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
@@ -358,8 +372,8 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    /* Receives two primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
-    Returns a SvPrimaryLiteralIntegral with the final value. */
+    /* Receives two integral primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
+    Returns an integral SvPrimaryLiteralIntegral with the final value. */
     pub fn cat(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         ret = ret.lsl(right_nu.size);
@@ -369,7 +383,7 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. */
     pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -405,7 +419,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
     Otherwise it returns false. */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -441,7 +455,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
     pub fn eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -475,7 +489,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required.
+    /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
     The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
         if !self.signed {
@@ -558,7 +572,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives the number of bits in which a primary literal should be truncated.
+    /* Receives the number of bits in which an integral primary literal should be truncated.
     The correct final number of bits is set but the signedness doesn't change. */
     pub fn _truncate(&mut self, size: usize) {
         if size == 0 {
