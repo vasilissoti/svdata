@@ -12,4 +12,12 @@ let b = SvPrimaryLiteral {
 
 let c: SvPrimaryLiteral = a.mul(b.clone());
 
+let exp = SvPrimaryLiteral {
+    data01: vec![4, 0],
+    num_bits: 67,
+    signed: false,
+};
+
+assert_eq!(c, exp);
+
 let actual_string = format!("{}", c);

@@ -6,4 +6,12 @@ let a = SvPrimaryLiteral {
 
 let b: SvPrimaryLiteral = a.lsl(4);
 
+let exp = SvPrimaryLiteral {
+    data01: vec![4, 0],
+    num_bits: 68,
+    signed: true,
+};
+
+assert_eq!(b, exp);
+
 let actual_string = format!("{}", b);

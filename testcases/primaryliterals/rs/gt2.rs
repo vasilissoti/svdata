@@ -10,6 +10,6 @@ let b = SvPrimaryLiteral {
     signed: true,
 };
 
-let c: bool = a.gt(b.clone());
+let c: bool = a > b;
 
 let actual_string = format!("{}", c);

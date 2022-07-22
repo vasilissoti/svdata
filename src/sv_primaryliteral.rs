@@ -1,3 +1,4 @@
+use std::cmp::Ordering;
 use std::fmt;
 
 #[derive(Debug, Clone)]
@@ -9,7 +10,9 @@ pub struct SvPrimaryLiteral {
 
 // The following functions should be replaced by the build in methods once they become stable
 impl SvPrimaryLiteral {
-    /* Unsigned addition between a primary literal and usize (since these can be used for "signed" and "unsigned" values, the final number of bits is not derived within the function but instead must be explicitly implemented according the context that the function is used). */
+    /* Unsigned addition between a primary literal and usize.
+    It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
+    Instead it must be explicitly implemented according the context that the function is used. */
     pub fn _unsigned_usize_add(&mut self, right_nu: usize) {
         let last_index = self.data01.len() - 1;
         let left_nu: usize = self.data01[last_index];
@@ -38,7 +41,10 @@ impl SvPrimaryLiteral {
         }
     }
 
-    /* Unsigned addition between two primary literals. Both data01 vector dimensions (i.e nu of elements) are matched. As far as the final number of bits is concerned, the same logic was applied as the one mentioned in the previous fn). */
+    /* Unsigned addition between two primary literals.
+    Both data01 vector dimensions (i.e nu of elements) are matched.
+    It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
+    Instead it must be explicitly implemented according the context that the function is used. */
     pub fn _unsigned_primlit_add(&mut self, mut right_nu: SvPrimaryLiteral) {
         self._primlit_vec_elmnt_match(&mut right_nu);
 
@@ -111,7 +117,8 @@ impl SvPrimaryLiteral {
         true
     }
 
-    /* Accepts two signed primary literals and ensures that both are properly sign extended and matched to their data01 dimensions. The correct final number of bits is set to both arguments. */
+    /* Accepts two signed primary literals and ensures that both are properly sign extended and matched to their data01 dimensions.
+    The correct final number of bits is set to both arguments. */
     pub fn _matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteral) {
         if self.signed != true || right_nu.signed != true {
             panic!("Expected signed SvPrimaryLiterals but found unsigned!");
@@ -166,7 +173,8 @@ impl SvPrimaryLiteral {
         right_nu.num_bits = right_nu.data01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and sign extends the value in the existing number of vector elements. The correct final number of bits is set to the argument. */
+    /* Receives a signed primary literal and sign extends the value in the existing number of vector elements.
+    The correct final number of bits is set to the argument. */
     pub fn _sign_extension(&mut self) {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteral but found unsigned!");
@@ -197,7 +205,8 @@ impl SvPrimaryLiteral {
         self.num_bits = self.data01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa). The correct final number of bits is set to the argument. */
+    /* Receives a signed primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
+    The correct final number of bits is set to the argument. */
     pub fn neg(&self) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         if ret.is_zero() {
@@ -229,35 +238,27 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives a signed primary literal and returns a primary literal with its inverted value. The final number of bits remains the same as the original one.*/
+    /* Receives a signed primary literal and returns a primary literal with its inverted value.
+    The final number of bits remains the same as the original one.*/
     pub fn inv(&self) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for x in (0..ret.data01.len()).rev() {
-            let mut lsl: usize = ret.data01[x];
-            for y in 0..usize::BITS {
-                if lsl.leading_zeros() == 0 {
-                    ret.data01[x] = ret.data01[x] - 2usize.pow(usize::BITS - y - 1);
-                } else {
-                    ret.data01[x] = ret.data01[x] + 2usize.pow(usize::BITS - y - 1);
-                }
-
-                lsl = lsl << 1;
-            }
+        for x in 0..ret.data01.len() {
+            ret.data01[x] = !ret.data01[x];
         }
 
-        let initial_num_bits = ret.num_bits;
-        ret.num_bits = ret.data01.len() * usize::BITS as usize;
-        ret._truncate(initial_num_bits);
+        ret._truncate(ret.num_bits);
 
         ret
     }
 
-    /* Receives the number of shift positions and implemenents logical shifting to the left. For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted. If an explicit range is defined, _truncate can be used afterwards.*/
-    pub fn lsl(&self, positions: usize) -> SvPrimaryLiteral {
+    /* Receives the number of shift positions and implements logical shifting to the left.
+    For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted.
+    If an explicit range is defined, _truncate can be used afterwards.*/
+    pub fn lsl(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let mut leading_one: bool = false;
             ret.num_bits = ret.num_bits + 1;
 
@@ -284,11 +285,12 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives the number of shift positions and implemenents logical shifting to the right. The initial number of bits is preserved. */
-    pub fn lsr(&self, positions: usize) -> SvPrimaryLiteral {
+    /* Receives the number of shift positions and implements logical shifting to the right.
+    The initial number of bits is preserved. */
+    pub fn lsr(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let mut trailing_one: bool = false;
 
             for y in 0..ret.data01.len() {
@@ -310,12 +312,13 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives the number of shift positions and shifts the value to the left without changing the number of bits. The dropped bits are shifted in the RHS of the value. */
-    pub fn rol(&self, positions: usize) -> SvPrimaryLiteral {
+    /* Receives the number of shift positions and shifts the value to the left without changing the number of bits.
+    The dropped bits are shifted in the RHS of the value. */
+    pub fn rol(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         let last_index = ret.data01.len() - 1;
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let previous_size = ret.num_bits;
             let leading_one: bool;
 
@@ -336,12 +339,13 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives the number of shift positions and shifts the value to the right without changing the number of bits. The dropped bits are shifted in the LHS of the value. */
-    pub fn ror(&self, positions: usize) -> SvPrimaryLiteral {
+    /* Receives the number of shift positions and shifts the value to the right without changing the number of bits.
+    The dropped bits are shifted in the LHS of the value. */
+    pub fn ror(&self, n: usize) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         let last_index = ret.data01.len() - 1;
 
-        for _x in 0..positions {
+        for _x in 0..n {
             let trailing_one: bool = ret.data01[last_index].trailing_zeros() == 0;
             ret = ret.lsr(1);
 
@@ -353,7 +357,8 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Receives two primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's num_bits and adds them) and returns a SvPrimaryLiteral with the final value. */
+    /* Receives two primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's num_bits and adds them).
+    Returns a SvPrimaryLiteral with the final value. */
     pub fn cat(&self, right_nu: SvPrimaryLiteral) -> SvPrimaryLiteral {
         let mut ret: SvPrimaryLiteral = self.clone();
         ret = ret.lsl(right_nu.num_bits);
@@ -363,9 +368,10 @@ impl SvPrimaryLiteral {
         ret
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true. Otherwise it returns false. */
+    /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
+    Otherwise it returns false. */
     pub fn lt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
@@ -398,9 +404,10 @@ impl SvPrimaryLiteral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true. Otherwise it returns false. */
+    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
+    Otherwise it returns false. */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
@@ -433,9 +440,10 @@ impl SvPrimaryLiteral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true. Otherwise it returns false. */
+    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
+    Otherwise it returns false. */
     pub fn eq(&self, mut right_nu: SvPrimaryLiteral) -> bool {
-        if self.signed && !right_nu.signed || !self.signed && right_nu.signed {
+        if self.signed != right_nu.signed {
             panic!("Cannot compare signed with unsigned!");
         } else {
             let mut left_nu = self.clone();
@@ -466,7 +474,8 @@ impl SvPrimaryLiteral {
         }
     }
 
-    /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required. The correct final number of bits is set to the argument. */
+    /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required.
+    The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
         if !self.signed {
             if self.is_zero() {
@@ -549,7 +558,8 @@ impl SvPrimaryLiteral {
         }
     }
 
-    /* Receives the number of bits in which a primary literal should be truncated. The correct final number of bits is set but the signedness doesn't change. */
+    /* Receives the number of bits in which a primary literal should be truncated.
+    The correct final number of bits is set but the signedness doesn't change. */
     pub fn _truncate(&mut self, num_bits: usize) {
         if num_bits == 0 {
             panic!("Cannot truncate the value to zero bits!");
@@ -762,15 +772,39 @@ pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteral {
 
 impl fmt::Display for SvPrimaryLiteral {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "NumBits: {}", self.num_bits)?;
+        writeln!(f, "Signed: {}", self.signed)?;
         write!(f, "Data01: ")?;
 
         for x in 0..self.data01.len() {
-            write!(f, "{:b} ", self.data01[x])?;
+            writeln!(f, "{:b} ", self.data01[x])?;
         }
-
-        write!(f, "\n")?;
-
-        writeln!(f, "NumBits: {}", self.num_bits)?;
-        write!(f, "Signed: {}", self.signed)
+        write!(f, "")
     }
 }
+
+impl Ord for SvPrimaryLiteral {
+    fn cmp(&self, other: &Self) -> Ordering {
+        if self.eq(other.clone()) {
+            return Ordering::Equal;
+        } else if self.lt(other.clone()) {
+            return Ordering::Less;
+        } else {
+            Ordering::Greater
+        }
+    }
+}
+
+impl PartialOrd for SvPrimaryLiteral {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for SvPrimaryLiteral {
+    fn eq(&self, other: &Self) -> bool {
+        self.eq(other.clone())
+    }
+}
+
+impl Eq for SvPrimaryLiteral {}

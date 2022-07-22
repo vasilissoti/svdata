@@ -195,6 +195,14 @@ impl fmt::Display for SvPort {
             }
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
+        match self.comment.clone() {
+            None => {
+                writeln!(f, "    Comment: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Comment: {}", x)?;
+            }
+        }
 
         write!(f, "")
     }

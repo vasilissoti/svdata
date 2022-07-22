@@ -1,6 +1,7 @@
 use std::env;
 use std::fs::File;
 use std::io::{BufRead, BufReader, Write};
+use std::iter::zip;
 use std::path::Path;
 use walkdir::WalkDir;
 
@@ -52,11 +53,16 @@ fn main() {
         write!(t, "}}\n").unwrap();
     }
 
-    for (index, file_name) in entries_primlits.iter().enumerate() {
+    let length = entries_primlits.len();
+    let mut iter = zip(entries_primlits, entries_primlits_contents);
+
+    for _x in 0..length {
+        let (file_name, content) = iter.next().unwrap();
+
         write!(t, "#[test]\n").unwrap();
         write!(t, "fn test_{}() {{\n", file_name).unwrap();
 
-        for line in &entries_primlits_contents[index] {
+        for line in &content {
             _ = writeln!(t, "    {}", line.as_str());
         }
 

@@ -11,6 +11,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: [("5", "0")]
+    Comment: None
   Port: 
     Identifier: y
     Direction: Ref
@@ -21,4 +22,5 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 
