@@ -109,8 +109,8 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
-        for x in 0..self.data_01.len() {
-            if self.data_01[x].leading_zeros() != usize::BITS {
+        for x in &self.data_01 {
+            if x.leading_zeros() != usize::BITS {
                 return false;
             }
         }
@@ -118,18 +118,26 @@ impl SvPrimaryLiteralIntegral {
         true
     }
 
+    pub fn is_4state(&self) -> bool {
+        match self.data_xz.clone() {
+            None => false,
+            Some(_) => true,
+        }
+    }
+
     /* Receives an integral primary literal as an argument and deduces whether it contains X(s) or Z(s). */
-    pub fn contains_nonbinary(&mut self) -> bool {
-        match self.data_xz {
-            None => return false,
-            Some(vec) => {
-                for x in 0..self.data_xz.len() {
-                    if self.data_01[x].leading_zeros() != usize::BITS {
-                        return true;
-                    }
+    pub fn contains_nonbinary(&self) -> bool {
+        if !self.is_4state() {
+            return false;
+        } else {
+            for x in self.data_xz.as_ref().unwrap() {
+                if x.leading_zeros() != usize::BITS {
+                    return true;
                 }
             }
         }
+
+        false
     }
 
     /* Accepts two signed integral primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
@@ -797,16 +805,14 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
         }
 
         write!(f, "Data_XZ: ")?;
-        match self.data_xz.clone() {
-            None => {
-                writeln!(f, "None")?;
-            }
-            Some(vec) => {
-                for x in vec {
-                    writeln!(f, "{:b}", x)?;
-                }
+        if !self.is_4state() {
+            writeln!(f, "None")?;
+        } else {
+            for x in self.data_xz.as_ref().unwrap() {
+                writeln!(f, "{:b}", x)?;
             }
         }
+
         write!(f, "")
     }
 }
