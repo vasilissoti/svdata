@@ -1,5 +1,5 @@
 NumBits: 130
 Signed: true
-Data01: 10 
+data_01: 10 
 10 
 0 

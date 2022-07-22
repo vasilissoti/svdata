@@ -1,6 +1,6 @@
 let mut a = SvPrimaryLiteralIntegral {
-    data01: vec![1, 9223372036854775808],
-    dataXZ: None,
+    data_01: vec![1, 9223372036854775808],
+    data_xz: None,
     size: 65,
     signed: true,
 };
@@ -8,8 +8,8 @@ let mut a = SvPrimaryLiteralIntegral {
 a._sign_extension();
 
 let exp = SvPrimaryLiteralIntegral {
-    data01: vec![18446744073709551615, 9223372036854775808],
-    dataXZ: None,
+    data_01: vec![18446744073709551615, 9223372036854775808],
+    data_xz: None,
     size: 128,
     signed: true,
 };

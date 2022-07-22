@@ -1,13 +1,13 @@
 let a = SvPrimaryLiteralIntegral {
-    data01: vec![8],
-    dataXZ: None,
+    data_01: vec![8],
+    data_xz: None,
     size: 4,
     signed: false,
 };
 
 let b = SvPrimaryLiteralIntegral {
-    data01: vec![9223372036854775808],
-    dataXZ: None,
+    data_01: vec![9223372036854775808],
+    data_xz: None,
     size: 64,
     signed: false,
 };
@@ -15,8 +15,8 @@ let b = SvPrimaryLiteralIntegral {
 let c: SvPrimaryLiteralIntegral = a.mul(b.clone());
 
 let exp = SvPrimaryLiteralIntegral {
-    data01: vec![4, 0],
-    dataXZ: None,
+    data_01: vec![4, 0],
+    data_xz: None,
     size: 67,
     signed: false,
 };
