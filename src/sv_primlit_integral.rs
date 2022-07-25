@@ -140,6 +140,26 @@ impl SvPrimaryLiteralIntegral {
         false
     }
 
+    /* Receives a 2-state integral primary literal and returns its conversion to a 4-state integral primary literal. */
+    pub fn to_4state(&self) -> SvPrimaryLiteralIntegral {
+        let mut ret = SvPrimaryLiteralIntegral {
+            data_01: self.data_01.clone(),
+            data_xz: Some(vec![0]),
+            size: self.size,
+            signed: self.signed,
+        };
+
+        if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
+            for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
+                let mut new_vec = ret.data_xz.clone().unwrap();
+                new_vec.insert(0, 0);
+                ret.data_xz = Some(new_vec);
+            }
+        }
+
+        ret
+    }
+
     /* Accepts two signed integral primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
     The correct final number of bits is set to both arguments. */
     pub fn _matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
@@ -622,7 +642,7 @@ impl SvPrimaryLiteralIntegral {
         if !ret.signed {
             ret._unsigned_usize_add(right_nu);
             ret._minimum_width();
-            ret.data_xz = Some(vec![0]);
+            ret = ret.to_4state();
         } else {
             let right_nu = SvPrimaryLiteralIntegral {
                 data_01: vec![right_nu],
@@ -634,14 +654,6 @@ impl SvPrimaryLiteralIntegral {
             ret = ret.add_primlit(right_nu.clone());
         }
 
-        if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
-            for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
-                let mut new_vec = ret.data_xz.clone().unwrap();
-                new_vec.insert(0, 0);
-                ret.data_xz = Some(new_vec);
-            }
-        }
-
         ret
     }
 
@@ -650,9 +662,9 @@ impl SvPrimaryLiteralIntegral {
 
         if ret.is_4state() != right_nu.is_4state() {
             if !ret.is_4state() {
-                ret.data_xz = Some(vec![0]);
+                ret = ret.to_4state();
             } else {
-                right_nu.data_xz = Some(vec![0]);
+                right_nu = right_nu.to_4state();
             }
         }
 
@@ -691,8 +703,6 @@ impl SvPrimaryLiteralIntegral {
 
                     ret._minimum_width();
                 } else {
-                    let new_size: usize;
-
                     ret._matched_sign_extension(&mut right_nu);
                     ret._unsigned_primlit_add(right_nu.clone());
                     ret._truncate(ret.size);
@@ -702,13 +712,7 @@ impl SvPrimaryLiteralIntegral {
             }
 
             if ret.is_4state() {
-                if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
-                    for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
-                        let mut new_vec = ret.data_xz.clone().unwrap();
-                        new_vec.insert(0, 0);
-                        ret.data_xz = Some(new_vec);
-                    }
-                }
+                ret = ret.to_4state();
             }
 
             ret
