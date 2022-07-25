@@ -140,7 +140,7 @@ impl SvPrimaryLiteralIntegral {
         false
     }
 
-    /* Receives a 2-state integral primary literal and returns its conversion to a 4-state integral primary literal. */
+    /* Receives an integral primary literal and returns its contents in a 4-state integral primary literal. */
     pub fn to_4state(&self) -> SvPrimaryLiteralIntegral {
         let mut ret = SvPrimaryLiteralIntegral {
             data_01: self.data_01.clone(),
