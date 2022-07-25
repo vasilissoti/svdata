@@ -1,1 +1,4 @@
 /target
+ansi_port_inout_net.sv
+.gitignore
+test.json

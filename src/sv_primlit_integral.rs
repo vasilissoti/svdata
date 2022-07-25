@@ -11,36 +11,36 @@ pub struct SvPrimaryLiteralIntegral {
 
 // The following functions should be replaced by the build in methods once they become stable
 impl SvPrimaryLiteralIntegral {
-    /* Unsigned addition between an integral primary literal and usize.
-    It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
-    Instead it must be explicitly implemented according the context that the function is used. */
-    pub fn _unsigned_usize_add(&mut self, right_nu: usize) {
-        let last_index = self.data_01.len() - 1;
-        let left_nu: usize = self.data_01[last_index];
-        self.data_01[last_index] = left_nu.wrapping_add(right_nu.clone());
+    // /* Unsigned addition between an integral primary literal and usize.
+    // It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
+    // Instead it must be explicitly implemented according the context that the function is used. */
+    // pub fn _unsigned_usize_add(&mut self, right_nu: usize) {
+    //     let last_index = self.data_01.len() - 1;
+    //     let left_nu: usize = self.data_01[last_index];
+    //     self.data_01[last_index] = left_nu.wrapping_add(right_nu.clone());
 
-        if (self.data_01[last_index] < left_nu) || (self.data_01[last_index] < right_nu.clone()) {
-            if self.data_01.len() == 1 {
-                self.data_01.insert(0, 1);
-            } else {
-                let mut carry_flag: bool = true;
+    //     if (self.data_01[last_index] < left_nu) || (self.data_01[last_index] < right_nu.clone()) {
+    //         if self.data_01.len() == 1 {
+    //             self.data_01.insert(0, 1);
+    //         } else {
+    //             let mut carry_flag: bool = true;
 
-                for x in (0..self.data_01.len() - 1).rev() {
-                    let left_nu: usize = self.data_01[x];
-                    self.data_01[x] = left_nu.wrapping_add(1);
+    //             for x in (0..self.data_01.len() - 1).rev() {
+    //                 let left_nu: usize = self.data_01[x];
+    //                 self.data_01[x] = left_nu.wrapping_add(1);
 
-                    if self.data_01[x] > left_nu {
-                        carry_flag = false;
-                        break;
-                    }
-                }
+    //                 if self.data_01[x] > left_nu {
+    //                     carry_flag = false;
+    //                     break;
+    //                 }
+    //             }
 
-                if carry_flag {
-                    self.data_01.insert(0, 1);
-                }
-            }
-        }
-    }
+    //             if carry_flag {
+    //                 self.data_01.insert(0, 1);
+    //             }
+    //         }
+    //     }
+    // }
 
     /* Unsigned addition between two integral primary literals.
     Both data_01 vector dimensions (i.e nu of elements) are matched.
@@ -263,7 +263,7 @@ impl SvPrimaryLiteralIntegral {
 
         ret = ret.inv();
 
-        ret._unsigned_usize_add(1);
+        ret = ret.add_usize(1);
 
         if from_negative {
             ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
@@ -639,20 +639,15 @@ impl SvPrimaryLiteralIntegral {
 
     pub fn add_usize(&self, right_nu: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        if !ret.signed {
-            ret._unsigned_usize_add(right_nu);
-            ret._minimum_width();
-            ret = ret.to_4state();
-        } else {
-            let right_nu = SvPrimaryLiteralIntegral {
-                data_01: vec![right_nu],
-                data_xz: Some(vec![0]),
-                size: usize::BITS as usize,
-                signed: true,
-            };
 
-            ret = ret.add_primlit(right_nu.clone());
-        }
+        let right_nu = SvPrimaryLiteralIntegral {
+            data_01: vec![right_nu],
+            data_xz: None,
+            size: usize::BITS as usize,
+            signed: true,
+        };
+
+        ret = ret.add_primlit(right_nu.clone());
 
         ret
     }
@@ -836,7 +831,7 @@ impl SvPrimaryLiteralIntegral {
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     let mut ret = SvPrimaryLiteralIntegral {
         data_01: vec![value],
-        data_xz: Some(vec![0]),
+        data_xz: None,
         size: usize::BITS as usize,
         signed: true,
     };
