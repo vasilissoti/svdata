@@ -126,7 +126,7 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Receives an integral primary literal as an argument and deduces whether it contains X(s) or Z(s). */
-    pub fn contains_nonbinary(&self) -> bool {
+    pub fn contains_xz(&self) -> bool {
         if !self.is_4state() {
             return false;
         } else {
@@ -668,7 +668,7 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
-        if !ret.contains_nonbinary() && !right_nu.contains_nonbinary() {
+        if !ret.contains_xz() && !right_nu.contains_xz() {
             if ret.signed == false || right_nu.signed == false {
                 ret._unsigned_primlit_add(right_nu.clone());
                 ret.signed = false;
@@ -767,7 +767,7 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
-        if !left_nu.contains_nonbinary() && !right_nu.contains_nonbinary() {
+        if !left_nu.contains_xz() && !right_nu.contains_xz() {
             if !left_nu.signed || !right_nu.signed {
                 left_nu.signed = false;
                 right_nu.signed = false;
