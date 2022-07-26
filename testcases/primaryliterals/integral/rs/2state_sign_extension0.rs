@@ -5,7 +5,7 @@ let mut a = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-a._sign_extension();
+a._sign_extend();
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![0, 9223372036854775808],

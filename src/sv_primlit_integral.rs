@@ -132,7 +132,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Accepts two signed integral primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
     The correct final number of bits is set to both arguments. */
-    pub fn _matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
+    pub fn _matched_sign_extend(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
         if self.signed != true || right_nu.signed != true {
             panic!("Expected signed SvPrimaryLiterals but found unsigned!");
         }
@@ -188,7 +188,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives a signed integral primary literal and sign extends the value in the existing number of data_01 vector elements.
     The correct final number of bits is set to the argument. */
-    pub fn _sign_extension(&mut self) {
+    pub fn _sign_extend(&mut self) {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
         }
@@ -229,7 +229,7 @@ impl SvPrimaryLiteralIntegral {
         }
 
         let from_negative: bool = ret.is_negative();
-        ret._sign_extension();
+        ret._sign_extend();
 
         ret = ret.inv();
 
@@ -722,7 +722,7 @@ impl SvPrimaryLiteralIntegral {
                 } else if left_neg && right_neg {
                     let new_size: usize;
 
-                    ret._matched_sign_extension(&mut right_nu);
+                    ret._matched_sign_extend(&mut right_nu);
                     ret._unsigned_primlit_add(right_nu.clone());
 
                     new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
@@ -731,7 +731,7 @@ impl SvPrimaryLiteralIntegral {
 
                     ret._minimum_width();
                 } else {
-                    ret._matched_sign_extension(&mut right_nu);
+                    ret._matched_sign_extend(&mut right_nu);
                     ret._unsigned_primlit_add(right_nu.clone());
                     ret._truncate(ret.size);
 

@@ -12,7 +12,7 @@ let mut b = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-a._matched_sign_extension(&mut b);
+a._matched_sign_extend(&mut b);
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![18446744073709551615, 9223372036854775808],
