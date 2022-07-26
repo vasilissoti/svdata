@@ -281,6 +281,8 @@ impl SvPrimaryLiteralIntegral {
 
         for _x in 0..n {
             let mut leading_one: bool = false;
+            let mut leading_one_xz: bool = false;
+
             ret.size = ret.size + 1;
 
             for y in (0..ret.data_01.len()).rev() {
@@ -296,10 +298,30 @@ impl SvPrimaryLiteralIntegral {
                 if pre_mod.leading_zeros() == 0 {
                     leading_one = true;
                 }
+
+                if ret.is_4state() {
+                    let pre_mod = ret.data_xz.as_ref().unwrap()[y];
+
+                    if leading_one_xz {
+                        ret.data_xz.as_mut().unwrap()[y] =
+                            (ret.data_xz.as_ref().unwrap()[y] << 1) + 1;
+                        leading_one_xz = false;
+                    } else {
+                        ret.data_xz.as_mut().unwrap()[y] = ret.data_xz.as_ref().unwrap()[y] << 1;
+                    }
+
+                    if pre_mod.leading_zeros() == 0 {
+                        leading_one_xz = true;
+                    }
+                }
             }
 
             if leading_one {
                 ret.data_01.insert(0, 1);
+            }
+
+            if leading_one_xz {
+                ret.data_xz.as_mut().unwrap().insert(0, 1);
             }
         }
 
