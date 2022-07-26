@@ -411,8 +411,6 @@ impl SvPrimaryLiteralIntegral {
                     right_nu_neg = false;
                 }
 
-                println!("left bool {} & right bool {}", left_nu_neg, right_nu_neg);
-
                 if left_nu_neg && !right_nu_neg {
                     return true;
                 } else if !left_nu_neg && right_nu_neg {
@@ -479,8 +477,6 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     right_nu_neg = false;
                 }
-
-                println!("left bool {} & right bool {}", left_nu_neg, right_nu_neg);
 
                 if left_nu_neg && !right_nu_neg {
                     return false;
