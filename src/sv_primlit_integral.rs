@@ -182,6 +182,14 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
+        if self.is_4state() {
+            self.data_xz = self.to_4state().data_xz;
+        }
+
+        if right_nu.is_4state() {
+            right_nu.data_xz = right_nu.to_4state().data_xz;
+        }
+
         self.size = self.data_01.len() * usize::BITS as usize;
         right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
     }
@@ -740,7 +748,7 @@ impl SvPrimaryLiteralIntegral {
             }
 
             if ret.is_4state() {
-                ret = ret.to_4state();
+                ret.data_xz = ret.to_4state().data_xz;
             }
 
             ret
@@ -848,13 +856,7 @@ impl SvPrimaryLiteralIntegral {
 
         ret.data_xz = left_nu.data_xz.clone();
         if ret.is_4state() {
-            if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
-                for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
-                    let mut new_vec = ret.data_xz.clone().unwrap();
-                    new_vec.insert(0, 0);
-                    ret.data_xz = Some(new_vec);
-                }
-            }
+            ret.data_xz = ret.to_4state().data_xz;
         }
 
         ret
