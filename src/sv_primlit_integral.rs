@@ -58,6 +58,14 @@ impl SvPrimaryLiteralIntegral {
                 self.data_01.insert(0, 0);
             }
         }
+
+        if self.is_4state() {
+            self.data_xz = self.to_4state().data_xz;
+        }
+
+        if right_nu.is_4state() {
+            right_nu.data_xz = right_nu.to_4state().data_xz;
+        }
     }
 
     /* Receives a signed integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
@@ -180,14 +188,6 @@ impl SvPrimaryLiteralIntegral {
                     break;
                 }
             }
-        }
-
-        if self.is_4state() {
-            self.data_xz = self.to_4state().data_xz;
-        }
-
-        if right_nu.is_4state() {
-            right_nu.data_xz = right_nu.to_4state().data_xz;
         }
 
         self.size = self.data_01.len() * usize::BITS as usize;
