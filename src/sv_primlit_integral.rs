@@ -316,12 +316,14 @@ impl SvPrimaryLiteralIntegral {
                 }
             }
 
-            if leading_one {
+            if leading_one || leading_one_xz {
                 ret.data_01.insert(0, 1);
-            }
 
-            if leading_one_xz {
-                ret.data_xz.as_mut().unwrap().insert(0, 1);
+                if ret.is_4state() && leading_one_xz {
+                    ret.data_xz.as_mut().unwrap().insert(0, 1);
+                } else if ret.is_4state() && leading_one {
+                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                }
             }
         }
 
