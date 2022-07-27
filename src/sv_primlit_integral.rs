@@ -283,6 +283,13 @@ impl SvPrimaryLiteralIntegral {
             let mut leading_one: bool = false;
             let mut leading_one_xz: bool = false;
 
+            let check_zero: bool;
+            if ret.signed && !ret.is_negative() {
+                check_zero = true;
+            } else {
+                check_zero = false;
+            }
+
             ret.size = ret.size + 1;
 
             for y in (0..ret.data_01.len()).rev() {
@@ -316,12 +323,21 @@ impl SvPrimaryLiteralIntegral {
                 }
             }
 
-            if leading_one || leading_one_xz {
+            if leading_one && leading_one_xz {
                 ret.data_01.insert(0, 1);
+                ret.data_xz.as_mut().unwrap().insert(0, 1);
+            } else if leading_one {
+                ret.data_01.insert(0, 1);
+                if ret.is_4state() {
+                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                }
+            } else if leading_one_xz {
+                ret.data_01.insert(0, 0);
+                ret.data_xz.as_mut().unwrap().insert(0, 1);
+            } else if check_zero && (ret.size > usize::BITS as usize * ret.data_01.len()) {
+                ret.data_01.insert(0, 0);
 
-                if ret.is_4state() && leading_one_xz {
-                    ret.data_xz.as_mut().unwrap().insert(0, 1);
-                } else if ret.is_4state() && leading_one {
+                if ret.is_4state() {
                     ret.data_xz.as_mut().unwrap().insert(0, 0);
                 }
             }
