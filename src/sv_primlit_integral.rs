@@ -430,6 +430,13 @@ impl SvPrimaryLiteralIntegral {
     pub fn ror(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         let last_index = ret.data_01.len() - 1;
+        let msb: u32;
+
+        if ret.size % usize::BITS as usize == 0 {
+            msb = usize::BITS;
+        } else {
+            msb = ret.size as u32 % usize::BITS;
+        }
 
         for _x in 0..n {
             let trailing_one: bool = ret.data_01[last_index].trailing_zeros() == 0;
@@ -442,12 +449,12 @@ impl SvPrimaryLiteralIntegral {
             ret = ret.lsr(1);
 
             if trailing_one {
-                ret.data_01[0] = ret.data_01[0] + 2usize.pow(usize::BITS - 1);
+                ret.data_01[0] = ret.data_01[0] + 2usize.pow(msb - 1);
             }
 
             if trailing_one_xz {
                 ret.data_xz.as_mut().unwrap()[0] =
-                    ret.data_xz.as_ref().unwrap()[0] + 2usize.pow(usize::BITS - 1);
+                    ret.data_xz.as_ref().unwrap()[0] + 2usize.pow(msb - 1);
             }
         }
 
