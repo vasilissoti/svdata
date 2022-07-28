@@ -392,18 +392,33 @@ impl SvPrimaryLiteralIntegral {
         for _x in 0..n {
             let previous_size = ret.size;
             let leading_one: bool;
+            let mut leading_one_xz: bool = false;
 
             if previous_size % usize::BITS as usize == 0 {
                 leading_one = ret.data_01[0].leading_zeros() == 0;
+
+                if ret.is_4state() {
+                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() == 0;
+                }
             } else {
                 leading_one = ret.data_01[0].leading_zeros() as usize
                     == (usize::BITS as usize - (ret.size % usize::BITS as usize));
+
+                if ret.is_4state() {
+                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() as usize
+                        == (usize::BITS as usize - (ret.size % usize::BITS as usize));
+                }
             }
 
             ret = ret.lsl(1);
             ret._truncate(previous_size);
             if leading_one {
                 ret.data_01[last_index] = ret.data_01[last_index] + 1;
+            }
+
+            if leading_one_xz {
+                ret.data_xz.as_mut().unwrap()[last_index] =
+                    ret.data_xz.as_ref().unwrap()[last_index] + 1;
             }
         }
 
@@ -718,6 +733,39 @@ impl SvPrimaryLiteralIntegral {
                 {
                     if self.data_01[0].leading_zeros() == (usize::BITS - x as u32) {
                         self.data_01[0] = self.data_01[0] - 2usize.pow(x as u32 - 1);
+                    }
+                }
+            }
+
+            if self.is_4state() {
+                let elmnts_to_be_rm: usize;
+                let bits_to_be_rm: usize;
+
+                if (size % usize::BITS as usize) == 0 {
+                    elmnts_to_be_rm =
+                        self.data_xz.as_ref().unwrap().len() - size / usize::BITS as usize;
+                    bits_to_be_rm = 0;
+                } else {
+                    elmnts_to_be_rm =
+                        self.data_xz.as_ref().unwrap().len() - (size / usize::BITS as usize) - 1;
+                    bits_to_be_rm = usize::BITS as usize - size % usize::BITS as usize;
+                }
+
+                for _x in 0..elmnts_to_be_rm {
+                    self.data_xz.as_mut().unwrap().remove(0);
+                }
+
+                if bits_to_be_rm != 0 {
+                    for x in ((usize::BITS as usize - bits_to_be_rm + 1)
+                        ..(usize::BITS as usize + 1))
+                        .rev()
+                    {
+                        if self.data_xz.as_ref().unwrap()[0].leading_zeros()
+                            == (usize::BITS - x as u32)
+                        {
+                            self.data_xz.as_mut().unwrap()[0] =
+                                self.data_xz.as_ref().unwrap()[0] - 2usize.pow(x as u32 - 1);
+                        }
                     }
                 }
             }
