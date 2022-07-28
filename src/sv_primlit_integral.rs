@@ -433,10 +433,21 @@ impl SvPrimaryLiteralIntegral {
 
         for _x in 0..n {
             let trailing_one: bool = ret.data_01[last_index].trailing_zeros() == 0;
+            let mut trailing_one_xz: bool = false;
+
+            if ret.is_4state() {
+                trailing_one_xz = ret.data_xz.as_ref().unwrap()[last_index].trailing_zeros() == 0;
+            }
+
             ret = ret.lsr(1);
 
             if trailing_one {
                 ret.data_01[0] = ret.data_01[0] + 2usize.pow(usize::BITS - 1);
+            }
+
+            if trailing_one_xz {
+                ret.data_xz.as_mut().unwrap()[0] =
+                    ret.data_xz.as_ref().unwrap()[0] + 2usize.pow(usize::BITS - 1);
             }
         }
 
