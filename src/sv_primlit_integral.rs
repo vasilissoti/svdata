@@ -466,8 +466,31 @@ impl SvPrimaryLiteralIntegral {
     pub fn cat(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         ret = ret.lsl(right_nu.size);
+
+        let mut left_nu: SvPrimaryLiteralIntegral = ret.clone();
+
+        if left_nu.is_4state() || right_nu.is_4state() {
+            let mut left_xz = SvPrimaryLiteralIntegral {
+                data_01: left_nu.data_xz.as_ref().unwrap().clone(),
+                data_xz: None,
+                size: left_nu.size,
+                signed: false,
+            };
+
+            let right_xz = SvPrimaryLiteralIntegral {
+                data_01: right_nu.data_xz.as_ref().unwrap().clone(),
+                data_xz: None,
+                size: right_nu.size,
+                signed: false,
+            };
+
+            left_xz._unsigned_primlit_add(right_xz.clone());
+            left_nu.data_xz = Some(left_xz.data_01.clone());
+        }
+
         ret._unsigned_primlit_add(right_nu.clone());
         ret.size = self.size + right_nu.size;
+        ret.data_xz = left_nu.data_xz.clone();
 
         ret
     }
