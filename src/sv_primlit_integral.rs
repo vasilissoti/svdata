@@ -367,7 +367,7 @@ impl SvPrimaryLiteralIntegral {
 
                     if trailing_one_xz {
                         ret.data_xz.as_mut().unwrap()[y] =
-                            (ret.data_xz.as_ref().unwrap()[y] >> 1) + 1;
+                            (ret.data_xz.as_ref().unwrap()[y] >> 1) + 2usize.pow(usize::BITS - 1);
                         trailing_one_xz = false;
                     } else {
                         ret.data_xz.as_mut().unwrap()[y] = ret.data_xz.as_ref().unwrap()[y] >> 1;
