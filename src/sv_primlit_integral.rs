@@ -1038,27 +1038,32 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
     }
 }
 
-impl Ord for SvPrimaryLiteralIntegral {
-    fn cmp(&self, other: &Self) -> Ordering {
-        if self.lt(other.clone()) {
-            return Ordering::Less;
-        } else if self.gt(other.clone()) {
-            return Ordering::Greater;
-        } else {
-            Ordering::Equal
-        }
-    }
-}
-
 impl PartialOrd for SvPrimaryLiteralIntegral {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
+        if self.contains_xz() || other.contains_xz() {
+            return None;
+        } else if self.lt(other.clone()) {
+            return Some(Ordering::Less);
+        } else if self.gt(other.clone()) {
+            return Some(Ordering::Greater);
+        } else {
+            Some(Ordering::Equal)
+        }
     }
 }
 
 impl PartialEq for SvPrimaryLiteralIntegral {
     fn eq(&self, other: &Self) -> bool {
-        self.eq(other.clone())
+        if self.contains_xz() || other.contains_xz() {
+            let signedness = self.signed == other.signed;
+            let size = self.size == other.size;
+            let data_01 = self.data_01 == other.data_01;
+            let data_xz = self.data_xz.as_ref().unwrap() == other.data_xz.as_ref().unwrap();
+
+            return signedness && size && data_01 && data_xz;
+        } else {
+            self.eq(other.clone())
+        }
     }
 }
 

@@ -12,6 +12,6 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c: bool = a > b;
+let c: bool = a < b;
 
 let actual_string = format!("{}", c);
