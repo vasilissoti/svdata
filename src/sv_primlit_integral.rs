@@ -498,12 +498,28 @@ impl SvPrimaryLiteralIntegral {
     /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. */
     pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
-        if self.signed != right_nu.signed {
-            panic!("Cannot compare signed with unsigned!");
-        } else {
-            let mut left_nu = self.clone();
+        let mut left_nu = self.clone();
 
-            if self.signed {
+        if left_nu.signed != right_nu.signed {
+            if left_nu.signed {
+                if left_nu.is_negative() {
+                    return true;
+                } else {
+                    left_nu.signed = false;
+                    left_nu._minimum_width();
+                    return left_nu.lt(right_nu.clone());
+                }
+            } else {
+                if right_nu.is_negative() {
+                    return false;
+                } else {
+                    right_nu.signed = false;
+                    right_nu._minimum_width();
+                    return left_nu.lt(right_nu.clone());
+                }
+            }
+        } else {
+            if left_nu.signed {
                 let left_nu_neg: bool;
                 let right_nu_neg: bool;
 
@@ -565,12 +581,28 @@ impl SvPrimaryLiteralIntegral {
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
     Otherwise it returns false. */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
-        if self.signed != right_nu.signed {
-            panic!("Cannot compare signed with unsigned!");
-        } else {
-            let mut left_nu = self.clone();
+        let mut left_nu = self.clone();
 
-            if self.signed {
+        if left_nu.signed != right_nu.signed {
+            if left_nu.signed {
+                if left_nu.is_negative() {
+                    return false;
+                } else {
+                    left_nu.signed = false;
+                    left_nu._minimum_width();
+                    return left_nu.gt(right_nu.clone());
+                }
+            } else {
+                if right_nu.is_negative() {
+                    return true;
+                } else {
+                    right_nu.signed = false;
+                    right_nu._minimum_width();
+                    return left_nu.gt(right_nu.clone());
+                }
+            }
+        } else {
+            if left_nu.signed {
                 let left_nu_neg: bool;
                 let right_nu_neg: bool;
 
@@ -632,12 +664,28 @@ impl SvPrimaryLiteralIntegral {
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
     pub fn eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
-        if self.signed != right_nu.signed {
-            panic!("Cannot compare signed with unsigned!");
-        } else {
-            let mut left_nu = self.clone();
+        let mut left_nu = self.clone();
 
-            if self.signed {
+        if left_nu.signed != right_nu.signed {
+            if left_nu.signed {
+                if left_nu.is_negative() {
+                    return false;
+                } else {
+                    left_nu.signed = false;
+                    left_nu._minimum_width();
+                    return left_nu.eq(right_nu.clone());
+                }
+            } else {
+                if right_nu.is_negative() {
+                    return false;
+                } else {
+                    right_nu.signed = false;
+                    right_nu._minimum_width();
+                    return left_nu.eq(right_nu.clone());
+                }
+            }
+        } else {
+            if left_nu.signed {
                 if left_nu.is_negative() && !right_nu.is_negative() {
                     return false;
                 } else if !left_nu.is_negative() && right_nu.is_negative() {
