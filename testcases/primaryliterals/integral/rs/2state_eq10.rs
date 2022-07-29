@@ -14,4 +14,6 @@ let b = SvPrimaryLiteralIntegral {
 
 let c: bool = a == b;
 
+assert_eq!(c, true);
+
 let actual_string = format!("{}", c);
