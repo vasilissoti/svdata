@@ -1,0 +1,26 @@
+Module:
+  Identifier: mh20
+  Filepath: testcases/semantics/sv/ieee1800_2017_mh20.sv
+  Port: 
+    Identifier: x
+    Direction: Ref
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: [("5", "0")]
+    Comment: None
+  Port: 
+    Identifier: y
+    Direction: Ref
+    DataKind: Variable
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: None
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+

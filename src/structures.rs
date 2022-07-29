@@ -23,7 +23,23 @@ pub struct SvPackageDeclaration {
 #[derive(Debug, Serialize, Clone)]
 pub struct SvParameter {
     pub identifier: String,
-    pub datatype: String,
+    pub expression: Option<String>,
+    pub paramtype: SvParamType,
+    pub datatype: Option<SvDataType>,
+    pub datatype_overridable: bool,
+    pub classid: Option<String>,
+    pub signedness: Option<SvSignedness>,
+    pub signedness_overridable: bool,
+    pub num_bits: Option<u64>,
+    pub packed_dimensions: Vec<SvPackedDimension>,
+    pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+    pub comment: Option<String>,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub enum SvParamType {
+    Parameter,
+    LocalParam,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -46,6 +62,7 @@ pub enum SvDataKind {
 pub enum SvSignedness {
     Signed,
     Unsigned,
+    Unsupported,
     IMPLICIT,
 }
 
@@ -70,6 +87,7 @@ pub enum SvDataType {
     Class,
     TypeRef,
     String,
+    Unsupported,
     IMPLICIT,
 }
 
@@ -104,6 +122,7 @@ pub struct SvPort {
     pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
+    pub comment: Option<String>,
 }
 
 impl fmt::Display for SvData {
@@ -124,6 +143,10 @@ impl fmt::Display for SvModuleDeclaration {
 
         for port in self.ports.clone() {
             write!(f, "{}", port)?;
+        }
+
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
         }
 
         writeln!(f, "")
@@ -172,6 +195,93 @@ impl fmt::Display for SvPort {
             }
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
+        match self.comment.clone() {
+            None => {
+                writeln!(f, "    Comment: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Comment: {}", x)?;
+            }
+        }
+
+        write!(f, "")
+    }
+}
+
+impl fmt::Display for SvParameter {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "  Parameter: ")?;
+        writeln!(f, "    Identifier: {}", self.identifier)?;
+        match self.expression.clone() {
+            None => {
+                writeln!(f, "    Expression: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Expression: {}", x)?;
+            }
+        }
+        writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
+        match self.datatype.clone() {
+            None => {
+                writeln!(f, "    DataType: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    DataType: {:?}", x)?;
+            }
+        }
+        writeln!(
+            f,
+            "    DataTypeOverridable: {:?}",
+            self.datatype_overridable
+        )?;
+        match self.classid.clone() {
+            None => {
+                writeln!(f, "    ClassIdentifier: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    ClassIdentifier: {}", x)?;
+            }
+        }
+        match self.signedness.clone() {
+            None => {
+                writeln!(f, "    Signedness: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Signedness: {:?}", x)?;
+            }
+        }
+        writeln!(
+            f,
+            "    SignednessOverridable: {:?}",
+            self.signedness_overridable
+        )?;
+        match self.num_bits.clone() {
+            None => {
+                writeln!(f, "    NumBits: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    NumBits: {}", x)?;
+            }
+        }
+        writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
+        let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
+
+        for (u, l) in self.unpacked_dimensions.clone() {
+            match l {
+                Some(x) => unpackeddim_display.push((u.clone(), x.clone())),
+                None => unpackeddim_display.push((u.clone(), String::from("None"))),
+            }
+        }
+        writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
+
+        match self.comment.clone() {
+            None => {
+                writeln!(f, "    Comment: None")?;
+            }
+            Some(x) => {
+                writeln!(f, "    Comment: {}", x)?;
+            }
+        }
 
         write!(f, "")
     }

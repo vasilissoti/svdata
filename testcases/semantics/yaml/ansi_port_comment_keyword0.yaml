@@ -1,0 +1,123 @@
+---
+modules:
+  - identifier: TestModule
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*post*/
+      - identifier: b
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions: []
+        comment: /*pd*//*post*/
+      - identifier: c
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions:
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
+        comment: /*kind*//*pd*//*ud*//*post*/
+      - identifier: d
+        direction: Inout
+        datakind: Net
+        datatype: Int
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*post*/
+      - identifier: e
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions:
+          - - FOO-1
+            - "0"
+        comment: /*ty*//*post*/
+      - identifier: f
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*post*/
+      - identifier: g
+        direction: Inout
+        datakind: Net
+        datatype: String
+        classid: ~
+        nettype: Wire
+        signedness: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*ty*//*post*/
+      - identifier: h
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*dir*//*sign*//*post*/
+      - identifier: i
+        direction: Inout
+        datakind: Net
+        datatype: Integer
+        classid: ~
+        nettype: Tri
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /*dir*//*kind*//*ty*//*sign*//*post*/
+      - identifier: j
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Signed
+        packed_dimensions:
+          - - FOO-1
+            - "0"
+        unpacked_dimensions:
+          - - FOO
+            - ~
+          - - FOO-1
+            - "0"
+        comment: /*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/
+    filepath: testcases/semantics/sv/ansi_port_comment_keyword0.sv
+packages: []
