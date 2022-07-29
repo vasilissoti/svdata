@@ -3,46 +3,16 @@ use std::fmt;
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
-    pub data01: Vec<usize>,
+    pub data_01: Vec<usize>,
+    pub data_xz: Option<Vec<usize>>,
     pub size: usize,
     pub signed: bool,
 }
 
 // The following functions should be replaced by the build in methods once they become stable
 impl SvPrimaryLiteralIntegral {
-    /* Unsigned addition between a primary literal and usize.
-    It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
-    Instead it must be explicitly implemented according the context that the function is used. */
-    pub fn _unsigned_usize_add(&mut self, right_nu: usize) {
-        let last_index = self.data01.len() - 1;
-        let left_nu: usize = self.data01[last_index];
-        self.data01[last_index] = left_nu.wrapping_add(right_nu.clone());
-
-        if (self.data01[last_index] < left_nu) || (self.data01[last_index] < right_nu.clone()) {
-            if self.data01.len() == 1 {
-                self.data01.insert(0, 1);
-            } else {
-                let mut carry_flag: bool = true;
-
-                for x in (0..self.data01.len() - 1).rev() {
-                    let left_nu: usize = self.data01[x];
-                    self.data01[x] = left_nu.wrapping_add(1);
-
-                    if self.data01[x] > left_nu {
-                        carry_flag = false;
-                        break;
-                    }
-                }
-
-                if carry_flag {
-                    self.data01.insert(0, 1);
-                }
-            }
-        }
-    }
-
-    /* Unsigned addition between two primary literals.
-    Both data01 vector dimensions (i.e nu of elements) are matched.
+    /* Unsigned addition between two integral primary literals.
+    Both data_01 vector dimensions (i.e nu of elements) are matched.
     It can be used for "signed" and "unsigned" values, and therefore the final number of bits is not derived within the function.
     Instead it must be explicitly implemented according the context that the function is used. */
     pub fn _unsigned_primlit_add(&mut self, mut right_nu: SvPrimaryLiteralIntegral) {
@@ -50,15 +20,15 @@ impl SvPrimaryLiteralIntegral {
 
         let mut carry_flag: bool = false;
 
-        for x in (0..self.data01.len()).rev() {
-            let left_nu: usize = self.data01[x];
-            self.data01[x] = left_nu.wrapping_add(right_nu.data01[x]);
+        for x in (0..self.data_01.len()).rev() {
+            let left_nu: usize = self.data_01[x];
+            self.data_01[x] = left_nu.wrapping_add(right_nu.data_01[x]);
 
             if carry_flag {
-                self.data01[x] = self.data01[x].wrapping_add(1);
+                self.data_01[x] = self.data_01[x].wrapping_add(1);
             }
 
-            if self.data01[x] >= left_nu && self.data01[x] >= right_nu.data01[x] {
+            if self.data_01[x] >= left_nu && self.data_01[x] >= right_nu.data_01[x] {
                 carry_flag = false;
             } else {
                 carry_flag = true;
@@ -66,50 +36,59 @@ impl SvPrimaryLiteralIntegral {
         }
 
         if carry_flag {
-            self.data01.insert(0, 1);
+            self.data_01.insert(0, 1);
         }
     }
 
-    /* Accepts two primary literals and ensures that both data01 vector dimensions (i.e nu of elements) are matched. */
+    /* Accepts two integral primary literals and ensures that both data_01 vector dimensions (i.e nu of elements) are matched. */
     pub fn _primlit_vec_elmnt_match(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
-        let left_size = self.data01.len();
-        let right_size = right_nu.data01.len();
+        let left_size = self.data_01.len();
+        let right_size = right_nu.data_01.len();
 
         if left_size > right_size {
             let diff: usize = left_size - right_size;
 
             for _x in 0..diff {
-                right_nu.data01.insert(0, 0);
+                right_nu.data_01.insert(0, 0);
             }
         } else if left_size < right_size {
             let diff: usize = right_size - left_size;
 
             for _x in 0..diff {
-                self.data01.insert(0, 0);
+                self.data_01.insert(0, 0);
             }
+        }
+
+        if self.is_4state() {
+            self.data_xz = self.to_4state().data_xz;
+        }
+
+        if right_nu.is_4state() {
+            right_nu.data_xz = right_nu.to_4state().data_xz;
         }
     }
 
-    /* Receives a signed primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
+    /* Receives a signed integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
     pub fn is_negative(&mut self) -> bool {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
         }
+        let mut zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: true,
+        };
 
-        let leading_zeros: usize =
-            usize::BITS as usize - (self.size - (self.data01.len() - 1) * usize::BITS as usize);
+        let ret = self < &mut zero;
 
-        if self.data01[0].leading_zeros() as usize == leading_zeros {
-            true
-        } else {
-            false
-        }
+        ret
     }
 
-    /* Receives a primary literal as an argument and deduces whether the stored value is zero. */
+    /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
-        for x in 0..self.data01.len() {
-            if self.data01[x].leading_zeros() != usize::BITS {
+        for x in &self.data_01 {
+            if x.leading_zeros() != usize::BITS {
                 return false;
             }
         }
@@ -117,9 +96,51 @@ impl SvPrimaryLiteralIntegral {
         true
     }
 
-    /* Accepts two signed primary literals and ensures that both are properly sign extended and matched to their data01 dimensions.
+    pub fn is_4state(&self) -> bool {
+        match self.data_xz.clone() {
+            None => false,
+            Some(_) => true,
+        }
+    }
+
+    /* Receives an integral primary literal as an argument and deduces whether it contains X(s) or Z(s). */
+    pub fn contains_xz(&self) -> bool {
+        if !self.is_4state() {
+            return false;
+        } else {
+            for x in self.data_xz.as_ref().unwrap() {
+                if x.leading_zeros() != usize::BITS {
+                    return true;
+                }
+            }
+        }
+
+        false
+    }
+
+    /* Receives an integral primary literal and returns its contents in a 4-state integral primary literal. */
+    pub fn to_4state(&self) -> SvPrimaryLiteralIntegral {
+        let mut ret = SvPrimaryLiteralIntegral {
+            data_01: self.data_01.clone(),
+            data_xz: Some(vec![0]),
+            size: self.size,
+            signed: self.signed,
+        };
+
+        if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
+            for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
+                let mut new_vec = ret.data_xz.clone().unwrap();
+                new_vec.insert(0, 0);
+                ret.data_xz = Some(new_vec);
+            }
+        }
+
+        ret
+    }
+
+    /* Accepts two signed integral primary literals and ensures that both are properly sign extended and matched to their data_01 dimensions.
     The correct final number of bits is set to both arguments. */
-    pub fn _matched_sign_extension(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
+    pub fn _matched_sign_extend(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
         if self.signed != true || right_nu.signed != true {
             panic!("Expected signed SvPrimaryLiterals but found unsigned!");
         }
@@ -132,15 +153,15 @@ impl SvPrimaryLiteralIntegral {
         if left_neg {
             let mut last_element: bool = false;
 
-            for x in 0..self.data01.len() {
-                let left_leading = self.data01[x].leading_zeros();
+            for x in 0..self.data_01.len() {
+                let left_leading = self.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
                     last_element = true;
                 }
 
                 for y in 0..left_leading {
-                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                    self.data_01[x] = self.data_01[x] + 2usize.pow(usize::BITS - y - 1);
                 }
 
                 if last_element {
@@ -152,15 +173,15 @@ impl SvPrimaryLiteralIntegral {
         if right_neg {
             let mut last_element: bool = false;
 
-            for x in 0..right_nu.data01.len() {
-                let left_leading = right_nu.data01[x].leading_zeros();
+            for x in 0..right_nu.data_01.len() {
+                let left_leading = right_nu.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
                     last_element = true;
                 }
 
                 for y in 0..left_leading {
-                    right_nu.data01[x] = right_nu.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                    right_nu.data_01[x] = right_nu.data_01[x] + 2usize.pow(usize::BITS - y - 1);
                 }
 
                 if last_element {
@@ -169,13 +190,13 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
-        self.size = self.data01.len() * usize::BITS as usize;
-        right_nu.size = right_nu.data01.len() * usize::BITS as usize;
+        self.size = self.data_01.len() * usize::BITS as usize;
+        right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and sign extends the value in the existing number of vector elements.
+    /* Receives a signed integral primary literal and sign extends the value in the existing number of data_01 vector elements.
     The correct final number of bits is set to the argument. */
-    pub fn _sign_extension(&mut self) {
+    pub fn _sign_extend(&mut self) {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
         }
@@ -185,15 +206,15 @@ impl SvPrimaryLiteralIntegral {
         if left_neg {
             let mut last_element: bool = false;
 
-            for x in 0..self.data01.len() {
-                let left_leading = self.data01[x].leading_zeros();
+            for x in 0..self.data_01.len() {
+                let left_leading = self.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
                     last_element = true;
                 }
 
                 for y in 0..left_leading {
-                    self.data01[x] = self.data01[x] + 2usize.pow(usize::BITS - y - 1);
+                    self.data_01[x] = self.data_01[x] + 2usize.pow(usize::BITS - y - 1);
                 }
 
                 if last_element {
@@ -202,10 +223,10 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
-        self.size = self.data01.len() * usize::BITS as usize;
+        self.size = self.data_01.len() * usize::BITS as usize;
     }
 
-    /* Receives a signed primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
+    /* Receives a signed integral primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
     The correct final number of bits is set to the argument. */
     pub fn neg(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
@@ -216,35 +237,35 @@ impl SvPrimaryLiteralIntegral {
         }
 
         let from_negative: bool = ret.is_negative();
-        ret._sign_extension();
+        ret._sign_extend();
 
         ret = ret.inv();
 
-        ret._unsigned_usize_add(1);
+        ret = ret.add_usize(1);
 
         if from_negative {
-            ret.size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
-                + (ret.data01.len() - 1) * usize::BITS as usize;
+            ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
+                + (ret.data_01.len() - 1) * usize::BITS as usize;
 
-            if ret.data01[0].leading_zeros() == 0 {
-                ret.data01.insert(0, 0);
+            if ret.data_01[0].leading_zeros() == 0 {
+                ret.data_01.insert(0, 0);
             }
         } else {
-            ret.size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
-                + (ret.data01.len() - 1) * usize::BITS as usize;
+            ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
+                + (ret.data_01.len() - 1) * usize::BITS as usize;
             ret._minimum_width();
         }
 
         ret
     }
 
-    /* Receives a signed primary literal and returns a primary literal with its inverted value.
+    /* Receives a signed integral primary literal and returns a primary literal with its inverted value.
     The final number of bits remains the same as the original one.*/
     pub fn inv(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
 
-        for x in 0..ret.data01.len() {
-            ret.data01[x] = !ret.data01[x];
+        for x in 0..ret.data_01.len() {
+            ret.data_01[x] = !ret.data_01[x];
         }
 
         ret._truncate(ret.size);
@@ -253,32 +274,65 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Receives the number of shift positions and implements logical shifting to the left.
-    For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the primlit is dynamically adjusted.
+    For each shift the total number of bits increments by 1 i.e. lsl works as 2^(positions) and the size of the integral primlit is dynamically adjusted.
     If an explicit range is defined, _truncate can be used afterwards.*/
     pub fn lsl(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
 
         for _x in 0..n {
             let mut leading_one: bool = false;
+            let mut leading_one_xz: bool = false;
+
             ret.size = ret.size + 1;
 
-            for y in (0..ret.data01.len()).rev() {
-                let pre_mod = ret.data01[y];
+            for y in (0..ret.data_01.len()).rev() {
+                let pre_mod = ret.data_01[y];
 
                 if leading_one {
-                    ret.data01[y] = (ret.data01[y] << 1) + 1;
+                    ret.data_01[y] = (ret.data_01[y] << 1) + 1;
                     leading_one = false;
                 } else {
-                    ret.data01[y] = ret.data01[y] << 1;
+                    ret.data_01[y] = ret.data_01[y] << 1;
                 }
 
                 if pre_mod.leading_zeros() == 0 {
                     leading_one = true;
                 }
+
+                if ret.is_4state() {
+                    let pre_mod = ret.data_xz.as_ref().unwrap()[y];
+
+                    if leading_one_xz {
+                        ret.data_xz.as_mut().unwrap()[y] =
+                            (ret.data_xz.as_ref().unwrap()[y] << 1) + 1;
+                        leading_one_xz = false;
+                    } else {
+                        ret.data_xz.as_mut().unwrap()[y] = ret.data_xz.as_ref().unwrap()[y] << 1;
+                    }
+
+                    if pre_mod.leading_zeros() == 0 {
+                        leading_one_xz = true;
+                    }
+                }
             }
 
-            if leading_one {
-                ret.data01.insert(0, 1);
+            if leading_one && leading_one_xz {
+                ret.data_01.insert(0, 1);
+                ret.data_xz.as_mut().unwrap().insert(0, 1);
+            } else if leading_one {
+                ret.data_01.insert(0, 1);
+                if ret.is_4state() {
+                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                }
+            } else if leading_one_xz {
+                ret.data_01.insert(0, 0);
+                ret.data_xz.as_mut().unwrap().insert(0, 1);
+            } else if ret.signed && (ret.size > usize::BITS as usize * ret.data_01.len()) {
+                ret.data_01.insert(0, 0);
+
+                if ret.is_4state() {
+                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                }
             }
         }
 
@@ -292,19 +346,36 @@ impl SvPrimaryLiteralIntegral {
 
         for _x in 0..n {
             let mut trailing_one: bool = false;
+            let mut trailing_one_xz: bool = false;
 
-            for y in 0..ret.data01.len() {
-                let pre_mod = ret.data01[y];
+            for y in 0..ret.data_01.len() {
+                let pre_mod = ret.data_01[y];
 
                 if trailing_one {
-                    ret.data01[y] = (ret.data01[y] >> 1) + 2usize.pow(usize::BITS - 1);
+                    ret.data_01[y] = (ret.data_01[y] >> 1) + 2usize.pow(usize::BITS - 1);
                     trailing_one = false;
                 } else {
-                    ret.data01[y] = ret.data01[y] >> 1;
+                    ret.data_01[y] = ret.data_01[y] >> 1;
                 }
 
                 if pre_mod.trailing_zeros() == 0 {
                     trailing_one = true;
+                }
+
+                if ret.is_4state() {
+                    let pre_mod = ret.data_xz.as_ref().unwrap()[y];
+
+                    if trailing_one_xz {
+                        ret.data_xz.as_mut().unwrap()[y] =
+                            (ret.data_xz.as_ref().unwrap()[y] >> 1) + 2usize.pow(usize::BITS - 1);
+                        trailing_one_xz = false;
+                    } else {
+                        ret.data_xz.as_mut().unwrap()[y] = ret.data_xz.as_ref().unwrap()[y] >> 1;
+                    }
+
+                    if pre_mod.trailing_zeros() == 0 {
+                        trailing_one_xz = true;
+                    }
                 }
             }
         }
@@ -316,23 +387,38 @@ impl SvPrimaryLiteralIntegral {
     The dropped bits are shifted in the RHS of the value. */
     pub fn rol(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        let last_index = ret.data01.len() - 1;
+        let last_index = ret.data_01.len() - 1;
 
         for _x in 0..n {
             let previous_size = ret.size;
             let leading_one: bool;
+            let mut leading_one_xz: bool = false;
 
             if previous_size % usize::BITS as usize == 0 {
-                leading_one = ret.data01[0].leading_zeros() == 0;
+                leading_one = ret.data_01[0].leading_zeros() == 0;
+
+                if ret.is_4state() {
+                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() == 0;
+                }
             } else {
-                leading_one = ret.data01[0].leading_zeros() as usize
+                leading_one = ret.data_01[0].leading_zeros() as usize
                     == (usize::BITS as usize - (ret.size % usize::BITS as usize));
+
+                if ret.is_4state() {
+                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() as usize
+                        == (usize::BITS as usize - (ret.size % usize::BITS as usize));
+                }
             }
 
             ret = ret.lsl(1);
             ret._truncate(previous_size);
             if leading_one {
-                ret.data01[last_index] = ret.data01[last_index] + 1;
+                ret.data_01[last_index] = ret.data_01[last_index] + 1;
+            }
+
+            if leading_one_xz {
+                ret.data_xz.as_mut().unwrap()[last_index] =
+                    ret.data_xz.as_ref().unwrap()[last_index] + 1;
             }
         }
 
@@ -343,32 +429,73 @@ impl SvPrimaryLiteralIntegral {
     The dropped bits are shifted in the LHS of the value. */
     pub fn ror(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        let last_index = ret.data01.len() - 1;
+        let last_index = ret.data_01.len() - 1;
+        let msb: u32;
+
+        if ret.size % usize::BITS as usize == 0 {
+            msb = usize::BITS;
+        } else {
+            msb = ret.size as u32 % usize::BITS;
+        }
 
         for _x in 0..n {
-            let trailing_one: bool = ret.data01[last_index].trailing_zeros() == 0;
+            let trailing_one: bool = ret.data_01[last_index].trailing_zeros() == 0;
+            let mut trailing_one_xz: bool = false;
+
+            if ret.is_4state() {
+                trailing_one_xz = ret.data_xz.as_ref().unwrap()[last_index].trailing_zeros() == 0;
+            }
+
             ret = ret.lsr(1);
 
             if trailing_one {
-                ret.data01[0] = ret.data01[0] + 2usize.pow(usize::BITS - 1);
+                ret.data_01[0] = ret.data_01[0] + 2usize.pow(msb - 1);
+            }
+
+            if trailing_one_xz {
+                ret.data_xz.as_mut().unwrap()[0] =
+                    ret.data_xz.as_ref().unwrap()[0] + 2usize.pow(msb - 1);
             }
         }
 
         ret
     }
 
-    /* Receives two primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
-    Returns a SvPrimaryLiteralIntegral with the final value. */
+    /* Receives two integral primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
+    Returns an integral SvPrimaryLiteralIntegral with the final value. */
     pub fn cat(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         ret = ret.lsl(right_nu.size);
+
+        let mut left_nu: SvPrimaryLiteralIntegral = ret.clone();
+
+        if left_nu.is_4state() || right_nu.is_4state() {
+            let mut left_xz = SvPrimaryLiteralIntegral {
+                data_01: left_nu.data_xz.as_ref().unwrap().clone(),
+                data_xz: None,
+                size: left_nu.size,
+                signed: false,
+            };
+
+            let right_xz = SvPrimaryLiteralIntegral {
+                data_01: right_nu.data_xz.as_ref().unwrap().clone(),
+                data_xz: None,
+                size: right_nu.size,
+                signed: false,
+            };
+
+            left_xz._unsigned_primlit_add(right_xz.clone());
+            left_nu.data_xz = Some(left_xz.data_01.clone());
+        }
+
         ret._unsigned_primlit_add(right_nu.clone());
         ret.size = self.size + right_nu.size;
+        ret.data_xz = left_nu.data_xz.clone();
 
         ret
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. */
     pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -377,18 +504,49 @@ impl SvPrimaryLiteralIntegral {
             let mut left_nu = self.clone();
 
             if self.signed {
-                if left_nu.is_negative() && !right_nu.is_negative() {
+                let left_nu_neg: bool;
+                let right_nu_neg: bool;
+
+                let left_leading_zeros: usize = usize::BITS as usize
+                    - (left_nu.size - (left_nu.data_01.len() - 1) * usize::BITS as usize);
+
+                if left_nu.data_01[0].leading_zeros() as usize == left_leading_zeros {
+                    left_nu_neg = true;
+                } else {
+                    left_nu_neg = false;
+                }
+
+                let right_leading_zeros: usize = usize::BITS as usize
+                    - (right_nu.size - (right_nu.data_01.len() - 1) * usize::BITS as usize);
+
+                if right_nu.data_01[0].leading_zeros() as usize == right_leading_zeros {
+                    right_nu_neg = true;
+                } else {
+                    right_nu_neg = false;
+                }
+
+                if left_nu_neg && !right_nu_neg {
                     return true;
-                } else if !left_nu.is_negative() && right_nu.is_negative() {
+                } else if !left_nu_neg && right_nu_neg {
                     return false;
                 } else {
-                    left_nu._minimum_width();
-                    right_nu._minimum_width();
+                    if left_nu_neg {
+                        left_nu._minimum_width();
+                        right_nu._minimum_width();
 
-                    if (left_nu.size < right_nu.size) && !left_nu.is_negative() {
-                        return true;
-                    } else if (left_nu.size > right_nu.size) && left_nu.is_negative() {
-                        return true;
+                        if left_nu.size > right_nu.size {
+                            return true;
+                        }
+                    } else {
+                        left_nu.signed = false;
+                        right_nu.signed = false;
+
+                        left_nu._minimum_width();
+                        right_nu._minimum_width();
+
+                        if left_nu.size < right_nu.size {
+                            return true;
+                        }
                     }
                 }
             } else {
@@ -404,7 +562,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
     Otherwise it returns false. */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -413,18 +571,49 @@ impl SvPrimaryLiteralIntegral {
             let mut left_nu = self.clone();
 
             if self.signed {
-                if left_nu.is_negative() && !right_nu.is_negative() {
+                let left_nu_neg: bool;
+                let right_nu_neg: bool;
+
+                let left_leading_zeros: usize = usize::BITS as usize
+                    - (left_nu.size - (left_nu.data_01.len() - 1) * usize::BITS as usize);
+
+                if left_nu.data_01[0].leading_zeros() as usize == left_leading_zeros {
+                    left_nu_neg = true;
+                } else {
+                    left_nu_neg = false;
+                }
+
+                let right_leading_zeros: usize = usize::BITS as usize
+                    - (right_nu.size - (right_nu.data_01.len() - 1) * usize::BITS as usize);
+
+                if right_nu.data_01[0].leading_zeros() as usize == right_leading_zeros {
+                    right_nu_neg = true;
+                } else {
+                    right_nu_neg = false;
+                }
+
+                if left_nu_neg && !right_nu_neg {
                     return false;
-                } else if !left_nu.is_negative() && right_nu.is_negative() {
+                } else if !left_nu_neg && right_nu_neg {
                     return true;
                 } else {
-                    left_nu._minimum_width();
-                    right_nu._minimum_width();
+                    if left_nu_neg {
+                        left_nu._minimum_width();
+                        right_nu._minimum_width();
 
-                    if (left_nu.size > right_nu.size) && !left_nu.is_negative() {
-                        return true;
-                    } else if (left_nu.size < right_nu.size) && left_nu.is_negative() {
-                        return true;
+                        if left_nu.size < right_nu.size {
+                            return true;
+                        }
+                    } else {
+                        left_nu.signed = false;
+                        right_nu.signed = false;
+
+                        left_nu._minimum_width();
+                        right_nu._minimum_width();
+
+                        if left_nu.size > right_nu.size {
+                            return true;
+                        }
                     }
                 }
             } else {
@@ -440,7 +629,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
+    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
     pub fn eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         if self.signed != right_nu.signed {
@@ -453,19 +642,20 @@ impl SvPrimaryLiteralIntegral {
                     return false;
                 } else if !left_nu.is_negative() && right_nu.is_negative() {
                     return false;
-                } else {
-                    left_nu._minimum_width();
-                    right_nu._minimum_width();
+                }
+            }
 
-                    if left_nu.size == right_nu.size {
-                        return true;
+            left_nu._minimum_width();
+            right_nu._minimum_width();
+
+            if left_nu.size == right_nu.size {
+                let mut eq_found: bool = true;
+                for x in 0..left_nu.data_01.len() {
+                    if left_nu.data_01[x] != right_nu.data_01[x] {
+                        eq_found = false;
                     }
                 }
-            } else {
-                left_nu._minimum_width();
-                right_nu._minimum_width();
-
-                if left_nu.size == right_nu.size {
+                if eq_found {
                     return true;
                 }
             }
@@ -474,42 +664,42 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives a signed or unsigned primary literal and deduces an equivalent representation with the minimum number of bits required.
+    /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
     The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
         if !self.signed {
             if self.is_zero() {
-                for _x in 0..self.data01.len() {
-                    self.data01.remove(0);
+                for _x in 0..self.data_01.len() {
+                    self.data_01.remove(0);
                 }
-                self.data01.push(0);
+                self.data_01.push(0);
                 self.size = 1;
             } else {
-                for _x in 0..self.data01.len() {
-                    if self.data01[0] == 0 {
-                        self.data01.remove(0);
+                for _x in 0..self.data_01.len() {
+                    if self.data_01[0] == 0 {
+                        self.data_01.remove(0);
                     }
                 }
 
-                self.size = (usize::BITS as usize - self.data01[0].leading_zeros() as usize)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.size = (usize::BITS as usize - self.data_01[0].leading_zeros() as usize)
+                    + (self.data_01.len() - 1) * usize::BITS as usize;
             }
         } else {
             let mut min_num_found: bool = false;
             let mut vec_elements_to_rm: usize = 0;
 
             if self.is_negative() {
-                for x in 0..self.data01.len() {
+                for x in 0..self.data_01.len() {
                     while !min_num_found {
-                        let pre_leading = self.data01[x].leading_zeros();
+                        let pre_leading = self.data_01[x].leading_zeros();
 
                         let minimized_value: usize =
-                            self.data01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
+                            self.data_01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
                         let post_leading = minimized_value.leading_zeros();
 
                         if post_leading == usize::BITS {
-                            if x == (self.data01.len() - 1)
-                                || self.data01[x + 1].leading_zeros() != 0
+                            if x == (self.data_01.len() - 1)
+                                || self.data_01[x + 1].leading_zeros() != 0
                             {
                                 min_num_found = true;
                                 break;
@@ -520,7 +710,7 @@ impl SvPrimaryLiteralIntegral {
                             min_num_found = true;
                             break;
                         } else {
-                            self.data01[x] = minimized_value;
+                            self.data_01[x] = minimized_value;
                             self.size = self.size - 1;
 
                             if post_leading == usize::BITS {
@@ -532,32 +722,32 @@ impl SvPrimaryLiteralIntegral {
                 }
 
                 for _x in 0..vec_elements_to_rm {
-                    self.data01.remove(0);
+                    self.data_01.remove(0);
                 }
             } else if self.is_zero() {
-                for _x in 0..self.data01.len() {
-                    self.data01.remove(0);
+                for _x in 0..self.data_01.len() {
+                    self.data_01.remove(0);
                 }
-                self.data01.push(0);
+                self.data_01.push(0);
                 self.size = 1;
             } else {
-                for _x in 0..self.data01.len() {
-                    if self.data01[0] == 0 {
-                        self.data01.remove(0);
+                for _x in 0..self.data_01.len() {
+                    if self.data_01[0] == 0 {
+                        self.data_01.remove(0);
                     }
                 }
 
-                if self.data01[0].leading_zeros() == 0 {
-                    self.data01.insert(0, 0);
+                if self.data_01[0].leading_zeros() == 0 {
+                    self.data_01.insert(0, 0);
                 }
 
-                self.size = (usize::BITS as usize - self.data01[0].leading_zeros() as usize + 1)
-                    + (self.data01.len() - 1) * usize::BITS as usize;
+                self.size = (usize::BITS as usize - self.data_01[0].leading_zeros() as usize + 1)
+                    + (self.data_01.len() - 1) * usize::BITS as usize;
             }
         }
     }
 
-    /* Receives the number of bits in which a primary literal should be truncated.
+    /* Receives the number of bits in which an integral primary literal should be truncated.
     The correct final number of bits is set but the signedness doesn't change. */
     pub fn _truncate(&mut self, size: usize) {
         if size == 0 {
@@ -567,23 +757,56 @@ impl SvPrimaryLiteralIntegral {
             let bits_to_be_rm: usize;
 
             if (size % usize::BITS as usize) == 0 {
-                elmnts_to_be_rm = self.data01.len() - size / usize::BITS as usize;
+                elmnts_to_be_rm = self.data_01.len() - size / usize::BITS as usize;
                 bits_to_be_rm = 0;
             } else {
-                elmnts_to_be_rm = self.data01.len() - (size / usize::BITS as usize) - 1;
+                elmnts_to_be_rm = self.data_01.len() - (size / usize::BITS as usize) - 1;
                 bits_to_be_rm = usize::BITS as usize - size % usize::BITS as usize;
             }
 
             for _x in 0..elmnts_to_be_rm {
-                self.data01.remove(0);
+                self.data_01.remove(0);
             }
 
             if bits_to_be_rm != 0 {
                 for x in
                     ((usize::BITS as usize - bits_to_be_rm + 1)..(usize::BITS as usize + 1)).rev()
                 {
-                    if self.data01[0].leading_zeros() == (usize::BITS - x as u32) {
-                        self.data01[0] = self.data01[0] - 2usize.pow(x as u32 - 1);
+                    if self.data_01[0].leading_zeros() == (usize::BITS - x as u32) {
+                        self.data_01[0] = self.data_01[0] - 2usize.pow(x as u32 - 1);
+                    }
+                }
+            }
+
+            if self.is_4state() {
+                let elmnts_to_be_rm: usize;
+                let bits_to_be_rm: usize;
+
+                if (size % usize::BITS as usize) == 0 {
+                    elmnts_to_be_rm =
+                        self.data_xz.as_ref().unwrap().len() - size / usize::BITS as usize;
+                    bits_to_be_rm = 0;
+                } else {
+                    elmnts_to_be_rm =
+                        self.data_xz.as_ref().unwrap().len() - (size / usize::BITS as usize) - 1;
+                    bits_to_be_rm = usize::BITS as usize - size % usize::BITS as usize;
+                }
+
+                for _x in 0..elmnts_to_be_rm {
+                    self.data_xz.as_mut().unwrap().remove(0);
+                }
+
+                if bits_to_be_rm != 0 {
+                    for x in ((usize::BITS as usize - bits_to_be_rm + 1)
+                        ..(usize::BITS as usize + 1))
+                        .rev()
+                    {
+                        if self.data_xz.as_ref().unwrap()[0].leading_zeros()
+                            == (usize::BITS - x as u32)
+                        {
+                            self.data_xz.as_mut().unwrap()[0] =
+                                self.data_xz.as_ref().unwrap()[0] - 2usize.pow(x as u32 - 1);
+                        }
                     }
                 }
             }
@@ -596,86 +819,91 @@ impl SvPrimaryLiteralIntegral {
 
     pub fn add_usize(&self, right_nu: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        if !ret.signed {
-            ret._unsigned_usize_add(right_nu);
-            ret._minimum_width();
-            ret
-        } else {
-            let right_nu = SvPrimaryLiteralIntegral {
-                data01: vec![right_nu],
-                size: usize::BITS as usize,
-                signed: true,
-            };
 
-            ret.add_primlit(right_nu.clone())
-        }
+        let right_nu = SvPrimaryLiteralIntegral {
+            data_01: vec![right_nu],
+            data_xz: None,
+            size: usize::BITS as usize,
+            signed: true,
+        };
+
+        ret = ret.add_primlit(right_nu.clone());
+
+        ret
     }
 
     pub fn add_primlit(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        if ret.signed == false || right_nu.signed == false {
-            ret._unsigned_primlit_add(right_nu.clone());
-            ret.signed = false;
 
-            ret._minimum_width();
-        } else {
-            let left_neg: bool = ret.is_negative();
-            let right_neg: bool = right_nu.is_negative();
+        if ret.is_4state() != right_nu.is_4state() {
+            if !ret.is_4state() {
+                ret = ret.to_4state();
+            } else {
+                right_nu = right_nu.to_4state();
+            }
+        }
 
-            if !left_neg && !right_neg {
-                let new_size: usize;
-
+        if !ret.contains_xz() && !right_nu.contains_xz() {
+            if ret.signed == false || right_nu.signed == false {
                 ret._unsigned_primlit_add(right_nu.clone());
-
-                if ret.data01[0].leading_zeros() == 0 {
-                    ret.data01.insert(0, 0);
-                }
-
-                new_size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
-                    + (ret.data01.len() - 1) * usize::BITS as usize;
-
-                ret.size = new_size;
-            } else if left_neg && right_neg {
-                let new_size: usize;
-
-                ret._matched_sign_extension(&mut right_nu);
-                ret._unsigned_primlit_add(right_nu.clone());
-
-                new_size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize)
-                    + (ret.data01.len() - 1) * usize::BITS as usize;
-                ret.size = new_size;
+                ret.signed = false;
 
                 ret._minimum_width();
             } else {
-                let new_size: usize;
+                let left_neg: bool = ret.is_negative();
+                let right_neg: bool = right_nu.is_negative();
 
-                ret._matched_sign_extension(&mut right_nu);
-                ret._unsigned_primlit_add(right_nu.clone());
-                ret._truncate(ret.size);
+                if !left_neg && !right_neg {
+                    let new_size: usize;
 
-                if ret.is_negative() {
-                    ret._minimum_width();
-                } else if ret.is_zero() {
-                    ret._truncate(usize::BITS as usize);
-                    ret.size = 1;
-                } else {
-                    new_size = (usize::BITS as usize - ret.data01[0].leading_zeros() as usize + 1)
-                        + (ret.data01.len() - 1) * usize::BITS as usize;
+                    ret._unsigned_primlit_add(right_nu.clone());
+
+                    if ret.data_01[0].leading_zeros() == 0 {
+                        ret.data_01.insert(0, 0);
+                    }
+
+                    new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
+                        + (ret.data_01.len() - 1) * usize::BITS as usize;
+
                     ret.size = new_size;
+                } else if left_neg && right_neg {
+                    let new_size: usize;
+
+                    ret._matched_sign_extend(&mut right_nu);
+                    ret._unsigned_primlit_add(right_nu.clone());
+
+                    new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
+                        + (ret.data_01.len() - 1) * usize::BITS as usize;
+                    ret.size = new_size;
+
+                    ret._minimum_width();
+                } else {
+                    ret._matched_sign_extend(&mut right_nu);
+                    ret._unsigned_primlit_add(right_nu.clone());
+                    ret._truncate(ret.size);
+
+                    ret._minimum_width();
                 }
             }
+
+            if ret.is_4state() {
+                ret.data_xz = ret.to_4state().data_xz;
+            }
+
+            ret
+        } else {
+            unimplemented!();
         }
-        ret
     }
 
     pub fn mul_unsigned(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral;
         let mut left_nu: SvPrimaryLiteralIntegral = self.clone();
         let mut add_ver: Vec<SvPrimaryLiteralIntegral> = Vec::new();
-        let last_index = right_nu.data01.len() - 1;
+        let last_index = right_nu.data_01.len() - 1;
 
         for x in 0..right_nu.size {
-            if right_nu.data01[last_index].trailing_zeros() == 0 {
+            if right_nu.data_01[last_index].trailing_zeros() == 0 {
                 if x == 0 {
                     add_ver.push(left_nu.clone());
                 } else {
@@ -689,7 +917,8 @@ impl SvPrimaryLiteralIntegral {
             right_nu = right_nu.lsr(1);
         }
         ret = SvPrimaryLiteralIntegral {
-            data01: vec![0],
+            data_01: vec![0],
+            data_xz: None,
             signed: false,
             size: 1,
         };
@@ -705,51 +934,68 @@ impl SvPrimaryLiteralIntegral {
         let mut left_nu: SvPrimaryLiteralIntegral = self.clone();
         let mut ret: SvPrimaryLiteralIntegral;
 
-        if !left_nu.signed || !right_nu.signed {
-            left_nu.signed = false;
-            right_nu.signed = false;
+        if left_nu.is_4state() != right_nu.is_4state() {
+            if !left_nu.is_4state() {
+                left_nu.data_xz = Some(vec![0]);
+            } else {
+                right_nu.data_xz = Some(vec![0]);
+            }
+        }
 
-            left_nu._minimum_width();
-            right_nu._minimum_width();
+        if !left_nu.contains_xz() && !right_nu.contains_xz() {
+            if !left_nu.signed || !right_nu.signed {
+                left_nu.signed = false;
+                right_nu.signed = false;
 
-            ret = left_nu.mul_unsigned(right_nu.clone());
-            ret._minimum_width();
-        } else {
-            let left_neg: bool = left_nu.is_negative();
-            let right_neg: bool = right_nu.is_negative();
-            let result_neg: bool;
+                left_nu._minimum_width();
+                right_nu._minimum_width();
 
-            if left_neg && right_neg {
-                left_nu = left_nu.neg();
-                right_nu = right_nu.neg();
-                result_neg = false;
-            } else if left_neg || right_neg {
-                if left_neg {
+                ret = left_nu.mul_unsigned(right_nu.clone());
+                ret._minimum_width();
+            } else {
+                let left_neg: bool = left_nu.is_negative();
+                let right_neg: bool = right_nu.is_negative();
+                let result_neg: bool;
+
+                if left_neg && right_neg {
                     left_nu = left_nu.neg();
-                } else {
                     right_nu = right_nu.neg();
+                    result_neg = false;
+                } else if left_neg || right_neg {
+                    if left_neg {
+                        left_nu = left_nu.neg();
+                    } else {
+                        right_nu = right_nu.neg();
+                    }
+                    result_neg = true;
+                } else {
+                    result_neg = false;
                 }
-                result_neg = true;
-            } else {
-                result_neg = false;
+
+                left_nu.signed = false;
+                right_nu.signed = false;
+
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                ret = left_nu.mul_unsigned(right_nu.clone());
+                ret._minimum_width();
+                ret.signed = true;
+
+                if result_neg {
+                    ret.size = ret.size + 1;
+                    ret = ret.neg();
+                } else {
+                    ret.size = ret.size + 1;
+                }
             }
+        } else {
+            unimplemented!();
+        }
 
-            left_nu.signed = false;
-            right_nu.signed = false;
-
-            left_nu._minimum_width();
-            right_nu._minimum_width();
-
-            ret = left_nu.mul_unsigned(right_nu.clone());
-            ret._minimum_width();
-            ret.signed = true;
-
-            if result_neg {
-                ret.size = ret.size + 1;
-                ret = ret.neg();
-            } else {
-                ret.size = ret.size + 1;
-            }
+        ret.data_xz = left_nu.data_xz.clone();
+        if ret.is_4state() {
+            ret.data_xz = ret.to_4state().data_xz;
         }
 
         ret
@@ -758,7 +1004,8 @@ impl SvPrimaryLiteralIntegral {
 
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     let mut ret = SvPrimaryLiteralIntegral {
-        data01: vec![value],
+        data_01: vec![value],
+        data_xz: None,
         size: usize::BITS as usize,
         signed: true,
     };
@@ -772,23 +1019,33 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "NumBits: {}", self.size)?;
         writeln!(f, "Signed: {}", self.signed)?;
-        write!(f, "Data01: ")?;
+        write!(f, "Data_01: ")?;
 
-        for x in 0..self.data01.len() {
-            writeln!(f, "{:b} ", self.data01[x])?;
+        for x in 0..self.data_01.len() {
+            writeln!(f, "{:b}", self.data_01[x])?;
         }
+
+        write!(f, "Data_XZ: ")?;
+        if !self.is_4state() {
+            writeln!(f, "None")?;
+        } else {
+            for x in self.data_xz.as_ref().unwrap() {
+                writeln!(f, "{:b}", x)?;
+            }
+        }
+
         write!(f, "")
     }
 }
 
 impl Ord for SvPrimaryLiteralIntegral {
     fn cmp(&self, other: &Self) -> Ordering {
-        if self.eq(other.clone()) {
-            return Ordering::Equal;
-        } else if self.lt(other.clone()) {
+        if self.lt(other.clone()) {
             return Ordering::Less;
+        } else if self.gt(other.clone()) {
+            return Ordering::Greater;
         } else {
-            Ordering::Greater
+            Ordering::Equal
         }
     }
 }

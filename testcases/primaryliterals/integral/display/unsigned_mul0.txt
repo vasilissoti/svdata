@@ -1,3 +1,0 @@
-NumBits: 4
-Signed: false
-Data01: 1100 
