@@ -7,11 +7,11 @@ let a = SvPrimaryLiteralIntegral {
 
 let b = SvPrimaryLiteralIntegral {
     data_01: vec![4611686018427387904],
-    data_xz: Some(vec![0]),
+    data_xz: Some(vec![4611686018427387904]),
     size: 64,
     signed: true,
 };
 
-let c: bool = a < b;
+let c: bool = a > b;
 
 let actual_string = format!("{}", c);
