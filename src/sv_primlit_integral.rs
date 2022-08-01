@@ -87,13 +87,16 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
-        for x in &self.data_01 {
-            if x.leading_zeros() != usize::BITS {
-                return false;
-            }
-        }
+        let mut zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: true,
+        };
 
-        true
+        let ret = self == &mut zero;
+
+        ret
     }
 
     pub fn is_4state(&self) -> bool {
@@ -663,53 +666,32 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
-    pub fn eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
-        let mut left_nu = self.clone();
-
-        if left_nu.signed != right_nu.signed {
-            if left_nu.signed {
-                if left_nu.is_negative() {
-                    return false;
-                } else {
-                    left_nu.signed = false;
-                    left_nu._minimum_width();
-                    return left_nu.eq(right_nu.clone());
-                }
-            } else {
-                if right_nu.is_negative() {
-                    return false;
-                } else {
-                    right_nu.signed = false;
-                    right_nu._minimum_width();
-                    return left_nu.eq(right_nu.clone());
-                }
+    pub fn eq(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
+        let mut left_zero: bool = true;
+        for x in &self.data_01 {
+            if x.leading_zeros() != usize::BITS {
+                left_zero = false;
             }
-        } else {
-            if left_nu.signed {
-                if left_nu.is_negative() && !right_nu.is_negative() {
-                    return false;
-                } else if !left_nu.is_negative() && right_nu.is_negative() {
-                    return false;
-                }
-            }
-
-            left_nu._minimum_width();
-            right_nu._minimum_width();
-
-            if left_nu.size == right_nu.size {
-                let mut eq_found: bool = true;
-                for x in 0..left_nu.data_01.len() {
-                    if left_nu.data_01[x] != right_nu.data_01[x] {
-                        eq_found = false;
-                    }
-                }
-                if eq_found {
-                    return true;
-                }
-            }
-
-            false
         }
+
+        let mut right_zero: bool = true;
+        for y in &right_nu.data_01 {
+            if y.leading_zeros() != usize::BITS {
+                right_zero = false;
+            }
+        }
+
+        if left_zero && right_zero {
+            return true;
+        } else if left_zero != right_zero {
+            return false;
+        } else if self < &right_nu {
+            return false;
+        } else if self > &right_nu {
+            return false;
+        }
+
+        true
     }
 
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
