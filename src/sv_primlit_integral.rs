@@ -845,9 +845,8 @@ impl SvPrimaryLiteralIntegral {
 
         if !ret.contains_xz() && !right_nu.contains_xz() {
             if ret.signed == false || right_nu.signed == false {
-                ret._unsigned_primlit_add(right_nu.clone());
                 ret.signed = false;
-
+                ret._unsigned_primlit_add(right_nu.clone());
                 ret._minimum_width();
             } else {
                 let left_neg: bool = ret.is_negative();
@@ -892,7 +891,28 @@ impl SvPrimaryLiteralIntegral {
 
             ret
         } else {
-            unimplemented!();
+            if ret.size < right_nu.size {
+                ret.size = right_nu.size;
+            }
+
+            // Possible carry out from the MSB
+            ret.size = ret.size + 1;
+
+            if ret.signed != right_nu.signed {
+                ret.signed = false;
+            }
+
+            let mod_primlit: SvPrimaryLiteralIntegral = usize_to_primlit(0);
+
+            for _x in 0..(ret.size - 1) {
+                mod_primlit.cat(usize_to_primlit(0));
+            }
+
+            mod_primlit.to_4state();
+            ret.data_01 = mod_primlit.data_01;
+            ret.data_xz = mod_primlit.data_xz;
+
+            ret
         }
     }
 
@@ -936,9 +956,9 @@ impl SvPrimaryLiteralIntegral {
 
         if left_nu.is_4state() != right_nu.is_4state() {
             if !left_nu.is_4state() {
-                left_nu.data_xz = Some(vec![0]);
+                left_nu = left_nu.to_4state();
             } else {
-                right_nu.data_xz = Some(vec![0]);
+                right_nu = right_nu.to_4state();
             }
         }
 
@@ -989,13 +1009,27 @@ impl SvPrimaryLiteralIntegral {
                     ret.size = ret.size + 1;
                 }
             }
-        } else {
-            unimplemented!();
-        }
 
-        ret.data_xz = left_nu.data_xz.clone();
-        if ret.is_4state() {
-            ret.data_xz = ret.to_4state().data_xz;
+            if ret.is_4state() {
+                ret.data_xz = ret.to_4state().data_xz;
+            }
+        } else {
+            ret = left_nu.clone();
+            ret.size = ret.size + right_nu.size + 1;
+
+            if ret.signed != right_nu.signed {
+                ret.signed = false;
+            }
+
+            let mod_primlit: SvPrimaryLiteralIntegral = usize_to_primlit(0);
+
+            for _x in 0..(ret.size - 1) {
+                mod_primlit.cat(usize_to_primlit(0));
+            }
+
+            mod_primlit.to_4state();
+            ret.data_01 = mod_primlit.data_01;
+            ret.data_xz = mod_primlit.data_xz;
         }
 
         ret
