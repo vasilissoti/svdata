@@ -930,8 +930,8 @@ impl SvPrimaryLiteralIntegral {
 
             let mod_primlit = SvPrimaryLiteralIntegral {
                 data_01: vec![0],
-                data_xz: vec![1],
-                signedness: ret.signed,
+                data_xz: Some(vec![1]),
+                signed: ret.signed,
                 size: 1,
             };
 
@@ -1054,8 +1054,8 @@ impl SvPrimaryLiteralIntegral {
 
             let mod_primlit = SvPrimaryLiteralIntegral {
                 data_01: vec![0],
-                data_xz: vec![1],
-                signedness: ret.signed,
+                data_xz: Some(vec![1]),
+                signed: ret.signed,
                 size: 1,
             };
 
