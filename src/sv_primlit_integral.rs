@@ -926,22 +926,25 @@ impl SvPrimaryLiteralIntegral {
             }
 
             // Possible carry out from the MSB
-            ret.size = ret.size + 1;
+            let final_num_bits = ret.size + right_nu.size + 1;
 
-            let mod_primlit = SvPrimaryLiteralIntegral {
+            ret = SvPrimaryLiteralIntegral {
+                data_01: vec![0],
+                data_xz: Some(vec![1]),
+                signed: ret.signed == false || right_nu.signed == false,
+                size: 1,
+            };
+
+            let x_primlit = SvPrimaryLiteralIntegral {
                 data_01: vec![0],
                 data_xz: Some(vec![1]),
                 signed: ret.signed,
                 size: 1,
             };
 
-            for _x in 0..ret.size {
-                ret.cat(mod_primlit.clone());
+            for _x in 0..(final_num_bits - 1) {
+                ret = ret.cat(x_primlit.clone());
             }
-
-            mod_primlit.to_4state();
-            ret.data_01 = mod_primlit.data_01;
-            ret.data_xz = mod_primlit.data_xz;
 
             ret
         }
@@ -1045,27 +1048,25 @@ impl SvPrimaryLiteralIntegral {
                 ret.data_xz = ret.to_4state().data_xz;
             }
         } else {
-            ret = left_nu.clone();
-            ret.size = ret.size + right_nu.size + 1;
+            let final_num_bits = left_nu.size + right_nu.size;
 
-            if ret.signed != right_nu.signed {
-                ret.signed = false;
-            }
+            ret = SvPrimaryLiteralIntegral {
+                data_01: vec![0],
+                data_xz: Some(vec![1]),
+                signed: !(left_nu.signed == false || right_nu.signed == false),
+                size: 1,
+            };
 
-            let mod_primlit = SvPrimaryLiteralIntegral {
+            let x_primlit = SvPrimaryLiteralIntegral {
                 data_01: vec![0],
                 data_xz: Some(vec![1]),
                 signed: ret.signed,
                 size: 1,
             };
 
-            for _x in 0..ret.size {
-                ret.cat(mod_primlit.clone());
+            for _x in 0..(final_num_bits - 1) {
+                ret = ret.cat(x_primlit.clone());
             }
-
-            mod_primlit.to_4state();
-            ret.data_01 = mod_primlit.data_01;
-            ret.data_xz = mod_primlit.data_xz;
         }
 
         ret
@@ -1124,7 +1125,10 @@ impl PartialOrd for SvPrimaryLiteralIntegral {
 
 impl PartialEq for SvPrimaryLiteralIntegral {
     fn eq(&self, other: &Self) -> bool {
-        if self.contains_xz() || other.contains_xz() {
+        if self.contains_xz() != other.contains_xz() {
+            return false;
+        }
+        if self.contains_xz() && other.contains_xz() {
             let signedness = self.signed == other.signed;
             let size = self.size == other.size;
             let data_01 = self.data_01 == other.data_01;
