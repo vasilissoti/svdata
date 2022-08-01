@@ -928,14 +928,15 @@ impl SvPrimaryLiteralIntegral {
             // Possible carry out from the MSB
             ret.size = ret.size + 1;
 
-            if ret.signed != right_nu.signed {
-                ret.signed = false;
-            }
+            let mod_primlit = SvPrimaryLiteralIntegral {
+                data_01: vec![0],
+                data_xz: vec![1],
+                signedness: ret.signed,
+                size: 1,
+            };
 
-            let mod_primlit: SvPrimaryLiteralIntegral = usize_to_primlit(0);
-
-            for _x in 0..(ret.size - 1) {
-                mod_primlit.cat(usize_to_primlit(0));
+            for _x in 0..ret.size {
+                ret.cat(mod_primlit.clone());
             }
 
             mod_primlit.to_4state();
@@ -1051,10 +1052,15 @@ impl SvPrimaryLiteralIntegral {
                 ret.signed = false;
             }
 
-            let mod_primlit: SvPrimaryLiteralIntegral = usize_to_primlit(0);
+            let mod_primlit = SvPrimaryLiteralIntegral {
+                data_01: vec![0],
+                data_xz: vec![1],
+                signedness: ret.signed,
+                size: 1,
+            };
 
-            for _x in 0..(ret.size - 1) {
-                mod_primlit.cat(usize_to_primlit(0));
+            for _x in 0..ret.size {
+                ret.cat(mod_primlit.clone());
             }
 
             mod_primlit.to_4state();
