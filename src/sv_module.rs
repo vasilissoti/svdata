@@ -1,6 +1,7 @@
-use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
+use crate::structures::{SvModuleDeclaration, SvParamType, SvPort, SvInstance};
 use crate::sv_misc::identifier;
 use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
+use crate::sv_instance::module_instance;
 use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
@@ -12,6 +13,7 @@ pub fn module_declaration_ansi(
         identifier: module_identifier(m.clone(), syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        instances: Vec::new(),
         filepath: String::from(filepath),
     };
 
@@ -106,6 +108,11 @@ pub fn module_declaration_ansi(
                 ret.ports.push(parsed_port.clone());
                 prev_port = Some(parsed_port.clone());
             }
+
+            RefNode::ModuleInstantiation(p) => {
+                let parsed_instance: SvInstance = module_instance(p, syntax_tree);
+                ret.instances.push(parsed_instance.clone());
+            }
             _ => (),
         }
     }
@@ -121,6 +128,7 @@ pub fn module_declaration_nonansi(
         identifier: module_identifier(_m, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        instances: Vec::new(),
         filepath: String::from(_filepath),
     };
     // TODO
