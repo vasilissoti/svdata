@@ -12,6 +12,7 @@ pub struct SvModuleDeclaration {
     pub identifier: String,
     pub parameters: Vec<SvParameter>,
     pub ports: Vec<SvPort>,
+    pub instances: Vec<SvInstance>,
     pub filepath: String,
 }
 
@@ -125,6 +126,14 @@ pub struct SvPort {
     pub comment: Option<String>,
 }
 
+#[derive(Debug, Serialize, Clone)]
+pub struct SvInstance {
+    pub module_name: String,
+    pub instance_name: String,
+    pub hierarchy: Vec<String>,
+    pub connections: Vec<Vec<String>>,
+}
+
 impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         for module in self.modules.clone() {
@@ -149,7 +158,23 @@ impl fmt::Display for SvModuleDeclaration {
             write!(f, "{}", param)?;
         }
 
+        for instance in self.instances.clone() {
+            write!(f, "{}", instance)?;
+        }
+
         writeln!(f, "")
+    }
+}
+
+impl fmt::Display for SvInstance {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "  Instance: ")?;
+        writeln!(f, "    Module name: {}", self.module_name)?;
+        writeln!(f, "    Instance name: {}", self.instance_name)?;
+        writeln!(f, "    Hierarchy: {:?}", self.hierarchy)?;
+        writeln!(f, "    Connections: {:?}", self.connections)?;
+
+        write!(f, "")
     }
 }
 
