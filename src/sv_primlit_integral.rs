@@ -775,6 +775,10 @@ impl SvPrimaryLiteralIntegral {
                     + (self.data_01.len() - 1) * usize::BITS as usize;
             }
         }
+
+        if self.is_4state() && (self.data_01.len() < self.data_xz.as_ref().unwrap().len()) {
+            self.data_xz = self.to_4state().data_xz;
+        }
     }
 
     /* Receives the number of bits in which an integral primary literal should be truncated.
