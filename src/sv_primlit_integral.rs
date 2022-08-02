@@ -926,12 +926,12 @@ impl SvPrimaryLiteralIntegral {
             }
 
             // Possible carry out from the MSB
-            let final_num_bits = ret.size + right_nu.size + 1;
+            let final_num_bits = ret.size + 1;
 
             ret = SvPrimaryLiteralIntegral {
                 data_01: vec![0],
                 data_xz: Some(vec![1]),
-                signed: ret.signed == false || right_nu.signed == false,
+                signed: !(ret.signed == false || right_nu.signed == false),
                 size: 1,
             };
 
