@@ -106,6 +106,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_input_net_signed.sv"
     }
   ],

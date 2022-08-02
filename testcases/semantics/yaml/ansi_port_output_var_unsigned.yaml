@@ -83,5 +83,6 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_output_var_unsigned.sv
 packages: []

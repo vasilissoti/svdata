@@ -75,5 +75,6 @@ modules:
           - - FOO-1
             - "0"
         comment: /*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_comment_keyword1.sv
 packages: []

@@ -51,5 +51,6 @@ modules:
         unpacked_dimensions: []
         comment: /* id/eq *//*eq/val*//*post*/
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_parameter_comment_nokeyword.sv
 packages: []

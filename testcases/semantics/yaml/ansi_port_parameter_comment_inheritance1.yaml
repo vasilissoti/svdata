@@ -63,5 +63,6 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance1.sv
 packages: []

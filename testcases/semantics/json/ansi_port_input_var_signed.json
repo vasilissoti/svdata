@@ -101,6 +101,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_input_var_signed.sv"
     }
   ],
