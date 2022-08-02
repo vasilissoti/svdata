@@ -259,6 +259,10 @@ impl SvPrimaryLiteralIntegral {
             ret._minimum_width();
         }
 
+        if ret.is_4state() {
+            ret.data_xz = ret.to_4state().data_xz;
+        }
+
         ret
     }
 
