@@ -93,5 +93,6 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_localparam.sv
 packages: []

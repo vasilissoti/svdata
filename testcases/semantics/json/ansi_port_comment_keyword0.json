@@ -163,6 +163,7 @@
           "comment": "/*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/"
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_comment_keyword0.sv"
     }
   ],

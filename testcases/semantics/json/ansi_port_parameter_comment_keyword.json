@@ -89,6 +89,7 @@
         }
       ],
       "ports": [],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_parameter_comment_keyword.sv"
     }
   ],

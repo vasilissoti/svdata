@@ -33,5 +33,6 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_output_net_class.sv
 packages: []
