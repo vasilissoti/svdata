@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::fmt;
-use std::ops::{Add, Mul, Not, Shl, Shr};
+use std::ops::{Add, Mul, Neg, Not, Shl, Shr};
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
@@ -232,7 +232,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives a signed integral primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
     The correct final number of bits is set to the argument. */
-    pub fn neg(&self) -> SvPrimaryLiteralIntegral {
+    pub fn nega(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         if ret.is_zero() {
             return ret;
@@ -1207,5 +1207,16 @@ impl Not for SvPrimaryLiteralIntegral {
 
     fn not(self) -> Self {
         self.inv()
+    }
+}
+
+impl Neg for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn neg(self) -> Self {
+        if self.contains_xz() {
+            panic!("Cannot negate an integral primary literal that contains X/Z!");
+        }
+        self.nega()
     }
 }
