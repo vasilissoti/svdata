@@ -692,36 +692,6 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
-    Otherwise it returns false. */
-    pub fn eq(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
-        let mut left_zero: bool = true;
-        for x in &self.data_01 {
-            if x.leading_zeros() != usize::BITS {
-                left_zero = false;
-            }
-        }
-
-        let mut right_zero: bool = true;
-        for y in &right_nu.data_01 {
-            if y.leading_zeros() != usize::BITS {
-                right_zero = false;
-            }
-        }
-
-        if left_zero && right_zero {
-            return true;
-        } else if left_zero != right_zero {
-            return false;
-        } else if self < &right_nu {
-            return false;
-        } else if self > &right_nu {
-            return false;
-        }
-
-        true
-    }
-
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
     The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
@@ -1168,7 +1138,31 @@ impl PartialEq for SvPrimaryLiteralIntegral {
 
             return signedness && size && data_01 && data_xz;
         } else {
-            self.eq(other.clone())
+            let mut left_zero: bool = true;
+            for x in &self.data_01 {
+                if x.leading_zeros() != usize::BITS {
+                    left_zero = false;
+                }
+            }
+
+            let mut right_zero: bool = true;
+            for y in &other.data_01 {
+                if y.leading_zeros() != usize::BITS {
+                    right_zero = false;
+                }
+            }
+
+            if left_zero && right_zero {
+                return true;
+            } else if left_zero != right_zero {
+                return false;
+            } else if self < other {
+                return false;
+            } else if self > other {
+                return false;
+            }
+
+            true
         }
     }
 }
