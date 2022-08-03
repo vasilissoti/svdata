@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::fmt;
-use std::ops::Mul;
+use std::ops::{Add, Mul};
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
@@ -245,7 +245,7 @@ impl SvPrimaryLiteralIntegral {
 
         ret = ret.inv();
 
-        ret = ret.add_usize(1);
+        ret = ret + 1;
 
         if from_negative {
             ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
@@ -529,7 +529,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. */
-    pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    pub fn lth(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         let mut left_nu = self.clone();
 
         if left_nu.signed != right_nu.signed {
@@ -539,7 +539,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     left_nu.signed = false;
                     left_nu._minimum_width();
-                    return left_nu.lt(right_nu.clone());
+                    return left_nu.lth(right_nu.clone());
                 }
             } else {
                 if right_nu.is_negative() {
@@ -547,7 +547,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     right_nu.signed = false;
                     right_nu._minimum_width();
-                    return left_nu.lt(right_nu.clone());
+                    return left_nu.lth(right_nu.clone());
                 }
             }
         } else {
@@ -612,7 +612,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
     Otherwise it returns false. */
-    pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    pub fn gth(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         let mut left_nu = self.clone();
 
         if left_nu.signed != right_nu.signed {
@@ -622,7 +622,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     left_nu.signed = false;
                     left_nu._minimum_width();
-                    return left_nu.gt(right_nu.clone());
+                    return left_nu.gth(right_nu.clone());
                 }
             } else {
                 if right_nu.is_negative() {
@@ -630,7 +630,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     right_nu.signed = false;
                     right_nu._minimum_width();
-                    return left_nu.gt(right_nu.clone());
+                    return left_nu.gth(right_nu.clone());
                 }
             }
         } else {
@@ -691,6 +691,36 @@ impl SvPrimaryLiteralIntegral {
 
             false
         }
+    }
+
+    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
+    Otherwise it returns false. */
+    pub fn equ(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
+        let mut left_zero: bool = true;
+        for x in &self.data_01 {
+            if x.leading_zeros() != usize::BITS {
+                left_zero = false;
+            }
+        }
+
+        let mut right_zero: bool = true;
+        for y in &right_nu.data_01 {
+            if y.leading_zeros() != usize::BITS {
+                right_zero = false;
+            }
+        }
+
+        if left_zero && right_zero {
+            return true;
+        } else if left_zero != right_zero {
+            return false;
+        } else if self < &right_nu {
+            return false;
+        } else if self > &right_nu {
+            return false;
+        }
+
+        true
     }
 
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
@@ -848,21 +878,6 @@ impl SvPrimaryLiteralIntegral {
         } else {
             panic!("The original number of bits is smaller than the requested one!");
         }
-    }
-
-    pub fn add_usize(&self, right_nu: usize) -> SvPrimaryLiteralIntegral {
-        let mut ret: SvPrimaryLiteralIntegral = self.clone();
-
-        let right_nu = SvPrimaryLiteralIntegral {
-            data_01: vec![right_nu],
-            data_xz: None,
-            size: usize::BITS as usize,
-            signed: true,
-        };
-
-        ret = ret.add_primlit(right_nu.clone());
-
-        ret
     }
 
     pub fn add_primlit(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
@@ -1116,9 +1131,9 @@ impl PartialOrd for SvPrimaryLiteralIntegral {
     fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
         if self.contains_xz() || other.contains_xz() {
             return None;
-        } else if self.lt(other.clone()) {
+        } else if self.lth(other.clone()) {
             return Some(Ordering::Less);
-        } else if self.gt(other.clone()) {
+        } else if self.gth(other.clone()) {
             return Some(Ordering::Greater);
         } else {
             Some(Ordering::Equal)
@@ -1139,36 +1154,29 @@ impl PartialEq for SvPrimaryLiteralIntegral {
 
             return signedness && size && data_01 && data_xz;
         } else {
-            let mut left_zero: bool = true;
-            for x in &self.data_01 {
-                if x.leading_zeros() != usize::BITS {
-                    left_zero = false;
-                }
-            }
-
-            let mut right_zero: bool = true;
-            for y in &other.data_01 {
-                if y.leading_zeros() != usize::BITS {
-                    right_zero = false;
-                }
-            }
-
-            if left_zero && right_zero {
-                return true;
-            } else if left_zero != right_zero {
-                return false;
-            } else if self < other {
-                return false;
-            } else if self > other {
-                return false;
-            }
-
-            true
+            self.equ(other.clone())
         }
     }
 }
 
 impl Eq for SvPrimaryLiteralIntegral {}
+
+impl Add for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn add(self, rhs: Self) -> Self {
+        self.add_primlit(rhs.clone())
+    }
+}
+
+impl Add<usize> for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn add(self, rhs: usize) -> Self {
+        let rhs = usize_to_primlit(rhs);
+        self.add_primlit(rhs.clone())
+    }
+}
 
 impl Mul for SvPrimaryLiteralIntegral {
     type Output = Self;
