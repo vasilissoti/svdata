@@ -87,7 +87,9 @@
         {
           "module_name": "bar",
           "instance_name": "u_bar2",
-          "hierarchy": ["la_FOO"],
+          "hierarchy": [
+            "la_FOO"
+          ],
           "connections": [
             [
               "a",

@@ -32,6 +32,26 @@ fn inst_instance_name(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTr
 fn inst_hierarchy(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> Vec<String> {
     let mut ret: Vec<String> = Vec::new();
 
+    for node in syntax_tree {
+        match node {
+            RefNode::GenerateBlock(x) => {
+                for instance in x {
+                    match instance {
+                        RefNode::ModuleInstantiation(y) => {
+                            if y == p {
+                                let label = unwrap_node!(node.clone(), GenerateBlockIdentifier).unwrap();
+                                let label = identifier(label, &syntax_tree).unwrap();
+                                ret.push(label);
+                            }
+                        }
+                        _ => (),
+                }
+                }
+            }
+            _ => (),
+        }
+    }
+
     ret
 }
 
