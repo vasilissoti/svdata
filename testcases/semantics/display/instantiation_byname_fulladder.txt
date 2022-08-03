@@ -1,0 +1,128 @@
+Module:
+  Identifier: fulladd
+  Filepath: testcases/semantics/sv/instantiation_byname_fulladder.sv
+  Port: 
+    Identifier: s
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: a_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: b_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: c_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
+Module:
+  Identifier: fulladder_4bit
+  Filepath: testcases/semantics/sv/instantiation_byname_fulladder.sv
+  Port: 
+    Identifier: sum
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: cout
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: a
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: b
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+  Port: 
+    Identifier: cin
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Instance: 
+    Module name: fulladd
+    Instance name: f0
+    Hierarchy: []
+    Connections: [["s", "sum[0]"], ["c_out", "c1"], ["a_in", "a[0]"], ["b_in", "b[0]"], ["c_in", "cin"]]
+  Instance: 
+    Module name: fulladd
+    Instance name: f1
+    Hierarchy: []
+    Connections: [["s", "sum[1]"], ["c_out", "c2"], ["a_in", "a[1]"], ["b_in", "b[1]"], ["c_in", "c1"]]
+  Instance: 
+    Module name: fulladd
+    Instance name: f2
+    Hierarchy: []
+    Connections: [["s", "sum[2]"], ["c_out", "c3"], ["a_in", "a[2]"], ["b_in", "b[2]"], ["c_in", "c2"]]
+  Instance: 
+    Module name: fulladd
+    Instance name: f3
+    Hierarchy: []
+    Connections: [["s", "sum[3]"], ["c_out", "cout"], ["a_in", "a[3]"], ["b_in", "b[3]"], ["c_in", "c3"]]
+

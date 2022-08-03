@@ -1,0 +1,87 @@
+---
+modules:
+  - identifier: mkM1
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  - identifier: mkM2
+    parameters: []
+    ports:
+      - identifier: b
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_name: mkM1
+        instance_name: m1
+        hierarchy: []
+        connections:
+          - - b0
+            - b
+    filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  - identifier: mkM3
+    parameters: []
+    ports:
+      - identifier: c
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_name: mkM1
+        instance_name: m1
+        hierarchy: []
+        connections:
+          - - c0
+            - c
+      - module_name: mkM2
+        instance_name: m2
+        hierarchy: []
+        connections:
+          - - c0
+            - c
+    filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  - identifier: mkM4
+    parameters: []
+    ports:
+      - identifier: d
+        direction: Inout
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_name: mkM3
+        instance_name: m3
+        hierarchy: []
+        connections:
+          - - d0
+            - d
+    filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+packages: []

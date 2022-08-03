@@ -1,0 +1,63 @@
+Module:
+  Identifier: mydesign
+  Filepath: testcases/semantics/sv/instantiation_byorder_simple.sv
+  Port: 
+    Identifier: x
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: y
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: z
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Port: 
+    Identifier: o
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+
+Module:
+  Identifier: mydesign2
+  Filepath: testcases/semantics/sv/instantiation_byorder_simple.sv
+  Port: 
+    Identifier: o
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+  Instance: 
+    Module name: mydesign
+    Instance name: d0
+    Hierarchy: []
+    Connections: [["a[0]"], ["b"], ["a[1]"], ["c"]]
+
