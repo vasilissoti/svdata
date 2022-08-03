@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::fmt;
-use std::ops::{Add, Mul, Shl, Shr};
+use std::ops::{Add, Mul, Not, Shl, Shr};
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
@@ -1189,7 +1189,7 @@ impl Mul for SvPrimaryLiteralIntegral {
 impl Shl<usize> for SvPrimaryLiteralIntegral {
     type Output = Self;
 
-    fn shl(self, rhs: usize) -> SvPrimaryLiteralIntegral {
+    fn shl(self, rhs: usize) -> Self {
         self.lsl(rhs)
     }
 }
@@ -1197,7 +1197,15 @@ impl Shl<usize> for SvPrimaryLiteralIntegral {
 impl Shr<usize> for SvPrimaryLiteralIntegral {
     type Output = Self;
 
-    fn shr(self, rhs: usize) -> SvPrimaryLiteralIntegral {
+    fn shr(self, rhs: usize) -> Self {
         self.lsr(rhs)
+    }
+}
+
+impl Not for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn not(self) -> Self {
+        self.inv()
     }
 }
