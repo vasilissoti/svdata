@@ -12,7 +12,7 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c: SvPrimaryLiteralIntegral = a.mul(b.clone());
+let c: SvPrimaryLiteralIntegral = a * b;
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![4, 0],

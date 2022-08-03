@@ -1,5 +1,6 @@
 use std::cmp::Ordering;
 use std::fmt;
+use std::ops::Mul;
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
@@ -986,7 +987,7 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    pub fn mul(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+    pub fn mult(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu: SvPrimaryLiteralIntegral = self.clone();
         let mut ret: SvPrimaryLiteralIntegral;
 
@@ -1168,3 +1169,11 @@ impl PartialEq for SvPrimaryLiteralIntegral {
 }
 
 impl Eq for SvPrimaryLiteralIntegral {}
+
+impl Mul for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn mul(self, rhs: Self) -> Self {
+        self.mult(rhs.clone())
+    }
+}
