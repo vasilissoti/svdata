@@ -11,6 +11,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: b
     Direction: Input
@@ -21,6 +22,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: a2
     Direction: Output
@@ -31,6 +33,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Port: 
     Identifier: b2
     Direction: Output
@@ -41,6 +44,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Instance: 
     Module name: bar
     Instance name: u_bar0
@@ -54,6 +58,6 @@ Module:
   Instance: 
     Module name: bar
     Instance name: u_bar2
-    Hierarchy: ["la_FOO"]
+    Hierarchy: []
     Connections: [["a", "a2"], ["b", "b2"]]
 

@@ -11,6 +11,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
 
 Module:
   Identifier: mkM2
@@ -25,6 +26,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Instance: 
     Module name: mkM1
     Instance name: m1
@@ -44,6 +46,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Instance: 
     Module name: mkM1
     Instance name: m1
@@ -68,6 +71,7 @@ Module:
     Signedness: Unsigned
     PackedDimensions: []
     UnpackedDimensions: []
+    Comment: None
   Instance: 
     Module name: mkM3
     Instance name: m3

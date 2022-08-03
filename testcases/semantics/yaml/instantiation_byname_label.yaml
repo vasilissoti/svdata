@@ -62,8 +62,7 @@ modules:
             - b1
       - module_name: bar
         instance_name: u_bar2
-        hierarchy: 
-          - - la_FOO
+        hierarchy: []
         connections:
           - - a
             - a2
