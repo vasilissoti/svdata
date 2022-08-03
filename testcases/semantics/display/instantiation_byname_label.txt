@@ -58,6 +58,6 @@ Module:
   Instance: 
     Module name: bar
     Instance name: u_bar2
-    Hierarchy: []
+    Hierarchy: ["la_FOO"]
     Connections: [["a", "a2"], ["b", "b2"]]
 
