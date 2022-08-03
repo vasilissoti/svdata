@@ -1,0 +1,64 @@
+---
+modules:
+  - identifier: testmodule
+    parameters: []
+    ports:
+      - identifier: a
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: b
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: a2
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: b2
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_name: bar
+        instance_name: test0
+        hierarchy: []
+        connections:
+          - - a
+            - "a2[i]"
+          - - b
+            - "b2[k]"
+      - module_name: bar
+        instance_name: test1
+        hierarchy: []
+        connections:
+          - - a
+            - "a2[i]"
+          - - b
+            - "b2[k]"
+    filepath: testcases/semantics/sv/instantiation_byname_variabel_indexing.sv
+packages: []

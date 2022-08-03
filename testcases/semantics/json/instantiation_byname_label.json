@@ -1,0 +1,107 @@
+{
+  "modules": [
+    {
+      "identifier": "foo",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "a",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "a2",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b2",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [
+        {
+          "module_name": "bar",
+          "instance_name": "u_bar0",
+          "hierarchy": [],
+          "connections": [
+            [
+              "a",
+              "a0"
+            ],
+            [
+              "b",
+              "b0"
+            ]
+          ]
+        },
+        {
+          "module_name": "bar",
+          "instance_name": "u_bar1",
+          "hierarchy": [],
+          "connections": [
+            [
+              "a",
+              "a1"
+            ],
+            [
+              "b",
+              "b1"
+            ]
+          ]
+        },
+        {
+          "module_name": "bar",
+          "instance_name": "u_bar2",
+          "hierarchy": ["la_FOO"],
+          "connections": [
+            [
+              "a",
+              "a2"
+            ],
+            [
+              "b",
+              "b2"
+            ]
+          ]
+        }
+      ],
+      "filepath": "testcases/semantics/sv/instantiation_byname_label.sv"
+    }
+  ],
+  "packages": []
+}
