@@ -1,6 +1,6 @@
 use std::cmp::Ordering;
 use std::fmt;
-use std::ops::{Add, Mul};
+use std::ops::{Add, Mul, Shl};
 
 #[derive(Debug, Clone)]
 pub struct SvPrimaryLiteralIntegral {
@@ -1183,5 +1183,13 @@ impl Mul for SvPrimaryLiteralIntegral {
 
     fn mul(self, rhs: Self) -> Self {
         self.mult(rhs.clone())
+    }
+}
+
+impl Shl<usize> for SvPrimaryLiteralIntegral {
+    type Output = Self;
+
+    fn shl(self, rhs: usize) -> SvPrimaryLiteralIntegral {
+        self.lsl(rhs)
     }
 }
