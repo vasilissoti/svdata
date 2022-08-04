@@ -355,52 +355,50 @@ fn port_parameter_datatype_ansi(
 
     match datatype {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
-            ret = (Some(SvDataType::Logic), false);
+            return (Some(SvDataType::Logic), false);
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
-            ret = (Some(SvDataType::Reg), false);
+            return (Some(SvDataType::Reg), false);
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
-            ret = (Some(SvDataType::Bit), false);
+            return (Some(SvDataType::Bit), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
-            ret = (Some(SvDataType::Byte), false);
+            return (Some(SvDataType::Byte), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
-            ret = (Some(SvDataType::Shortint), false);
+            return (Some(SvDataType::Shortint), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
-            ret = (Some(SvDataType::Int), false);
+            return (Some(SvDataType::Int), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
-            ret = (Some(SvDataType::Longint), false);
+            return (Some(SvDataType::Longint), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
-            ret = (Some(SvDataType::Integer), false);
+            return (Some(SvDataType::Integer), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
-            ret = (Some(SvDataType::Time), false);
+            return (Some(SvDataType::Time), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
-            ret = (Some(SvDataType::Shortreal), false);
+            return (Some(SvDataType::Shortreal), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
-            ret = (Some(SvDataType::Realtime), false);
+            return (Some(SvDataType::Realtime), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
-            ret = (Some(SvDataType::Real), false);
+            return (Some(SvDataType::Real), false);
         }
-        Some(RefNode::ClassType(_)) => ret = (Some(SvDataType::Class), false),
-        Some(RefNode::TypeReference(_)) => ret = (Some(SvDataType::TypeRef), false),
+        Some(RefNode::ClassType(_)) => return (Some(SvDataType::Class), false),
+        Some(RefNode::TypeReference(_)) => return (Some(SvDataType::TypeRef), false),
         _ => {
-            let mut string_found: bool = false;
             if common_data != None {
                 match unwrap_node!(common_data.clone(), DataType) {
                     Some(x) => match keyword(x, syntax_tree) {
                         Some(x) => {
                             if x == "string" {
-                                ret = (Some(SvDataType::String), false);
-                                string_found = true;
+                                return (Some(SvDataType::String), false);
                             } else {
                                 println!("{}", x);
                                 unreachable!();
@@ -414,7 +412,7 @@ fn port_parameter_datatype_ansi(
                 }
             }
 
-            if !string_found && found_assignment {
+            if found_assignment {
                 if parameter_resolver_needed_ansi(p) {
                     match unwrap_node!(p, BinaryOperator) {
                         Some(_) => ret = (Some(parameter_datatype_resolver_ansi(p)), true),
