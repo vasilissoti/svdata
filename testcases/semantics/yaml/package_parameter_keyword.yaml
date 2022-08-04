@@ -1,0 +1,68 @@
+---
+modules: []
+packages:
+  - identifier: TestPackage
+    parameters:
+      - identifier: a
+        expression: "8'sb10101010"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 8
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: b
+        expression: "4'b1000"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 4
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: e
+        expression: "7.5"
+        paramtype: Parameter
+        datatype: Real
+        datatype_overridable: false
+        classid: ~
+        signedness: ~
+        signedness_overridable: false
+        num_bits: 64
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: f
+        expression: "5"
+        paramtype: Parameter
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: g
+        expression: "\"hello\""
+        paramtype: Parameter
+        datatype: String
+        datatype_overridable: false
+        classid: ~
+        signedness: ~
+        signedness_overridable: false
+        num_bits: 40
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/package_parameter_keyword.sv
