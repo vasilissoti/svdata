@@ -17,7 +17,9 @@ pub struct SvModuleDeclaration {
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPackageDeclaration {
+    pub identifier: String,
     pub parameters: Vec<SvParameter>,
+    pub filepath: String,
 }
 
 #[derive(Debug, Serialize, Clone)]

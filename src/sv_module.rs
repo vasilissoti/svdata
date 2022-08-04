@@ -67,7 +67,6 @@ pub fn module_declaration_ansi(
                             } else {
                                 let common_data =
                                     unwrap_node!(param_type.clone(), DataType, DataTypeOrImplicit);
-                                let a = unwrap_node!(param_type.clone(), ListOfParamAssignments);
 
                                 let param_type = match param_type {
                                     RefNode::LocalParameterDeclarationParam(_) => {
@@ -80,7 +79,7 @@ pub fn module_declaration_ansi(
                                     _ => unreachable!(),
                                 };
 
-                                for param in a.unwrap() {
+                                for param in a {
                                     match param {
                                         RefNode::ParamAssignment(x) => {
                                             ret.parameters.push(port_parameter_declaration_ansi(
@@ -109,6 +108,7 @@ pub fn module_declaration_ansi(
             _ => (),
         }
     }
+
     ret
 }
 
