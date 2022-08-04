@@ -57,8 +57,13 @@ pub fn port_parameter_declaration_ansi(
     param_type: &SvParamType,
 ) -> SvParameter {
     let found_assignment = port_parameter_check_default_ansi(p);
-    let (param_datatype, param_datatype_overridable) =
-        port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
+    let (param_datatype, param_datatype_overridable) = port_parameter_datatype_ansi(
+        common_data.clone(),
+        p,
+        syntax_tree,
+        found_assignment,
+        param_type,
+    );
     let (param_signedness, param_signedness_overridable) = port_parameter_signedness_ansi(
         common_data.clone(),
         p,
@@ -98,7 +103,13 @@ pub fn port_parameter_declaration_ansi(
         comment: get_comment(RefNode::ParamAssignment(p), syntax_tree),
     };
 
-    port_parameter_syntax_ansi(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
+    port_parameter_syntax_ansi(
+        &ret.datatype,
+        &ret.signedness,
+        &ret.packed_dimensions,
+        param_type,
+        found_assignment,
+    );
 
     ret
 }
@@ -115,6 +126,8 @@ fn port_parameter_syntax_ansi(
     datatype: &Option<SvDataType>,
     signedness: &Option<SvSignedness>,
     packed_dimensions: &Vec<SvPackedDimension>,
+    param_type: &SvParamType,
+    found_assignment: bool,
 ) {
     if !packed_dimensions.is_empty() {
         match datatype {
@@ -136,6 +149,11 @@ fn port_parameter_syntax_ansi(
             _ => (),
         },
 
+        _ => (),
+    }
+
+    match (param_type, found_assignment) {
+        (SvParamType::LocalParam, false) => panic!("Localparams must have a default value!"),
         _ => (),
     }
 }
@@ -311,8 +329,13 @@ fn port_parameter_datatype_ansi(
     p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
     found_assignment: bool,
+    param_type: &SvParamType,
 ) -> (Option<SvDataType>, bool) {
     let datatype: Option<RefNode>;
+    let mut ret: (Option<SvDataType>, bool) = match param_type {
+        SvParamType::Parameter => (None, true),
+        SvParamType::LocalParam => (Some(SvDataType::Logic), false),
+    };
 
     match common_data {
         Some(_) => {
@@ -332,50 +355,52 @@ fn port_parameter_datatype_ansi(
 
     match datatype {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
-            (Some(SvDataType::Logic), false)
+            ret = (Some(SvDataType::Logic), false);
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
-            (Some(SvDataType::Reg), false)
+            ret = (Some(SvDataType::Reg), false);
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
-            (Some(SvDataType::Bit), false)
+            ret = (Some(SvDataType::Bit), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
-            (Some(SvDataType::Byte), false)
+            ret = (Some(SvDataType::Byte), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
-            (Some(SvDataType::Shortint), false)
+            ret = (Some(SvDataType::Shortint), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
-            (Some(SvDataType::Int), false)
+            ret = (Some(SvDataType::Int), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
-            (Some(SvDataType::Longint), false)
+            ret = (Some(SvDataType::Longint), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
-            (Some(SvDataType::Integer), false)
+            ret = (Some(SvDataType::Integer), false);
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
-            (Some(SvDataType::Time), false)
+            ret = (Some(SvDataType::Time), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
-            (Some(SvDataType::Shortreal), false)
+            ret = (Some(SvDataType::Shortreal), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
-            (Some(SvDataType::Realtime), false)
+            ret = (Some(SvDataType::Realtime), false);
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
-            (Some(SvDataType::Real), false)
+            ret = (Some(SvDataType::Real), false);
         }
-        Some(RefNode::ClassType(_)) => (Some(SvDataType::Class), false),
-        Some(RefNode::TypeReference(_)) => (Some(SvDataType::TypeRef), false),
+        Some(RefNode::ClassType(_)) => ret = (Some(SvDataType::Class), false),
+        Some(RefNode::TypeReference(_)) => ret = (Some(SvDataType::TypeRef), false),
         _ => {
+            let mut string_found: bool = false;
             if common_data != None {
                 match unwrap_node!(common_data.clone(), DataType) {
                     Some(x) => match keyword(x, syntax_tree) {
                         Some(x) => {
                             if x == "string" {
-                                return (Some(SvDataType::String), false);
+                                ret = (Some(SvDataType::String), false);
+                                string_found = true;
                             } else {
                                 println!("{}", x);
                                 unreachable!();
@@ -389,32 +414,37 @@ fn port_parameter_datatype_ansi(
                 }
             }
 
-            if found_assignment {
+            if !string_found && found_assignment {
                 if parameter_resolver_needed_ansi(p) {
                     match unwrap_node!(p, BinaryOperator) {
-                        Some(_) => return (Some(parameter_datatype_resolver_ansi(p)), true),
-                        _ => return (Some(SvDataType::Unsupported), true),
+                        Some(_) => ret = (Some(parameter_datatype_resolver_ansi(p)), true),
+                        _ => ret = (Some(SvDataType::Unsupported), true),
                     }
                 } else {
                     let implicit_type =
                         unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral, StringLiteral);
                     match implicit_type {
                         Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
-                            return (Some(SvDataType::Logic), true)
+                            ret = (Some(SvDataType::Logic), true);
                         }
                         Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
-                            return (Some(SvDataType::Real), true)
+                            ret = (Some(SvDataType::Real), true);
                         }
-                        Some(RefNode::TimeLiteral(_)) => return (Some(SvDataType::Time), true),
-                        Some(RefNode::UnbasedUnsizedLiteral(_)) => (Some(SvDataType::Bit), true),
-                        Some(RefNode::StringLiteral(_)) => (Some(SvDataType::String), true),
+                        Some(RefNode::TimeLiteral(_)) => ret = (Some(SvDataType::Time), true),
+                        Some(RefNode::UnbasedUnsizedLiteral(_)) => {
+                            ret = (Some(SvDataType::Bit), true)
+                        }
+                        Some(RefNode::StringLiteral(_)) => ret = (Some(SvDataType::String), true),
                         _ => unreachable!(),
                     }
                 }
-            } else {
-                return (None, true);
             }
         }
+    }
+
+    match param_type {
+        SvParamType::Parameter => ret,
+        SvParamType::LocalParam => (ret.0, false),
     }
 }
 
@@ -423,7 +453,7 @@ fn port_parameter_signedness_ansi(
     p: &sv_parser::ParamAssignment,
     datatype: &Option<SvDataType>,
     found_assignment: bool,
-    datatype_status: bool,
+    datatype_overridable: bool,
     syntax_tree: &SyntaxTree,
 ) -> (Option<SvSignedness>, bool) {
     match m {
@@ -447,7 +477,7 @@ fn port_parameter_signedness_ansi(
         Some(SvDataType::Class)
         | Some(SvDataType::String)
         | Some(SvDataType::Real)
-        | Some(SvDataType::Time) => match datatype_status {
+        | Some(SvDataType::Time) => match datatype_overridable {
             true => return (None, true),
             false => return (None, false),
         },
