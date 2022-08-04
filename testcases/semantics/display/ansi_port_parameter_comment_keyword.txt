@@ -58,10 +58,10 @@ Module:
     Expression: 5
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
@@ -74,7 +74,7 @@ Module:
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []

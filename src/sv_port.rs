@@ -71,6 +71,7 @@ pub fn port_parameter_declaration_ansi(
         found_assignment,
         param_datatype_overridable.clone(),
         syntax_tree,
+        param_type,
     );
     let mut param_packeddim: Vec<SvPackedDimension> = Vec::new();
     match common_data {
@@ -453,7 +454,10 @@ fn port_parameter_signedness_ansi(
     found_assignment: bool,
     datatype_overridable: bool,
     syntax_tree: &SyntaxTree,
+    param_type: &SvParamType,
 ) -> (Option<SvSignedness>, bool) {
+    let ret: (Option<SvSignedness>, bool);
+
     match m {
         Some(_) => {
             let signedness = unwrap_node!(m.clone().unwrap(), Signing);
@@ -476,29 +480,29 @@ fn port_parameter_signedness_ansi(
         | Some(SvDataType::String)
         | Some(SvDataType::Real)
         | Some(SvDataType::Time) => match datatype_overridable {
-            true => return (None, true),
-            false => return (None, false),
+            true => ret = (None, true),
+            false => ret = (None, false),
         },
 
         Some(SvDataType::Shortint)
         | Some(SvDataType::Int)
         | Some(SvDataType::Longint)
         | Some(SvDataType::Byte)
-        | Some(SvDataType::Integer) => (Some(SvSignedness::Signed), true),
+        | Some(SvDataType::Integer) => ret = (Some(SvSignedness::Signed), true),
 
         Some(SvDataType::Logic) => {
             if !found_assignment {
-                return (Some(SvSignedness::Unsigned), true);
+                ret = (Some(SvSignedness::Unsigned), true);
             } else {
                 if parameter_resolver_needed_ansi(p) {
                     match unwrap_node!(p, BinaryOperator) {
                         Some(_) => {
-                            return (
+                            ret = (
                                 parameter_signedness_resolver_ansi(p, datatype, syntax_tree),
                                 true,
                             )
                         }
-                        _ => return (Some(SvSignedness::Unsupported), true),
+                        _ => ret = (Some(SvSignedness::Unsupported), true),
                     }
                 } else {
                     let integral_type =
@@ -506,7 +510,7 @@ fn port_parameter_signedness_ansi(
                     match integral_type {
                         Some(RefNode::DecimalNumber(sv_parser::DecimalNumber::UnsignedNumber(
                             _,
-                        ))) => return (Some(SvSignedness::Signed), true),
+                        ))) => ret = (Some(SvSignedness::Signed), true),
                         _ => {
                             let base = unwrap_node!(
                                 integral_type.unwrap(),
@@ -521,33 +525,33 @@ fn port_parameter_signedness_ansi(
                             match base {
                                 Some(RefNode::BinaryBase(_)) => {
                                     if base_token == "'sb" {
-                                        return (Some(SvSignedness::Signed), true);
+                                        ret = (Some(SvSignedness::Signed), true);
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
+                                        ret = (Some(SvSignedness::Unsigned), true);
                                     }
                                 }
 
                                 Some(RefNode::HexBase(_)) => {
                                     if base_token == "'sh" {
-                                        return (Some(SvSignedness::Signed), true);
+                                        ret = (Some(SvSignedness::Signed), true);
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
+                                        ret = (Some(SvSignedness::Unsigned), true);
                                     }
                                 }
 
                                 Some(RefNode::OctalBase(_)) => {
                                     if base_token == "'so" {
-                                        return (Some(SvSignedness::Signed), true);
+                                        ret = (Some(SvSignedness::Signed), true);
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
+                                        ret = (Some(SvSignedness::Unsigned), true);
                                     }
                                 }
 
                                 Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
                                     if base_token == "'sd" {
-                                        return (Some(SvSignedness::Signed), true);
+                                        ret = (Some(SvSignedness::Signed), true);
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
+                                        ret = (Some(SvSignedness::Unsigned), true);
                                     }
                                 }
 
@@ -560,10 +564,15 @@ fn port_parameter_signedness_ansi(
         }
 
         _ => match datatype {
-            Some(SvDataType::Unsupported) => (Some(SvSignedness::Unsupported), true),
-            None => (None, true),
-            _ => (Some(SvSignedness::Unsigned), true),
+            Some(SvDataType::Unsupported) => ret = (Some(SvSignedness::Unsupported), true),
+            None => ret = (None, true),
+            _ => ret = (Some(SvSignedness::Unsigned), true),
         },
+    }
+
+    match param_type {
+        SvParamType::Parameter => ret,
+        SvParamType::LocalParam => (ret.0, false),
     }
 }
 
@@ -658,19 +667,7 @@ fn port_parameter_bits_ansi(
                             _ => {
                                 return Some(32);
 
-                                // let integral_type =
-                                // unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
-
-                                // match integral_type {
-
-                                //     Some(RefNode::DecimalNumber(_)) => {
-                                //         let base = unwrap_node!(integral_type, UnsignedNumber, DecimalNumberBaseUnsigned);
-
-                                //         match base {
-
-                                //         }
-                                //     }
-                                // }
+                                // TODO
                             }
                         }
                     }
