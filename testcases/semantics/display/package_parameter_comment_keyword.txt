@@ -13,7 +13,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /*post*//*eq/val*//* post */
+    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
   Parameter: 
     Identifier: b
     Expression: 5
@@ -26,7 +26,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* id/eq *//*eq/val*//* post */
+    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
   Parameter: 
     Identifier: c
     Expression: 3
@@ -39,7 +39,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /*post*//*eq/val*//* post */
+    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
   Parameter: 
     Identifier: d
     Expression: 2
@@ -52,7 +52,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /*id/eq*//*eq/val*//*post*/
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
   Parameter: 
     Identifier: e
     Expression: 5
@@ -65,7 +65,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* id/eq *//*eq/val*//* post */
+    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
   Parameter: 
     Identifier: f
     Expression: 5
@@ -78,5 +78,5 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /*id/eq*//*eq/val*//*post*/
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
 

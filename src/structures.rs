@@ -35,7 +35,7 @@ pub struct SvParameter {
     pub num_bits: Option<u64>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
-    pub comment: Option<String>,
+    pub comment: Option<Vec<String>>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -124,7 +124,7 @@ pub struct SvPort {
     pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
-    pub comment: Option<String>,
+    pub comment: Option<Vec<String>>,
 }
 
 impl fmt::Display for SvData {
@@ -219,7 +219,7 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    Comment: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Comment: {}", x)?;
+                writeln!(f, "    Comment: {:?}", x)?;
             }
         }
 
@@ -298,7 +298,7 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Comment: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Comment: {}", x)?;
+                writeln!(f, "    Comment: {:?}", x)?;
             }
         }
 

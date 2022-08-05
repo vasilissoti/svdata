@@ -16,7 +16,9 @@
           "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* A0 */"
+          "comment": [
+            "/* A0 */"
+          ]
         },
         {
           "identifier": "b",
@@ -44,7 +46,9 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* C0 */"
+          "comment": [
+            "/* C0 */"
+          ]
         },
         {
           "identifier": "d",
