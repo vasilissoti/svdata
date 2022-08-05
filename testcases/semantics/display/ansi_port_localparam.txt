@@ -28,7 +28,7 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: e
+    Identifier: c
     Expression: 7.5
     ParameterType: LocalParam
     DataType: Real
@@ -41,7 +41,7 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: f
+    Identifier: d
     Expression: 5
     ParameterType: LocalParam
     DataType: Logic
@@ -54,7 +54,7 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: g
+    Identifier: e
     Expression: "hello"
     ParameterType: LocalParam
     DataType: String
