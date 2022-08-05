@@ -5,7 +5,7 @@ packages:
     parameters:
       - identifier: a
         expression: "8'sb10101010"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -17,7 +17,7 @@ packages:
         comment: ~
       - identifier: b
         expression: "4'b1000"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -31,7 +31,7 @@ packages:
         comment: ~
       - identifier: e
         expression: "7.5"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Real
         datatype_overridable: false
         classid: ~
@@ -43,7 +43,7 @@ packages:
         comment: ~
       - identifier: f
         expression: "5"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -55,7 +55,7 @@ packages:
         comment: ~
       - identifier: g
         expression: "\"hello\""
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: String
         datatype_overridable: false
         classid: ~

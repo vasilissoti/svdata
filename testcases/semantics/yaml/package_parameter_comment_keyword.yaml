@@ -5,7 +5,7 @@ packages:
     parameters:
       - identifier: a
         expression: "1"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -17,7 +17,7 @@ packages:
         comment: /*post*//*eq/val*//* post */
       - identifier: b
         expression: "5"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -29,7 +29,7 @@ packages:
         comment: /* id/eq *//*eq/val*//* post */
       - identifier: c
         expression: "3"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
         classid: ~
@@ -41,7 +41,7 @@ packages:
         comment: /*post*//*eq/val*//* post */
       - identifier: d
         expression: "2"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
         classid: ~

@@ -4,7 +4,7 @@ Package:
   Parameter: 
     Identifier: a
     Expression: 1
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -17,7 +17,7 @@ Package:
   Parameter: 
     Identifier: b
     Expression: 5
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -30,7 +30,7 @@ Package:
   Parameter: 
     Identifier: c
     Expression: 3
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Int
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -43,7 +43,7 @@ Package:
   Parameter: 
     Identifier: d
     Expression: 2
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Int
     DataTypeOverridable: false
     ClassIdentifier: None

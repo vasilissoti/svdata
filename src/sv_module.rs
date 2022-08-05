@@ -59,7 +59,7 @@ pub fn module_declaration_ansi(
                                                 syntax_tree,
                                                 common_data.clone(),
                                                 &param_type,
-                                            ))
+                                            ));
                                         }
                                         _ => (),
                                     }

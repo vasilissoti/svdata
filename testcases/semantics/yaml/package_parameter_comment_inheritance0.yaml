@@ -29,7 +29,7 @@ packages:
         comment: ~
       - identifier: c
         expression: "1"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -41,7 +41,7 @@ packages:
         comment: /* C0 */
       - identifier: d
         expression: "6"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~
@@ -53,7 +53,7 @@ packages:
         comment: ~
       - identifier: e
         expression: "3"
-        paramtype: Parameter
+        paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
         classid: ~

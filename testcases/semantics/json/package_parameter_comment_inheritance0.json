@@ -35,7 +35,7 @@
         {
           "identifier": "c",
           "expression": "1",
-          "paramtype": "Parameter",
+          "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
@@ -49,7 +49,7 @@
         {
           "identifier": "d",
           "expression": "6",
-          "paramtype": "Parameter",
+          "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
@@ -63,7 +63,7 @@
         {
           "identifier": "e",
           "expression": "3",
-          "paramtype": "Parameter",
+          "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,

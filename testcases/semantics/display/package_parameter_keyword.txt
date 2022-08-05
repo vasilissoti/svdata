@@ -4,7 +4,7 @@ Package:
   Parameter: 
     Identifier: a
     Expression: 8'sb10101010
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -17,7 +17,7 @@ Package:
   Parameter: 
     Identifier: b
     Expression: 4'b1000
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -30,7 +30,7 @@ Package:
   Parameter: 
     Identifier: e
     Expression: 7.5
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Real
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -43,7 +43,7 @@ Package:
   Parameter: 
     Identifier: f
     Expression: 5
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
@@ -56,7 +56,7 @@ Package:
   Parameter: 
     Identifier: g
     Expression: "hello"
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: String
     DataTypeOverridable: false
     ClassIdentifier: None

@@ -1,7 +1,7 @@
 use crate::structures::{SvPackageDeclaration, SvParamType};
 use crate::sv_misc::identifier;
 use crate::sv_port::port_parameter_declaration_ansi;
-use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
+use sv_parser::{unwrap_node, RefNode, SyntaxTree};
 
 pub fn package_declaration(
     m: RefNode,
@@ -13,39 +13,22 @@ pub fn package_declaration(
         parameters: Vec::new(),
         filepath: String::from(filepath),
     };
-    let mut param_type: RefNode = m.clone();
 
-    for node in m.into_iter().event() {
+    for node in m {
         match node {
-            NodeEvent::Enter(RefNode::ParameterDeclarationParam(x)) => {
-                param_type = RefNode::ParameterDeclarationParam(x);
-            }
+            RefNode::ParameterDeclarationParam(_) | RefNode::LocalParameterDeclarationParam(_) => {
+                let common_data = unwrap_node!(node.clone(), DataType, DataTypeOrImplicit);
+                let a = unwrap_node!(node.clone(), ListOfParamAssignments);
 
-            NodeEvent::Enter(RefNode::LocalParameterDeclarationParam(x)) => {
-                param_type = RefNode::LocalParameterDeclarationParam(x);
-            }
-
-            NodeEvent::Enter(RefNode::ListOfParamAssignments(a)) => {
-                let common_data = unwrap_node!(param_type.clone(), DataType, DataTypeOrImplicit);
-
-                let param_type = match param_type {
-                    RefNode::LocalParameterDeclarationParam(_) => SvParamType::LocalParam,
-                    RefNode::ParameterDeclarationParam(_) => SvParamType::Parameter,
-                    _ => unreachable!(),
-                };
-
-                for param in a {
+                for param in a.unwrap() {
                     match param {
                         RefNode::ParamAssignment(x) => {
-                            let mut parameter = port_parameter_declaration_ansi(
+                            ret.parameters.push(port_parameter_declaration_ansi(
                                 x,
                                 syntax_tree,
                                 common_data.clone(),
                                 &SvParamType::LocalParam,
-                            );
-
-                            parameter.paramtype = param_type.clone();
-                            ret.parameters.push(parameter);
+                            ));
                         }
                         _ => (),
                     }
