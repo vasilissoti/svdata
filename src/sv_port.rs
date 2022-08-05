@@ -356,43 +356,43 @@ fn port_parameter_datatype_ansi(
 
     match datatype {
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Logic(_))) => {
-            return (Some(SvDataType::Logic), false);
+            (Some(SvDataType::Logic), false)
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Reg(_))) => {
-            return (Some(SvDataType::Reg), false);
+            (Some(SvDataType::Reg), false)
         }
         Some(RefNode::IntegerVectorType(sv_parser::IntegerVectorType::Bit(_))) => {
-            return (Some(SvDataType::Bit), false);
+            (Some(SvDataType::Bit), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Byte(_))) => {
-            return (Some(SvDataType::Byte), false);
+            (Some(SvDataType::Byte), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Shortint(_))) => {
-            return (Some(SvDataType::Shortint), false);
+            (Some(SvDataType::Shortint), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Int(_))) => {
-            return (Some(SvDataType::Int), false);
+            (Some(SvDataType::Int), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Longint(_))) => {
-            return (Some(SvDataType::Longint), false);
+            (Some(SvDataType::Longint), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Integer(_))) => {
-            return (Some(SvDataType::Integer), false);
+            (Some(SvDataType::Integer), false)
         }
         Some(RefNode::IntegerAtomType(sv_parser::IntegerAtomType::Time(_))) => {
-            return (Some(SvDataType::Time), false);
+            (Some(SvDataType::Time), false)
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Shortreal(_))) => {
-            return (Some(SvDataType::Shortreal), false);
+            (Some(SvDataType::Shortreal), false)
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Realtime(_))) => {
-            return (Some(SvDataType::Realtime), false);
+            (Some(SvDataType::Realtime), false)
         }
         Some(RefNode::NonIntegerType(sv_parser::NonIntegerType::Real(_))) => {
-            return (Some(SvDataType::Real), false);
+            (Some(SvDataType::Real), false)
         }
-        Some(RefNode::ClassType(_)) => return (Some(SvDataType::Class), false),
-        Some(RefNode::TypeReference(_)) => return (Some(SvDataType::TypeRef), false),
+        Some(RefNode::ClassType(_)) => (Some(SvDataType::Class), false),
+        Some(RefNode::TypeReference(_)) => (Some(SvDataType::TypeRef), false),
         _ => {
             if common_data != None {
                 match unwrap_node!(common_data.clone(), DataType) {
@@ -438,12 +438,12 @@ fn port_parameter_datatype_ansi(
                     }
                 }
             }
-        }
-    }
 
-    match param_type {
-        SvParamType::Parameter => ret,
-        SvParamType::LocalParam => (ret.0, false),
+            match param_type {
+                SvParamType::Parameter => ret,
+                SvParamType::LocalParam => (ret.0, false),
+            }
+        }
     }
 }
 
@@ -524,35 +524,35 @@ fn port_parameter_signedness_ansi(
 
                             match base {
                                 Some(RefNode::BinaryBase(_)) => {
-                                    if base_token == "'sb" {
-                                        ret = (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sb" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        ret = (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::HexBase(_)) => {
-                                    if base_token == "'sh" {
-                                        ret = (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sh" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        ret = (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::OctalBase(_)) => {
-                                    if base_token == "'so" {
-                                        ret = (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'so" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        ret = (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
-                                    if base_token == "'sd" {
-                                        ret = (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sd" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        ret = (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 _ => unreachable!(),

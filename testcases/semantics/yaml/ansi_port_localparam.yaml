@@ -28,7 +28,7 @@ modules:
             - "0"
         unpacked_dimensions: []
         comment: ~
-      - identifier: e
+      - identifier: c
         expression: "7.5"
         paramtype: LocalParam
         datatype: Real
@@ -40,7 +40,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: f
+      - identifier: d
         expression: "5"
         paramtype: LocalParam
         datatype: Logic
@@ -52,7 +52,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: g
+      - identifier: e
         expression: "\"hello\""
         paramtype: LocalParam
         datatype: String
