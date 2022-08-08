@@ -12,7 +12,8 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*post*/
+        comment:
+          - /*post*/
       - identifier: b
         direction: Inout
         datakind: Net
@@ -24,7 +25,9 @@ modules:
           - - FOO-1
             - "0"
         unpacked_dimensions: []
-        comment: /*pd*//*post*/
+        comment:
+          - /*pd*/
+          - /*post*/
       - identifier: c
         direction: Inout
         datakind: Net
@@ -40,7 +43,11 @@ modules:
             - ~
           - - FOO-1
             - "0"
-        comment: /*kind*//*pd*//*ud*//*post*/
+        comment:
+          - /*kind*/
+          - /*pd*/
+          - /*ud*/
+          - /*post*/
       - identifier: d
         direction: Inout
         datakind: Net
@@ -50,7 +57,8 @@ modules:
         signedness: Signed
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*post*/
+        comment:
+          - /*post*/
       - identifier: e
         direction: Inout
         datakind: Net
@@ -62,7 +70,9 @@ modules:
         unpacked_dimensions:
           - - FOO-1
             - "0"
-        comment: /*ty*//*post*/
+        comment:
+          - /*ty*/
+          - /*post*/
       - identifier: f
         direction: Inout
         datakind: Net
@@ -72,7 +82,8 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*post*/
+        comment:
+          - /*post*/
       - identifier: g
         direction: Inout
         datakind: Net
@@ -82,7 +93,9 @@ modules:
         signedness: ~
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*ty*//*post*/
+        comment:
+          - /*ty*/
+          - /*post*/
       - identifier: h
         direction: Inout
         datakind: Net
@@ -92,7 +105,10 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*sign*/
+          - /*post*/
       - identifier: i
         direction: Inout
         datakind: Net
@@ -102,7 +118,12 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*kind*//*ty*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*kind*/
+          - /*ty*/
+          - /*sign*/
+          - /*post*/
       - identifier: j
         direction: Inout
         datakind: Net
@@ -118,6 +139,13 @@ modules:
             - ~
           - - FOO-1
             - "0"
-        comment: /*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/
+        comment:
+          - /*dir*/
+          - /*kind*/
+          - /*ty*/
+          - /*sign*/
+          - /*pd*/
+          - /*ud*/
+          - /*post*/
     filepath: testcases/semantics/sv/ansi_port_comment_keyword0.sv
 packages: []
