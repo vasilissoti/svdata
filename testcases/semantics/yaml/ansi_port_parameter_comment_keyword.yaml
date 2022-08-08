@@ -62,10 +62,10 @@ modules:
         expression: "5"
         paramtype: LocalParam
         datatype: Logic
-        datatype_overridable: true
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
@@ -80,7 +80,7 @@ modules:
         datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []

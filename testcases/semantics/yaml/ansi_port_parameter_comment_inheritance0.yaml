@@ -6,10 +6,10 @@ modules:
         expression: "(8'sb10101010+\"hello\")"
         paramtype: LocalParam
         datatype: Logic
-        datatype_overridable: true
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
@@ -19,10 +19,10 @@ modules:
         expression: "3"
         paramtype: LocalParam
         datatype: Logic
-        datatype_overridable: true
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
