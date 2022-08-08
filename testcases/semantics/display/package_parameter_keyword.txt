@@ -1,0 +1,69 @@
+Package:
+  Identifier: TestPackage
+  Filepath: testcases/semantics/sv/package_parameter_keyword.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b
+    Expression: 4'b1000
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: e
+    Expression: 7.5
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 40
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+

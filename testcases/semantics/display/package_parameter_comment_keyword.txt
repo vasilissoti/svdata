@@ -1,0 +1,82 @@
+Package:
+  Identifier: TestPackage
+  Filepath: testcases/semantics/sv/package_parameter_comment_keyword.sv
+  Parameter: 
+    Identifier: a
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*post*//*eq/val*//* post */
+  Parameter: 
+    Identifier: b
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* id/eq *//*eq/val*//* post */
+  Parameter: 
+    Identifier: c
+    Expression: 3
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*post*//*eq/val*//* post */
+  Parameter: 
+    Identifier: d
+    Expression: 2
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*id/eq*//*eq/val*//*post*/
+  Parameter: 
+    Identifier: e
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /* id/eq *//*eq/val*//* post */
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: /*id/eq*//*eq/val*//*post*/
+

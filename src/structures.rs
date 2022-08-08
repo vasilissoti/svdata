@@ -17,7 +17,9 @@ pub struct SvModuleDeclaration {
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPackageDeclaration {
+    pub identifier: String,
     pub parameters: Vec<SvParameter>,
+    pub filepath: String,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -130,6 +132,9 @@ impl fmt::Display for SvData {
         for module in self.modules.clone() {
             write!(f, "{}", module)?;
         }
+        for package in self.packages.clone() {
+            write!(f, "{}", package)?;
+        }
 
         write!(f, "")
     }
@@ -144,6 +149,20 @@ impl fmt::Display for SvModuleDeclaration {
         for port in self.ports.clone() {
             write!(f, "{}", port)?;
         }
+
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
+        }
+
+        writeln!(f, "")
+    }
+}
+
+impl fmt::Display for SvPackageDeclaration {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "Package:")?;
+        writeln!(f, "  Identifier: {}", self.identifier)?;
+        writeln!(f, "  Filepath: {}", self.filepath)?;
 
         for param in self.parameters.clone() {
             write!(f, "{}", param)?;

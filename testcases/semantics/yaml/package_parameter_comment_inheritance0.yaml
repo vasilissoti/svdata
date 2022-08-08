@@ -1,0 +1,66 @@
+---
+modules: []
+packages:
+  - identifier: TestPackage
+    parameters:
+      - identifier: a
+        expression: "(8'sb10101010+\"hello\")"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 404
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /* A0 */
+      - identifier: b
+        expression: "3"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: c
+        expression: "1"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: /* C0 */
+      - identifier: d
+        expression: "6"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: e
+        expression: "3"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/package_parameter_comment_inheritance0.sv
