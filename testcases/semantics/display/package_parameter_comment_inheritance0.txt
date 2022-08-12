@@ -13,7 +13,7 @@ Package:
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* A0 */
+    Comment: ["/* A0 */"]
   Parameter: 
     Identifier: b
     Expression: 3
@@ -39,7 +39,7 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* C0 */
+    Comment: ["/* C0 */"]
   Parameter: 
     Identifier: d
     Expression: 6

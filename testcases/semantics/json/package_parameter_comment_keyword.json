@@ -16,7 +16,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*post*//*eq/val*//* post */"
+          "comment": [
+            "/*post*/",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "b",
@@ -30,7 +34,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* id/eq *//*eq/val*//* post */"
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "c",
@@ -44,7 +52,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*post*//*eq/val*//* post */"
+          "comment": [
+            "/*post*/",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "d",
@@ -58,7 +70,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*id/eq*//*eq/val*//*post*/"
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "e",
@@ -72,7 +88,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* id/eq *//*eq/val*//* post */"
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "f",
@@ -86,7 +106,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*id/eq*//*eq/val*//*post*/"
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
         }
       ],
       "filepath": "testcases/semantics/sv/package_parameter_comment_keyword.sv"

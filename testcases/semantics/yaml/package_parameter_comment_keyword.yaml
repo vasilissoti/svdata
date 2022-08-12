@@ -14,7 +14,10 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*post*//*eq/val*//* post */
+        comment:
+          - /*post*/
+          - /*eq/val*/
+          - /* post */
       - identifier: b
         expression: "5"
         paramtype: LocalParam
@@ -26,7 +29,10 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /* id/eq *//*eq/val*//* post */
+        comment:
+          - /* id/eq */
+          - /*eq/val*/
+          - /* post */
       - identifier: c
         expression: "3"
         paramtype: LocalParam
@@ -38,7 +44,10 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*post*//*eq/val*//* post */
+        comment:
+          - /*post*/
+          - /*eq/val*/
+          - /* post */
       - identifier: d
         expression: "2"
         paramtype: LocalParam
@@ -50,7 +59,10 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*id/eq*//*eq/val*//*post*/
+        comment:
+          - /*id/eq*/
+          - /*eq/val*/
+          - /*post*/
       - identifier: e
         expression: "5"
         paramtype: LocalParam
@@ -62,7 +74,10 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /* id/eq *//*eq/val*//* post */
+        comment:
+          - /* id/eq */
+          - /*eq/val*/
+          - /* post */
       - identifier: f
         expression: "5"
         paramtype: LocalParam
@@ -74,5 +89,8 @@ packages:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*id/eq*//*eq/val*//*post*/
+        comment:
+          - /*id/eq*/
+          - /*eq/val*/
+          - /*post*/
     filepath: testcases/semantics/sv/package_parameter_comment_keyword.sv
