@@ -272,34 +272,28 @@ impl SvPrimaryLiteralIntegral {
     pub fn inv(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
 
-        if !self.contains_xz() {
-            for x in 0..ret.data_01.len() {
-                ret.data_01[x] = !ret.data_01[x];
-            }
-
-            ret._truncate(ret.size);
+        let first_elmnt_bits: u32;
+        if ret.size % usize::BITS as usize == 0 {
+            first_elmnt_bits = usize::BITS;
         } else {
-            let first_elmnt_bits: u32;
-            if ret.size % usize::BITS as usize == 0 {
-                first_elmnt_bits = usize::BITS;
-            } else {
-                first_elmnt_bits = ret.size as u32 % usize::BITS;
-            }
-            let remaining_bits = usize::BITS - first_elmnt_bits;
+            first_elmnt_bits = ret.size as u32 % usize::BITS;
+        }
+        let remaining_bits = usize::BITS - first_elmnt_bits;
 
-            for _x in 0..ret.size {
-                if ret.data_xz.as_ref().unwrap()[0].leading_zeros() == remaining_bits {
-                    if ret.data_01[0].leading_zeros() == remaining_bits {
-                        ret.data_01[0] = ret.data_01[0] - 2usize.pow(first_elmnt_bits - 1);
-                    }
-                } else if ret.data_01[0].leading_zeros() == remaining_bits {
+        for _x in 0..ret.size {
+            if ret.is_4state()
+                && (ret.data_xz.as_ref().unwrap()[0].leading_zeros() == remaining_bits)
+            {
+                if ret.data_01[0].leading_zeros() == remaining_bits {
                     ret.data_01[0] = ret.data_01[0] - 2usize.pow(first_elmnt_bits - 1);
-                } else {
-                    ret.data_01[0] = ret.data_01[0] + 2usize.pow(first_elmnt_bits - 1);
                 }
-
-                ret = ret.ror(1);
+            } else if ret.data_01[0].leading_zeros() == remaining_bits {
+                ret.data_01[0] = ret.data_01[0] - 2usize.pow(first_elmnt_bits - 1);
+            } else {
+                ret.data_01[0] = ret.data_01[0] + 2usize.pow(first_elmnt_bits - 1);
             }
+
+            ret = ret.ror(1);
         }
 
         ret
