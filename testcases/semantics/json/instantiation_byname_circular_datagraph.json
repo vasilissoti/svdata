@@ -1,0 +1,249 @@
+{
+  "modules": [
+    {
+      "identifier": "m0",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "s_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "w_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "w_out",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [],
+      "filepath": "testcases/semantics/sv/instantiation_byname_circular_datagraph.sv"
+    },
+    {
+      "identifier": "m1",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "c_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "w_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "w_out",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [],
+      "filepath": "testcases/semantics/sv/instantiation_byname_circular_datagraph.sv"
+    },
+    {
+      "identifier": "m2",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "w_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "w_out",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "o_out",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [],
+      "filepath": "testcases/semantics/sv/instantiation_byname_circular_datagraph.sv"
+    },
+    {
+      "identifier": "testmodule",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "o",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "s",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [
+        {
+          "module_name": "m0",
+          "instance_name": "i0",
+          "hierarchy": [],
+          "connections": [
+            [
+              "s_in",
+              "s"
+            ],
+            [
+              "w_in",
+              "w10"
+            ],
+            [
+              "w_out",
+              "w02"
+            ]
+          ]
+        },
+        {
+          "module_name": "m1",
+          "instance_name": "i1",
+          "hierarchy": [],
+          "connections": [
+            [
+              "c_in",
+              "c"
+            ],
+            [
+              "w_in",
+              "c"
+            ],
+            [
+              "w_out",
+              "w10"
+            ]
+          ]
+        },
+        {
+          "module_name": "m1",
+          "instance_name": "i2",
+          "hierarchy": [],
+          "connections": [
+            [
+              "w_in",
+              "w02"
+            ],
+            [
+              "w_out",
+              "w21"
+            ],
+            [
+              "o_out",
+              "o"
+            ]
+          ]
+        }
+      ],
+      "filepath": "testcases/semantics/sv/instantiation_byname_circular_datagraph.sv"
+    }
+  ],
+  "packages": []
+}

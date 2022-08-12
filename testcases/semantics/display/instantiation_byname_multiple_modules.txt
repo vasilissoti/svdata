@@ -2,8 +2,19 @@ Module:
   Identifier: mkM1
   Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   Port: 
-    Identifier: a
-    Direction: Inout
+    Identifier: a_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: a_out
+    Direction: Output
     DataKind: Net
     DataType: Logic
     ClassIdentifier: None
@@ -17,8 +28,19 @@ Module:
   Identifier: mkM2
   Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   Port: 
-    Identifier: b
-    Direction: Inout
+    Identifier: b_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b_out
+    Direction: Output
     DataKind: Net
     DataType: Logic
     ClassIdentifier: None
@@ -31,14 +53,25 @@ Module:
     Module name: mkM1
     Instance name: m1
     Hierarchy: []
-    Connections: [["b0", "b"]]
+    Connections: [["a_in", "b_in"], ["a_out", "b_out"]]
 
 Module:
   Identifier: mkM3
   Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   Port: 
-    Identifier: c
-    Direction: Inout
+    Identifier: c_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: c_out
+    Direction: Output
     DataKind: Net
     DataType: Logic
     ClassIdentifier: None
@@ -51,19 +84,30 @@ Module:
     Module name: mkM1
     Instance name: m1
     Hierarchy: []
-    Connections: [["c0", "c"]]
+    Connections: [["a_in", "c_in"], ["a_out", "w"]]
   Instance: 
     Module name: mkM2
     Instance name: m2
     Hierarchy: []
-    Connections: [["c0", "c"]]
+    Connections: [["b_in", "w"], ["b_out", "c_out"]]
 
 Module:
   Identifier: mkM4
   Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   Port: 
-    Identifier: d
-    Direction: Inout
+    Identifier: d_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: d_out
+    Direction: Output
     DataKind: Net
     DataType: Logic
     ClassIdentifier: None
@@ -76,5 +120,5 @@ Module:
     Module name: mkM3
     Instance name: m3
     Hierarchy: []
-    Connections: [["d0", "d"]]
+    Connections: [["c_in", "d_in"], ["c_out", "d_out"]]
 
