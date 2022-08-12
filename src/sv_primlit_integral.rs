@@ -689,32 +689,44 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
-    pub fn equ(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
-        let mut left_zero: bool = true;
-        for x in &self.data_01 {
-            if x.leading_zeros() != usize::BITS {
-                left_zero = false;
+    pub fn case_eq(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
+        if self.contains_xz() != right_nu.contains_xz() {
+            return false;
+        }
+        if self.contains_xz() && right_nu.contains_xz() {
+            let signedness = self.signed == right_nu.signed;
+            let size = self.size == right_nu.size;
+            let data_01 = self.data_01 == right_nu.data_01;
+            let data_xz = self.data_xz.as_ref().unwrap() == right_nu.data_xz.as_ref().unwrap();
+
+            return signedness && size && data_01 && data_xz;
+        } else {
+            let mut left_zero: bool = true;
+            for x in &self.data_01 {
+                if x.leading_zeros() != usize::BITS {
+                    left_zero = false;
+                }
             }
-        }
 
-        let mut right_zero: bool = true;
-        for y in &right_nu.data_01 {
-            if y.leading_zeros() != usize::BITS {
-                right_zero = false;
+            let mut right_zero: bool = true;
+            for y in &right_nu.data_01 {
+                if y.leading_zeros() != usize::BITS {
+                    right_zero = false;
+                }
             }
-        }
 
-        if left_zero && right_zero {
-            return true;
-        } else if left_zero != right_zero {
-            return false;
-        } else if self < &right_nu {
-            return false;
-        } else if self > &right_nu {
-            return false;
-        }
+            if left_zero && right_zero {
+                return true;
+            } else if left_zero != right_zero {
+                return false;
+            } else if self < &right_nu {
+                return false;
+            } else if self > &right_nu {
+                return false;
+            }
 
-        true
+            true
+        }
     }
 
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
@@ -1188,19 +1200,7 @@ impl PartialOrd for SvPrimaryLiteralIntegral {
 
 impl PartialEq for SvPrimaryLiteralIntegral {
     fn eq(&self, other: &Self) -> bool {
-        if self.contains_xz() != other.contains_xz() {
-            return false;
-        }
-        if self.contains_xz() && other.contains_xz() {
-            let signedness = self.signed == other.signed;
-            let size = self.size == other.size;
-            let data_01 = self.data_01 == other.data_01;
-            let data_xz = self.data_xz.as_ref().unwrap() == other.data_xz.as_ref().unwrap();
-
-            return signedness && size && data_01 && data_xz;
-        } else {
-            self.equ(other.clone())
-        }
+        self.case_eq(other.clone())
     }
 }
 
