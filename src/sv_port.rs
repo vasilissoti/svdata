@@ -57,8 +57,13 @@ pub fn port_parameter_declaration_ansi(
     param_type: &SvParamType,
 ) -> SvParameter {
     let found_assignment = port_parameter_check_default_ansi(p);
-    let (param_datatype, param_datatype_overridable) =
-        port_parameter_datatype_ansi(common_data.clone(), p, syntax_tree, found_assignment);
+    let (param_datatype, param_datatype_overridable) = port_parameter_datatype_ansi(
+        common_data.clone(),
+        p,
+        syntax_tree,
+        found_assignment,
+        param_type,
+    );
     let (param_signedness, param_signedness_overridable) = port_parameter_signedness_ansi(
         common_data.clone(),
         p,
@@ -66,6 +71,7 @@ pub fn port_parameter_declaration_ansi(
         found_assignment,
         param_datatype_overridable.clone(),
         syntax_tree,
+        param_type,
     );
     let mut param_packeddim: Vec<SvPackedDimension> = Vec::new();
     match common_data {
@@ -98,7 +104,13 @@ pub fn port_parameter_declaration_ansi(
         comment: get_comment(RefNode::ParamAssignment(p), syntax_tree),
     };
 
-    port_parameter_syntax_ansi(&ret.datatype, &ret.signedness, &ret.packed_dimensions);
+    port_parameter_syntax_ansi(
+        &ret.datatype,
+        &ret.signedness,
+        &ret.packed_dimensions,
+        param_type,
+        found_assignment,
+    );
 
     ret
 }
@@ -115,6 +127,8 @@ fn port_parameter_syntax_ansi(
     datatype: &Option<SvDataType>,
     signedness: &Option<SvSignedness>,
     packed_dimensions: &Vec<SvPackedDimension>,
+    param_type: &SvParamType,
+    found_assignment: bool,
 ) {
     if !packed_dimensions.is_empty() {
         match datatype {
@@ -136,6 +150,11 @@ fn port_parameter_syntax_ansi(
             _ => (),
         },
 
+        _ => (),
+    }
+
+    match (param_type, found_assignment) {
+        (SvParamType::LocalParam, false) => panic!("Localparams must have a default value!"),
         _ => (),
     }
 }
@@ -311,8 +330,13 @@ fn port_parameter_datatype_ansi(
     p: &sv_parser::ParamAssignment,
     syntax_tree: &SyntaxTree,
     found_assignment: bool,
+    param_type: &SvParamType,
 ) -> (Option<SvDataType>, bool) {
     let datatype: Option<RefNode>;
+    let mut ret: (Option<SvDataType>, bool) = match param_type {
+        SvParamType::Parameter => (None, true),
+        SvParamType::LocalParam => (Some(SvDataType::Logic), false),
+    };
 
     match common_data {
         Some(_) => {
@@ -392,27 +416,32 @@ fn port_parameter_datatype_ansi(
             if found_assignment {
                 if parameter_resolver_needed_ansi(p) {
                     match unwrap_node!(p, BinaryOperator) {
-                        Some(_) => return (Some(parameter_datatype_resolver_ansi(p)), true),
-                        _ => return (Some(SvDataType::Unsupported), true),
+                        Some(_) => ret = (Some(parameter_datatype_resolver_ansi(p)), true),
+                        _ => ret = (Some(SvDataType::Unsupported), true),
                     }
                 } else {
                     let implicit_type =
                         unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral, StringLiteral);
                     match implicit_type {
                         Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
-                            return (Some(SvDataType::Logic), true)
+                            ret = (Some(SvDataType::Logic), true);
                         }
                         Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
-                            return (Some(SvDataType::Real), true)
+                            ret = (Some(SvDataType::Real), true);
                         }
-                        Some(RefNode::TimeLiteral(_)) => return (Some(SvDataType::Time), true),
-                        Some(RefNode::UnbasedUnsizedLiteral(_)) => (Some(SvDataType::Bit), true),
-                        Some(RefNode::StringLiteral(_)) => (Some(SvDataType::String), true),
+                        Some(RefNode::TimeLiteral(_)) => ret = (Some(SvDataType::Time), true),
+                        Some(RefNode::UnbasedUnsizedLiteral(_)) => {
+                            ret = (Some(SvDataType::Bit), true)
+                        }
+                        Some(RefNode::StringLiteral(_)) => ret = (Some(SvDataType::String), true),
                         _ => unreachable!(),
                     }
                 }
-            } else {
-                return (None, true);
+            }
+
+            match param_type {
+                SvParamType::Parameter => ret,
+                SvParamType::LocalParam => (ret.0, false),
             }
         }
     }
@@ -423,9 +452,12 @@ fn port_parameter_signedness_ansi(
     p: &sv_parser::ParamAssignment,
     datatype: &Option<SvDataType>,
     found_assignment: bool,
-    datatype_status: bool,
+    datatype_overridable: bool,
     syntax_tree: &SyntaxTree,
+    param_type: &SvParamType,
 ) -> (Option<SvSignedness>, bool) {
+    let ret: (Option<SvSignedness>, bool);
+
     match m {
         Some(_) => {
             let signedness = unwrap_node!(m.clone().unwrap(), Signing);
@@ -447,30 +479,30 @@ fn port_parameter_signedness_ansi(
         Some(SvDataType::Class)
         | Some(SvDataType::String)
         | Some(SvDataType::Real)
-        | Some(SvDataType::Time) => match datatype_status {
-            true => return (None, true),
-            false => return (None, false),
+        | Some(SvDataType::Time) => match datatype_overridable {
+            true => ret = (None, true),
+            false => ret = (None, false),
         },
 
         Some(SvDataType::Shortint)
         | Some(SvDataType::Int)
         | Some(SvDataType::Longint)
         | Some(SvDataType::Byte)
-        | Some(SvDataType::Integer) => (Some(SvSignedness::Signed), true),
+        | Some(SvDataType::Integer) => ret = (Some(SvSignedness::Signed), true),
 
         Some(SvDataType::Logic) => {
             if !found_assignment {
-                return (Some(SvSignedness::Unsigned), true);
+                ret = (Some(SvSignedness::Unsigned), true);
             } else {
                 if parameter_resolver_needed_ansi(p) {
                     match unwrap_node!(p, BinaryOperator) {
                         Some(_) => {
-                            return (
+                            ret = (
                                 parameter_signedness_resolver_ansi(p, datatype, syntax_tree),
                                 true,
                             )
                         }
-                        _ => return (Some(SvSignedness::Unsupported), true),
+                        _ => ret = (Some(SvSignedness::Unsupported), true),
                     }
                 } else {
                     let integral_type =
@@ -478,7 +510,7 @@ fn port_parameter_signedness_ansi(
                     match integral_type {
                         Some(RefNode::DecimalNumber(sv_parser::DecimalNumber::UnsignedNumber(
                             _,
-                        ))) => return (Some(SvSignedness::Signed), true),
+                        ))) => ret = (Some(SvSignedness::Signed), true),
                         _ => {
                             let base = unwrap_node!(
                                 integral_type.unwrap(),
@@ -492,35 +524,35 @@ fn port_parameter_signedness_ansi(
 
                             match base {
                                 Some(RefNode::BinaryBase(_)) => {
-                                    if base_token == "'sb" {
-                                        return (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sb" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::HexBase(_)) => {
-                                    if base_token == "'sh" {
-                                        return (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sh" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::OctalBase(_)) => {
-                                    if base_token == "'so" {
-                                        return (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'so" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
-                                    if base_token == "'sd" {
-                                        return (Some(SvSignedness::Signed), true);
+                                    ret = if base_token == "'sd" {
+                                        (Some(SvSignedness::Signed), true)
                                     } else {
-                                        return (Some(SvSignedness::Unsigned), true);
-                                    }
+                                        (Some(SvSignedness::Unsigned), true)
+                                    };
                                 }
 
                                 _ => unreachable!(),
@@ -532,10 +564,15 @@ fn port_parameter_signedness_ansi(
         }
 
         _ => match datatype {
-            Some(SvDataType::Unsupported) => (Some(SvSignedness::Unsupported), true),
-            None => (None, true),
-            _ => (Some(SvSignedness::Unsigned), true),
+            Some(SvDataType::Unsupported) => ret = (Some(SvSignedness::Unsupported), true),
+            None => ret = (None, true),
+            _ => ret = (Some(SvSignedness::Unsigned), true),
         },
+    }
+
+    match param_type {
+        SvParamType::Parameter => ret,
+        SvParamType::LocalParam => (ret.0, false),
     }
 }
 
@@ -630,19 +667,7 @@ fn port_parameter_bits_ansi(
                             _ => {
                                 return Some(32);
 
-                                // let integral_type =
-                                // unwrap_node!(p, DecimalNumber, BinaryNumber, HexNumber, OctalNumber);
-
-                                // match integral_type {
-
-                                //     Some(RefNode::DecimalNumber(_)) => {
-                                //         let base = unwrap_node!(integral_type, UnsignedNumber, DecimalNumberBaseUnsigned);
-
-                                //         match base {
-
-                                //         }
-                                //     }
-                                // }
+                                // TODO
                             }
                         }
                     }

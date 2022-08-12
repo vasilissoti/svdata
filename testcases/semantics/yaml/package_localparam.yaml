@@ -1,6 +1,7 @@
 ---
-modules:
-  - identifier: TestModule
+modules: []
+packages:
+  - identifier: TestPackage
     parameters:
       - identifier: a
         expression: "8'sb10101010"
@@ -28,7 +29,7 @@ modules:
             - "0"
         unpacked_dimensions: []
         comment: ~
-      - identifier: c
+      - identifier: e
         expression: "7.5"
         paramtype: LocalParam
         datatype: Real
@@ -40,7 +41,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: d
+      - identifier: f
         expression: "5"
         paramtype: LocalParam
         datatype: Logic
@@ -52,7 +53,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: e
+      - identifier: g
         expression: "\"hello\""
         paramtype: LocalParam
         datatype: String
@@ -64,6 +65,4 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-    ports: []
-    filepath: testcases/semantics/sv/ansi_port_localparam.sv
-packages: []
+    filepath: testcases/semantics/sv/package_localparam.sv

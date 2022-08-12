@@ -1,6 +1,6 @@
-Module:
-  Identifier: TestModule
-  Filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance0.sv
+Package:
+  Identifier: TestPackage
+  Filepath: testcases/semantics/sv/package_parameter_comment_inheritance0.sv
   Parameter: 
     Identifier: a
     Expression: (8'sb10101010+"hello")
@@ -30,12 +30,12 @@ Module:
   Parameter: 
     Identifier: c
     Expression: 1
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
@@ -43,26 +43,26 @@ Module:
   Parameter: 
     Identifier: d
     Expression: 6
-    ParameterType: Parameter
+    ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
     Identifier: e
-    Expression: None
-    ParameterType: Parameter
-    DataType: None
-    DataTypeOverridable: true
+    Expression: 3
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: None
-    SignednessOverridable: true
-    NumBits: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
