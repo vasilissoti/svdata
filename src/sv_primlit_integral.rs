@@ -1108,19 +1108,70 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "NumBits: {}", self.size)?;
         writeln!(f, "Signed: {}", self.signed)?;
-        write!(f, "Data_01: ")?;
+        writeln!(f, "4State: {}", self.is_4state())?;
 
-        for x in 0..self.data_01.len() {
-            writeln!(f, "{:b}", self.data_01[x])?;
+        let mut string_vec: Vec<String> = Vec::new();
+        let mut s: String = String::new();
+        let mut mod_primlit = self.clone();
+        let first_elmnt_bits: u32;
+
+        if mod_primlit.size % usize::BITS as usize == 0 {
+            first_elmnt_bits = usize::BITS;
+        } else {
+            first_elmnt_bits = mod_primlit.size as u32 % usize::BITS;
+        }
+        let remaining_bits = usize::BITS - first_elmnt_bits;
+
+        for _x in 0..first_elmnt_bits {
+            if mod_primlit.is_4state()
+                && (mod_primlit.data_xz.as_ref().unwrap()[0].leading_zeros() == remaining_bits)
+            {
+                if mod_primlit.data_01[0].leading_zeros() == remaining_bits {
+                    s.push('Z');
+                } else {
+                    s.push('X');
+                }
+            } else if mod_primlit.data_01[0].leading_zeros() == remaining_bits {
+                s.push('1');
+            } else {
+                s.push('0');
+            }
+
+            mod_primlit = mod_primlit.rol(1);
         }
 
-        write!(f, "Data_XZ: ")?;
-        if !self.is_4state() {
-            writeln!(f, "None")?;
-        } else {
-            for x in self.data_xz.as_ref().unwrap() {
-                writeln!(f, "{:b}", x)?;
+        string_vec.push(s);
+
+        if self.data_01.len() > 1 {
+            for x in 1..self.data_01.len() {
+                let mut mod_primlit = self.clone();
+                let mut s: String = String::new();
+
+                for _y in 0..usize::BITS {
+                    if mod_primlit.is_4state()
+                        && (mod_primlit.data_xz.as_ref().unwrap()[x].leading_zeros() == 0)
+                    {
+                        if mod_primlit.data_01[x].leading_zeros() == 0 {
+                            s.push('Z');
+                        } else {
+                            s.push('X');
+                        }
+                    } else if mod_primlit.data_01[x].leading_zeros() == 0 {
+                        s.push('1');
+                    } else {
+                        s.push('0');
+                    }
+
+                    mod_primlit = mod_primlit.rol(1);
+                }
+
+                string_vec.push(s);
             }
+        }
+
+        write!(f, "Data: ")?;
+        for x in string_vec {
+            writeln!(f, "{}", x)?;
         }
 
         write!(f, "")

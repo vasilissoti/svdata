@@ -1,4 +1,4 @@
 NumBits: 5
 Signed: true
-Data_01: 1100
-Data_XZ: None
+4State: false
+Data: 01100
