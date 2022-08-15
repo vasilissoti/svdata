@@ -14,6 +14,6 @@ let b = SvPrimaryLiteralIntegral {
 
 let c: bool = a.case_eq(b.clone());
 
-assert_eq!(c, false);
+assert_eq!(c, true);
 
 let actual_string = format!("{}", c);

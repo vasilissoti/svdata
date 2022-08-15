@@ -527,26 +527,11 @@ impl SvPrimaryLiteralIntegral {
 
         if left_nu.contains_xz() || right_nu.contains_xz() {
             return false;
-        }
+        } else if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
 
-        if left_nu.signed != right_nu.signed {
-            if left_nu.signed {
-                if left_nu.is_negative() {
-                    return true;
-                } else {
-                    left_nu.signed = false;
-                    left_nu._minimum_width();
-                    return left_nu.lt(right_nu.clone());
-                }
-            } else {
-                if right_nu.is_negative() {
-                    return false;
-                } else {
-                    right_nu.signed = false;
-                    right_nu._minimum_width();
-                    return left_nu.lt(right_nu.clone());
-                }
-            }
+            return left_nu.lt(right_nu.clone());
         } else {
             if left_nu.signed {
                 let left_nu_neg: bool;
@@ -614,26 +599,11 @@ impl SvPrimaryLiteralIntegral {
 
         if left_nu.contains_xz() || right_nu.contains_xz() {
             return false;
-        }
+        } else if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
 
-        if left_nu.signed != right_nu.signed {
-            if left_nu.signed {
-                if left_nu.is_negative() {
-                    return false;
-                } else {
-                    left_nu.signed = false;
-                    left_nu._minimum_width();
-                    return left_nu.gt(right_nu.clone());
-                }
-            } else {
-                if right_nu.is_negative() {
-                    return true;
-                } else {
-                    right_nu.signed = false;
-                    right_nu._minimum_width();
-                    return left_nu.gt(right_nu.clone());
-                }
-            }
+            return left_nu.gt(right_nu.clone());
         } else {
             if left_nu.signed {
                 let left_nu_neg: bool;
@@ -696,20 +666,26 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
-    pub fn case_eq(&self, right_nu: SvPrimaryLiteralIntegral) -> bool {
-        if self.contains_xz() != right_nu.contains_xz() {
+    pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+        let mut left_nu = self.clone();
+
+        if left_nu.contains_xz() != right_nu.contains_xz() {
             return false;
-        }
-        if self.contains_xz() && right_nu.contains_xz() {
-            let signedness = self.signed == right_nu.signed;
-            let size = self.size == right_nu.size;
-            let data_01 = self.data_01 == right_nu.data_01;
-            let data_xz = self.data_xz.as_ref().unwrap() == right_nu.data_xz.as_ref().unwrap();
+        } else if left_nu.contains_xz() && right_nu.contains_xz() {
+            let signedness = left_nu.signed == right_nu.signed;
+            let size = left_nu.size == right_nu.size;
+            let data_01 = left_nu.data_01 == right_nu.data_01;
+            let data_xz = left_nu.data_xz.as_ref().unwrap() == right_nu.data_xz.as_ref().unwrap();
 
             return signedness && size && data_01 && data_xz;
+        } else if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
+
+            return left_nu.case_eq(right_nu.clone());
         } else {
             let mut left_zero: bool = true;
-            for x in &self.data_01 {
+            for x in &left_nu.data_01 {
                 if x.leading_zeros() != usize::BITS {
                     left_zero = false;
                 }
@@ -726,13 +702,24 @@ impl SvPrimaryLiteralIntegral {
                 return true;
             } else if left_zero != right_zero {
                 return false;
-            } else if self.lt(right_nu.clone()) {
-                return false;
-            } else if self.gt(right_nu.clone()) {
-                return false;
+            } else {
+                left_nu._minimum_width();
+                right_nu._minimum_width();
+
+                if left_nu.size == right_nu.size {
+                    let mut eq_found: bool = true;
+                    for x in 0..left_nu.data_01.len() {
+                        if left_nu.data_01[x] != right_nu.data_01[x] {
+                            eq_found = false;
+                        }
+                    }
+                    if eq_found {
+                        return true;
+                    }
+                }
             }
 
-            true
+            false
         }
     }
 
