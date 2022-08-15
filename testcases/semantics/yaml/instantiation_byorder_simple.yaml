@@ -59,8 +59,8 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_name: mydesign
-        instance_name: d0
+      - module_identifier: mydesign
+        hierarchical_instance: d0
         hierarchy: []
         connections:
           - - "a[0]"

@@ -115,8 +115,8 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_name: fulladd
-        instance_name: f0
+      - module_identifier: fulladd
+        hierarchical_instance: f0
         hierarchy: []
         connections:
           - - s
@@ -129,8 +129,8 @@ modules:
             - "b[0]"
           - - c_in
             - cin
-      - module_name: fulladd
-        instance_name: f1
+      - module_identifier: fulladd
+        hierarchical_instance: f1
         hierarchy: []
         connections:
           - - s
@@ -143,8 +143,8 @@ modules:
             - "b[1]"
           - - c_in
             - c1
-      - module_name: fulladd
-        instance_name: f2
+      - module_identifier: fulladd
+        hierarchical_instance: f2
         hierarchy: []
         connections:
           - - s
@@ -157,8 +157,8 @@ modules:
             - "b[2]"
           - - c_in
             - c2
-      - module_name: fulladd
-        instance_name: f3
+      - module_identifier: fulladd
+        hierarchical_instance: f3
         hierarchy: []
         connections:
           - - s

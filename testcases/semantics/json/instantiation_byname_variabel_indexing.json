@@ -55,8 +55,8 @@
       ],
       "instances": [
         {
-          "module_name": "bar",
-          "instance_name": "test0",
+          "module_identifier": "bar",
+          "hierarchical_instance": "test0",
           "hierarchy": [],
           "connections": [
             [
@@ -70,8 +70,8 @@
           ]
         },
         {
-          "module_name": "bar",
-          "instance_name": "test1",
+          "module_identifier": "bar",
+          "hierarchical_instance": "test1",
           "hierarchy": [],
           "connections": [
             [

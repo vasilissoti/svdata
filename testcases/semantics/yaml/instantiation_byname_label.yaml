@@ -44,24 +44,24 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_name: bar
-        instance_name: u_bar0
+      - module_identifier: bar
+        hierarchical_instance: u_bar0
         hierarchy: []
         connections:
           - - a
             - a0
           - - b
             - b0
-      - module_name: bar
-        instance_name: u_bar1
+      - module_identifier: bar
+        hierarchical_instance: u_bar1
         hierarchy: []
         connections:
           - - a
             - a1
           - - b
             - b1
-      - module_name: bar
-        instance_name: u_bar2
+      - module_identifier: bar
+        hierarchical_instance: u_bar2
         hierarchy:
           - la_FOO
         connections:

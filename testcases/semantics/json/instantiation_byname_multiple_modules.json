@@ -63,8 +63,8 @@
       ],
       "instances": [
         {
-          "module_name": "mkM1",
-          "instance_name": "m1",
+          "module_identifier": "mkM1",
+          "hierarchical_instance": "m1",
           "hierarchy": [],
           "connections": [
             [
@@ -111,8 +111,8 @@
       ],
       "instances": [
         {
-          "module_name": "mkM1",
-          "instance_name": "m1",
+          "module_identifier": "mkM1",
+          "hierarchical_instance": "m1",
           "hierarchy": [],
           "connections": [
             [
@@ -126,8 +126,8 @@
           ]
         },
         {
-          "module_name": "mkM2",
-          "instance_name": "m2",
+          "module_identifier": "mkM2",
+          "hierarchical_instance": "m2",
           "hierarchy": [],
           "connections": [
             [
@@ -174,8 +174,8 @@
       ],
       "instances": [
         {
-          "module_name": "mkM3",
-          "instance_name": "m3",
+          "module_identifier": "mkM3",
+          "hierarchical_instance": "m3",
           "hierarchy": [],
           "connections": [
             [
