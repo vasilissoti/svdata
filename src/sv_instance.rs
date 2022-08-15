@@ -12,7 +12,7 @@ pub fn module_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxT
     ret
 }
 
-// Find module name for the instantiation (mother module)
+// Find module identifier for the instantiation (parent module)
 fn inst_module_identifier(
     _p: &sv_parser::ModuleInstantiation,
     _syntax_tree: &SyntaxTree,
@@ -20,7 +20,7 @@ fn inst_module_identifier(
     String::new()
 }
 
-// Find name of the instantiation (daughter module)
+// Find hierarchical instance for the instantiation (child module)
 fn inst_hierarchical_instance(
     _p: &sv_parser::ModuleInstantiation,
     _syntax_tree: &SyntaxTree,
@@ -28,7 +28,7 @@ fn inst_hierarchical_instance(
     String::new()
 }
 
-// Find hierarchy for the instantiation (only finds label for the time being)
+// Find hierarchy for the instantiation
 fn inst_hierarchy(_p: &sv_parser::ModuleInstantiation, _syntax_tree: &SyntaxTree) -> Vec<String> {
     Vec::new()
 }
