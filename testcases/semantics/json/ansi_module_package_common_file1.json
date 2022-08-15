@@ -104,6 +104,7 @@
         }
       ],
       "ports": [],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_module_package_common_file1.sv"
     },
     {
@@ -243,6 +244,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_module_package_common_file1.sv"
     }
   ],

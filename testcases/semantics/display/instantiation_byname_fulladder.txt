@@ -1,0 +1,138 @@
+Module:
+  Identifier: fulladd
+  Filepath: testcases/semantics/sv/instantiation_byname_fulladder.sv
+  Port: 
+    Identifier: s
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: c_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: a_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: c_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Module:
+  Identifier: fulladder_4bit
+  Filepath: testcases/semantics/sv/instantiation_byname_fulladder.sv
+  Port: 
+    Identifier: sum
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: cout
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: a
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: cin
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+

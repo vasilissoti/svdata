@@ -75,5 +75,6 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_input_net_signed.sv
 packages: []

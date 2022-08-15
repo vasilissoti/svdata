@@ -1,0 +1,124 @@
+Module:
+  Identifier: mkM1
+  Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  Port: 
+    Identifier: a_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: a_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Module:
+  Identifier: mkM2
+  Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  Port: 
+    Identifier: b_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+
+Module:
+  Identifier: mkM3
+  Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  Port: 
+    Identifier: c_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: c_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+
+Module:
+  Identifier: mkM4
+  Filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
+  Port: 
+    Identifier: d_in
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: d_out
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Instance: 
+    Module identifier: 
+    Hierarchical instance: 
+    Hierarchy: []
+    Connections: []
+

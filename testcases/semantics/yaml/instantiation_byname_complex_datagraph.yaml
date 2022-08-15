@@ -1,0 +1,347 @@
+---
+modules:
+  - identifier: M1
+    parameters: []
+    ports:
+      - identifier: in1_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out1_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M2
+    parameters: []
+    ports:
+      - identifier: in2_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in2_2
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out2_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M3
+    parameters: []
+    ports:
+      - identifier: in3_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in3_2
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in3_3
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out3_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M4
+    parameters: []
+    ports:
+      - identifier: in4_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out4_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out4_2
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M5
+    parameters: []
+    ports:
+      - identifier: in5_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out5_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out5_2
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M6
+    parameters: []
+    ports:
+      - identifier: in6_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in6_2
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out6_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M7
+    parameters: []
+    ports:
+      - identifier: in7_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in7_2
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out7_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+  - identifier: M8
+    parameters: []
+    ports:
+      - identifier: in8_1
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: in8_2
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out8_1
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out8_2
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: out8_3
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
+packages: []

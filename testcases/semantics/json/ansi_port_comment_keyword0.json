@@ -201,6 +201,7 @@
           ]
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_comment_keyword0.sv"
     }
   ],

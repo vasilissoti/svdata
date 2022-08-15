@@ -1,0 +1,159 @@
+---
+modules:
+  - identifier: m0
+    parameters: []
+    ports:
+      - identifier: s_in
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: w_in
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: w_out
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_circular_datagraph.sv
+  - identifier: m1
+    parameters: []
+    ports:
+      - identifier: c_in
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: w_in
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: w_out
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_circular_datagraph.sv
+  - identifier: m2
+    parameters: []
+    ports:
+      - identifier: w_in
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: w_out
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: o_out
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byname_circular_datagraph.sv
+  - identifier: testmodule
+    parameters: []
+    ports:
+      - identifier: o
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: s
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: c
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byname_circular_datagraph.sv
+packages: []

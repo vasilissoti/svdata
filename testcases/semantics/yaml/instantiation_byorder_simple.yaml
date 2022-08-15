@@ -1,0 +1,67 @@
+---
+modules:
+  - identifier: mydesign
+    parameters: []
+    ports:
+      - identifier: x
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: y
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: z
+        direction: Input
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: o
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances: []
+    filepath: testcases/semantics/sv/instantiation_byorder_simple.sv
+  - identifier: mydesign2
+    parameters: []
+    ports:
+      - identifier: o
+        direction: Output
+        datakind: Net
+        datatype: Logic
+        classid: ~
+        nettype: Wire
+        signedness: Unsigned
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    instances:
+      - module_identifier: ""
+        hierarchical_instance: ""
+        hierarchy: []
+        connections: []
+    filepath: testcases/semantics/sv/instantiation_byorder_simple.sv
+packages: []

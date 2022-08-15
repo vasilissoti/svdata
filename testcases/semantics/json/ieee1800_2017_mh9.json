@@ -22,6 +22,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ieee1800_2017_mh9.sv"
     }
   ],

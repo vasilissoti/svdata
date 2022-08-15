@@ -113,6 +113,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_output_var_unsigned.sv"
     }
   ],
