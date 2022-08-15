@@ -175,25 +175,15 @@ impl fmt::Display for SvInstance {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Instance: ")?;
         writeln!(f, "    Module identifier: {}", self.module_identifier)?;
-        writeln!(f, "    Hierarchical instance: {}", self.hierarchical_instance)?;
+        writeln!(
+            f,
+            "    Hierarchical instance: {}",
+            self.hierarchical_instance
+        )?;
         writeln!(f, "    Hierarchy: {:?}", self.hierarchy)?;
         writeln!(f, "    Connections: {:?}", self.connections)?;
 
         write!(f, "")
-    }
-}
-
-impl fmt::Display for SvPackageDeclaration {
-    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        writeln!(f, "Package:")?;
-        writeln!(f, "  Identifier: {}", self.identifier)?;
-        writeln!(f, "  Filepath: {}", self.filepath)?;
-
-        for param in self.parameters.clone() {
-            write!(f, "{}", param)?;
-        }
-
-        writeln!(f, "")
     }
 }
 
