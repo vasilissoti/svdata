@@ -1,7 +1,7 @@
-use crate::structures::{SvModuleDeclaration, SvParamType, SvPort, SvInstance};
+use crate::structures::{SvInstance, SvModuleDeclaration, SvParamType, SvPort};
+use crate::sv_instance::module_instance;
 use crate::sv_misc::identifier;
 use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
-use crate::sv_instance::module_instance;
 use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(

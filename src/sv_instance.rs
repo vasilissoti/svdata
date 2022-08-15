@@ -1,11 +1,8 @@
 use crate::structures::SvInstance;
+use crate::sv_misc::{get_string, identifier};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
-use crate::sv_misc::{identifier, get_string};
 
-pub fn module_instance(
-    p: &sv_parser::ModuleInstantiation,
-    syntax_tree: &SyntaxTree,
-) -> SvInstance {
+pub fn module_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> SvInstance {
     let ret = SvInstance {
         module_identifier: inst_module_identifier(p, syntax_tree),
         hierarchical_instance: inst_hierarchical_instance(p, syntax_tree),
@@ -23,7 +20,10 @@ fn inst_module_identifier(p: &sv_parser::ModuleInstantiation, syntax_tree: &Synt
 }
 
 // Find name of the instantiation (daughter module)
-fn inst_hierarchical_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
+fn inst_hierarchical_instance(
+    p: &sv_parser::ModuleInstantiation,
+    syntax_tree: &SyntaxTree,
+) -> String {
     let mut ret: String = String::new();
     ret
 }
@@ -35,7 +35,10 @@ fn inst_hierarchy(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) 
 }
 
 // Finding connections for the instantiation
-fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> Vec<Vec<String>> {
+fn inst_connections(
+    p: &sv_parser::ModuleInstantiation,
+    syntax_tree: &SyntaxTree,
+) -> Vec<Vec<String>> {
     let mut ret: Vec<Vec<String>> = Vec::new();
     ret
 }
