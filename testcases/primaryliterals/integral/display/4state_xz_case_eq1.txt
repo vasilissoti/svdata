@@ -1,1 +1,1 @@
-false
+SvPrimaryLiteralIntegral { data_01: [0], data_xz: None, size: 1, signed: false }

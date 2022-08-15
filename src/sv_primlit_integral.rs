@@ -94,9 +94,16 @@ impl SvPrimaryLiteralIntegral {
             signed: true,
         };
 
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+
         let ret = self.case_eq(zero.clone());
 
-        ret
+        ret == one
     }
 
     pub fn is_4state(&self) -> bool {
@@ -666,18 +673,32 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
     Otherwise it returns false. */
-    pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
+        let zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
 
         if left_nu.contains_xz() != right_nu.contains_xz() {
-            return false;
+            return zero;
         } else if left_nu.contains_xz() && right_nu.contains_xz() {
             let signedness = left_nu.signed == right_nu.signed;
             let size = left_nu.size == right_nu.size;
             let data_01 = left_nu.data_01 == right_nu.data_01;
             let data_xz = left_nu.data_xz.as_ref().unwrap() == right_nu.data_xz.as_ref().unwrap();
 
-            return signedness && size && data_01 && data_xz;
+            if signedness && size && data_01 && data_xz {
+                return one;
+            }
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
@@ -699,9 +720,9 @@ impl SvPrimaryLiteralIntegral {
             }
 
             if left_zero && right_zero {
-                return true;
+                return one;
             } else if left_zero != right_zero {
-                return false;
+                return zero;
             } else {
                 left_nu._minimum_width();
                 right_nu._minimum_width();
@@ -714,13 +735,13 @@ impl SvPrimaryLiteralIntegral {
                         }
                     }
                     if eq_found {
-                        return true;
+                        return one;
                     }
                 }
             }
-
-            false
         }
+
+        zero
     }
 
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
