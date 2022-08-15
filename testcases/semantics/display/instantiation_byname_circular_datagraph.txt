@@ -146,18 +146,18 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: m0
-    Hierarchical instance: i0
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["s_in", "s"], ["w_in", "w10"], ["w_out", "w02"]]
+    Connections: []
   Instance: 
-    Module identifier: m1
-    Hierarchical instance: i1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["c_in", "c"], ["w_in", "c"], ["w_out", "w10"]]
+    Connections: []
   Instance: 
-    Module identifier: m1
-    Hierarchical instance: i2
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["w_in", "w02"], ["w_out", "w21"], ["o_out", "o"]]
+    Connections: []
 

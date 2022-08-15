@@ -55,34 +55,16 @@
       ],
       "instances": [
         {
-          "module_identifier": "bar",
-          "hierarchical_instance": "test0",
+          "module_identifier": "",
+          "hierarchical_instance": "",
           "hierarchy": [],
-          "connections": [
-            [
-              "a",
-              "a2[i]"
-            ],
-            [
-              "b",
-              "b2[k]"
-            ]
-          ]
+          "connections": []
         },
         {
-          "module_identifier": "bar",
-          "hierarchical_instance": "test1",
+          "module_identifier": "",
+          "hierarchical_instance": "",
           "hierarchy": [],
-          "connections": [
-            [
-              "a",
-              "a2[i]"
-            ],
-            [
-              "b",
-              "b2[k]"
-            ]
-          ]
+          "connections": []
         }
       ],
       "filepath": "testcases/semantics/sv/instantiation_byname_variabel_indexing.sv"

@@ -55,51 +55,22 @@
       ],
       "instances": [
         {
-          "module_identifier": "bar",
-          "hierarchical_instance": "u_bar0",
+          "module_identifier": "",
+          "hierarchical_instance": "",
           "hierarchy": [],
-          "connections": [
-            [
-              "a",
-              "a0"
-            ],
-            [
-              "b",
-              "b0"
-            ]
-          ]
+          "connections": []
         },
         {
-          "module_identifier": "bar",
-          "hierarchical_instance": "u_bar1",
+          "module_identifier": "",
+          "hierarchical_instance": "",
           "hierarchy": [],
-          "connections": [
-            [
-              "a",
-              "a1"
-            ],
-            [
-              "b",
-              "b1"
-            ]
-          ]
+          "connections": []
         },
         {
-          "module_identifier": "bar",
-          "hierarchical_instance": "u_bar2",
-          "hierarchy": [
-            "la_FOO"
-          ],
-          "connections": [
-            [
-              "a",
-              "a2"
-            ],
-            [
-              "b",
-              "b2"
-            ]
-          ]
+          "module_identifier": "",
+          "hierarchical_instance": "",
+          "hierarchy": [],
+          "connections": []
         }
       ],
       "filepath": "testcases/semantics/sv/instantiation_byname_label.sv"

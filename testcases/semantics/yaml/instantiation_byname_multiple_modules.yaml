@@ -49,14 +49,10 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: mkM1
-        hierarchical_instance: m1
+      - module_identifier: ""
+        hierarchical_instance: ""
         hierarchy: []
-        connections:
-          - - a_in
-            - b_in
-          - - a_out
-            - b_out
+        connections: []
     filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   - identifier: mkM3
     parameters: []
@@ -82,22 +78,14 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: mkM1
-        hierarchical_instance: m1
+      - module_identifier: ""
+        hierarchical_instance: ""
         hierarchy: []
-        connections:
-          - - a_in
-            - c_in
-          - - a_out
-            - w
-      - module_identifier: mkM2
-        hierarchical_instance: m2
+        connections: []
+      - module_identifier: ""
+        hierarchical_instance: ""
         hierarchy: []
-        connections:
-          - - b_in
-            - w
-          - - b_out
-            - c_out
+        connections: []
     filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
   - identifier: mkM4
     parameters: []
@@ -123,13 +111,9 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: mkM3
-        hierarchical_instance: m3
+      - module_identifier: ""
+        hierarchical_instance: ""
         hierarchy: []
-        connections:
-          - - c_in
-            - d_in
-          - - c_out
-            - d_out
+        connections: []
     filepath: testcases/semantics/sv/instantiation_byname_multiple_modules.sv
 packages: []

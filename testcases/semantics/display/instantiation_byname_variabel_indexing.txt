@@ -46,13 +46,13 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: bar
-    Hierarchical instance: test0
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["a", "a2[i]"], ["b", "b2[k]"]]
+    Connections: []
   Instance: 
-    Module identifier: bar
-    Hierarchical instance: test1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["a", "a2[i]"], ["b", "b2[k]"]]
+    Connections: []
 

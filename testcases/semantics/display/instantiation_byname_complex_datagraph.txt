@@ -146,15 +146,15 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: M1
-    Hierarchical instance: i1_1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in1_1", "in4_1"], ["out1_1", "out4_1"]]
+    Connections: []
   Instance: 
-    Module identifier: M1
-    Hierarchical instance: i1_2
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in1_1", "in4_1"], ["out1_1", "out4_2"]]
+    Connections: []
 
 Module:
   Identifier: M5
@@ -193,15 +193,15 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: M4
-    Hierarchical instance: i4
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in4_1", "in5_1"], ["out4_1", "out5_2"], ["out4_2", "w1"]]
+    Connections: []
   Instance: 
-    Module identifier: M1
-    Hierarchical instance: i1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in1_1", "w1"], ["out1_1", "out5_1"]]
+    Connections: []
 
 Module:
   Identifier: M6
@@ -240,15 +240,15 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: M2
-    Hierarchical instance: i2_1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in2_1", "in6_1"], ["in2_2", "in6_2"], ["out2_1", "w1"]]
+    Connections: []
   Instance: 
-    Module identifier: M2
-    Hierarchical instance: i2_2
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in2_1", "in6_1"], ["in2_2", "w1"], ["out2_1", "out6_1"]]
+    Connections: []
 
 Module:
   Identifier: M7
@@ -287,20 +287,20 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: M6
-    Hierarchical instance: i6
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in6_1", "in7_1"], ["in6_2", "in7_2"], ["out6_1", "w1"]]
+    Connections: []
   Instance: 
-    Module identifier: M1
-    Hierarchical instance: i1
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in1_1", "in7_2"], ["out1_1", "w2"]]
+    Connections: []
   Instance: 
-    Module identifier: M3
-    Hierarchical instance: i3
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in3_1", "w1"], ["in3_2", "in7_2"], ["in3_3", "w2"], ["out3_1", "out7_1"]]
+    Connections: []
 
 Module:
   Identifier: M8
@@ -361,13 +361,13 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: M5
-    Hierarchical instance: i5
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in5_1", "in8_1"], ["out5_1", "out8_1"], ["out5_2", "out8_2"]]
+    Connections: []
   Instance: 
-    Module identifier: M7
-    Hierarchical instance: m7
+    Module identifier: 
+    Hierarchical instance: 
     Hierarchy: []
-    Connections: [["in7_1", "in8_1"], ["in7_2", "in8_2"], ["out7_1", "out8_3"]]
+    Connections: []
 
