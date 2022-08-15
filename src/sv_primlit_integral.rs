@@ -1,4 +1,3 @@
-use std::cmp::Ordering;
 use std::fmt;
 use std::ops::{Add, Mul, Neg, Shl, Shr};
 
@@ -74,14 +73,14 @@ impl SvPrimaryLiteralIntegral {
         if self.signed != true {
             panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
         }
-        let mut zero = SvPrimaryLiteralIntegral {
+        let zero = SvPrimaryLiteralIntegral {
             data_01: vec![0],
             data_xz: None,
             size: 1,
             signed: true,
         };
 
-        let ret = self < &mut zero;
+        let ret = self.lt(zero.clone());
 
         ret
     }
@@ -522,9 +521,13 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
-    Otherwise it returns false. */
-    pub fn lth(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    Otherwise it returns false. By default if any of the two operands contains X/Z the comparison returns false. */
+    pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         let mut left_nu = self.clone();
+
+        if left_nu.contains_xz() || right_nu.contains_xz() {
+            return false;
+        }
 
         if left_nu.signed != right_nu.signed {
             if left_nu.signed {
@@ -533,7 +536,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     left_nu.signed = false;
                     left_nu._minimum_width();
-                    return left_nu.lth(right_nu.clone());
+                    return left_nu.lt(right_nu.clone());
                 }
             } else {
                 if right_nu.is_negative() {
@@ -541,7 +544,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     right_nu.signed = false;
                     right_nu._minimum_width();
-                    return left_nu.lth(right_nu.clone());
+                    return left_nu.lt(right_nu.clone());
                 }
             }
         } else {
@@ -605,9 +608,13 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is greater than the RHS it returns true.
-    Otherwise it returns false. */
-    pub fn gth(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    Otherwise it returns false. By default if any of the two operands contains X/Z the comparison returns false. */
+    pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
         let mut left_nu = self.clone();
+
+        if left_nu.contains_xz() || right_nu.contains_xz() {
+            return false;
+        }
 
         if left_nu.signed != right_nu.signed {
             if left_nu.signed {
@@ -616,7 +623,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     left_nu.signed = false;
                     left_nu._minimum_width();
-                    return left_nu.gth(right_nu.clone());
+                    return left_nu.gt(right_nu.clone());
                 }
             } else {
                 if right_nu.is_negative() {
@@ -624,7 +631,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     right_nu.signed = false;
                     right_nu._minimum_width();
-                    return left_nu.gth(right_nu.clone());
+                    return left_nu.gt(right_nu.clone());
                 }
             }
         } else {
@@ -719,9 +726,9 @@ impl SvPrimaryLiteralIntegral {
                 return true;
             } else if left_zero != right_zero {
                 return false;
-            } else if self < &right_nu {
+            } else if self.lt(right_nu.clone()) {
                 return false;
-            } else if self > &right_nu {
+            } else if self.gt(right_nu.clone()) {
                 return false;
             }
 
@@ -1181,20 +1188,6 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
         }
 
         write!(f, "")
-    }
-}
-
-impl PartialOrd for SvPrimaryLiteralIntegral {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        if self.contains_xz() || other.contains_xz() {
-            return None;
-        } else if self.lth(other.clone()) {
-            return Some(Ordering::Less);
-        } else if self.gth(other.clone()) {
-            return Some(Ordering::Greater);
-        } else {
-            Some(Ordering::Equal)
-        }
     }
 }
 
