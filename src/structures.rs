@@ -178,6 +178,20 @@ impl fmt::Display for SvInstance {
     }
 }
 
+impl fmt::Display for SvPackageDeclaration {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "Package:")?;
+        writeln!(f, "  Identifier: {}", self.identifier)?;
+        writeln!(f, "  Filepath: {}", self.filepath)?;
+
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
+        }
+
+        writeln!(f, "")
+    }
+}
+
 impl fmt::Display for SvPort {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Port: ")?;
