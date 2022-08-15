@@ -64,8 +64,8 @@ pub fn get_string(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     }
 }
 
-pub fn get_comment(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let mut ret: String = String::new();
+pub fn get_comment(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<Vec<String>> {
+    let mut ret: Vec<String> = Vec::new();
     let mut extract_comment: bool = false;
 
     for node in parent.into_iter().event() {
@@ -74,7 +74,7 @@ pub fn get_comment(parent: RefNode, syntax_tree: &SyntaxTree) -> Option<String> 
             NodeEvent::Leave(RefNode::Comment(_)) => extract_comment = false,
             NodeEvent::Enter(RefNode::Locate(x)) => {
                 if extract_comment {
-                    ret.push_str(&syntax_tree.get_str(x).unwrap().to_string());
+                    ret.push(syntax_tree.get_str(x).unwrap().to_string());
                 }
             }
 

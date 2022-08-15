@@ -12,7 +12,11 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*ty*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*ty*/
+          - /*sign*/
+          - /*post*/
       - identifier: b
         direction: Input
         datakind: Variable
@@ -22,7 +26,12 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*kind*//*ty*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*kind*/
+          - /*ty*/
+          - /*sign*/
+          - /*post*/
       - identifier: c
         direction: Input
         datakind: Net
@@ -38,7 +47,14 @@ modules:
             - ~
           - - FOO-1
             - "0"
-        comment: /*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/
+        comment:
+          - /*dir*/
+          - /*kind*/
+          - /*ty*/
+          - /*sign*/
+          - /*pd*/
+          - /*ud*/
+          - /*post*/
       - identifier: d
         direction: Output
         datakind: Variable
@@ -48,7 +64,11 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*ty*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*ty*/
+          - /*sign*/
+          - /*post*/
       - identifier: e
         direction: Output
         datakind: Variable
@@ -58,7 +78,12 @@ modules:
         signedness: Unsigned
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /*dir*//*kind*//*ty*//*sign*//*post*/
+        comment:
+          - /*dir*/
+          - /*kind*/
+          - /*ty*/
+          - /*sign*/
+          - /*post*/
       - identifier: f
         direction: Output
         datakind: Net

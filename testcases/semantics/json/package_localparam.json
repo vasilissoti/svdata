@@ -1,7 +1,8 @@
 {
-  "modules": [
+  "modules": [],
+  "packages": [
     {
-      "identifier": "TestModule",
+      "identifier": "TestPackage",
       "parameters": [
         {
           "identifier": "a",
@@ -37,7 +38,7 @@
           "comment": null
         },
         {
-          "identifier": "c",
+          "identifier": "e",
           "expression": "7.5",
           "paramtype": "LocalParam",
           "datatype": "Real",
@@ -51,7 +52,7 @@
           "comment": null
         },
         {
-          "identifier": "d",
+          "identifier": "f",
           "expression": "5",
           "paramtype": "LocalParam",
           "datatype": "Logic",
@@ -65,7 +66,7 @@
           "comment": null
         },
         {
-          "identifier": "e",
+          "identifier": "g",
           "expression": "\"hello\"",
           "paramtype": "LocalParam",
           "datatype": "String",
@@ -79,10 +80,7 @@
           "comment": null
         }
       ],
-      "ports": [],
-      "instances": [],
-      "filepath": "testcases/semantics/sv/ansi_port_localparam.sv"
+      "filepath": "testcases/semantics/sv/package_localparam.sv"
     }
-  ],
-  "packages": []
+  ]
 }

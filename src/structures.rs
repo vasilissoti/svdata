@@ -18,7 +18,9 @@ pub struct SvModuleDeclaration {
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SvPackageDeclaration {
+    pub identifier: String,
     pub parameters: Vec<SvParameter>,
+    pub filepath: String,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -34,7 +36,7 @@ pub struct SvParameter {
     pub num_bits: Option<u64>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
-    pub comment: Option<String>,
+    pub comment: Option<Vec<String>>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -123,7 +125,7 @@ pub struct SvPort {
     pub signedness: Option<SvSignedness>,
     pub packed_dimensions: Vec<SvPackedDimension>,
     pub unpacked_dimensions: Vec<SvUnpackedDimension>,
-    pub comment: Option<String>,
+    pub comment: Option<Vec<String>>,
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -138,6 +140,9 @@ impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         for module in self.modules.clone() {
             write!(f, "{}", module)?;
+        }
+        for package in self.packages.clone() {
+            write!(f, "{}", package)?;
         }
 
         write!(f, "")
@@ -175,6 +180,20 @@ impl fmt::Display for SvInstance {
         writeln!(f, "    Connections: {:?}", self.connections)?;
 
         write!(f, "")
+    }
+}
+
+impl fmt::Display for SvPackageDeclaration {
+    fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
+        writeln!(f, "Package:")?;
+        writeln!(f, "  Identifier: {}", self.identifier)?;
+        writeln!(f, "  Filepath: {}", self.filepath)?;
+
+        for param in self.parameters.clone() {
+            write!(f, "{}", param)?;
+        }
+
+        writeln!(f, "")
     }
 }
 
@@ -239,7 +258,7 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    Comment: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Comment: {}", x)?;
+                writeln!(f, "    Comment: {:?}", x)?;
             }
         }
 
@@ -318,7 +337,7 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    Comment: None")?;
             }
             Some(x) => {
-                writeln!(f, "    Comment: {}", x)?;
+                writeln!(f, "    Comment: {:?}", x)?;
             }
         }
 
