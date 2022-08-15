@@ -143,8 +143,8 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_name: m0
-        instance_name: i0
+      - module_identifier: m0
+        hierarchical_instance: i0
         hierarchy: []
         connections:
           - - s_in
@@ -153,8 +153,8 @@ modules:
             - w10
           - - w_out
             - w02
-      - module_name: m1
-        instance_name: i1
+      - module_identifier: m1
+        hierarchical_instance: i1
         hierarchy: []
         connections:
           - - c_in
@@ -163,8 +163,8 @@ modules:
             - c
           - - w_out
             - w10
-      - module_name: m1
-        instance_name: i2
+      - module_identifier: m1
+        hierarchical_instance: i2
         hierarchy: []
         connections:
           - - w_in

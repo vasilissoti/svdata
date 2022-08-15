@@ -7,8 +7,8 @@ pub fn module_instance(
     syntax_tree: &SyntaxTree,
 ) -> SvInstance {
     let ret = SvInstance {
-        module_name: inst_module_name(p, syntax_tree),
-        instance_name: inst_instance_name(p, syntax_tree),
+        module_identifier: inst_module_identifier(p, syntax_tree),
+        hierarchical_instance: inst_hierarchical_instance(p, syntax_tree),
         hierarchy: inst_hierarchy(p, syntax_tree),
         connections: inst_connections(p, syntax_tree),
     };
@@ -17,13 +17,13 @@ pub fn module_instance(
 }
 
 // Find module name for the instantiation (mother module)
-fn inst_module_name(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
+fn inst_module_identifier(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(p, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
 
 // Find name of the instantiation (daughter module)
-fn inst_instance_name(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
+fn inst_hierarchical_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(p, InstanceIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }

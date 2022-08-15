@@ -175,8 +175,8 @@
       ],
       "instances": [
         {
-          "module_name": "M1",
-          "instance_name": "i1_1",
+          "module_identifier": "M1",
+          "hierarchical_instance": "i1_1",
           "hierarchy": [],
           "connections": [
             [
@@ -190,8 +190,8 @@
           ]
         },
         {
-          "module_name": "M1",
-          "instance_name": "i1_2",
+          "module_identifier": "M1",
+          "hierarchical_instance": "i1_2",
           "hierarchy": [],
           "connections": [
             [
@@ -250,8 +250,8 @@
       ],
       "instances": [
         {
-          "module_name": "M4",
-          "instance_name": "i4",
+          "module_identifier": "M4",
+          "hierarchical_instance": "i4",
           "hierarchy": [],
           "connections": [
             [
@@ -269,8 +269,8 @@
           ]
         },
         {
-          "module_name": "M1",
-          "instance_name": "i1",
+          "module_identifier": "M1",
+          "hierarchical_instance": "i1",
           "hierarchy": [],
           "connections": [
             [
@@ -329,8 +329,8 @@
       ],
       "instances": [
         {
-          "module_name": "M2",
-          "instance_name": "i2_1",
+          "module_identifier": "M2",
+          "hierarchical_instance": "i2_1",
           "hierarchy": [],
           "connections": [
             [
@@ -348,8 +348,8 @@
           ]
         },
         {
-          "module_name": "M2",
-          "instance_name": "i2_2",
+          "module_identifier": "M2",
+          "hierarchical_instance": "i2_2",
           "hierarchy": [],
           "connections": [
             [
@@ -412,8 +412,8 @@
       ],
       "instances": [
         {
-          "module_name": "M6",
-          "instance_name": "i6",
+          "module_identifier": "M6",
+          "hierarchical_instance": "i6",
           "hierarchy": [],
           "connections": [
             [
@@ -431,8 +431,8 @@
           ]
         },
         {
-          "module_name": "M1",
-          "instance_name": "i1",
+          "module_identifier": "M1",
+          "hierarchical_instance": "i1",
           "hierarchy": [],
           "connections": [
             [
@@ -446,8 +446,8 @@
           ]
         },
         {
-          "module_name": "M3",
-          "instance_name": "i3",
+          "module_identifier": "M3",
+          "hierarchical_instance": "i3",
           "hierarchy": [],
           "connections": [
             [
@@ -538,8 +538,8 @@
       ],
       "instances": [
         {
-          "module_name": "M5",
-          "instance_name": "i5",
+          "module_identifier": "M5",
+          "hierarchical_instance": "i5",
           "hierarchy": [],
           "connections": [
             [
@@ -557,8 +557,8 @@
           ]
         },
         {
-          "module_name": "M7",
-          "instance_name": "m7",
+          "module_identifier": "M7",
+          "hierarchical_instance": "m7",
           "hierarchy": [],
           "connections": [
             [

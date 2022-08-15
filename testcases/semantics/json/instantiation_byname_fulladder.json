@@ -150,8 +150,8 @@
       ],
       "instances": [
         {
-          "module_name": "fulladd",
-          "instance_name": "f0",
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f0",
           "hierarchy": [],
           "connections": [
             [
@@ -177,8 +177,8 @@
           ]
         },
         {
-          "module_name": "fulladd",
-          "instance_name": "f1",
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f1",
           "hierarchy": [],
           "connections": [
             [
@@ -204,8 +204,8 @@
           ]
         },
         {
-          "module_name": "fulladd",
-          "instance_name": "f2",
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f2",
           "hierarchy": [],
           "connections": [
             [
@@ -231,8 +231,8 @@
           ]
         },
         {
-          "module_name": "fulladd",
-          "instance_name": "f3",
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f3",
           "hierarchy": [],
           "connections": [
             [
