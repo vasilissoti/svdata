@@ -63,5 +63,6 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/parameter_resolver_binary_operations0.sv
 packages: []
