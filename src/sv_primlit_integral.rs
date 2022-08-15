@@ -1,7 +1,7 @@
 use std::fmt;
 use std::ops::{Add, Mul, Neg, Shl, Shr};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct SvPrimaryLiteralIntegral {
     pub data_01: Vec<usize>,
     pub data_xz: Option<Vec<usize>>,
@@ -87,14 +87,14 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
-        let mut zero = SvPrimaryLiteralIntegral {
+        let zero = SvPrimaryLiteralIntegral {
             data_01: vec![0],
             data_xz: None,
             size: 1,
             signed: true,
         };
 
-        let ret = self == &mut zero;
+        let ret = self.case_eq(zero.clone());
 
         ret
     }
@@ -1190,14 +1190,6 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
         write!(f, "")
     }
 }
-
-impl PartialEq for SvPrimaryLiteralIntegral {
-    fn eq(&self, other: &Self) -> bool {
-        self.case_eq(other.clone())
-    }
-}
-
-impl Eq for SvPrimaryLiteralIntegral {}
 
 impl Add for SvPrimaryLiteralIntegral {
     type Output = Self;

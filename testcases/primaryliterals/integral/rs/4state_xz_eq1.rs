@@ -12,7 +12,7 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c: bool = a == b;
+let c: bool = a.case_eq(b.clone());
 
 assert_eq!(c, false);
 
