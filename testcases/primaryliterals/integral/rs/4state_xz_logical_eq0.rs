@@ -1,25 +1,25 @@
 let a = SvPrimaryLiteralIntegral {
     data_01: vec![4611686018427387904],
     data_xz: Some(vec!{4611686018427387904}),
-    size: 63,
-    signed: false,
+    size: 64,
+    signed: true,
 };
 
 let b = SvPrimaryLiteralIntegral {
-    data_01: vec![4611686018427387904],
-    data_xz: Some(vec!{4611686018427387904}),
+    data_01: vec![9223372036854775808],
+    data_xz: Some(vec!{9223372036854775808}),
     size: 64,
-    signed: false,
+    signed: true,
 };
 
-let c = a.case_eq(b.clone());
-let zero = SvPrimaryLiteralIntegral {
+let c = a.logical_eq(b.clone());
+let unknown = SvPrimaryLiteralIntegral {
     data_01: vec![0],
-    data_xz: None,
+    data_xz: Some(vec![1]),
     size: 1,
     signed: false,
 };
 
-assert_eq!(c, zero);
+assert_eq!(c, unknown);
 
 let actual_string = format!("{}", c);

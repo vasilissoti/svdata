@@ -671,8 +671,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Compares two signed or unsigned integral primary literals and if the value of the LHS primlit is equal to the RHS it returns true.
-    Otherwise it returns false. */
+    /* Emulates the case equality operator "===" as defined in 1800-2017 | 11.4.5 Equality operators */
     pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
         let zero = SvPrimaryLiteralIntegral {
@@ -699,11 +698,46 @@ impl SvPrimaryLiteralIntegral {
             if signedness && size && data_01 && data_xz {
                 return one;
             }
+            zero
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
 
             return left_nu.case_eq(right_nu.clone());
+        } else {
+            left_nu.logical_eq(right_nu.clone())
+        }
+    }
+
+    /* Emulates the logical equality operator "==" as defined in 1800-2017 | 11.4.5 Equality operators */
+    pub fn logical_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+        let mut left_nu = self.clone();
+        let zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let unknown = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: Some(vec![1]),
+            size: 1,
+            signed: false,
+        };
+
+        if left_nu.contains_xz() || right_nu.contains_xz() {
+            return unknown;
+        } else if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
+
+            return left_nu.logical_eq(right_nu.clone());
         } else {
             let mut left_zero: bool = true;
             for x in &left_nu.data_01 {

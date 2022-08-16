@@ -12,14 +12,14 @@ let b = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let c = a.case_eq(b.clone());
-let zero = SvPrimaryLiteralIntegral {
+let c = a.logical_eq(b.clone());
+let unknown = SvPrimaryLiteralIntegral {
     data_01: vec![0],
-    data_xz: None,
+    data_xz: Some(vec![1]),
     size: 1,
     signed: false,
 };
 
-assert_eq!(c, zero);
+assert_eq!(c, unknown);
 
 let actual_string = format!("{}", c);

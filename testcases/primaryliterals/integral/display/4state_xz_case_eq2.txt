@@ -1,1 +1,4 @@
-SvPrimaryLiteralIntegral { data_01: [0], data_xz: None, size: 1, signed: false }
+NumBits: 1
+Signed: false
+4State: false
+Data: 0
