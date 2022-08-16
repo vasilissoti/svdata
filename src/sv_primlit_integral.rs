@@ -146,7 +146,7 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    /* Returns whether the MSB of data_01 is high. */
+    /* Returns whether the MSB of data_01 is high. The size must be correctly specified. */
     pub fn data_01_msb_high(&self) -> bool {
         let left_leading_zeros: usize =
             usize::BITS as usize - (self.size - (self.data_01.len() - 1) * usize::BITS as usize);
@@ -158,7 +158,7 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Returns whether the MSB of data_xz is high. */
+    /* Returns whether the MSB of data_xz is high. The size must be correctly specified. */
     pub fn data_xz_msb_high(&self) -> bool {
         if !self.is_4state() {
             return false;
@@ -959,7 +959,9 @@ impl SvPrimaryLiteralIntegral {
         }
 
         if self.is_4state() && (self.data_01.len() < self.data_xz.as_ref().unwrap().len()) {
-            self.data_xz = self.to_4state().data_xz;
+            for _x in 0..(self.data_xz.as_ref().unwrap().len() - self.data_01.len()) {
+                self.data_xz.as_mut().unwrap().remove(0);
+            }
         }
     }
 
