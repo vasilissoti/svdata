@@ -278,6 +278,18 @@ impl SvPrimaryLiteralIntegral {
         right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
     }
 
+    /* Accepts two unsigned integral primary literals and ensures that both are properly zero extended and matched to their data_01 dimensions.
+    The correct final number of bits is set to both arguments. */
+    pub fn _matched_zero_extend(&mut self, right_nu: &mut SvPrimaryLiteralIntegral) {
+        if self.signed == true || right_nu.signed == true {
+            panic!("Expected unsigned SvPrimaryLiterals but found signed!");
+        }
+
+        self._primlit_vec_elmnt_match(right_nu);
+        self.size = self.data_01.len() * usize::BITS as usize;
+        right_nu.size = right_nu.data_01.len() * usize::BITS as usize;
+    }
+
     /* Receives a signed integral primary literal and sign extends the value in the existing number of data_01 vector elements.
     The correct final number of bits is set to the argument. */
     pub fn _sign_extend(&mut self) {
