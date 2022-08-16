@@ -115,21 +115,61 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: fulladd
+        hierarchical_instance: f0
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - s
+            - "sum[0]"
+          - - c_out
+            - c1
+          - - a_in
+            - "a[0]"
+          - - b_in
+            - "b[0]"
+          - - c_in
+            - cin
+      - module_identifier: fulladd
+        hierarchical_instance: f1
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - s
+            - "sum[1]"
+          - - c_out
+            - c2
+          - - a_in
+            - "a[1]"
+          - - b_in
+            - "b[1]"
+          - - c_in
+            - c1
+      - module_identifier: fulladd
+        hierarchical_instance: f2
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - s
+            - "sum[2]"
+          - - c_out
+            - c3
+          - - a_in
+            - "a[2]"
+          - - b_in
+            - "b[2]"
+          - - c_in
+            - c2
+      - module_identifier: fulladd
+        hierarchical_instance: f3
         hierarchy: []
-        connections: []
+        connections:
+          - - s
+            - "sum[3]"
+          - - c_out
+            - cout
+          - - a_in
+            - "a[3]"
+          - - b_in
+            - "b[3]"
+          - - c_in
+            - c3
     filepath: testcases/semantics/sv/instantiation_byname_fulladder.sv
 packages: []

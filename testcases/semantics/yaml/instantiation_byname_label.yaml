@@ -44,17 +44,30 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: bar
+        hierarchical_instance: u_bar0
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - a
+            - a0
+          - - b
+            - b0
+      - module_identifier: bar
+        hierarchical_instance: u_bar1
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
-        hierarchy: []
-        connections: []
+        connections:
+          - - a
+            - a1
+          - - b
+            - b1
+      - module_identifier: bar
+        hierarchical_instance: u_bar2
+        hierarchy:
+          - la_FOO
+        connections:
+          - - a
+            - a2
+          - - b
+            - b2
     filepath: testcases/semantics/sv/instantiation_byname_label.sv
 packages: []

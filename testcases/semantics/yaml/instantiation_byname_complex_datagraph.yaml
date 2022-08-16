@@ -139,14 +139,22 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: M1
+        hierarchical_instance: i1_1
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in1_1
+            - in4_1
+          - - out1_1
+            - out4_1
+      - module_identifier: M1
+        hierarchical_instance: i1_2
         hierarchy: []
-        connections: []
+        connections:
+          - - in1_1
+            - in4_1
+          - - out1_1
+            - out4_2
     filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
   - identifier: M5
     parameters: []
@@ -182,14 +190,24 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: M4
+        hierarchical_instance: i4
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in4_1
+            - in5_1
+          - - out4_1
+            - out5_2
+          - - out4_2
+            - w1
+      - module_identifier: M1
+        hierarchical_instance: i1
         hierarchy: []
-        connections: []
+        connections:
+          - - in1_1
+            - w1
+          - - out1_1
+            - out5_1
     filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
   - identifier: M6
     parameters: []
@@ -225,14 +243,26 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: M2
+        hierarchical_instance: i2_1
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in2_1
+            - in6_1
+          - - in2_2
+            - in6_2
+          - - out2_1
+            - w1
+      - module_identifier: M2
+        hierarchical_instance: i2_2
         hierarchy: []
-        connections: []
+        connections:
+          - - in2_1
+            - in6_1
+          - - in2_2
+            - w1
+          - - out2_1
+            - out6_1
     filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
   - identifier: M7
     parameters: []
@@ -268,18 +298,36 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: M6
+        hierarchical_instance: i6
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in6_1
+            - in7_1
+          - - in6_2
+            - in7_2
+          - - out6_1
+            - w1
+      - module_identifier: M1
+        hierarchical_instance: i1
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in1_1
+            - in7_2
+          - - out1_1
+            - w2
+      - module_identifier: M3
+        hierarchical_instance: i3
         hierarchy: []
-        connections: []
+        connections:
+          - - in3_1
+            - w1
+          - - in3_2
+            - in7_2
+          - - in3_3
+            - w2
+          - - out3_1
+            - out7_1
     filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
   - identifier: M8
     parameters: []
@@ -335,13 +383,25 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances:
-      - module_identifier: ""
-        hierarchical_instance: ""
+      - module_identifier: M5
+        hierarchical_instance: i5
         hierarchy: []
-        connections: []
-      - module_identifier: ""
-        hierarchical_instance: ""
+        connections:
+          - - in5_1
+            - in8_1
+          - - out5_1
+            - out8_1
+          - - out5_2
+            - out8_2
+      - module_identifier: M7
+        hierarchical_instance: m7
         hierarchy: []
-        connections: []
+        connections:
+          - - in7_1
+            - in8_1
+          - - in7_2
+            - in8_2
+          - - out7_1
+            - out8_3
     filepath: testcases/semantics/sv/instantiation_byname_complex_datagraph.sv
 packages: []
