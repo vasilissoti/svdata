@@ -50,10 +50,10 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: mkM1
+    Hierarchical instance: m1
     Hierarchy: []
-    Connections: []
+    Connections: [["a_in", "b_in"], ["a_out", "b_out"]]
 
 Module:
   Identifier: mkM3
@@ -81,15 +81,15 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: mkM1
+    Hierarchical instance: m1
     Hierarchy: []
-    Connections: []
+    Connections: [["a_in", "c_in"], ["a_out", "w"]]
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: mkM2
+    Hierarchical instance: m2
     Hierarchy: []
-    Connections: []
+    Connections: [["b_in", "w"], ["b_out", "c_out"]]
 
 Module:
   Identifier: mkM4
@@ -117,8 +117,8 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: mkM3
+    Hierarchical instance: m3
     Hierarchy: []
-    Connections: []
+    Connections: [["c_in", "d_in"], ["c_out", "d_out"]]
 

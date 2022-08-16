@@ -116,23 +116,23 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: fulladd
+    Hierarchical instance: f0
     Hierarchy: []
-    Connections: []
+    Connections: [["s", "sum[0]"], ["c_out", "c1"], ["a_in", "a[0]"], ["b_in", "b[0]"], ["c_in", "cin"]]
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: fulladd
+    Hierarchical instance: f1
     Hierarchy: []
-    Connections: []
+    Connections: [["s", "sum[1]"], ["c_out", "c2"], ["a_in", "a[1]"], ["b_in", "b[1]"], ["c_in", "c1"]]
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: fulladd
+    Hierarchical instance: f2
     Hierarchy: []
-    Connections: []
+    Connections: [["s", "sum[2]"], ["c_out", "c3"], ["a_in", "a[2]"], ["b_in", "b[2]"], ["c_in", "c2"]]
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: fulladd
+    Hierarchical instance: f3
     Hierarchy: []
-    Connections: []
+    Connections: [["s", "sum[3]"], ["c_out", "cout"], ["a_in", "a[3]"], ["b_in", "b[3]"], ["c_in", "c3"]]
 

@@ -61,8 +61,8 @@ Module:
     UnpackedDimensions: []
     Comment: None
   Instance: 
-    Module identifier: 
-    Hierarchical instance: 
+    Module identifier: mydesign
+    Hierarchical instance: d0
     Hierarchy: []
-    Connections: []
+    Connections: [["a[0]"], ["b"], ["a[1]"], ["c"]]
 
