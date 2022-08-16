@@ -1,0 +1,336 @@
+Module:
+  Identifier: TestModule_A
+  Filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b
+    Expression: 4'b1000
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: c
+    Expression: None
+    ParameterType: Parameter
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: [("4", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: e
+    Expression: 7.5
+    ParameterType: Parameter
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: Parameter
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: true
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: Parameter
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 40
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Module:
+  Identifier: TestModule_B
+  Filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
+  Port: 
+    Identifier: a
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: c
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: [("FOO-1", "0")]
+    UnpackedDimensions: [("FOO", "None"), ("FOO-1", "0")]
+    Comment: None
+  Port: 
+    Identifier: d
+    Direction: Inout
+    DataKind: Net
+    DataType: Int
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Signed
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: e
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: [("FOO-1", "0")]
+    Comment: None
+  Port: 
+    Identifier: f
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: g
+    Direction: Inout
+    DataKind: Net
+    DataType: String
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: h
+    Direction: Inout
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: i
+    Direction: Inout
+    DataKind: Net
+    DataType: Integer
+    ClassIdentifier: None
+    NetType: Tri
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Package:
+  Identifier: TestPackage_A
+  Filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
+  Parameter: 
+    Identifier: a
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: b
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: c
+    Expression: 3
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: d
+    Expression: 2
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+  Parameter: 
+    Identifier: e
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+
+Package:
+  Identifier: TestPackage_B
+  Filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
+  Parameter: 
+    Identifier: a
+    Expression: 8'sb10101010
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b
+    Expression: 4'b1000
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: e
+    Expression: 7.5
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 40
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+

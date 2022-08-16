@@ -1,7 +1,7 @@
-use crate::structures::{SvModuleDeclaration, SvParamType, SvPort, SvInstance};
+use crate::structures::{SvInstance, SvModuleDeclaration, SvParamType, SvPort};
+use crate::sv_instance::module_instance;
 use crate::sv_misc::identifier;
 use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
-use crate::sv_instance::module_instance;
 use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
 
 pub fn module_declaration_ansi(
@@ -61,7 +61,7 @@ pub fn module_declaration_ansi(
                                                 syntax_tree,
                                                 common_data.clone(),
                                                 &param_type,
-                                            ))
+                                            ));
                                         }
                                         _ => (),
                                     }
@@ -69,7 +69,6 @@ pub fn module_declaration_ansi(
                             } else {
                                 let common_data =
                                     unwrap_node!(param_type.clone(), DataType, DataTypeOrImplicit);
-                                let a = unwrap_node!(param_type.clone(), ListOfParamAssignments);
 
                                 let param_type = match param_type {
                                     RefNode::LocalParameterDeclarationParam(_) => {
@@ -82,7 +81,7 @@ pub fn module_declaration_ansi(
                                     _ => unreachable!(),
                                 };
 
-                                for param in a.unwrap() {
+                                for param in a {
                                     match param {
                                         RefNode::ParamAssignment(x) => {
                                             ret.parameters.push(port_parameter_declaration_ansi(
@@ -116,6 +115,7 @@ pub fn module_declaration_ansi(
             _ => (),
         }
     }
+
     ret
 }
 

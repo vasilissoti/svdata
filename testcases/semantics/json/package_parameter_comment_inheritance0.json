@@ -1,58 +1,58 @@
 {
-  "modules": [
+  "modules": [],
+  "packages": [
     {
-      "identifier": "TestModule",
+      "identifier": "TestPackage",
       "parameters": [
         {
           "identifier": "a",
-          "expression": "8'sb10101010",
+          "expression": "(8'sb10101010+\"hello\")",
           "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 8,
+          "num_bits": 404,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": null
+          "comment": [
+            "/* A0 */"
+          ]
         },
         {
           "identifier": "b",
-          "expression": "4'b1000",
+          "expression": "3",
           "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 4,
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
+          "num_bits": 32,
+          "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         },
         {
           "identifier": "c",
-          "expression": "7.5",
+          "expression": "1",
           "paramtype": "LocalParam",
-          "datatype": "Real",
+          "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
-          "signedness": null,
+          "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 64,
+          "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": null
+          "comment": [
+            "/* C0 */"
+          ]
         },
         {
           "identifier": "d",
-          "expression": "5",
+          "expression": "6",
           "paramtype": "LocalParam",
           "datatype": "Logic",
           "datatype_overridable": false,
@@ -66,23 +66,20 @@
         },
         {
           "identifier": "e",
-          "expression": "\"hello\"",
+          "expression": "3",
           "paramtype": "LocalParam",
-          "datatype": "String",
+          "datatype": "Logic",
           "datatype_overridable": false,
           "classid": null,
-          "signedness": null,
+          "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 40,
+          "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         }
       ],
-      "ports": [],
-      "instances": [],
-      "filepath": "testcases/semantics/sv/ansi_port_localparam.sv"
+      "filepath": "testcases/semantics/sv/package_parameter_comment_inheritance0.sv"
     }
-  ],
-  "packages": []
+  ]
 }

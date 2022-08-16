@@ -1,11 +1,8 @@
 use crate::structures::SvInstance;
+use crate::sv_misc::{get_string, identifier};
 use sv_parser::{unwrap_node, RefNode, SyntaxTree};
-use crate::sv_misc::{identifier, get_string};
 
-pub fn module_instance(
-    p: &sv_parser::ModuleInstantiation,
-    syntax_tree: &SyntaxTree,
-) -> SvInstance {
+pub fn module_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> SvInstance {
     let ret = SvInstance {
         module_identifier: inst_module_identifier(p, syntax_tree),
         hierarchical_instance: inst_hierarchical_instance(p, syntax_tree),
@@ -13,17 +10,20 @@ pub fn module_instance(
         connections: inst_connections(p, syntax_tree),
     };
 
-    return ret;
+    ret
 }
 
-// Find module name for the instantiation (mother module)
+// Find module identifier for the instantiation (parent module)
 fn inst_module_identifier(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(p, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
 
-// Find name of the instantiation (daughter module)
-fn inst_hierarchical_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
+// Find hierarchical instance for the instantiation (child module)
+fn inst_hierarchical_instance(
+    p: &sv_parser::ModuleInstantiation,
+    syntax_tree: &SyntaxTree,
+) -> String {
     let id = unwrap_node!(p, InstanceIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
@@ -39,13 +39,14 @@ fn inst_hierarchy(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) 
                     match instance {
                         RefNode::ModuleInstantiation(y) => {
                             if y == p {
-                                let label = unwrap_node!(node.clone(), GenerateBlockIdentifier).unwrap();
+                                let label =
+                                    unwrap_node!(node.clone(), GenerateBlockIdentifier).unwrap();
                                 let label = identifier(label, &syntax_tree).unwrap();
                                 ret.push(label);
                             }
                         }
                         _ => (),
-                }
+                    }
                 }
             }
             _ => (),
@@ -56,16 +57,20 @@ fn inst_hierarchy(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) 
 }
 
 // Finding connections for the instantiation
-fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> Vec<Vec<String>> {
+fn inst_connections(
+    p: &sv_parser::ModuleInstantiation,
+    syntax_tree: &SyntaxTree,
+) -> Vec<Vec<String>> {
     let mut ret: Vec<Vec<String>> = Vec::new();
 
     for node in p {
         match node {
-            RefNode::NamedPortConnection(x) => {            // Port connection by name
-                // Connection in mother module
+            // Port connection by name
+            RefNode::NamedPortConnection(x) => {
+                // Connection in parent module
                 let left = unwrap_node!(node.clone(), PortIdentifier).unwrap();
                 let left = identifier(left, &syntax_tree).unwrap();
-                // Connection in daughter module
+                // Connection in child module
                 let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier).unwrap();
                 let right_name = identifier(right_node, &syntax_tree).unwrap();
                 let mut right_index = String::new();
@@ -74,14 +79,20 @@ fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree
                         RefNode::Select(y) => {
                             for expression_node in y {
                                 match expression_node {
-                                    RefNode::HierarchicalIdentifier(_) => { // Indexing a variabel
-                                        let right_node = unwrap_node!(expression_node.clone(), Identifier).unwrap();
-                                        right_index = identifier(right_node, &syntax_tree).unwrap(); 
-                                    },
-                                    RefNode::IntegralNumber(_) => { // Indexing a number
-                                        let right_node = unwrap_node!(select_node.clone(), DecimalNumber).unwrap();
-                                        right_index = get_string(right_node, &syntax_tree).unwrap();                   
-                                    },
+                                    // Indexing a variabel
+                                    RefNode::HierarchicalIdentifier(_) => {
+                                        let right_node =
+                                            unwrap_node!(expression_node.clone(), Identifier)
+                                                .unwrap();
+                                        right_index = identifier(right_node, &syntax_tree).unwrap();
+                                    }
+                                    // Indexing a number
+                                    RefNode::IntegralNumber(_) => {
+                                        let right_node =
+                                            unwrap_node!(select_node.clone(), DecimalNumber)
+                                                .unwrap();
+                                        right_index = get_string(right_node, &syntax_tree).unwrap();
+                                    }
                                     _ => (),
                                 }
                             }
@@ -90,15 +101,17 @@ fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree
                     }
                 }
                 // Push connection to ret
-                if right_index == "" {      // If no indexing
+                if right_index == "" {
+                    // If no indexing
                     ret.push([left, right_name].to_vec());
-                }
-                else {                      // If there is indexing
+                } else {
+                    // If there is indexing
                     let right = format!("{}[{}]", right_name, right_index);
                     ret.push([left, right].to_vec());
                 }
             }
-            RefNode::OrderedPortConnection(x) => {          // Port connection by order
+            // Port connection by order
+            RefNode::OrderedPortConnection(x) => {
                 let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier).unwrap();
                 let right_name = identifier(right_node, &syntax_tree).unwrap();
                 let mut right_index = String::new();
@@ -107,14 +120,20 @@ fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree
                         RefNode::Select(y) => {
                             for expression_node in y {
                                 match expression_node {
-                                    RefNode::HierarchicalIdentifier(_) => { // Indexing a variabel
-                                        let right_node = unwrap_node!(expression_node.clone(), Identifier).unwrap();
-                                        right_index = identifier(right_node, &syntax_tree).unwrap(); 
-                                    },
-                                    RefNode::IntegralNumber(_) => { // Indexng a number
-                                        let right_node = unwrap_node!(expression_node.clone(), DecimalNumber).unwrap();
-                                        right_index = get_string(right_node, &syntax_tree).unwrap();                   
-                                    },
+                                    // Indexing a variabel
+                                    RefNode::HierarchicalIdentifier(_) => {
+                                        let right_node =
+                                            unwrap_node!(expression_node.clone(), Identifier)
+                                                .unwrap();
+                                        right_index = identifier(right_node, &syntax_tree).unwrap();
+                                    }
+                                    // Indexng a number
+                                    RefNode::IntegralNumber(_) => {
+                                        let right_node =
+                                            unwrap_node!(expression_node.clone(), DecimalNumber)
+                                                .unwrap();
+                                        right_index = get_string(right_node, &syntax_tree).unwrap();
+                                    }
                                     _ => (),
                                 }
                             }
@@ -123,10 +142,11 @@ fn inst_connections(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree
                     }
                 }
                 // Push connection to ret
-                if right_index == "" {      // If no indexing
+                if right_index == "" {
+                    // If no indexing
                     ret.push([right_name].to_vec());
-                }
-                else {                      // If there is indexing
+                } else {
+                    // If there is indexing
                     let right = format!("{}[{}]", right_name, right_index);
                     ret.push([right].to_vec());
                 }

@@ -1,68 +1,68 @@
-Module:
-  Identifier: TestModule
-  Filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance0.sv
+Package:
+  Identifier: TestPackage
+  Filepath: testcases/semantics/sv/package_localparam.sv
   Parameter: 
     Identifier: a
-    Expression: (8'sb10101010+"hello")
+    Expression: 8'sb10101010
     ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: false
-    NumBits: 404
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: ["/* A0 */"]
-  Parameter: 
-    Identifier: b
-    Expression: 3
-    ParameterType: LocalParam
-    DataType: Logic
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessOverridable: false
-    NumBits: 32
+    NumBits: 8
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: c
-    Expression: 1
-    ParameterType: Parameter
+    Identifier: b
+    Expression: 4'b1000
+    ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
-    NumBits: 32
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: ["/* C0 */"]
-  Parameter: 
-    Identifier: d
-    Expression: 6
-    ParameterType: Parameter
-    DataType: Logic
-    DataTypeOverridable: true
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessOverridable: true
-    NumBits: 32
-    PackedDimensions: []
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
     Comment: None
   Parameter: 
     Identifier: e
-    Expression: None
-    ParameterType: Parameter
-    DataType: None
-    DataTypeOverridable: true
+    Expression: 7.5
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: None
-    SignednessOverridable: true
-    NumBits: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: f
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 40
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None

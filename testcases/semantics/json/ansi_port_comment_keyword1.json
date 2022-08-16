@@ -14,7 +14,12 @@
           "signedness": "Unsigned",
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*dir*//*ty*//*sign*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "b",
@@ -26,7 +31,13 @@
           "signedness": "Unsigned",
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*dir*//*kind*//*ty*//*sign*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*kind*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "c",
@@ -52,7 +63,15 @@
               "0"
             ]
           ],
-          "comment": "/*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*kind*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*pd*/",
+            "/*ud*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "d",
@@ -64,7 +83,12 @@
           "signedness": "Unsigned",
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*dir*//*ty*//*sign*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "e",
@@ -76,7 +100,13 @@
           "signedness": "Unsigned",
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*dir*//*kind*//*ty*//*sign*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*kind*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "f",
@@ -102,7 +132,15 @@
               "0"
             ]
           ],
-          "comment": "/*dir*//*kind*//*ty*//*sign*//*pd*//*ud*//*post*/"
+          "comment": [
+            "/*dir*/",
+            "/*kind*/",
+            "/*ty*/",
+            "/*sign*/",
+            "/*pd*/",
+            "/*ud*/",
+            "/*post*/"
+          ]
         }
       ],
       "instances": [],

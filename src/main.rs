@@ -11,6 +11,7 @@ use std::{env, process};
 use sv_parser::{parse_sv, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
 use svdata::structures::SvData;
 use svdata::sv_module::{module_declaration_ansi, module_declaration_nonansi};
+use svdata::sv_package::package_declaration;
 use verilog_filelist_parser; // DBG
 
 #[derive(Debug, Parser)]
@@ -207,6 +208,10 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut SvData
                 }
                 RefNode::ModuleDeclarationNonansi(_) => {
                     let _d = module_declaration_nonansi(node, &syntax_tree, filepath);
+                }
+                RefNode::PackageDeclaration(_) => {
+                    let d = package_declaration(node, &syntax_tree, filepath);
+                    svdata.packages.push(d.clone());
                 }
                 _ => (),
             }
