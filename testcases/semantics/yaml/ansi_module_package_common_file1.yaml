@@ -81,6 +81,7 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
   - identifier: TestModule_B
     parameters: []
@@ -185,6 +186,7 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+    instances: []
     filepath: testcases/semantics/sv/ansi_module_package_common_file1.sv
 packages:
   - identifier: TestPackage_A

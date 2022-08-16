@@ -75,6 +75,7 @@
         }
       ],
       "ports": [],
+      "instances": [],
       "filepath": "testcases/semantics/sv/parameter_resolver_binary_operations1.sv"
     }
   ],
