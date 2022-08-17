@@ -12,8 +12,14 @@ let b = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let c: bool = a.gt(b.clone());
+let c = a.gt(b.clone());
+let unknown = SvPrimaryLiteralIntegral {
+    data_01: vec![0],
+    data_xz: Some(vec![1]),
+    size: 1,
+    signed: false,
+};
 
-assert_eq!(c, false);
+assert_eq!(c, unknown);
 
 let actual_string = format!("{}", c);
