@@ -815,6 +815,65 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
+    /* Emulates the wildcard equality operator "==?" as defined in 1800-2017 | 11.4.6 Wildcard equality operators */
+    pub fn wildcard_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+        let mut left_nu = self.clone();
+
+        if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
+
+            left_nu.wildcard_eq(right_nu.clone())
+        } else if !right_nu.contains_xz() {
+            left_nu.logical_eq(right_nu.clone())
+        } else {
+            if left_nu.signed {
+                left_nu._matched_sign_extend(&mut right_nu);
+            } else {
+                left_nu._matched_zero_extend(&mut right_nu);
+            }
+
+            for _x in 0..left_nu.size {
+                let left_msb_x: bool = !left_nu.data_01_msb_high() && left_nu.data_xz_msb_high();
+                let left_msb_z: bool = left_nu.data_01_msb_high() && left_nu.data_xz_msb_high();
+                let left_msb_0: bool = !left_nu.data_01_msb_high() && !left_nu.data_xz_msb_high();
+                let left_msb_1: bool = left_nu.data_01_msb_high() && !left_nu.data_xz_msb_high();
+
+                let right_msb_x: bool = !right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
+                let right_msb_z: bool = right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
+
+                if right_msb_x {
+                    if left_msb_z {
+                        right_nu.data_01[0] = right_nu.data_01[0] + 2usize.pow(usize::BITS - 1);
+                    } else if left_msb_1 {
+                        right_nu.data_01[0] = right_nu.data_01[0] + 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[0] =
+                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                    } else if left_msb_0 {
+                        right_nu.data_xz.as_mut().unwrap()[0] =
+                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                    }
+                } else if right_msb_z {
+                    if left_msb_x {
+                        right_nu.data_01[0] = right_nu.data_01[0] - 2usize.pow(usize::BITS - 1);
+                    } else if left_msb_1 {
+                        right_nu.data_xz.as_mut().unwrap()[0] =
+                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                    } else if left_msb_0 {
+                        right_nu.data_01[0] = right_nu.data_01[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[0] =
+                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                    }
+                }
+
+                left_nu = left_nu.rol(1);
+                right_nu = right_nu.rol(1);
+            }
+
+            left_nu.logical_eq(right_nu)
+        }
+    }
+
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
     The correct final number of bits is set to the argument. */
     pub fn _minimum_width(&mut self) {
