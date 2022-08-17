@@ -78,9 +78,16 @@ impl SvPrimaryLiteralIntegral {
             signed: true,
         };
 
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+
         let ret = self.lt(zero.clone());
 
-        ret
+        ret == one
     }
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
@@ -623,32 +630,51 @@ impl SvPrimaryLiteralIntegral {
 
     /* Compares two signed or unsigned integral primary literals and if the value of the RHS primlit is greater than the LHS it returns true.
     Otherwise it returns false. By default if any of the two operands contains X/Z the comparison returns false. */
-    pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> bool {
+    pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
 
+        let zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let unknown = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: Some(vec![1]),
+            size: 1,
+            signed: false,
+        };
+
         if left_nu.contains_xz() || right_nu.contains_xz() {
-            return false;
+            unknown
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
 
-            return left_nu.lt(right_nu.clone());
+            left_nu.lt(right_nu.clone())
         } else {
             if left_nu.signed {
                 let left_nu_neg: bool = left_nu.data_01_msb_high();
                 let right_nu_neg: bool = right_nu.data_01_msb_high();
 
                 if left_nu_neg && !right_nu_neg {
-                    return true;
+                    return one;
                 } else if !left_nu_neg && right_nu_neg {
-                    return false;
+                    return zero;
                 } else {
                     if left_nu_neg {
                         left_nu._minimum_width();
                         right_nu._minimum_width();
 
                         if left_nu.size > right_nu.size {
-                            return true;
+                            return one;
                         }
                     } else {
                         left_nu.signed = false;
@@ -658,7 +684,7 @@ impl SvPrimaryLiteralIntegral {
                         right_nu._minimum_width();
 
                         if left_nu.size < right_nu.size {
-                            return true;
+                            return one;
                         }
                     }
                 }
@@ -667,11 +693,11 @@ impl SvPrimaryLiteralIntegral {
                 right_nu._minimum_width();
 
                 if left_nu.size < right_nu.size {
-                    return true;
+                    return one;
                 }
             }
 
-            false
+            zero
         }
     }
 
