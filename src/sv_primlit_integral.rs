@@ -533,24 +533,8 @@ impl SvPrimaryLiteralIntegral {
 
         for _x in 0..n {
             let previous_size = ret.size;
-            let leading_one: bool;
-            let mut leading_one_xz: bool = false;
-
-            if previous_size % usize::BITS as usize == 0 {
-                leading_one = ret.data_01[0].leading_zeros() == 0;
-
-                if ret.is_4state() {
-                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() == 0;
-                }
-            } else {
-                leading_one = ret.data_01[0].leading_zeros() as usize
-                    == (usize::BITS as usize - (ret.size % usize::BITS as usize));
-
-                if ret.is_4state() {
-                    leading_one_xz = ret.data_xz.as_ref().unwrap()[0].leading_zeros() as usize
-                        == (usize::BITS as usize - (ret.size % usize::BITS as usize));
-                }
-            }
+            let leading_one: bool = ret.data_01_msb_high();
+            let leading_one_xz: bool = ret.data_xz_msb_high();
 
             ret = ret.lsl(1);
             ret._truncate(previous_size);
@@ -651,26 +635,8 @@ impl SvPrimaryLiteralIntegral {
             return left_nu.lt(right_nu.clone());
         } else {
             if left_nu.signed {
-                let left_nu_neg: bool;
-                let right_nu_neg: bool;
-
-                let left_leading_zeros: usize = usize::BITS as usize
-                    - (left_nu.size - (left_nu.data_01.len() - 1) * usize::BITS as usize);
-
-                if left_nu.data_01[0].leading_zeros() as usize == left_leading_zeros {
-                    left_nu_neg = true;
-                } else {
-                    left_nu_neg = false;
-                }
-
-                let right_leading_zeros: usize = usize::BITS as usize
-                    - (right_nu.size - (right_nu.data_01.len() - 1) * usize::BITS as usize);
-
-                if right_nu.data_01[0].leading_zeros() as usize == right_leading_zeros {
-                    right_nu_neg = true;
-                } else {
-                    right_nu_neg = false;
-                }
+                let left_nu_neg: bool = left_nu.data_01_msb_high();
+                let right_nu_neg: bool = right_nu.data_01_msb_high();
 
                 if left_nu_neg && !right_nu_neg {
                     return true;
@@ -723,26 +689,8 @@ impl SvPrimaryLiteralIntegral {
             return left_nu.gt(right_nu.clone());
         } else {
             if left_nu.signed {
-                let left_nu_neg: bool;
-                let right_nu_neg: bool;
-
-                let left_leading_zeros: usize = usize::BITS as usize
-                    - (left_nu.size - (left_nu.data_01.len() - 1) * usize::BITS as usize);
-
-                if left_nu.data_01[0].leading_zeros() as usize == left_leading_zeros {
-                    left_nu_neg = true;
-                } else {
-                    left_nu_neg = false;
-                }
-
-                let right_leading_zeros: usize = usize::BITS as usize
-                    - (right_nu.size - (right_nu.data_01.len() - 1) * usize::BITS as usize);
-
-                if right_nu.data_01[0].leading_zeros() as usize == right_leading_zeros {
-                    right_nu_neg = true;
-                } else {
-                    right_nu_neg = false;
-                }
+                let left_nu_neg: bool = left_nu.data_01_msb_high();
+                let right_nu_neg: bool = right_nu.data_01_msb_high();
 
                 if left_nu_neg && !right_nu_neg {
                     return false;
