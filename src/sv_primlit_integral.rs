@@ -749,9 +749,9 @@ impl SvPrimaryLiteralIntegral {
             left_nu.signed = false;
             right_nu.signed = false;
 
-            return left_nu.case_eq(right_nu.clone());
+            left_nu.case_eq(right_nu.clone())
         } else if left_nu.contains_xz() != right_nu.contains_xz() {
-            return zero;
+            zero
         } else if left_nu.contains_xz() && right_nu.contains_xz() {
             if left_nu.signed {
                 left_nu._matched_sign_extend(&mut right_nu);
@@ -794,12 +794,12 @@ impl SvPrimaryLiteralIntegral {
         };
 
         if left_nu.contains_xz() || right_nu.contains_xz() {
-            return unknown;
+            unknown
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
 
-            return left_nu.logical_eq(right_nu.clone());
+            left_nu.logical_eq(right_nu.clone())
         } else {
             if left_nu.signed {
                 left_nu._matched_sign_extend(&mut right_nu);
@@ -807,18 +807,12 @@ impl SvPrimaryLiteralIntegral {
                 left_nu._matched_zero_extend(&mut right_nu);
             }
 
-            let mut eq_found: bool = true;
-            for x in 0..left_nu.data_01.len() {
-                if left_nu.data_01[x] != right_nu.data_01[x] {
-                    eq_found = false;
-                }
-            }
-            if eq_found {
+            if left_nu.data_01 == right_nu.data_01 {
                 return one;
             }
-        }
 
-        zero
+            zero
+        }
     }
 
     /* Receives a signed or unsigned integral primary literal and deduces an equivalent representation with the minimum number of bits required.
