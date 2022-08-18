@@ -700,6 +700,41 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
+    /* Emulates the less than or equal operator "<=" as defined in 1800-2017 | 11.4.4 Relational operators */
+    pub fn le(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+        let zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let unknown = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: Some(vec![1]),
+            size: 1,
+            signed: false,
+        };
+
+        if self.contains_xz() || right_nu.contains_xz() {
+            unknown
+        } else {
+            let lt = self.lt(right_nu.clone());
+            let logical_eq = self.logical_eq(right_nu.clone());
+
+            if lt == one || logical_eq == one {
+                return one;
+            }
+
+            zero
+        }
+    }
+
     /* Emulates the greater than operator ">" as defined in 1800-2017 | 11.4.4 Relational operators */
     pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
@@ -766,6 +801,41 @@ impl SvPrimaryLiteralIntegral {
                 if left_nu.size > right_nu.size {
                     return one;
                 }
+            }
+
+            zero
+        }
+    }
+
+    /* Emulates the greater than or equal operator ">=" as defined in 1800-2017 | 11.4.4 Relational operators */
+    pub fn ge(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+        let zero = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let one = SvPrimaryLiteralIntegral {
+            data_01: vec![1],
+            data_xz: None,
+            size: 1,
+            signed: false,
+        };
+        let unknown = SvPrimaryLiteralIntegral {
+            data_01: vec![0],
+            data_xz: Some(vec![1]),
+            size: 1,
+            signed: false,
+        };
+
+        if self.contains_xz() || right_nu.contains_xz() {
+            unknown
+        } else {
+            let gt = self.gt(right_nu.clone());
+            let logical_eq = self.logical_eq(right_nu.clone());
+
+            if gt == one || logical_eq == one {
+                return one;
             }
 
             zero
