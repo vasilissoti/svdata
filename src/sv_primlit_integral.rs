@@ -66,49 +66,20 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives a signed integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
+    /* Receives an integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
     pub fn is_negative(&mut self) -> bool {
-        if self.signed != true {
-            panic!("Expected signed SvPrimaryLiteralIntegral but found unsigned!");
-        }
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: true,
-        };
+        let mut zero = bit1b_0();
+        zero.signed = true;
 
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-
-        let ret = self.lt(zero.clone());
-
-        ret == one
+        self.lt(zero) == logic1b_1()
     }
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
     pub fn is_zero(&mut self) -> bool {
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: true,
-        };
+        let mut zero = bit1b_0();
+        zero.signed = true;
 
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-
-        let ret = self.case_eq(zero.clone());
-
-        ret == one
+        self.case_eq(zero) == bit1b_1()
     }
 
     pub fn is_4state(&self) -> bool {
@@ -154,7 +125,7 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Returns whether the MSB of data_01 is high. The size must be correctly specified. */
-    pub fn data_01_msb_high(&self) -> bool {
+    pub fn is_set_msb_01(&self) -> bool {
         let left_leading_zeros: usize =
             usize::BITS as usize - (self.size - (self.data_01.len() - 1) * usize::BITS as usize);
 
@@ -166,16 +137,16 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Returns whether the MSB of data_xz is high. The size must be correctly specified. */
-    pub fn data_xz_msb_high(&self) -> bool {
-        if !self.is_4state() {
-            return false;
-        }
+    pub fn is_set_msb_xz(&self) -> bool {
+        if self.is_4state() {
+            let left_leading_zeros: usize = usize::BITS as usize
+                - (self.size - (self.data_xz.as_ref().unwrap().len() - 1) * usize::BITS as usize);
 
-        let left_leading_zeros: usize = usize::BITS as usize
-            - (self.size - (self.data_xz.as_ref().unwrap().len() - 1) * usize::BITS as usize);
-
-        if self.data_xz.as_ref().unwrap()[0].leading_zeros() as usize == left_leading_zeros {
-            true
+            if self.data_xz.as_ref().unwrap()[0].leading_zeros() as usize == left_leading_zeros {
+                true
+            } else {
+                false
+            }
         } else {
             false
         }
@@ -191,11 +162,11 @@ impl SvPrimaryLiteralIntegral {
         let left_neg: bool = self.is_negative();
         let right_neg: bool = right_nu.is_negative();
 
-        let left_sign_x: bool = !self.data_01_msb_high() && self.data_xz_msb_high();
-        let right_sign_x: bool = !right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
+        let left_sign_x: bool = !self.is_set_msb_01() && self.is_set_msb_xz();
+        let right_sign_x: bool = !right_nu.is_set_msb_01() && right_nu.is_set_msb_xz();
 
-        let left_sign_z: bool = self.data_01_msb_high() && self.data_xz_msb_high();
-        let right_sign_z: bool = right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
+        let left_sign_z: bool = self.is_set_msb_01() && self.is_set_msb_xz();
+        let right_sign_z: bool = right_nu.is_set_msb_01() && right_nu.is_set_msb_xz();
 
         self._primlit_vec_elmnt_match(right_nu);
 
@@ -306,8 +277,8 @@ impl SvPrimaryLiteralIntegral {
 
         let left_neg: bool = self.is_negative();
 
-        let left_sign_x: bool = !self.data_01_msb_high() && self.data_xz_msb_high();
-        let left_sign_z: bool = self.data_01_msb_high() && self.data_xz_msb_high();
+        let left_sign_x: bool = !self.is_set_msb_01() && self.is_set_msb_xz();
+        let left_sign_z: bool = self.is_set_msb_01() && self.is_set_msb_xz();
 
         if left_neg || left_sign_z {
             let mut last_element: bool = false;
@@ -355,7 +326,7 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives a signed integral primary literal and returns its opposite signed primary literal (i.e +ve -> -ve and vice versa).
     The correct final number of bits is set to the argument. */
-    pub fn nega(&self) -> SvPrimaryLiteralIntegral {
+    pub fn negate(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         if ret.is_zero() {
             return ret;
@@ -540,8 +511,8 @@ impl SvPrimaryLiteralIntegral {
 
         for _x in 0..n {
             let previous_size = ret.size;
-            let leading_one: bool = ret.data_01_msb_high();
-            let leading_one_xz: bool = ret.data_xz_msb_high();
+            let leading_one: bool = ret.is_set_msb_01();
+            let leading_one_xz: bool = ret.is_set_msb_xz();
 
             ret = ret.lsl(1);
             ret._truncate(previous_size);
@@ -632,27 +603,8 @@ impl SvPrimaryLiteralIntegral {
     pub fn lt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
 
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let unknown = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: Some(vec![1]),
-            size: 1,
-            signed: false,
-        };
-
         if left_nu.contains_xz() || right_nu.contains_xz() {
-            unknown
+            logic1b_x()
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
@@ -660,30 +612,30 @@ impl SvPrimaryLiteralIntegral {
             left_nu.lt(right_nu.clone())
         } else {
             if left_nu.signed {
-                let left_nu_neg: bool = left_nu.data_01_msb_high();
-                let right_nu_neg: bool = right_nu.data_01_msb_high();
+                let left_nu_neg: bool = left_nu.is_set_msb_01();
+                let right_nu_neg: bool = right_nu.is_set_msb_01();
 
                 if left_nu_neg && !right_nu_neg {
-                    return one;
+                    return logic1b_1();
                 } else if !left_nu_neg && right_nu_neg {
-                    return zero;
+                    return logic1b_0();
                 } else {
                     if left_nu_neg {
                         left_nu._minimum_width();
                         right_nu._minimum_width();
 
                         if left_nu.size > right_nu.size {
-                            return one;
+                            return logic1b_1();
                         }
                     } else {
                         left_nu.signed = false;
                         right_nu.signed = false;
 
-                        left_nu._minimum_width();
+                        left_nu._minimum_width(); // minimize_size
                         right_nu._minimum_width();
 
                         if left_nu.size < right_nu.size {
-                            return one;
+                            return logic1b_1();
                         }
                     }
                 }
@@ -692,46 +644,27 @@ impl SvPrimaryLiteralIntegral {
                 right_nu._minimum_width();
 
                 if left_nu.size < right_nu.size {
-                    return one;
+                    return logic1b_1();
                 }
             }
 
-            zero
+            logic1b_0()
         }
     }
 
     /* Emulates the less than or equal operator "<=" as defined in 1800-2017 | 11.4.4 Relational operators */
     pub fn le(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let unknown = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: Some(vec![1]),
-            size: 1,
-            signed: false,
-        };
-
         if self.contains_xz() || right_nu.contains_xz() {
-            unknown
+            logic1b_x()
         } else {
             let lt = self.lt(right_nu.clone());
             let logical_eq = self.logical_eq(right_nu.clone());
 
-            if lt == one || logical_eq == one {
-                return one;
+            if lt == logic1b_1() || logical_eq == logic1b_1() {
+                return logic1b_1();
             }
 
-            zero
+            logic1b_0()
         }
     }
 
@@ -739,27 +672,8 @@ impl SvPrimaryLiteralIntegral {
     pub fn gt(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
 
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let unknown = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: Some(vec![1]),
-            size: 1,
-            signed: false,
-        };
-
         if left_nu.contains_xz() || right_nu.contains_xz() {
-            unknown
+            logic1b_x()
         } else if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
@@ -767,20 +681,20 @@ impl SvPrimaryLiteralIntegral {
             left_nu.gt(right_nu.clone())
         } else {
             if left_nu.signed {
-                let left_nu_neg: bool = left_nu.data_01_msb_high();
-                let right_nu_neg: bool = right_nu.data_01_msb_high();
+                let left_nu_neg: bool = left_nu.is_set_msb_01();
+                let right_nu_neg: bool = right_nu.is_set_msb_01();
 
                 if left_nu_neg && !right_nu_neg {
-                    return zero;
+                    return logic1b_0();
                 } else if !left_nu_neg && right_nu_neg {
-                    return one;
+                    return logic1b_1();
                 } else {
                     if left_nu_neg {
                         left_nu._minimum_width();
                         right_nu._minimum_width();
 
                         if left_nu.size < right_nu.size {
-                            return one;
+                            return logic1b_1();
                         }
                     } else {
                         left_nu.signed = false;
@@ -790,7 +704,7 @@ impl SvPrimaryLiteralIntegral {
                         right_nu._minimum_width();
 
                         if left_nu.size > right_nu.size {
-                            return one;
+                            return logic1b_1();
                         }
                     }
                 }
@@ -799,64 +713,33 @@ impl SvPrimaryLiteralIntegral {
                 right_nu._minimum_width();
 
                 if left_nu.size > right_nu.size {
-                    return one;
+                    return logic1b_1();
                 }
             }
 
-            zero
+            logic1b_0()
         }
     }
 
     /* Emulates the greater than or equal operator ">=" as defined in 1800-2017 | 11.4.4 Relational operators */
     pub fn ge(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let unknown = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: Some(vec![1]),
-            size: 1,
-            signed: false,
-        };
-
         if self.contains_xz() || right_nu.contains_xz() {
-            unknown
+            logic1b_x()
         } else {
             let gt = self.gt(right_nu.clone());
             let logical_eq = self.logical_eq(right_nu.clone());
 
-            if gt == one || logical_eq == one {
-                return one;
+            if gt == logic1b_1() || logical_eq == logic1b_1() {
+                return logic1b_1();
             }
 
-            zero
+            logic1b_0()
         }
     }
 
     /* Emulates the case equality operator "===" as defined in 1800-2017 | 11.4.5 Equality operators */
     pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
 
         if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
@@ -864,7 +747,7 @@ impl SvPrimaryLiteralIntegral {
 
             left_nu.case_eq(right_nu.clone())
         } else if left_nu.contains_xz() != right_nu.contains_xz() {
-            zero
+            bit1b_0()
         } else if left_nu.contains_xz() && right_nu.contains_xz() {
             if left_nu.signed {
                 left_nu._matched_sign_extend(&mut right_nu);
@@ -876,43 +759,9 @@ impl SvPrimaryLiteralIntegral {
             let data_xz = left_nu.data_xz.as_ref().unwrap() == right_nu.data_xz.as_ref().unwrap();
 
             if data_01 && data_xz {
-                return one;
+                return bit1b_1();
             }
-            zero
-        } else {
-            left_nu.logical_eq(right_nu.clone())
-        }
-    }
-
-    /* Emulates the logical equality operator "==" as defined in 1800-2017 | 11.4.5 Equality operators */
-    pub fn logical_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
-        let mut left_nu = self.clone();
-        let zero = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let one = SvPrimaryLiteralIntegral {
-            data_01: vec![1],
-            data_xz: None,
-            size: 1,
-            signed: false,
-        };
-        let unknown = SvPrimaryLiteralIntegral {
-            data_01: vec![0],
-            data_xz: Some(vec![1]),
-            size: 1,
-            signed: false,
-        };
-
-        if left_nu.contains_xz() || right_nu.contains_xz() {
-            unknown
-        } else if left_nu.signed != right_nu.signed {
-            left_nu.signed = false;
-            right_nu.signed = false;
-
-            left_nu.logical_eq(right_nu.clone())
+            bit1b_0()
         } else {
             if left_nu.signed {
                 left_nu._matched_sign_extend(&mut right_nu);
@@ -921,10 +770,26 @@ impl SvPrimaryLiteralIntegral {
             }
 
             if left_nu.data_01 == right_nu.data_01 {
-                return one;
+                return bit1b_1();
             }
 
-            zero
+            bit1b_0()
+        }
+    }
+
+    /* Emulates the logical equality operator "==" as defined in 1800-2017 | 11.4.5 Equality operators */
+    pub fn logical_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
+        let mut left_nu = self.clone();
+
+        if left_nu.contains_xz() || right_nu.contains_xz() {
+            logic1b_x()
+        } else if left_nu.signed != right_nu.signed {
+            left_nu.signed = false;
+            right_nu.signed = false;
+
+            left_nu.logical_eq(right_nu.clone())
+        } else {
+            left_nu.case_eq(right_nu.clone()).to_4state()
         }
     }
 
@@ -947,13 +812,13 @@ impl SvPrimaryLiteralIntegral {
             }
 
             for _x in 0..left_nu.size {
-                let left_msb_x: bool = !left_nu.data_01_msb_high() && left_nu.data_xz_msb_high();
-                let left_msb_z: bool = left_nu.data_01_msb_high() && left_nu.data_xz_msb_high();
-                let left_msb_0: bool = !left_nu.data_01_msb_high() && !left_nu.data_xz_msb_high();
-                let left_msb_1: bool = left_nu.data_01_msb_high() && !left_nu.data_xz_msb_high();
+                let left_msb_x: bool = !left_nu.is_set_msb_01() && left_nu.is_set_msb_xz();
+                let left_msb_z: bool = left_nu.is_set_msb_01() && left_nu.is_set_msb_xz();
+                let left_msb_0: bool = !left_nu.is_set_msb_01() && !left_nu.is_set_msb_xz();
+                let left_msb_1: bool = left_nu.is_set_msb_01() && !left_nu.is_set_msb_xz();
 
-                let right_msb_x: bool = !right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
-                let right_msb_z: bool = right_nu.data_01_msb_high() && right_nu.data_xz_msb_high();
+                let right_msb_x: bool = !right_nu.is_set_msb_01() && right_nu.is_set_msb_xz();
+                let right_msb_z: bool = right_nu.is_set_msb_01() && right_nu.is_set_msb_xz();
 
                 if right_msb_x {
                     if left_msb_z {
@@ -1296,14 +1161,14 @@ impl SvPrimaryLiteralIntegral {
                 let result_neg: bool;
 
                 if left_neg && right_neg {
-                    left_nu = left_nu.neg();
-                    right_nu = right_nu.neg();
+                    left_nu = left_nu.negate();
+                    right_nu = right_nu.negate();
                     result_neg = false;
                 } else if left_neg || right_neg {
                     if left_neg {
-                        left_nu = left_nu.neg();
+                        left_nu = left_nu.negate();
                     } else {
-                        right_nu = right_nu.neg();
+                        right_nu = right_nu.negate();
                     }
                     result_neg = true;
                 } else {
@@ -1322,7 +1187,7 @@ impl SvPrimaryLiteralIntegral {
 
                 if result_neg {
                     ret.size = ret.size + 1;
-                    ret = ret.neg();
+                    ret = ret.negate();
                 } else {
                     ret.size = ret.size + 1;
                 }
@@ -1368,6 +1233,60 @@ pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     ret._minimum_width();
 
     ret
+}
+
+pub fn bit1b_0() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![0],
+        data_xz: None,
+        size: 1,
+        signed: false,
+    }
+}
+
+pub fn bit1b_1() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![1],
+        data_xz: None,
+        size: 1,
+        signed: false,
+    }
+}
+
+pub fn logic1b_0() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![0],
+        data_xz: Some(vec![0]),
+        size: 1,
+        signed: false,
+    }
+}
+
+pub fn logic1b_1() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![1],
+        data_xz: Some(vec![0]),
+        size: 1,
+        signed: false,
+    }
+}
+
+pub fn logic1b_x() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![0],
+        data_xz: Some(vec![1]),
+        size: 1,
+        signed: false,
+    }
+}
+
+pub fn _logic1b_z() -> SvPrimaryLiteralIntegral {
+    SvPrimaryLiteralIntegral {
+        data_01: vec![1],
+        data_xz: Some(vec![1]),
+        size: 1,
+        signed: false,
+    }
 }
 
 impl fmt::Display for SvPrimaryLiteralIntegral {
@@ -1490,8 +1409,9 @@ impl Neg for SvPrimaryLiteralIntegral {
 
     fn neg(self) -> Self {
         if self.contains_xz() {
-            panic!("Cannot negate an integral primary literal that contains X/Z!");
+            logic1b_x()
+        } else {
+            self.negate()
         }
-        self.nega()
     }
 }

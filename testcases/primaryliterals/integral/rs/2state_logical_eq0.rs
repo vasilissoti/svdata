@@ -13,13 +13,7 @@ let b = SvPrimaryLiteralIntegral {
 };
 
 let c = a.logical_eq(b.clone());
-let zero = SvPrimaryLiteralIntegral {
-    data_01: vec![0],
-    data_xz: None,
-    size: 1,
-    signed: false,
-};
 
-assert_eq!(c, zero);
+assert_eq!(c, logic1b_0());
 
 let actual_string = format!("{}", c);
