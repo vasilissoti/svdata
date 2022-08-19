@@ -13,13 +13,13 @@ pub fn module_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxT
     ret
 }
 
-// Find module identifier for the instantiation (parent module)
+// Find module identifier for the instantiation (child module)
 fn inst_module_identifier(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
     let id = unwrap_node!(p, ModuleIdentifier).unwrap();
     identifier(id, &syntax_tree).unwrap()
 }
 
-// Find hierarchical instance for the instantiation (child module)
+// Find hierarchical instance for the instantiation
 fn inst_hierarchical_instance(
     p: &sv_parser::ModuleInstantiation,
     syntax_tree: &SyntaxTree,
@@ -67,10 +67,10 @@ fn inst_connections(
         match node {
             // Port connection by name
             RefNode::NamedPortConnection(x) => {
-                // Connection in parent module
+                // Connection in child module
                 let left = unwrap_node!(node.clone(), PortIdentifier).unwrap();
                 let left = identifier(left, &syntax_tree).unwrap();
-                // Connection in child module
+                // Connection in parent module
                 let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier).unwrap();
                 let right_name = identifier(right_node, &syntax_tree).unwrap();
                 let mut right_index = String::new();
