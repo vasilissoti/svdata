@@ -6,8 +6,8 @@ let mut a = SvPrimaryLiteralIntegral {
 };
 
 let mut b = SvPrimaryLiteralIntegral {
-    data_01: vec![0, 9223372036854775808],
-    data_xz: Some(vec![1, 0]),
+    data_01: vec![9223372036854775808, 0],
+    data_xz: Some(vec![0, 1]),
     size: 65,
     signed: true,
 };
@@ -15,8 +15,8 @@ let mut b = SvPrimaryLiteralIntegral {
 a._matched_sign_extend(&mut b);
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![18446744073709551615, 9223372036854775808],
-    data_xz: Some(vec![18446744073709551615, 9223372036854775808]),
+    data_01: vec![9223372036854775808, 18446744073709551615],
+    data_xz: Some(vec![9223372036854775808, 18446744073709551615]),
     size: 128,
     signed: true,
 };

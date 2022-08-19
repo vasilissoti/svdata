@@ -15,7 +15,7 @@ let b = SvPrimaryLiteralIntegral {
 let c: SvPrimaryLiteralIntegral = a.cat(b.clone());
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![4, 3],
+    data_01: vec![3, 4],
     data_xz: None,
     size: 68,
     signed: true,

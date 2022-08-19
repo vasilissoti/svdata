@@ -8,8 +8,8 @@ let a = SvPrimaryLiteralIntegral {
 let b: SvPrimaryLiteralIntegral = a << 2;
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![2, 0],
-    data_xz: Some(vec![2, 0]),
+    data_01: vec![0, 2],
+    data_xz: Some(vec![0, 2]),
     size: 66,
     signed: true,
 };
