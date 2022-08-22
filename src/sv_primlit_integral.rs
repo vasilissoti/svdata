@@ -158,7 +158,6 @@ impl SvPrimaryLiteralIntegral {
         if self.signed != true || right_nu.signed != true {
             panic!("Expected signed SvPrimaryLiterals but found unsigned!");
         }
-
         let left_neg: bool = self.is_negative();
         let right_neg: bool = right_nu.is_negative();
 
@@ -616,39 +615,38 @@ impl SvPrimaryLiteralIntegral {
                 let right_nu_neg: bool = right_nu.is_set_msb_01();
 
                 if left_nu_neg && !right_nu_neg {
-                    return logic1b_1();
+                    logic1b_1()
                 } else if !left_nu_neg && right_nu_neg {
-                    return logic1b_0();
+                    logic1b_0()
                 } else {
                     if left_nu_neg {
-                        left_nu._minimum_width();
-                        right_nu._minimum_width();
+                        left_nu._matched_sign_extend(&mut right_nu);
 
-                        if left_nu.size > right_nu.size {
-                            return logic1b_1();
+                        for x in 0..left_nu.data_01.len() {
+                            if left_nu.data_01[x] < right_nu.data_01[x] {
+                                return logic1b_1();
+                            }
                         }
+
+                        logic1b_0()
                     } else {
                         left_nu.signed = false;
                         right_nu.signed = false;
 
-                        left_nu._minimum_width(); // minimize_size
-                        right_nu._minimum_width();
-
-                        if left_nu.size < right_nu.size {
-                            return logic1b_1();
-                        }
+                        left_nu.lt(right_nu.clone())
                     }
                 }
             } else {
-                left_nu._minimum_width();
-                right_nu._minimum_width();
+                left_nu._matched_zero_extend(&mut right_nu);
 
-                if left_nu.size < right_nu.size {
-                    return logic1b_1();
+                for x in 0..left_nu.data_01.len() {
+                    if left_nu.data_01[x] < right_nu.data_01[x] {
+                        return logic1b_1();
+                    }
                 }
-            }
 
-            logic1b_0()
+                logic1b_0()
+            }
         }
     }
 
@@ -685,39 +683,31 @@ impl SvPrimaryLiteralIntegral {
                 let right_nu_neg: bool = right_nu.is_set_msb_01();
 
                 if left_nu_neg && !right_nu_neg {
-                    return logic1b_0();
+                    logic1b_0()
                 } else if !left_nu_neg && right_nu_neg {
-                    return logic1b_1();
+                    logic1b_1()
                 } else {
-                    if left_nu_neg {
-                        left_nu._minimum_width();
-                        right_nu._minimum_width();
+                    left_nu._matched_sign_extend(&mut right_nu);
 
-                        if left_nu.size < right_nu.size {
-                            return logic1b_1();
-                        }
-                    } else {
-                        left_nu.signed = false;
-                        right_nu.signed = false;
-
-                        left_nu._minimum_width();
-                        right_nu._minimum_width();
-
-                        if left_nu.size > right_nu.size {
+                    for x in 0..left_nu.data_01.len() {
+                        if left_nu.data_01[x] > right_nu.data_01[x] {
                             return logic1b_1();
                         }
                     }
+
+                    logic1b_0()
                 }
             } else {
-                left_nu._minimum_width();
-                right_nu._minimum_width();
+                left_nu._matched_zero_extend(&mut right_nu);
 
-                if left_nu.size > right_nu.size {
-                    return logic1b_1();
+                for x in 0..left_nu.data_01.len() {
+                    if left_nu.data_01[x] > right_nu.data_01[x] {
+                        return logic1b_1();
+                    }
                 }
-            }
 
-            logic1b_0()
+                logic1b_0()
+            }
         }
     }
 
@@ -740,7 +730,6 @@ impl SvPrimaryLiteralIntegral {
     /* Emulates the case equality operator "===" as defined in 1800-2017 | 11.4.5 Equality operators */
     pub fn case_eq(&self, mut right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut left_nu = self.clone();
-
         if left_nu.signed != right_nu.signed {
             left_nu.signed = false;
             right_nu.signed = false;
