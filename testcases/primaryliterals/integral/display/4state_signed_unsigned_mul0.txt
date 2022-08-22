@@ -1,4 +1,4 @@
-NumBits: 4
+NumBits: 5
 Signed: false
 4State: true
-Data: 1100
+Data: 01100

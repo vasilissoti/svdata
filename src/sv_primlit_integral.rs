@@ -1128,53 +1128,31 @@ impl SvPrimaryLiteralIntegral {
             }
         }
 
+        let final_num_bits: usize = left_nu.size + right_nu.size;
+        let elmnts_sign_extension: usize = left_nu.data_01.len() + right_nu.data_01.len();
+
         if !left_nu.contains_xz() && !right_nu.contains_xz() {
-            if !left_nu.signed || !right_nu.signed {
-                left_nu.signed = false;
-                right_nu.signed = false;
-
-                left_nu._minimum_width();
-                right_nu._minimum_width();
-
-                ret = left_nu.mul_unsigned(right_nu.clone());
-                ret._minimum_width();
-            } else {
-                let left_neg: bool = left_nu.is_negative();
-                let right_neg: bool = right_nu.is_negative();
-                let result_neg: bool;
-
-                if left_neg && right_neg {
-                    left_nu = left_nu.negate();
-                    right_nu = right_nu.negate();
-                    result_neg = false;
-                } else if left_neg || right_neg {
-                    if left_neg {
-                        left_nu = left_nu.negate();
-                    } else {
-                        right_nu = right_nu.negate();
-                    }
-                    result_neg = true;
-                } else {
-                    result_neg = false;
+            if left_nu.signed && right_nu.signed {
+                let mut matched_prim_lit = bit1b_0();
+                matched_prim_lit.signed = true;
+                for _x in 0..(elmnts_sign_extension - 1) {
+                    matched_prim_lit.data_01.push(0);
                 }
+                matched_prim_lit.size = elmnts_sign_extension * usize::BITS as usize;
 
-                left_nu.signed = false;
-                right_nu.signed = false;
-
-                left_nu._minimum_width();
-                right_nu._minimum_width();
-
-                ret = left_nu.mul_unsigned(right_nu.clone());
-                ret._minimum_width();
-                ret.signed = true;
-
-                if result_neg {
-                    ret.size = ret.size + 1;
-                    ret = ret.negate();
-                } else {
-                    ret.size = ret.size + 1;
-                }
+                left_nu._matched_sign_extend(&mut matched_prim_lit);
+                right_nu._matched_sign_extend(&mut matched_prim_lit);
             }
+
+            ret = left_nu.mul_unsigned(right_nu.clone());
+            if ret.size > final_num_bits {
+                ret._truncate(final_num_bits);
+            } else {
+                ret.size = final_num_bits;
+                // Due to the addition within unsigned_mult we can always expect that ret.data_01.len() is sufficient enough for final_num_bits.
+            }
+
+            ret.signed = left_nu.signed && right_nu.signed;
 
             if ret.is_4state() {
                 ret.data_xz = ret.to_4state().data_xz;

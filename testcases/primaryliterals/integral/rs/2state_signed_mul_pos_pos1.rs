@@ -17,7 +17,7 @@ let c: SvPrimaryLiteralIntegral = a * b;
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![2, 0],
     data_xz: None,
-    size: 67,
+    size: 69,
     signed: true,
 };
 
