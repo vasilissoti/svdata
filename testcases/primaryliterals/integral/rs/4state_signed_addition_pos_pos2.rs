@@ -8,9 +8,9 @@ let a = SvPrimaryLiteralIntegral {
 let b: SvPrimaryLiteralIntegral = a + 4611686018427387904;
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![4611686018427387904, 9223372036854775808],
-    data_xz: Some(vec![0, 0]),
-    size: 128,
+    data_01: vec![0, 4611686018427387904, 9223372036854775808],
+    data_xz: Some(vec![0, 0, 0]),
+    size: 129,
     signed: true,
 };
 

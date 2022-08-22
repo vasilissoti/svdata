@@ -334,10 +334,7 @@ impl SvPrimaryLiteralIntegral {
         }
 
         let from_negative: bool = ret.is_negative();
-        ret._sign_extend();
-
         ret = ret.inv();
-
         ret = ret + 1;
 
         if from_negative {
@@ -350,8 +347,9 @@ impl SvPrimaryLiteralIntegral {
         } else {
             ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
                 + (ret.data_01.len() - 1) * usize::BITS as usize;
-            ret._minimum_width();
         }
+
+        ret._minimum_width();
 
         if ret.is_4state() {
             ret.data_xz = ret.to_4state().data_xz;
@@ -1012,44 +1010,40 @@ impl SvPrimaryLiteralIntegral {
         }
 
         if !ret.contains_xz() && !right_nu.contains_xz() {
+            // Possible carry out from the MSB
+            let final_num_bits: usize;
+            let elmnts_sign_extension: usize;
+
+            if ret.size > right_nu.size {
+                final_num_bits = ret.size + 1;
+                elmnts_sign_extension = ret.data_01.len() + 1;
+            } else {
+                final_num_bits = right_nu.size + 1;
+                elmnts_sign_extension = right_nu.data_01.len() + 1;
+            }
+
             if ret.signed == false || right_nu.signed == false {
                 ret.signed = false;
-                ret._unsigned_primlit_add(right_nu.clone());
-                ret._minimum_width();
             } else {
-                let left_neg: bool = ret.is_negative();
-                let right_neg: bool = right_nu.is_negative();
+                let mut matched_prim_lit = bit1b_0();
+                matched_prim_lit.signed = true;
+                for _x in 0..(elmnts_sign_extension - 1) {
+                    matched_prim_lit.data_01.push(0);
+                }
+                matched_prim_lit.size = elmnts_sign_extension * usize::BITS as usize;
 
-                if !left_neg && !right_neg {
-                    let new_size: usize;
+                ret._matched_sign_extend(&mut matched_prim_lit);
+                right_nu._matched_sign_extend(&mut matched_prim_lit);
+            }
 
-                    ret._unsigned_primlit_add(right_nu.clone());
+            ret._unsigned_primlit_add(right_nu.clone());
 
-                    if ret.data_01[0].leading_zeros() == 0 {
-                        ret.data_01.insert(0, 0);
-                    }
-
-                    new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
-                        + (ret.data_01.len() - 1) * usize::BITS as usize;
-
-                    ret.size = new_size;
-                } else if left_neg && right_neg {
-                    let new_size: usize;
-
-                    ret._matched_sign_extend(&mut right_nu);
-                    ret._unsigned_primlit_add(right_nu.clone());
-
-                    new_size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
-                        + (ret.data_01.len() - 1) * usize::BITS as usize;
-                    ret.size = new_size;
-
-                    ret._minimum_width();
-                } else {
-                    ret._matched_sign_extend(&mut right_nu);
-                    ret._unsigned_primlit_add(right_nu.clone());
-                    ret._truncate(ret.size);
-
-                    ret._minimum_width();
+            if ret.signed {
+                ret._truncate(final_num_bits);
+            } else {
+                ret.size = final_num_bits;
+                if (ret.data_01.len() * usize::BITS as usize) < final_num_bits {
+                    ret.data_01.insert(0, 0);
                 }
             }
 
