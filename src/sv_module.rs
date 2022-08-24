@@ -23,7 +23,7 @@ pub fn module_declaration_ansi(
         match node {
             RefNode::ParameterPortList(p) => {
                 let mut common_scope_found: bool = false;
-                let mut param_type: RefNode = node.clone();
+                let mut param_type: RefNode = node;
 
                 for sub_node in p.into_iter().event() {
                     match sub_node {
@@ -50,7 +50,6 @@ pub fn module_declaration_ansi(
 
                         NodeEvent::Enter(RefNode::ListOfParamAssignments(a)) => {
                             if !common_scope_found {
-                                let common_data = None;
                                 let param_type = SvParamType::Parameter;
 
                                 for param in a {
@@ -59,7 +58,7 @@ pub fn module_declaration_ansi(
                                             ret.parameters.push(port_parameter_declaration_ansi(
                                                 x,
                                                 syntax_tree,
-                                                common_data.clone(),
+                                                None,
                                                 &param_type,
                                             ));
                                         }
@@ -103,14 +102,14 @@ pub fn module_declaration_ansi(
             }
 
             RefNode::AnsiPortDeclaration(p) => {
-                let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port.clone());
+                let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port);
                 ret.ports.push(parsed_port.clone());
-                prev_port = Some(parsed_port.clone());
+                prev_port = Some(parsed_port);
             }
 
             RefNode::ModuleInstantiation(p) => {
                 let parsed_instance: SvInstance = module_instance(p, syntax_tree);
-                ret.instances.push(parsed_instance.clone());
+                ret.instances.push(parsed_instance);
             }
             _ => (),
         }
@@ -137,5 +136,5 @@ pub fn module_declaration_nonansi(
 
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
     let id = unwrap_node!(node, ModuleIdentifier).unwrap();
-    identifier(id, &syntax_tree)
+    identifier(id, syntax_tree)
 }

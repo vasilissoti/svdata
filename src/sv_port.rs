@@ -30,15 +30,16 @@ pub fn port_declaration_ansi(
             comment: get_comment(RefNode::AnsiPortDeclaration(p), syntax_tree),
         }
     } else {
+        let prev_port = prev_port.clone().unwrap();
         ret = SvPort {
             identifier: port_identifier(p, syntax_tree),
-            direction: prev_port.clone().unwrap().direction,
-            nettype: prev_port.clone().unwrap().nettype,
-            datakind: prev_port.clone().unwrap().datakind,
-            datatype: prev_port.clone().unwrap().datatype,
-            classid: prev_port.clone().unwrap().classid,
-            signedness: prev_port.clone().unwrap().signedness,
-            packed_dimensions: prev_port.clone().unwrap().packed_dimensions,
+            direction: prev_port.direction,
+            nettype: prev_port.nettype,
+            datakind: prev_port.datakind,
+            datatype: prev_port.datatype,
+            classid: prev_port.classid,
+            signedness: prev_port.signedness,
+            packed_dimensions: prev_port.packed_dimensions,
             unpacked_dimensions: port_unpackeddim_ansi(
                 RefNode::AnsiPortDeclaration(p),
                 syntax_tree,
