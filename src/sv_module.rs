@@ -135,6 +135,9 @@ pub fn module_declaration_nonansi(
 }
 
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = unwrap_node!(node, ModuleIdentifier).unwrap();
-    identifier(id, syntax_tree)
+    if let Some(id) = unwrap_node!(node, ModuleIdentifier) {
+        identifier(id, syntax_tree)
+    } else {
+        unreachable!()
+    }
 }

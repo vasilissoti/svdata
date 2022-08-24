@@ -683,8 +683,11 @@ fn port_parameter_bits_ansi(
 }
 
 fn port_identifier(node: &sv_parser::AnsiPortDeclaration, syntax_tree: &SyntaxTree) -> String {
-    let id = unwrap_node!(node, PortIdentifier).unwrap();
-    identifier(id, &syntax_tree).unwrap()
+    if let Some(id) = unwrap_node!(node, PortIdentifier) {
+        identifier(id, syntax_tree).unwrap()
+    } else {
+        unreachable!()
+    }
 }
 
 fn port_direction_ansi(
@@ -779,8 +782,8 @@ fn port_nettype_ansi(
     match objecttype {
         Some(RefNode::AnsiPortDeclarationVariable(_)) => {
             match unwrap_node!(m, PortDirection, DataType, Signing, PackedDimension) {
-                Some(_) => return None,
-                _ => return Some(SvNetType::Wire),
+                Some(_) => None,
+                _ => Some(SvNetType::Wire),
             }
         }
 
@@ -789,51 +792,27 @@ fn port_nettype_ansi(
 
             match nettype {
                 // "Var" token was not found
-                Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => {
-                    return Some(SvNetType::Supply0)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => {
-                    return Some(SvNetType::Supply1)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => {
-                    return Some(SvNetType::Triand)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => {
-                    return Some(SvNetType::Trior)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => {
-                    return Some(SvNetType::Trireg)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => {
-                    return Some(SvNetType::Tri0)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => {
-                    return Some(SvNetType::Tri1)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => return Some(SvNetType::Tri),
-                Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => {
-                    return Some(SvNetType::Uwire)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => {
-                    return Some(SvNetType::Wire)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => {
-                    return Some(SvNetType::Wand)
-                }
-                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => return Some(SvNetType::Wor),
+                Some(RefNode::NetType(sv_parser::NetType::Supply0(_))) => Some(SvNetType::Supply0),
+                Some(RefNode::NetType(sv_parser::NetType::Supply1(_))) => Some(SvNetType::Supply1),
+                Some(RefNode::NetType(sv_parser::NetType::Triand(_))) => Some(SvNetType::Triand),
+                Some(RefNode::NetType(sv_parser::NetType::Trior(_))) => Some(SvNetType::Trior),
+                Some(RefNode::NetType(sv_parser::NetType::Trireg(_))) => Some(SvNetType::Trireg),
+                Some(RefNode::NetType(sv_parser::NetType::Tri0(_))) => Some(SvNetType::Tri0),
+                Some(RefNode::NetType(sv_parser::NetType::Tri1(_))) => Some(SvNetType::Tri1),
+                Some(RefNode::NetType(sv_parser::NetType::Tri(_))) => Some(SvNetType::Tri),
+                Some(RefNode::NetType(sv_parser::NetType::Uwire(_))) => Some(SvNetType::Uwire),
+                Some(RefNode::NetType(sv_parser::NetType::Wire(_))) => Some(SvNetType::Wire),
+                Some(RefNode::NetType(sv_parser::NetType::Wand(_))) => Some(SvNetType::Wand),
+                Some(RefNode::NetType(sv_parser::NetType::Wor(_))) => Some(SvNetType::Wor),
 
                 _ => match direction {
-                    SvPortDirection::Inout | SvPortDirection::Input => {
-                        return Some(SvNetType::Wire);
-                    }
+                    SvPortDirection::Inout | SvPortDirection::Input => Some(SvNetType::Wire),
                     SvPortDirection::Output => match unwrap_node!(m, DataType) {
-                        Some(_) => return None,
-                        _ => return Some(SvNetType::Wire),
+                        Some(_) => None,
+                        _ => Some(SvNetType::Wire),
                     },
 
-                    SvPortDirection::Ref => {
-                        return None;
-                    }
+                    SvPortDirection::Ref => None,
 
                     _ => unreachable!(),
                 },
@@ -889,7 +868,7 @@ fn port_packeddim_ansi(m: RefNode, syntax_tree: &SyntaxTree) -> Vec<SvPackedDime
                         let right =
                             get_string(RefNode::ConstantExpression(&r), syntax_tree).unwrap();
 
-                        ret.push((left.clone(), right.clone()));
+                        ret.push((left, right));
                     }
 
                     _ => (),
@@ -917,7 +896,7 @@ fn port_unpackeddim_ansi(m: RefNode, syntax_tree: &SyntaxTree) -> Vec<SvUnpacked
                         let right =
                             get_string(RefNode::ConstantExpression(r), syntax_tree).unwrap();
 
-                        ret.push((left.clone(), Some(right.clone())));
+                        ret.push((left, Some(right)));
                     }
 
                     _ => (),
@@ -928,7 +907,7 @@ fn port_unpackeddim_ansi(m: RefNode, syntax_tree: &SyntaxTree) -> Vec<SvUnpacked
                 let range = unwrap_node!(x, ConstantExpression).unwrap();
                 let left = get_string(range, syntax_tree).unwrap();
 
-                ret.push((left.clone(), None));
+                ret.push((left, None));
             }
 
             _ => (),
@@ -945,8 +924,11 @@ fn port_classid_ansi(
 ) -> Option<String> {
     match datatype {
         SvDataType::Class => {
-            let id = unwrap_node!(m, ClassIdentifier).unwrap();
-            Some(identifier(id, &syntax_tree).unwrap())
+            if let Some(id) = unwrap_node!(m, ClassIdentifier) {
+                identifier(id, syntax_tree)
+            } else {
+                unreachable!()
+            }
         }
 
         _ => None,
