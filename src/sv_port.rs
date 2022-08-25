@@ -583,7 +583,7 @@ fn port_parameter_signedness_ansi(
                                     };
                                 }
 
-                                _ => ret = (Some(SvSignedness::Unsupported), true),
+                                _ => unreachable!(),
                             }
                         }
                     }
