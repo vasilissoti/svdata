@@ -186,34 +186,30 @@ fn parameter_datatype_resolver_ansi(node: &sv_parser::ParamAssignment) -> SvData
         Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
             let subtype = unwrap_node!(node, RealNumber);
             match subtype {
-                Some(_) => return SvDataType::Real,
-                _ => return SvDataType::Logic,
+                Some(_) => SvDataType::Real,
+                _ => SvDataType::Logic,
             }
         }
 
-        Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
-            return SvDataType::Real;
-        }
+        Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => SvDataType::Real,
         Some(RefNode::TimeLiteral(_)) => {
             let subtype = unwrap_node!(node, RealNumber, IntegralNumber);
             match subtype {
-                Some(RefNode::RealNumber(_)) => return SvDataType::Real,
-                Some(RefNode::IntegralNumber(_)) => return SvDataType::Logic,
-                _ => return SvDataType::Time,
+                Some(RefNode::RealNumber(_)) => SvDataType::Real,
+                Some(RefNode::IntegralNumber(_)) => SvDataType::Logic,
+                _ => SvDataType::Time,
             }
         }
         Some(RefNode::UnbasedUnsizedLiteral(_)) => {
             let subtype = unwrap_node!(node, RealNumber, IntegralNumber);
             match subtype {
-                Some(RefNode::RealNumber(_)) => return SvDataType::Real,
-                Some(RefNode::IntegralNumber(_)) => return SvDataType::Logic,
-                _ => return SvDataType::Bit,
+                Some(RefNode::RealNumber(_)) => SvDataType::Real,
+                Some(RefNode::IntegralNumber(_)) => SvDataType::Logic,
+                _ => SvDataType::Bit,
             }
         }
-        Some(RefNode::StringLiteral(_)) => {
-            return SvDataType::String;
-        }
-        _ => unreachable!(),
+        Some(RefNode::StringLiteral(_)) => SvDataType::String,
+        _ => SvDataType::Unsupported,
     }
 }
 
@@ -227,6 +223,7 @@ fn parameter_signedness_resolver_ansi(
         _ => (),
     }
 
+    let mut ret: Option<SvSignedness> = Some(SvSignedness::Signed);
     for sub_node in node {
         match sub_node {
             RefNode::Number(sv_parser::Number::IntegralNumber(_)) => {
@@ -242,30 +239,44 @@ fn parameter_signedness_resolver_ansi(
                             OctalBase,
                             DecimalNumberBaseUnsigned
                         );
-                        let base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap();
+
+                        let base_token;
+                        match base.clone() {
+                            Some(_) => {
+                                base_token = get_string(base.clone().unwrap(), syntax_tree).unwrap()
+                            }
+                            _ => {
+                                ret = Some(SvSignedness::Unsupported); // If not primary literals
+                                break;
+                            }
+                        }
 
                         match base {
                             Some(RefNode::BinaryBase(_)) => {
                                 if base_token != "'sb" {
-                                    return Some(SvSignedness::Unsigned);
+                                    ret = Some(SvSignedness::Unsigned);
+                                    break;
                                 }
                             }
 
                             Some(RefNode::HexBase(_)) => {
                                 if base_token != "'sh" {
-                                    return Some(SvSignedness::Unsigned);
+                                    ret = Some(SvSignedness::Unsigned);
+                                    break;
                                 }
                             }
 
                             Some(RefNode::OctalBase(_)) => {
                                 if base_token != "'so" {
-                                    return Some(SvSignedness::Unsigned);
+                                    ret = Some(SvSignedness::Unsigned);
+                                    break;
                                 }
                             }
 
                             Some(RefNode::DecimalNumberBaseUnsigned(_)) => {
                                 if base_token != "'sd" {
-                                    return Some(SvSignedness::Unsigned);
+                                    ret = Some(SvSignedness::Unsigned);
+                                    break;
                                 }
                             }
 
@@ -278,22 +289,28 @@ fn parameter_signedness_resolver_ansi(
             }
 
             RefNode::Number(sv_parser::Number::RealNumber(_)) => {
-                return None;
+                ret = None;
+                break;
             }
 
             RefNode::TimeLiteral(_) => {
-                return Some(SvSignedness::Unsigned);
+                ret = Some(SvSignedness::Unsigned);
+                break;
             }
 
             RefNode::UnbasedUnsizedLiteral(_) => {
-                return Some(SvSignedness::Unsigned);
+                ret = Some(SvSignedness::Unsigned);
+                break;
             }
 
             RefNode::BinaryOperator(_) => {
                 let symbol_token = symbol(sub_node, syntax_tree).unwrap();
                 match symbol_token.as_str() {
                     "&" | "~&" | "|" | "~|" | "^" | "~^" | "<" | "<=" | ">" | ">=" | "=="
-                    | "=!" => return Some(SvSignedness::Unsigned),
+                    | "=!" => {
+                        ret = Some(SvSignedness::Unsigned);
+                        break;
+                    }
                     _ => (),
                 }
             }
@@ -302,7 +319,7 @@ fn parameter_signedness_resolver_ansi(
         }
     }
 
-    Some(SvSignedness::Signed)
+    ret
 }
 
 fn port_parameter_identifier_ansi(
@@ -435,7 +452,7 @@ fn port_parameter_datatype_ansi(
                             ret = (Some(SvDataType::Bit), true)
                         }
                         Some(RefNode::StringLiteral(_)) => ret = (Some(SvDataType::String), true),
-                        _ => unreachable!(),
+                        _ => ret = (Some(SvDataType::Unsupported), true),
                     }
                 }
             }
@@ -520,8 +537,18 @@ fn port_parameter_signedness_ansi(
                                 OctalBase,
                                 DecimalNumberBaseUnsigned
                             );
-                            let base_token =
-                                get_string(base.clone().unwrap(), syntax_tree).unwrap();
+
+                            let base_token;
+                            match base.clone() {
+                                Some(_) => {
+                                    base_token =
+                                        get_string(base.clone().unwrap(), syntax_tree).unwrap()
+                                }
+                                _ => {
+                                    return (Some(SvSignedness::Unsupported), true);
+                                    // If not primary literal
+                                }
+                            }
 
                             match base {
                                 Some(RefNode::BinaryBase(_)) => {
@@ -556,7 +583,7 @@ fn port_parameter_signedness_ansi(
                                     };
                                 }
 
-                                _ => unreachable!(),
+                                _ => ret = (Some(SvSignedness::Unsupported), true),
                             }
                         }
                     }
@@ -584,8 +611,11 @@ fn port_parameter_classid_ansi(
 ) -> Option<String> {
     match datatype {
         Some(SvDataType::Class) => {
-            let id = unwrap_node!(m.unwrap(), ClassIdentifier).unwrap();
-            Some(identifier(id, &syntax_tree).unwrap())
+            if let Some(id) = unwrap_node!(m.unwrap(), ClassIdentifier) {
+                identifier(id, syntax_tree)
+            } else {
+                unreachable!()
+            }
         }
 
         _ => None,
@@ -620,17 +650,17 @@ fn port_parameter_bits_ansi(
         Some(nu_bits)
     } else {
         if parameter_resolver_needed_ansi(p) {
-            return Some(404); // TODO
+            Some(404) // TODO
         } else {
             match datatype {
-                Some(SvDataType::Class) => return None,
+                Some(SvDataType::Class) => None,
 
-                Some(SvDataType::Bit) => return Some(1),
+                Some(SvDataType::Bit) => Some(1),
 
-                Some(SvDataType::Byte) => return Some(8),
+                Some(SvDataType::Byte) => Some(8),
 
                 Some(SvDataType::Integer) | Some(SvDataType::Int) | Some(SvDataType::Shortreal) => {
-                    return Some(32)
+                    Some(32)
                 }
 
                 Some(SvDataType::Shortint) => Some(16),
@@ -638,19 +668,19 @@ fn port_parameter_bits_ansi(
                 Some(SvDataType::Longint)
                 | Some(SvDataType::Time)
                 | Some(SvDataType::Real)
-                | Some(SvDataType::Realtime) => return Some(64),
+                | Some(SvDataType::Realtime) => Some(64),
 
                 Some(SvDataType::String) => {
                     if !found_assignment {
-                        return None;
+                        None
                     } else {
-                        return Some((expression.clone().unwrap().len() as u64 - 2) * 8);
+                        Some((expression.clone().unwrap().len() as u64 - 2) * 8)
                     }
                 }
 
                 Some(SvDataType::Reg) | Some(SvDataType::Logic) => {
                     if !found_assignment {
-                        return None;
+                        None
                     } else {
                         let fixed_size = unwrap_node!(p, Size);
 
@@ -662,11 +692,11 @@ fn port_parameter_bits_ansi(
                                     .as_str()
                                     .parse()
                                     .unwrap();
-                                return Some(ret);
+                                Some(ret)
                             }
 
                             _ => {
-                                return Some(32);
+                                Some(32)
 
                                 // TODO
                             }
