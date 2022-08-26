@@ -5,4 +5,8 @@ let mut a = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let actual_string = format!("{}", a.is_zero());
+let b: bool = a.is_zero();
+
+assert_eq!(b, false);
+
+let actual_string = format!("{}", b);

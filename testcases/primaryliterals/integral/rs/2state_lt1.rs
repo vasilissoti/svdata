@@ -12,6 +12,8 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c: bool = a < b;
+let c = a.lt(b.clone());
+
+assert_eq!(c, logic1b_0());
 
 let actual_string = format!("{}", c);
