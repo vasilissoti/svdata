@@ -9,7 +9,7 @@ let b: SvPrimaryLiteralIntegral = a << 1;
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![0, 0, 0],
-    data_xz: Some(vec![1, 1, 0]),
+    data_xz: Some(vec![0, 1, 1]),
     size: 129,
     signed: true,
 };

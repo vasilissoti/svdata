@@ -1,6 +1,6 @@
 let mut a = SvPrimaryLiteralIntegral {
-    data_01: vec![9223372036854775809, 9223372036854775808],
-    data_xz: Some(vec![9223372036854775809, 0]),
+    data_01: vec![9223372036854775808, 9223372036854775809],
+    data_xz: Some(vec![0, 9223372036854775809]),
     size: 128,
     signed: false,
 };
@@ -8,8 +8,8 @@ let mut a = SvPrimaryLiteralIntegral {
 a._truncate(69);
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![1, 9223372036854775808],
-    data_xz: Some(vec![1, 0]),
+    data_01: vec![9223372036854775808, 1],
+    data_xz: Some(vec![0, 1]),
     size: 69,
     signed: false,
 };
