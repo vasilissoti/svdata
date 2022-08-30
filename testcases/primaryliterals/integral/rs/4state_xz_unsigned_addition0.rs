@@ -12,7 +12,7 @@ let exp = SvPrimaryLiteralIntegral {
     data_xz: Some(vec![18446744073709551615, 1]),
     size: 65,
     signed: false,
-}
+};
 
 assert_eq!(b, exp);
 
