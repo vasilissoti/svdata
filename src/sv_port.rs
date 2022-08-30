@@ -637,13 +637,19 @@ fn port_parameter_bits_ansi(
 
         for dim in packed_dimensions {
             let (left, right) = dim;
-            let left_num: u64 = left.as_str().parse().unwrap();
-            let right_num: u64 = right.as_str().parse().unwrap();
+            let left_num: std::result::Result<u64, _> = left.as_str().parse();
+            let right_num: std::result::Result<u64, _> = right.as_str().parse();
 
-            if nu_bits == 0 {
-                nu_bits = left_num - right_num + 1;
-            } else {
-                nu_bits = nu_bits * (left_num - right_num + 1);
+            match (left_num, right_num) {
+                (Ok(left_num), Ok(right_num)) => {
+                    if nu_bits == 0 {
+                        nu_bits = left_num - right_num + 1;
+                    } else {
+                        nu_bits = nu_bits * (left_num - right_num + 1);
+                    }
+                }
+
+                _ => return Some(404), // TODO
             }
         }
 
