@@ -10,7 +10,7 @@ Module:
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: true
-    NumBits: 404
+    NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: ["/* A0 */"]

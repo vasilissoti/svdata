@@ -27,7 +27,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 404,
+          "num_bits": 64,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
@@ -41,7 +41,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": false,
-          "num_bits": 404,
+          "num_bits": 64,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null

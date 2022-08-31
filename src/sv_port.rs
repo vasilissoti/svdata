@@ -341,7 +341,7 @@ fn port_parameter_value_ansi(
     if !found_assignment {
         return None;
     } else {
-        let expression = unwrap_node!(node, ConstantExpression);
+        let expression = unwrap_node!(node, ConstantParamExpression);
         get_string(expression.unwrap(), syntax_tree)
     }
 }
@@ -662,36 +662,40 @@ fn port_parameter_bits_ansi(
 
         Some(nu_bits)
     } else {
-        if parameter_resolver_needed_ansi(p) {
-            Some(404) // TODO
-        } else {
-            match datatype {
-                Some(SvDataType::Class) => None,
+        match datatype {
+            Some(SvDataType::Class) => None,
 
-                Some(SvDataType::Bit) => Some(1),
+            Some(SvDataType::Bit) => Some(1),
 
-                Some(SvDataType::Byte) => Some(8),
+            Some(SvDataType::Byte) => Some(8),
 
-                Some(SvDataType::Integer) | Some(SvDataType::Int) | Some(SvDataType::Shortreal) => {
-                    Some(32)
-                }
+            Some(SvDataType::Integer) | Some(SvDataType::Int) | Some(SvDataType::Shortreal) => {
+                Some(32)
+            }
 
-                Some(SvDataType::Shortint) => Some(16),
+            Some(SvDataType::Shortint) => Some(16),
 
-                Some(SvDataType::Longint)
-                | Some(SvDataType::Time)
-                | Some(SvDataType::Real)
-                | Some(SvDataType::Realtime) => Some(64),
+            Some(SvDataType::Longint)
+            | Some(SvDataType::Time)
+            | Some(SvDataType::Real)
+            | Some(SvDataType::Realtime) => Some(64),
 
-                Some(SvDataType::String) => {
+            Some(SvDataType::String) => {
+                if parameter_resolver_needed_ansi(p) {
+                    Some(404) // TODO
+                } else {
                     if !found_assignment {
                         None
                     } else {
                         Some((expression.clone().unwrap().len() as u64 - 2) * 8)
                     }
                 }
+            }
 
-                Some(SvDataType::Reg) | Some(SvDataType::Logic) => {
+            Some(SvDataType::Reg) | Some(SvDataType::Logic) => {
+                if parameter_resolver_needed_ansi(p) {
+                    Some(404) // TODO
+                } else {
                     if !datatype_overridable {
                         Some(1)
                     } else if !found_assignment {
@@ -718,11 +722,13 @@ fn port_parameter_bits_ansi(
                         }
                     }
                 }
-
-                None => None,
-
-                _ => unreachable!(),
             }
+
+            Some(SvDataType::Unsupported) => Some(404), // TODO
+
+            None => None,
+
+            _ => unreachable!(),
         }
     }
 }

@@ -13,14 +13,14 @@
           "classid": "Colors",
           "signedness": null,
           "signedness_overridable": false,
-          "num_bits": 404,
+          "num_bits": null,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
         },
         {
           "identifier": "FRUITS",
-          "expression": "3",
+          "expression": "'{red,yellow,blue}",
           "paramtype": "LocalParam",
           "datatype": "Class",
           "datatype_overridable": false,
@@ -46,7 +46,7 @@
           "classid": "medal",
           "signedness": null,
           "signedness_overridable": false,
-          "num_bits": 404,
+          "num_bits": null,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null

@@ -115,6 +115,8 @@ package P_integralDataTypes; // {{{
   localparam bit unsigned bit_unsigned_1 = 1'b1;
   localparam bit signed bit_signed_0 = 1'b0;
   localparam bit signed bit_signed_1 = 1'b1;
+  localparam bit_implicit_0 = '0;
+  localparam bit_implicit_1 = '1;
 
   localparam logic logic_0 = 1'b0;
   localparam logic logic_1 = 1'b1;
@@ -132,6 +134,10 @@ package P_integralDataTypes; // {{{
   localparam logic unsigned logic_unsigned_1 = 1'b1;
   localparam logic signed logic_signed_0 = 1'b0;
   localparam logic signed logic_signed_1 = 1'b1;
+  localparam logic_implicit_0 = -1;
+  localparam logic_implicit_1 = 'sd57;
+  localparam logic_implicit_2 = -8'd58;
+  localparam logic_implicit_3 = -'sh60;
 
   localparam reg reg_0 = 1'b0;
   localparam reg reg_1 = 1'b1;
@@ -303,6 +309,8 @@ package P_integralVectorPacked; // {{{
   localparam bit signed [2:0][3:0] bit_signed_6 = '1;
   localparam bit signed [2:0][3:0] bit_signed_7 = '{1, 2, 3};
   localparam bit signed [2:0][3:0] bit_signed_8 = {4'd1, 4'd2, 4'd3};
+  localparam [3:0] bit_implicit_0 = '0;
+  localparam [3:0] bit_implicit_1 = '1;
 
   localparam logic [3:0] logic_0 = 4'b0101;
   localparam logic [3:0] logic_1 = 4'd5;

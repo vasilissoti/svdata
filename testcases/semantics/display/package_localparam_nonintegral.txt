@@ -358,7 +358,7 @@ Package:
     Comment: None
   Parameter: 
     Identifier: shortreal_unpacked_0
-    Expression: 3
+    Expression: '{1.2,3.4,5.6}
     ParameterType: LocalParam
     DataType: Shortreal
     DataTypeOverridable: false
@@ -371,7 +371,7 @@ Package:
     Comment: None
   Parameter: 
     Identifier: real_unpacked_0
-    Expression: 3
+    Expression: '{1.2,3.4,5.6}
     ParameterType: LocalParam
     DataType: Real
     DataTypeOverridable: false
@@ -384,7 +384,7 @@ Package:
     Comment: None
   Parameter: 
     Identifier: realtime_unpacked_0
-    Expression: 3
+    Expression: '{1.2,3.4,5.6}
     ParameterType: LocalParam
     DataType: Realtime
     DataTypeOverridable: false

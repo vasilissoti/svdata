@@ -10,13 +10,13 @@ Package:
     ClassIdentifier: Colors
     Signedness: None
     SignednessOverridable: false
-    NumBits: 404
+    NumBits: None
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
     Identifier: FRUITS
-    Expression: 3
+    Expression: '{red,yellow,blue}
     ParameterType: LocalParam
     DataType: Class
     DataTypeOverridable: false
@@ -36,7 +36,7 @@ Package:
     ClassIdentifier: medal
     Signedness: None
     SignednessOverridable: false
-    NumBits: 404
+    NumBits: None
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None

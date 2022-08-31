@@ -11,12 +11,12 @@ packages:
         classid: Colors
         signedness: ~
         signedness_overridable: false
-        num_bits: 404
+        num_bits: ~
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
       - identifier: FRUITS
-        expression: "3"
+        expression: "'{red,yellow,blue}"
         paramtype: LocalParam
         datatype: Class
         datatype_overridable: false
@@ -37,7 +37,7 @@ packages:
         classid: medal
         signedness: ~
         signedness_overridable: false
-        num_bits: 404
+        num_bits: ~
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~

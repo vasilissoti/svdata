@@ -1347,6 +1347,30 @@ packages:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+      - identifier: bit_implicit_0
+        expression: "'0"
+        paramtype: LocalParam
+        datatype: Bit
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 1
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: bit_implicit_1
+        expression: "'1"
+        paramtype: LocalParam
+        datatype: Bit
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 1
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
       - identifier: logic_0
         expression: "1'b0"
         paramtype: LocalParam
@@ -1536,6 +1560,54 @@ packages:
         signedness: Signed
         signedness_overridable: false
         num_bits: 1
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: logic_implicit_0
+        expression: "-1"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: logic_implicit_1
+        expression: "'sd57"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: logic_implicit_2
+        expression: "-8'd58"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 8
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: logic_implicit_3
+        expression: "-'sh60"
+        paramtype: LocalParam
+        datatype: Logic
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
@@ -1979,7 +2051,7 @@ packages:
         classid: ~
         signedness: Signed
         signedness_overridable: false
-        num_bits: 404
+        num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
@@ -2327,7 +2399,7 @@ packages:
         classid: ~
         signedness: Unsigned
         signedness_overridable: false
-        num_bits: 404
+        num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
@@ -2383,7 +2455,7 @@ packages:
   - identifier: P_integralNonVectorUnpacked
     parameters:
       - identifier: shortint_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2397,7 +2469,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2411,7 +2483,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2425,7 +2497,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2439,7 +2511,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2453,7 +2525,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2467,7 +2539,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2481,7 +2553,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2495,7 +2567,7 @@ packages:
             - ~
         comment: ~
       - identifier: shortint_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Shortint
         datatype_overridable: false
@@ -2509,7 +2581,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2523,7 +2595,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2537,7 +2609,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2551,7 +2623,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2565,7 +2637,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2579,7 +2651,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2593,7 +2665,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2607,7 +2679,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2621,7 +2693,7 @@ packages:
             - ~
         comment: ~
       - identifier: int_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Int
         datatype_overridable: false
@@ -2635,7 +2707,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2649,7 +2721,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2663,7 +2735,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2677,7 +2749,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2691,7 +2763,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2705,7 +2777,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2719,7 +2791,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2733,7 +2805,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2747,7 +2819,7 @@ packages:
             - ~
         comment: ~
       - identifier: longint_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Longint
         datatype_overridable: false
@@ -2761,7 +2833,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2775,7 +2847,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2789,7 +2861,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2803,7 +2875,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2817,7 +2889,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2831,7 +2903,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2845,7 +2917,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2859,7 +2931,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2873,7 +2945,7 @@ packages:
             - ~
         comment: ~
       - identifier: byte_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Byte
         datatype_overridable: false
@@ -2887,7 +2959,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2901,7 +2973,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2915,7 +2987,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2929,7 +3001,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2943,7 +3015,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2957,7 +3029,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2971,7 +3043,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2985,7 +3057,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_unsigned_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -2999,7 +3071,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -3013,7 +3085,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -3027,7 +3099,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -3041,7 +3113,7 @@ packages:
             - ~
         comment: ~
       - identifier: integer_signed_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Integer
         datatype_overridable: false
@@ -3055,7 +3127,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3069,7 +3141,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3083,7 +3155,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3097,7 +3169,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3111,7 +3183,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_unsigned_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3125,7 +3197,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_unsigned_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3139,7 +3211,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_unsigned_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3153,7 +3225,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_unsigned_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3167,7 +3239,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_signed_0
-        expression: "3"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3181,7 +3253,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_signed_1
-        expression: "3"
+        expression: "'{-1,-2,-3}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3195,7 +3267,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_signed_2
-        expression: "3"
+        expression: "'{'1,'0,'1}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3209,7 +3281,7 @@ packages:
             - ~
         comment: ~
       - identifier: time_signed_3
-        expression: "4"
+        expression: "'{'0,'1,'X,'Z}"
         paramtype: LocalParam
         datatype: Time
         datatype_overridable: false
@@ -3623,6 +3695,34 @@ packages:
         packed_dimensions:
           - - "2"
             - "0"
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: bit_implicit_0
+        expression: "'0"
+        paramtype: LocalParam
+        datatype: Bit
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 4
+        packed_dimensions:
+          - - "3"
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: bit_implicit_1
+        expression: "'1"
+        paramtype: LocalParam
+        datatype: Bit
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 4
+        packed_dimensions:
           - - "3"
             - "0"
         unpacked_dimensions: []
@@ -4627,7 +4727,7 @@ packages:
   - identifier: P_integralVectorUnpacked
     parameters:
       - identifier: bit_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4641,7 +4741,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4657,7 +4757,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4673,7 +4773,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4687,7 +4787,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4701,7 +4801,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4715,7 +4815,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4731,7 +4831,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4747,7 +4847,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4763,7 +4863,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4779,7 +4879,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4795,7 +4895,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4811,7 +4911,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_unsigned_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4825,7 +4925,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_unsigned_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4841,7 +4941,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_unsigned_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4857,7 +4957,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_unsigned_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4871,7 +4971,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_unsigned_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4885,7 +4985,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_unsigned_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4899,7 +4999,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_unsigned_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4915,7 +5015,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_unsigned_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4931,7 +5031,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_unsigned_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4947,7 +5047,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_unsigned_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4963,7 +5063,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_unsigned_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4979,7 +5079,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_unsigned_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -4995,7 +5095,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_signed_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5009,7 +5109,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_signed_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5025,7 +5125,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_signed_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5041,7 +5141,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_signed_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5055,7 +5155,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_signed_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5069,7 +5169,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_signed_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5083,7 +5183,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_signed_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5099,7 +5199,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_signed_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5115,7 +5215,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_signed_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5131,7 +5231,7 @@ packages:
             - "2"
         comment: ~
       - identifier: bit_signed_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5147,7 +5247,7 @@ packages:
             - ~
         comment: ~
       - identifier: bit_signed_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5163,7 +5263,7 @@ packages:
             - "0"
         comment: ~
       - identifier: bit_signed_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Bit
         datatype_overridable: false
@@ -5179,7 +5279,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5193,7 +5293,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5209,7 +5309,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5225,7 +5325,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5239,7 +5339,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5253,7 +5353,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5267,7 +5367,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5283,7 +5383,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5299,7 +5399,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5315,7 +5415,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5331,7 +5431,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5347,7 +5447,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5363,7 +5463,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_12
-        expression: "3"
+        expression: "'{'X,'Z,'X}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5379,7 +5479,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5393,7 +5493,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5409,7 +5509,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5425,7 +5525,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_unsigned_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5439,7 +5539,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5453,7 +5553,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_unsigned_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5467,7 +5567,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_unsigned_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5483,7 +5583,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5499,7 +5599,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_unsigned_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5515,7 +5615,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_unsigned_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5531,7 +5631,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_unsigned_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5547,7 +5647,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_unsigned_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5563,7 +5663,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_unsigned_12
-        expression: "3"
+        expression: "'{'X,'Z,'Z}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5579,7 +5679,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5593,7 +5693,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5609,7 +5709,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5625,7 +5725,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_signed_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5639,7 +5739,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5653,7 +5753,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_signed_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5667,7 +5767,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_signed_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5683,7 +5783,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5699,7 +5799,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_signed_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5715,7 +5815,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_signed_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5731,7 +5831,7 @@ packages:
             - ~
         comment: ~
       - identifier: logic_signed_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5747,7 +5847,7 @@ packages:
             - "0"
         comment: ~
       - identifier: logic_signed_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5763,7 +5863,7 @@ packages:
             - "2"
         comment: ~
       - identifier: logic_signed_12
-        expression: "3"
+        expression: "'{'X,'Z,'Z}"
         paramtype: LocalParam
         datatype: Logic
         datatype_overridable: false
@@ -5779,7 +5879,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5793,7 +5893,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5809,7 +5909,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5825,7 +5925,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5839,7 +5939,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5853,7 +5953,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5867,7 +5967,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5883,7 +5983,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5899,7 +5999,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5915,7 +6015,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5931,7 +6031,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5947,7 +6047,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5963,7 +6063,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_12
-        expression: "3"
+        expression: "'{'X,'Z,'X}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5979,7 +6079,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -5993,7 +6093,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6009,7 +6109,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6025,7 +6125,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_unsigned_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6039,7 +6139,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6053,7 +6153,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_unsigned_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6067,7 +6167,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_unsigned_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6083,7 +6183,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6099,7 +6199,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_unsigned_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6115,7 +6215,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_unsigned_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6131,7 +6231,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_unsigned_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6147,7 +6247,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_unsigned_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6163,7 +6263,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_unsigned_12
-        expression: "3"
+        expression: "'{'X,'Z,'Z}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6179,7 +6279,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_0
-        expression: "1"
+        expression: "'{1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6193,7 +6293,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_1
-        expression: "1"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6209,7 +6309,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_2
-        expression: "0"
+        expression: "'{3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6225,7 +6325,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_signed_3
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6239,7 +6339,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_4
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6253,7 +6353,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_signed_5
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6267,7 +6367,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_signed_6
-        expression: "3"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6283,7 +6383,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_7
-        expression: "2"
+        expression: "'{1,1,0}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6299,7 +6399,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_signed_8
-        expression: "0"
+        expression: "'{0,1,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6315,7 +6415,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_signed_9
-        expression: "3"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6331,7 +6431,7 @@ packages:
             - ~
         comment: ~
       - identifier: reg_signed_10
-        expression: "2"
+        expression: "'{3,2,1}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6347,7 +6447,7 @@ packages:
             - "0"
         comment: ~
       - identifier: reg_signed_11
-        expression: "0"
+        expression: "'{1,2,3}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false
@@ -6363,7 +6463,7 @@ packages:
             - "2"
         comment: ~
       - identifier: reg_signed_12
-        expression: "3"
+        expression: "'{'X,'Z,'Z}"
         paramtype: LocalParam
         datatype: Reg
         datatype_overridable: false

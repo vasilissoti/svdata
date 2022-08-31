@@ -339,7 +339,7 @@ packages:
         unpacked_dimensions: []
         comment: ~
       - identifier: shortreal_unpacked_0
-        expression: "3"
+        expression: "'{1.2,3.4,5.6}"
         paramtype: LocalParam
         datatype: Shortreal
         datatype_overridable: false
@@ -353,7 +353,7 @@ packages:
             - ~
         comment: ~
       - identifier: real_unpacked_0
-        expression: "3"
+        expression: "'{1.2,3.4,5.6}"
         paramtype: LocalParam
         datatype: Real
         datatype_overridable: false
@@ -367,7 +367,7 @@ packages:
             - ~
         comment: ~
       - identifier: realtime_unpacked_0
-        expression: "3"
+        expression: "'{1.2,3.4,5.6}"
         paramtype: LocalParam
         datatype: Realtime
         datatype_overridable: false

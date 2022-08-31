@@ -42,7 +42,7 @@ Package:
     Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
   Parameter: 
     Identifier: ud0
-    Expression: 3
+    Expression: '{557,558,559}
     ParameterType: LocalParam
     DataType: Int
     DataTypeOverridable: false
