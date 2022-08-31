@@ -2,7 +2,7 @@
   "modules": [],
   "packages": [
     {
-      "identifier": "TestPackage",
+      "identifier": "P_smoketest",
       "parameters": [
         {
           "identifier": "a",
@@ -80,7 +80,7 @@
           "comment": null
         }
       ],
-      "filepath": "testcases/semantics/sv/package_localparam.sv"
+      "filepath": "testcases/semantics/sv/package_localparam_smoketest.sv"
     }
   ]
 }

@@ -1,11 +1,11 @@
 Package:
-  Identifier: TestPackage
-  Filepath: testcases/semantics/sv/package_parameter_keyword.sv
+  Identifier: P_expressions
+  Filepath: testcases/semantics/sv/package_localparam_expressions.sv
   Parameter: 
-    Identifier: a
+    Identifier: A
     Expression: 8'sb10101010
     ParameterType: LocalParam
-    DataType: Logic
+    DataType: Byte
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
@@ -15,55 +15,42 @@ Package:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: b
-    Expression: 4'b1000
+    Identifier: B
+    Expression: (8'd5+"hello")
     ParameterType: LocalParam
-    DataType: Logic
+    DataType: Longint
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: false
-    NumBits: 4
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: e
-    Expression: 7.5
-    ParameterType: LocalParam
-    DataType: Real
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: None
-    SignednessOverridable: false
-    NumBits: 64
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: f
-    Expression: 5
+    Identifier: C
+    Expression: ("hello"+8'd5)
     ParameterType: LocalParam
-    DataType: Logic
+    DataType: Longint
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: false
-    NumBits: 32
+    NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: g
-    Expression: "hello"
+    Identifier: D
+    Expression: B+(C<<5)
     ParameterType: LocalParam
-    DataType: String
+    DataType: Bit
     DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: None
+    Signedness: Unsigned
     SignednessOverridable: false
-    NumBits: 40
-    PackedDimensions: []
+    NumBits: 404
+    PackedDimensions: [("A-1", "0")]
     UnpackedDimensions: []
     Comment: None
 

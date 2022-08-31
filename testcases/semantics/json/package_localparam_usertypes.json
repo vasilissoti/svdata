@@ -1,0 +1,232 @@
+{
+  "modules": [],
+  "packages": [
+    {
+      "identifier": "P_enum",
+      "parameters": [
+        {
+          "identifier": "LETTERBOX",
+          "expression": "red",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "Colors",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 404,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "FRUITS",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "Colors",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "3",
+              null
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "FIRST",
+          "expression": "gold",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "medal",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 404,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/package_localparam_usertypes.sv"
+    },
+    {
+      "identifier": "P_packedStruct",
+      "parameters": [
+        {
+          "identifier": "pack1_0",
+          "expression": "'0",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack1_1",
+          "expression": "'1",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack1_2",
+          "expression": "'{default:'0}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack1_3",
+          "expression": "'{default:'1}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack1_4",
+          "expression": "'{a:1,b:2,c:3,d:4}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack1_5",
+          "expression": "'{a:1,b:2,default:5}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack1",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_0",
+          "expression": "'X",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_1",
+          "expression": "'Z",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_2",
+          "expression": "'{default:'X}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_3",
+          "expression": "'{default:'Z}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_4",
+          "expression": "'{a:1,b:2,c:'X}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "pack2_5",
+          "expression": "'{a:1,b:2,default:5}",
+          "paramtype": "LocalParam",
+          "datatype": "Class",
+          "datatype_overridable": false,
+          "classid": "pack2",
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": null,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/package_localparam_usertypes.sv"
+    }
+  ]
+}

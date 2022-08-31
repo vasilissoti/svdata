@@ -1,0 +1,121 @@
+Package:
+  Identifier: P_comments
+  Filepath: testcases/semantics/sv/package_localparam_comments.sv
+  Parameter: 
+    Identifier: li0
+    Expression: 555
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/* id/eq */", "/*eq/val*/", "/*post*/"]
+  Parameter: 
+    Identifier: le0
+    Expression: 556
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+  Parameter: 
+    Identifier: pd0
+    Expression: {32'd560,32'd561,32'd562}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 96
+    PackedDimensions: [("2", "0"), ("31", "0")]
+    UnpackedDimensions: []
+    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+  Parameter: 
+    Identifier: ud0
+    Expression: 3
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: ["/*id/ud*/", "/*ud/eq*/", "/*eq/val*/", "/*post*/"]
+  Parameter: 
+    Identifier: pi0
+    Expression: 666
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: pe0
+    Expression: 667
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
+  Parameter: 
+    Identifier: i0
+    Expression: 777
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id0/eq0*/", "/*eq0/val0*/", "/*val0/sep*/"]
+  Parameter: 
+    Identifier: i1
+    Expression: 778
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id1/eq1*/", "/*eq1/val1*/", "/*val2/sep*/"]
+  Parameter: 
+    Identifier: i2
+    Expression: 779
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: ["/*id1/eq2*/", "/*eq2/val2*/", "/*post*/"]
+

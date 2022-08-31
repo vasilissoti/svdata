@@ -124,6 +124,10 @@ package P_integralDataTypes; // {{{
   localparam logic logic_5 = 1'bZ;
   localparam logic logic_6 = 'X;
   localparam logic logic_7 = 'Z;
+  localparam logic logic_8 = -1;
+  localparam logic logic_9 = 'sd57;
+  localparam logic logic_10 = -8'd58;
+  localparam logic logic_11 = -'sh60;
   localparam logic unsigned logic_unsigned_0 = 1'b0;
   localparam logic unsigned logic_unsigned_1 = 1'b1;
   localparam logic signed logic_signed_0 = 1'b0;
@@ -137,6 +141,10 @@ package P_integralDataTypes; // {{{
   localparam reg reg_5 = 1'bZ;
   localparam reg reg_6 = 'X;
   localparam reg reg_7 = 'Z;
+  localparam reg reg_8 = -1;
+  localparam reg reg_9 = 'sd57;
+  localparam reg reg_10 = -8'd58;
+  localparam reg reg_11 = -'sh60;
   localparam reg unsigned reg_unsigned_0 = 1'b0;
   localparam reg unsigned reg_unsigned_1 = 1'b1;
   localparam reg signed reg_signed_0 = 1'b0;

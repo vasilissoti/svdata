@@ -1,6 +1,6 @@
 Package:
-  Identifier: TestPackage
-  Filepath: testcases/semantics/sv/package_localparam.sv
+  Identifier: P_smoketest
+  Filepath: testcases/semantics/sv/package_localparam_smoketest.sv
   Parameter: 
     Identifier: a
     Expression: 8'sb10101010

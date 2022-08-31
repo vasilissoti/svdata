@@ -1,0 +1,471 @@
+{
+  "modules": [],
+  "packages": [
+    {
+      "identifier": "P_string",
+      "parameters": [
+        {
+          "identifier": "hello",
+          "expression": "\"Hello world!\"",
+          "paramtype": "LocalParam",
+          "datatype": "String",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 96,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "empty",
+          "expression": "\"\"",
+          "paramtype": "LocalParam",
+          "datatype": "String",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 0,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "printable",
+          "expression": "\"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !@#$%&'()*+,-./:;<=>?@[\\\\]^_`{|}~\"",
+          "paramtype": "LocalParam",
+          "datatype": "String",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 768,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c",
+          "expression": "\"A\"",
+          "paramtype": "LocalParam",
+          "datatype": "Byte",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 8,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b",
+          "expression": "\"\\x41\"",
+          "paramtype": "LocalParam",
+          "datatype": "Bit",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 11,
+          "packed_dimensions": [
+            [
+              "10",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "h",
+          "expression": "\"hello\"",
+          "paramtype": "LocalParam",
+          "datatype": "Bit",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [
+            [
+              "1",
+              "4"
+            ],
+            [
+              "7",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "s1",
+          "expression": "\"hello\\0world\"",
+          "paramtype": "LocalParam",
+          "datatype": "String",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 96,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b12",
+          "expression": "12'ha41",
+          "paramtype": "LocalParam",
+          "datatype": "Bit",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 12,
+          "packed_dimensions": [
+            [
+              "11",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "s2",
+          "expression": "string'(b)",
+          "paramtype": "LocalParam",
+          "datatype": "Unsupported",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsupported",
+          "signedness_overridable": false,
+          "num_bits": 404,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/package_localparam_nonintegral.sv"
+    },
+    {
+      "identifier": "P_real",
+      "parameters": [
+        {
+          "identifier": "shortreal_0",
+          "expression": "1.2",
+          "paramtype": "LocalParam",
+          "datatype": "Shortreal",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "real_0",
+          "expression": "1.2",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_0",
+          "expression": "1.2",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_1",
+          "expression": "1.2fs",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_2",
+          "expression": "1.2ps",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_3",
+          "expression": "1.2ns",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_4",
+          "expression": "1.2us",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_5",
+          "expression": "1.2ms",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_6",
+          "expression": "1.2s",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_0",
+          "expression": "1.2",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_1",
+          "expression": "0.1",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_2",
+          "expression": "2394.26331",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_3",
+          "expression": "1.2E12",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_4",
+          "expression": "1.30e-2",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_5",
+          "expression": "0.1e-0",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_6",
+          "expression": "23E10",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_7",
+          "expression": "29E-2",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "implicit_real_8",
+          "expression": "236.123_763_e-12",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "shortreal_unpacked_0",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Shortreal",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "3",
+              null
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "real_unpacked_0",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Real",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": null,
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "3",
+              null
+            ]
+          ],
+          "comment": null
+        },
+        {
+          "identifier": "realtime_unpacked_0",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Realtime",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 64,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "3",
+              null
+            ]
+          ],
+          "comment": null
+        }
+      ],
+      "filepath": "testcases/semantics/sv/package_localparam_nonintegral.sv"
+    }
+  ]
+}

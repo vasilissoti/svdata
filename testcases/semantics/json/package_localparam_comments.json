@@ -1,0 +1,188 @@
+{
+  "modules": [],
+  "packages": [
+    {
+      "identifier": "P_comments",
+      "parameters": [
+        {
+          "identifier": "li0",
+          "expression": "555",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
+        },
+        {
+          "identifier": "le0",
+          "expression": "556",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
+        },
+        {
+          "identifier": "pd0",
+          "expression": "{32'd560,32'd561,32'd562}",
+          "paramtype": "LocalParam",
+          "datatype": "Bit",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 96,
+          "packed_dimensions": [
+            [
+              "2",
+              "0"
+            ],
+            [
+              "31",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
+        },
+        {
+          "identifier": "ud0",
+          "expression": "3",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [
+            [
+              "3",
+              null
+            ]
+          ],
+          "comment": [
+            "/*id/ud*/",
+            "/*ud/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
+        },
+        {
+          "identifier": "pi0",
+          "expression": "666",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/* post */"
+          ]
+        },
+        {
+          "identifier": "pe0",
+          "expression": "667",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*post*/",
+            "/*eq/val*/",
+            "/* post */"
+          ]
+        },
+        {
+          "identifier": "i0",
+          "expression": "777",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*id0/eq0*/",
+            "/*eq0/val0*/",
+            "/*val0/sep*/"
+          ]
+        },
+        {
+          "identifier": "i1",
+          "expression": "778",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*id1/eq1*/",
+            "/*eq1/val1*/",
+            "/*val2/sep*/"
+          ]
+        },
+        {
+          "identifier": "i2",
+          "expression": "779",
+          "paramtype": "LocalParam",
+          "datatype": "Int",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Signed",
+          "signedness_overridable": false,
+          "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": [
+            "/*id1/eq2*/",
+            "/*eq2/val2*/",
+            "/*post*/"
+          ]
+        }
+      ],
+      "filepath": "testcases/semantics/sv/package_localparam_comments.sv"
+    }
+  ]
+}
