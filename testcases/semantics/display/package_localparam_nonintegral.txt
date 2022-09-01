@@ -109,10 +109,10 @@ Package:
     Identifier: s2
     Expression: string'(b)
     ParameterType: LocalParam
-    DataType: Unsupported
+    DataType: String
     DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: Unsupported
+    Signedness: None
     SignednessOverridable: false
     NumBits: 404
     PackedDimensions: []

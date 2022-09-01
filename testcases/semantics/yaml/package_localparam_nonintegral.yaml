@@ -110,10 +110,10 @@ packages:
       - identifier: s2
         expression: "string'(b)"
         paramtype: LocalParam
-        datatype: Unsupported
+        datatype: String
         datatype_overridable: false
         classid: ~
-        signedness: Unsupported
+        signedness: ~
         signedness_overridable: false
         num_bits: 404
         packed_dimensions: []

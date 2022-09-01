@@ -416,7 +416,7 @@ fn port_parameter_datatype_ansi(
         Some(RefNode::TypeReference(_)) => (Some(SvDataType::TypeRef), false),
         _ => {
             if common_data != None {
-                match unwrap_node!(common_data.clone(), DataType) {
+                match unwrap_node!(common_data.unwrap(), DataType) {
                     Some(x) => match keyword(x, syntax_tree) {
                         Some(x) => {
                             if x == "string" {
