@@ -102,7 +102,7 @@ fn inst_connections(
                                     }
                                     // Indexing a number
                                     RefNode::IntegralNumber(_) => {
-                                        let Some(right_node) =
+                                        if let Some(right_node) =
                                             unwrap_node!(expression_node.clone(), DecimalNumber)
                                         {
                                             right_index =
