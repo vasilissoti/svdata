@@ -160,10 +160,10 @@ modules:
           - - c_in
             - c
           - - w_in
-            - c
+            - w21
           - - w_out
             - w10
-      - module_identifier: m1
+      - module_identifier: m2
         hierarchical_instance: i2
         hierarchy: []
         connections:
