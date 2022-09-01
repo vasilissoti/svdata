@@ -2,37 +2,37 @@
 name: Regression
 on: [push, pull_request]
 jobs:
- build:
-   strategy:
-     matrix:
-       #TODO: Re-introduce Windows os: [ubuntu-latest, macOS-latest, windows-latest]
-       os: [ubuntu-latest, macOS-latest]
-       rust: [stable]
-   runs-on: ${{ matrix.os }}
-   steps:
-     - name: Setup Rust
-       uses: hecrj/setup-rust-action@v1
-       with:
-         rust-version: ${{ matrix.rust }}
+  build:
+    strategy:
+      matrix:
+        #TODO: Re-introduce Windows os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [ubuntu-latest, macOS-latest]
+        rust: [stable]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup Rust
+        uses: hecrj/setup-rust-action@v1
+        with:
+          rust-version: ${{ matrix.rust }}
 
-     - name: Checkout
-       uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
-     - name: Report Toolchain Versions
-       run: |
-         cargo -V
-         rustc -V
-         rustfmt -V
+      - name: Report Toolchain Versions
+        run: |
+          cargo -V
+          rustc -V
+          rustfmt -V
 
-     - name: Check Formatting
-       run: |
-         cargo fmt --check
+      - name: Check Formatting
+        run: |
+          cargo fmt --check
 
-     - name: Build
-       run: |
-         cargo build
+      - name: Build
+        run: |
+          cargo build
 
-     - name: Test
-       run: |
-         cargo test --verbose
+      - name: Test
+        run: |
+          cargo test --verbose
 
