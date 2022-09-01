@@ -1,5 +1,5 @@
 let mut a = SvPrimaryLiteralIntegral {
-    data_01: vec![1, 0],
+    data_01: vec![0, 1],
     data_xz: None,
     size: 65,
     signed: true,

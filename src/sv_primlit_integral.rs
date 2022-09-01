@@ -20,7 +20,7 @@ impl SvPrimaryLiteralIntegral {
 
         let mut carry_flag: bool = false;
 
-        for x in (0..self.data_01.len()).rev() {
+        for x in 0..self.data_01.len() {
             let left_nu: usize = self.data_01[x];
             self.data_01[x] = left_nu.wrapping_add(right_nu.data_01[x]);
 
@@ -36,7 +36,7 @@ impl SvPrimaryLiteralIntegral {
         }
 
         if carry_flag {
-            self.data_01.insert(0, 1);
+            self.data_01.push(1);
         }
     }
 
@@ -49,18 +49,18 @@ impl SvPrimaryLiteralIntegral {
             let diff: usize = left_size - right_size;
 
             for _x in 0..diff {
-                right_nu.data_01.insert(0, 0);
+                right_nu.data_01.push(0);
                 if right_nu.is_4state() {
-                    right_nu.data_xz.as_mut().unwrap().insert(0, 0);
+                    right_nu.data_xz.as_mut().unwrap().push(0);
                 }
             }
         } else if left_size < right_size {
             let diff: usize = right_size - left_size;
 
             for _x in 0..diff {
-                self.data_01.insert(0, 0);
+                self.data_01.push(0);
                 if self.is_4state() {
-                    self.data_xz.as_mut().unwrap().insert(0, 0);
+                    self.data_xz.as_mut().unwrap().push(0);
                 }
             }
         }
@@ -116,7 +116,7 @@ impl SvPrimaryLiteralIntegral {
         if ret.data_01.len() != ret.data_xz.as_ref().unwrap().len() {
             for _x in 0..(ret.data_01.len() - ret.data_xz.as_ref().unwrap().len()) {
                 let mut new_vec = ret.data_xz.clone().unwrap();
-                new_vec.insert(0, 0);
+                new_vec.push(0);
                 ret.data_xz = Some(new_vec);
             }
         }
@@ -129,7 +129,7 @@ impl SvPrimaryLiteralIntegral {
         let left_leading_zeros: usize =
             usize::BITS as usize - (self.size - (self.data_01.len() - 1) * usize::BITS as usize);
 
-        if self.data_01[0].leading_zeros() as usize == left_leading_zeros {
+        if self.data_01[self.data_01.len() - 1].leading_zeros() as usize == left_leading_zeros {
             true
         } else {
             false
@@ -142,7 +142,10 @@ impl SvPrimaryLiteralIntegral {
             let left_leading_zeros: usize = usize::BITS as usize
                 - (self.size - (self.data_xz.as_ref().unwrap().len() - 1) * usize::BITS as usize);
 
-            if self.data_xz.as_ref().unwrap()[0].leading_zeros() as usize == left_leading_zeros {
+            if self.data_xz.as_ref().unwrap()[self.data_xz.as_ref().unwrap().len() - 1]
+                .leading_zeros() as usize
+                == left_leading_zeros
+            {
                 true
             } else {
                 false
@@ -172,7 +175,7 @@ impl SvPrimaryLiteralIntegral {
         if left_neg || left_sign_z {
             let mut last_element: bool = false;
 
-            for x in 0..self.data_01.len() {
+            for x in (0..self.data_01.len()).rev() {
                 let left_leading = self.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -192,7 +195,7 @@ impl SvPrimaryLiteralIntegral {
         if left_sign_z || left_sign_x {
             let mut last_element: bool = false;
 
-            for x in 0..self.data_xz.as_ref().unwrap().len() {
+            for x in (0..self.data_xz.as_ref().unwrap().len()).rev() {
                 let left_leading = self.data_xz.as_ref().unwrap()[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -213,7 +216,7 @@ impl SvPrimaryLiteralIntegral {
         if right_neg || right_sign_z {
             let mut last_element: bool = false;
 
-            for x in 0..right_nu.data_01.len() {
+            for x in (0..right_nu.data_01.len()).rev() {
                 let left_leading = right_nu.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -233,7 +236,7 @@ impl SvPrimaryLiteralIntegral {
         if right_sign_z || right_sign_x {
             let mut last_element: bool = false;
 
-            for x in 0..right_nu.data_xz.as_ref().unwrap().len() {
+            for x in (0..right_nu.data_xz.as_ref().unwrap().len()).rev() {
                 let left_leading = right_nu.data_xz.as_ref().unwrap()[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -282,7 +285,7 @@ impl SvPrimaryLiteralIntegral {
         if left_neg || left_sign_z {
             let mut last_element: bool = false;
 
-            for x in 0..self.data_01.len() {
+            for x in (0..self.data_01.len()).rev() {
                 let left_leading = self.data_01[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -302,7 +305,7 @@ impl SvPrimaryLiteralIntegral {
         if left_sign_z || left_sign_x {
             let mut last_element: bool = false;
 
-            for x in 0..self.data_xz.as_ref().unwrap().len() {
+            for x in (0..self.data_xz.as_ref().unwrap().len()).rev() {
                 let left_leading = self.data_xz.as_ref().unwrap()[x].leading_zeros();
 
                 if left_leading != usize::BITS {
@@ -327,6 +330,7 @@ impl SvPrimaryLiteralIntegral {
     The correct final number of bits is set to the argument. */
     pub fn negate(&self) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
+
         if ret.is_zero() {
             return ret;
         } else if ret.signed != true {
@@ -336,17 +340,19 @@ impl SvPrimaryLiteralIntegral {
         let from_negative: bool = ret.is_negative();
         ret = ret.inv();
         ret = ret + 1;
+        let last_index = ret.data_01.len() - 1;
 
         if from_negative {
-            ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize + 1)
-                + (ret.data_01.len() - 1) * usize::BITS as usize;
+            ret.size = (usize::BITS as usize - ret.data_01[last_index].leading_zeros() as usize
+                + 1)
+                + (last_index) * usize::BITS as usize;
 
-            if ret.data_01[0].leading_zeros() == 0 {
-                ret.data_01.insert(0, 0);
+            if ret.data_01[last_index].leading_zeros() == 0 {
+                ret.data_01.push(0);
             }
         } else {
-            ret.size = (usize::BITS as usize - ret.data_01[0].leading_zeros() as usize)
-                + (ret.data_01.len() - 1) * usize::BITS as usize;
+            ret.size = (usize::BITS as usize - ret.data_01[last_index].leading_zeros() as usize)
+                + (last_index) * usize::BITS as usize;
         }
 
         ret._minimum_width();
@@ -370,18 +376,22 @@ impl SvPrimaryLiteralIntegral {
             first_elmnt_bits = ret.size as u32 % usize::BITS;
         }
         let remaining_bits = usize::BITS - first_elmnt_bits;
+        let last_index = ret.data_01.len() - 1;
 
         for _x in 0..ret.size {
             if ret.is_4state()
-                && (ret.data_xz.as_ref().unwrap()[0].leading_zeros() == remaining_bits)
+                && (ret.data_xz.as_ref().unwrap()[last_index].leading_zeros() == remaining_bits)
             {
-                if ret.data_01[0].leading_zeros() == remaining_bits {
-                    ret.data_01[0] = ret.data_01[0] - 2usize.pow(first_elmnt_bits - 1);
+                if ret.data_01[last_index].leading_zeros() == remaining_bits {
+                    ret.data_01[last_index] =
+                        ret.data_01[last_index] - 2usize.pow(first_elmnt_bits - 1);
                 }
-            } else if ret.data_01[0].leading_zeros() == remaining_bits {
-                ret.data_01[0] = ret.data_01[0] - 2usize.pow(first_elmnt_bits - 1);
+            } else if ret.data_01[last_index].leading_zeros() == remaining_bits {
+                ret.data_01[last_index] =
+                    ret.data_01[last_index] - 2usize.pow(first_elmnt_bits - 1);
             } else {
-                ret.data_01[0] = ret.data_01[0] + 2usize.pow(first_elmnt_bits - 1);
+                ret.data_01[last_index] =
+                    ret.data_01[last_index] + 2usize.pow(first_elmnt_bits - 1);
             }
 
             ret = ret.ror(1);
@@ -402,7 +412,7 @@ impl SvPrimaryLiteralIntegral {
 
             ret.size = ret.size + 1;
 
-            for y in (0..ret.data_01.len()).rev() {
+            for y in 0..ret.data_01.len() {
                 let pre_mod = ret.data_01[y];
 
                 if leading_one {
@@ -434,21 +444,21 @@ impl SvPrimaryLiteralIntegral {
             }
 
             if leading_one && leading_one_xz {
-                ret.data_01.insert(0, 1);
-                ret.data_xz.as_mut().unwrap().insert(0, 1);
+                ret.data_01.push(1);
+                ret.data_xz.as_mut().unwrap().push(1);
             } else if leading_one {
-                ret.data_01.insert(0, 1);
+                ret.data_01.push(1);
                 if ret.is_4state() {
-                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                    ret.data_xz.as_mut().unwrap().push(0);
                 }
             } else if leading_one_xz {
-                ret.data_01.insert(0, 0);
-                ret.data_xz.as_mut().unwrap().insert(0, 1);
+                ret.data_01.push(0);
+                ret.data_xz.as_mut().unwrap().push(1);
             } else if ret.signed && (ret.size > usize::BITS as usize * ret.data_01.len()) {
-                ret.data_01.insert(0, 0);
+                ret.data_01.push(0);
 
                 if ret.is_4state() {
-                    ret.data_xz.as_mut().unwrap().insert(0, 0);
+                    ret.data_xz.as_mut().unwrap().push(0);
                 }
             }
         }
@@ -465,7 +475,7 @@ impl SvPrimaryLiteralIntegral {
             let mut trailing_one: bool = false;
             let mut trailing_one_xz: bool = false;
 
-            for y in 0..ret.data_01.len() {
+            for y in (0..ret.data_01.len()).rev() {
                 let pre_mod = ret.data_01[y];
 
                 if trailing_one {
@@ -504,7 +514,6 @@ impl SvPrimaryLiteralIntegral {
     The dropped bits are shifted in the RHS of the value. */
     pub fn rol(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
-        let last_index = ret.data_01.len() - 1;
 
         for _x in 0..n {
             let previous_size = ret.size;
@@ -514,12 +523,11 @@ impl SvPrimaryLiteralIntegral {
             ret = ret.lsl(1);
             ret._truncate(previous_size);
             if leading_one {
-                ret.data_01[last_index] = ret.data_01[last_index] + 1;
+                ret.data_01[0] = ret.data_01[0] + 1;
             }
 
             if leading_one_xz {
-                ret.data_xz.as_mut().unwrap()[last_index] =
-                    ret.data_xz.as_ref().unwrap()[last_index] + 1;
+                ret.data_xz.as_mut().unwrap()[0] = ret.data_xz.as_ref().unwrap()[0] + 1;
             }
         }
 
@@ -540,22 +548,22 @@ impl SvPrimaryLiteralIntegral {
         }
 
         for _x in 0..n {
-            let trailing_one: bool = ret.data_01[last_index].trailing_zeros() == 0;
+            let trailing_one: bool = ret.data_01[0].trailing_zeros() == 0;
             let mut trailing_one_xz: bool = false;
 
             if ret.is_4state() {
-                trailing_one_xz = ret.data_xz.as_ref().unwrap()[last_index].trailing_zeros() == 0;
+                trailing_one_xz = ret.data_xz.as_ref().unwrap()[0].trailing_zeros() == 0;
             }
 
             ret = ret.lsr(1);
 
             if trailing_one {
-                ret.data_01[0] = ret.data_01[0] + 2usize.pow(msb - 1);
+                ret.data_01[last_index] = ret.data_01[last_index] + 2usize.pow(msb - 1);
             }
 
             if trailing_one_xz {
-                ret.data_xz.as_mut().unwrap()[0] =
-                    ret.data_xz.as_ref().unwrap()[0] + 2usize.pow(msb - 1);
+                ret.data_xz.as_mut().unwrap()[last_index] =
+                    ret.data_xz.as_ref().unwrap()[last_index] + 2usize.pow(msb - 1);
             }
         }
 
@@ -620,7 +628,7 @@ impl SvPrimaryLiteralIntegral {
                     if left_nu_neg {
                         left_nu._matched_sign_extend(&mut right_nu);
 
-                        for x in 0..left_nu.data_01.len() {
+                        for x in (0..left_nu.data_01.len()).rev() {
                             if left_nu.data_01[x] < right_nu.data_01[x] {
                                 return logic1b_1();
                             }
@@ -637,7 +645,7 @@ impl SvPrimaryLiteralIntegral {
             } else {
                 left_nu._matched_zero_extend(&mut right_nu);
 
-                for x in 0..left_nu.data_01.len() {
+                for x in (0..left_nu.data_01.len()).rev() {
                     if left_nu.data_01[x] < right_nu.data_01[x] {
                         return logic1b_1();
                     }
@@ -687,7 +695,7 @@ impl SvPrimaryLiteralIntegral {
                 } else {
                     left_nu._matched_sign_extend(&mut right_nu);
 
-                    for x in 0..left_nu.data_01.len() {
+                    for x in (0..left_nu.data_01.len()).rev() {
                         if left_nu.data_01[x] > right_nu.data_01[x] {
                             return logic1b_1();
                         }
@@ -698,7 +706,7 @@ impl SvPrimaryLiteralIntegral {
             } else {
                 left_nu._matched_zero_extend(&mut right_nu);
 
-                for x in 0..left_nu.data_01.len() {
+                for x in (0..left_nu.data_01.len()).rev() {
                     if left_nu.data_01[x] > right_nu.data_01[x] {
                         return logic1b_1();
                     }
@@ -797,7 +805,7 @@ impl SvPrimaryLiteralIntegral {
             } else {
                 left_nu._matched_zero_extend(&mut right_nu);
             }
-
+            let last_index = right_nu.data_01.len() - 1;
             for _x in 0..left_nu.size {
                 let left_msb_x: bool = !left_nu.is_set_msb_01() && left_nu.is_set_msb_xz();
                 let left_msb_z: bool = left_nu.is_set_msb_01() && left_nu.is_set_msb_xz();
@@ -809,25 +817,33 @@ impl SvPrimaryLiteralIntegral {
 
                 if right_msb_x {
                     if left_msb_z {
-                        right_nu.data_01[0] = right_nu.data_01[0] + 2usize.pow(usize::BITS - 1);
+                        right_nu.data_01[last_index] =
+                            right_nu.data_01[last_index] + 2usize.pow(usize::BITS - 1);
                     } else if left_msb_1 {
-                        right_nu.data_01[0] = right_nu.data_01[0] + 2usize.pow(usize::BITS - 1);
-                        right_nu.data_xz.as_mut().unwrap()[0] =
-                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_01[last_index] =
+                            right_nu.data_01[last_index] + 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[last_index] =
+                            right_nu.data_xz.as_ref().unwrap()[last_index]
+                                - 2usize.pow(usize::BITS - 1);
                     } else if left_msb_0 {
-                        right_nu.data_xz.as_mut().unwrap()[0] =
-                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[last_index] =
+                            right_nu.data_xz.as_ref().unwrap()[last_index]
+                                - 2usize.pow(usize::BITS - 1);
                     }
                 } else if right_msb_z {
                     if left_msb_x {
-                        right_nu.data_01[0] = right_nu.data_01[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_01[last_index] =
+                            right_nu.data_01[last_index] - 2usize.pow(usize::BITS - 1);
                     } else if left_msb_1 {
-                        right_nu.data_xz.as_mut().unwrap()[0] =
-                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[last_index] =
+                            right_nu.data_xz.as_ref().unwrap()[last_index]
+                                - 2usize.pow(usize::BITS - 1);
                     } else if left_msb_0 {
-                        right_nu.data_01[0] = right_nu.data_01[0] - 2usize.pow(usize::BITS - 1);
-                        right_nu.data_xz.as_mut().unwrap()[0] =
-                            right_nu.data_xz.as_ref().unwrap()[0] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_01[last_index] =
+                            right_nu.data_01[last_index] - 2usize.pow(usize::BITS - 1);
+                        right_nu.data_xz.as_mut().unwrap()[last_index] =
+                            right_nu.data_xz.as_ref().unwrap()[last_index]
+                                - 2usize.pow(usize::BITS - 1);
                     }
                 }
 
@@ -845,18 +861,21 @@ impl SvPrimaryLiteralIntegral {
         if !self.signed {
             if self.is_zero() {
                 for _x in 0..self.data_01.len() {
-                    self.data_01.remove(0);
+                    let last_index = self.data_01.len() - 1;
+                    self.data_01.remove(last_index);
                 }
                 self.data_01.push(0);
                 self.size = 1;
             } else {
                 for _x in 0..self.data_01.len() {
-                    if self.data_01[0] == 0 {
-                        self.data_01.remove(0);
+                    let last_index = self.data_01.len() - 1;
+                    if self.data_01[last_index] == 0 {
+                        self.data_01.remove(last_index);
                     }
                 }
 
-                self.size = (usize::BITS as usize - self.data_01[0].leading_zeros() as usize)
+                self.size = (usize::BITS as usize
+                    - self.data_01[self.data_01.len() - 1].leading_zeros() as usize)
                     + (self.data_01.len() - 1) * usize::BITS as usize;
             }
         } else {
@@ -864,18 +883,16 @@ impl SvPrimaryLiteralIntegral {
             let mut vec_elements_to_rm: usize = 0;
 
             if self.is_negative() {
-                for x in 0..self.data_01.len() {
+                for x in (0..self.data_01.len()).rev() {
                     while !min_num_found {
                         let pre_leading = self.data_01[x].leading_zeros();
 
                         let minimized_value: usize =
-                            self.data_01[x] - 2usize.pow(usize::BITS - pre_leading - 1); //TODO
+                            self.data_01[x] - 2usize.pow(usize::BITS - pre_leading - 1);
                         let post_leading = minimized_value.leading_zeros();
 
                         if post_leading == usize::BITS {
-                            if x == (self.data_01.len() - 1)
-                                || self.data_01[x + 1].leading_zeros() != 0
-                            {
+                            if x == 0 || self.data_01[x - 1].leading_zeros() != 0 {
                                 min_num_found = true;
                                 break;
                             }
@@ -897,33 +914,40 @@ impl SvPrimaryLiteralIntegral {
                 }
 
                 for _x in 0..vec_elements_to_rm {
-                    self.data_01.remove(0);
+                    let last_index = self.data_01.len() - 1;
+                    self.data_01.remove(last_index);
                 }
             } else if self.is_zero() {
                 for _x in 0..self.data_01.len() {
-                    self.data_01.remove(0);
+                    let last_index = self.data_01.len() - 1;
+                    self.data_01.remove(last_index);
                 }
                 self.data_01.push(0);
                 self.size = 1;
             } else {
                 for _x in 0..self.data_01.len() {
-                    if self.data_01[0] == 0 {
-                        self.data_01.remove(0);
+                    let last_index = self.data_01.len() - 1;
+                    if self.data_01[last_index] == 0 {
+                        self.data_01.remove(last_index);
                     }
                 }
 
-                if self.data_01[0].leading_zeros() == 0 {
-                    self.data_01.insert(0, 0);
+                let last_index = self.data_01.len() - 1;
+                if self.data_01[last_index].leading_zeros() == 0 {
+                    self.data_01.push(0);
                 }
 
-                self.size = (usize::BITS as usize - self.data_01[0].leading_zeros() as usize + 1)
+                self.size = (usize::BITS as usize
+                    - self.data_01[self.data_01.len() - 1].leading_zeros() as usize
+                    + 1)
                     + (self.data_01.len() - 1) * usize::BITS as usize;
             }
         }
 
         if self.is_4state() && (self.data_01.len() < self.data_xz.as_ref().unwrap().len()) {
             for _x in 0..(self.data_xz.as_ref().unwrap().len() - self.data_01.len()) {
-                self.data_xz.as_mut().unwrap().remove(0);
+                let last_index = self.data_01.len() - 1;
+                self.data_xz.as_mut().unwrap().remove(last_index);
             }
         }
     }
@@ -946,15 +970,18 @@ impl SvPrimaryLiteralIntegral {
             }
 
             for _x in 0..elmnts_to_be_rm {
-                self.data_01.remove(0);
+                let last_index = self.data_01.len() - 1;
+                self.data_01.remove(last_index);
             }
 
             if bits_to_be_rm != 0 {
+                let last_index = self.data_01.len() - 1;
                 for x in
                     ((usize::BITS as usize - bits_to_be_rm + 1)..(usize::BITS as usize + 1)).rev()
                 {
-                    if self.data_01[0].leading_zeros() == (usize::BITS - x as u32) {
-                        self.data_01[0] = self.data_01[0] - 2usize.pow(x as u32 - 1);
+                    if self.data_01[last_index].leading_zeros() == (usize::BITS - x as u32) {
+                        self.data_01[last_index] =
+                            self.data_01[last_index] - 2usize.pow(x as u32 - 1);
                     }
                 }
             }
@@ -974,19 +1001,22 @@ impl SvPrimaryLiteralIntegral {
                 }
 
                 for _x in 0..elmnts_to_be_rm {
-                    self.data_xz.as_mut().unwrap().remove(0);
+                    let last_index = self.data_xz.as_ref().unwrap().len() - 1;
+                    self.data_xz.as_mut().unwrap().remove(last_index);
                 }
 
                 if bits_to_be_rm != 0 {
+                    let last_index = self.data_xz.as_ref().unwrap().len() - 1;
                     for x in ((usize::BITS as usize - bits_to_be_rm + 1)
                         ..(usize::BITS as usize + 1))
                         .rev()
                     {
-                        if self.data_xz.as_ref().unwrap()[0].leading_zeros()
+                        if self.data_xz.as_ref().unwrap()[last_index].leading_zeros()
                             == (usize::BITS - x as u32)
                         {
-                            self.data_xz.as_mut().unwrap()[0] =
-                                self.data_xz.as_ref().unwrap()[0] - 2usize.pow(x as u32 - 1);
+                            self.data_xz.as_mut().unwrap()[last_index] =
+                                self.data_xz.as_ref().unwrap()[last_index]
+                                    - 2usize.pow(x as u32 - 1);
                         }
                     }
                 }
@@ -1043,7 +1073,7 @@ impl SvPrimaryLiteralIntegral {
             } else {
                 ret.size = final_num_bits;
                 if (ret.data_01.len() * usize::BITS as usize) < final_num_bits {
-                    ret.data_01.insert(0, 0);
+                    ret.data_01.push(0);
                 }
             }
 
@@ -1086,10 +1116,9 @@ impl SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral;
         let mut left_nu: SvPrimaryLiteralIntegral = self.clone();
         let mut add_ver: Vec<SvPrimaryLiteralIntegral> = Vec::new();
-        let last_index = right_nu.data_01.len() - 1;
 
         for x in 0..right_nu.size {
-            if right_nu.data_01[last_index].trailing_zeros() == 0 {
+            if right_nu.data_01[0].trailing_zeros() == 0 {
                 if x == 0 {
                     add_ver.push(left_nu.clone());
                 } else {
@@ -1268,16 +1297,19 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
         }
         let remaining_bits = usize::BITS - first_elmnt_bits;
 
+        let last_index = mod_primlit.data_01.len() - 1;
+
         for _x in 0..first_elmnt_bits {
             if mod_primlit.is_4state()
-                && (mod_primlit.data_xz.as_ref().unwrap()[0].leading_zeros() == remaining_bits)
+                && (mod_primlit.data_xz.as_ref().unwrap()[last_index].leading_zeros()
+                    == remaining_bits)
             {
-                if mod_primlit.data_01[0].leading_zeros() == remaining_bits {
+                if mod_primlit.data_01[last_index].leading_zeros() == remaining_bits {
                     s.push('Z');
                 } else {
                     s.push('X');
                 }
-            } else if mod_primlit.data_01[0].leading_zeros() == remaining_bits {
+            } else if mod_primlit.data_01[last_index].leading_zeros() == remaining_bits {
                 s.push('1');
             } else {
                 s.push('0');
@@ -1289,7 +1321,7 @@ impl fmt::Display for SvPrimaryLiteralIntegral {
         string_vec.push(s);
 
         if self.data_01.len() > 1 {
-            for x in 1..self.data_01.len() {
+            for x in (0..(self.data_01.len() - 1)).rev() {
                 let mut mod_primlit = self.clone();
                 let mut s: String = String::new();
 
