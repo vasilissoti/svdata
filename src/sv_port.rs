@@ -444,16 +444,14 @@ fn port_parameter_datatype_ansi(
                     let implicit_type =
                         unwrap_node!(p, Number, TimeLiteral, UnbasedUnsizedLiteral, StringLiteral);
                     match implicit_type {
-                        Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
+                        Some(RefNode::UnbasedUnsizedLiteral(_))
+                        | Some(RefNode::Number(sv_parser::Number::IntegralNumber(_))) => {
                             ret = (Some(SvDataType::Logic), true);
                         }
                         Some(RefNode::Number(sv_parser::Number::RealNumber(_))) => {
                             ret = (Some(SvDataType::Real), true);
                         }
                         Some(RefNode::TimeLiteral(_)) => ret = (Some(SvDataType::Time), true),
-                        Some(RefNode::UnbasedUnsizedLiteral(_)) => {
-                            ret = (Some(SvDataType::Bit), true)
-                        }
                         Some(RefNode::StringLiteral(_)) => ret = (Some(SvDataType::String), true),
                         _ => ret = (Some(SvDataType::Unsupported), true),
                     }
@@ -701,10 +699,10 @@ fn port_parameter_bits_ansi(
                     } else if !found_assignment {
                         None
                     } else {
-                        let fixed_size = unwrap_node!(p, Size);
+                        let fixed_size = unwrap_node!(p, Size, UnbasedUnsizedLiteral);
 
                         match fixed_size {
-                            Some(_) => {
+                            Some(RefNode::Size(_)) => {
                                 let ret: u64;
                                 ret = get_string(fixed_size.clone().unwrap(), syntax_tree)
                                     .unwrap()
@@ -713,7 +711,7 @@ fn port_parameter_bits_ansi(
                                     .unwrap();
                                 Some(ret)
                             }
-
+                            Some(RefNode::UnbasedUnsizedLiteral(_)) => Some(1),
                             _ => {
                                 Some(32)
 

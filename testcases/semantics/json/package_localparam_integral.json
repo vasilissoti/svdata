@@ -1573,34 +1573,6 @@
           "comment": null
         },
         {
-          "identifier": "bit_implicit_0",
-          "expression": "'0",
-          "paramtype": "LocalParam",
-          "datatype": "Bit",
-          "datatype_overridable": false,
-          "classid": null,
-          "signedness": "Unsigned",
-          "signedness_overridable": false,
-          "num_bits": 1,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
-          "identifier": "bit_implicit_1",
-          "expression": "'1",
-          "paramtype": "LocalParam",
-          "datatype": "Bit",
-          "datatype_overridable": false,
-          "classid": null,
-          "signedness": "Unsigned",
-          "signedness_overridable": false,
-          "num_bits": 1,
-          "packed_dimensions": [],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
           "identifier": "logic_0",
           "expression": "1'b0",
           "paramtype": "LocalParam",
@@ -1876,6 +1848,34 @@
           "signedness": "Signed",
           "signedness_overridable": false,
           "num_bits": 32,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "logic_implicit_4",
+          "expression": "'0",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 1,
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "logic_implicit_5",
+          "expression": "'1",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 1,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": null
@@ -4574,44 +4574,6 @@
           "comment": null
         },
         {
-          "identifier": "bit_implicit_0",
-          "expression": "'0",
-          "paramtype": "LocalParam",
-          "datatype": "Bit",
-          "datatype_overridable": false,
-          "classid": null,
-          "signedness": "Unsigned",
-          "signedness_overridable": false,
-          "num_bits": 4,
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
-          "identifier": "bit_implicit_1",
-          "expression": "'1",
-          "paramtype": "LocalParam",
-          "datatype": "Bit",
-          "datatype_overridable": false,
-          "classid": null,
-          "signedness": "Unsigned",
-          "signedness_overridable": false,
-          "num_bits": 4,
-          "packed_dimensions": [
-            [
-              "3",
-              "0"
-            ]
-          ],
-          "unpacked_dimensions": [],
-          "comment": null
-        },
-        {
           "identifier": "logic_0",
           "expression": "4'b0101",
           "paramtype": "LocalParam",
@@ -5302,6 +5264,44 @@
               "2",
               "0"
             ],
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "logic_implicit_0",
+          "expression": "'0",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 4,
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "logic_implicit_1",
+          "expression": "'1",
+          "paramtype": "LocalParam",
+          "datatype": "Logic",
+          "datatype_overridable": false,
+          "classid": null,
+          "signedness": "Unsigned",
+          "signedness_overridable": false,
+          "num_bits": 4,
+          "packed_dimensions": [
             [
               "3",
               "0"

@@ -1458,32 +1458,6 @@ Package:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: bit_implicit_0
-    Expression: '0
-    ParameterType: LocalParam
-    DataType: Bit
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: false
-    NumBits: 1
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: bit_implicit_1
-    Expression: '1
-    ParameterType: LocalParam
-    DataType: Bit
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: false
-    NumBits: 1
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
     Identifier: logic_0
     Expression: 1'b0
     ParameterType: LocalParam
@@ -1740,6 +1714,32 @@ Package:
     Signedness: Signed
     SignednessOverridable: false
     NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_4
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_5
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
@@ -3793,32 +3793,6 @@ Package:
     UnpackedDimensions: []
     Comment: None
   Parameter: 
-    Identifier: bit_implicit_0
-    Expression: '0
-    ParameterType: LocalParam
-    DataType: Bit
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: false
-    NumBits: 4
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
-    Identifier: bit_implicit_1
-    Expression: '1
-    ParameterType: LocalParam
-    DataType: Bit
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Unsigned
-    SignednessOverridable: false
-    NumBits: 4
-    PackedDimensions: [("3", "0")]
-    UnpackedDimensions: []
-    Comment: None
-  Parameter: 
     Identifier: logic_0
     Expression: 4'b0101
     ParameterType: LocalParam
@@ -4245,6 +4219,32 @@ Package:
     SignednessOverridable: false
     NumBits: 12
     PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_0
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_1
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
     Comment: None
   Parameter: 
