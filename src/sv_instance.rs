@@ -15,8 +15,11 @@ pub fn module_instance(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxT
 
 // Find module identifier for the instantiation (child module)
 fn inst_module_identifier(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) -> String {
-    let id = unwrap_node!(p, ModuleIdentifier).unwrap();
-    identifier(id, &syntax_tree).unwrap()
+    if let Some(id) = unwrap_node!(p, ModuleIdentifier) {
+        identifier(id, syntax_tree).unwrap()
+    } else {
+        unreachable!()
+    }
 }
 
 // Find hierarchical instance for the instantiation
@@ -24,8 +27,11 @@ fn inst_hierarchical_instance(
     p: &sv_parser::ModuleInstantiation,
     syntax_tree: &SyntaxTree,
 ) -> String {
-    let id = unwrap_node!(p, InstanceIdentifier).unwrap();
-    identifier(id, &syntax_tree).unwrap()
+    if let Some(id) = unwrap_node!(p, InstanceIdentifier) {
+        identifier(id, syntax_tree).unwrap()
+    } else {
+        unreachable!()
+    }
 }
 
 // Find hierarchy for the instantiation (only finds label for the time being)
@@ -39,10 +45,12 @@ fn inst_hierarchy(p: &sv_parser::ModuleInstantiation, syntax_tree: &SyntaxTree) 
                     match instance {
                         RefNode::ModuleInstantiation(y) => {
                             if y == p {
-                                let label =
-                                    unwrap_node!(node.clone(), GenerateBlockIdentifier).unwrap();
-                                let label = identifier(label, &syntax_tree).unwrap();
-                                ret.push(label);
+                                if let Some(label) = unwrap_node!(node.clone(), GenerateBlockIdentifier) {
+                                    let label = identifier(label, syntax_tree).unwrap();
+                                    ret.push(label);
+                                } else {
+                                    unreachable!()
+                                }
                             }
                         }
                         _ => (),
@@ -79,19 +87,21 @@ fn inst_connections(
                         RefNode::Select(y) => {
                             for expression_node in y {
                                 match expression_node {
-                                    // Indexing a variabel
+                                    // Indexing a variable
                                     RefNode::HierarchicalIdentifier(_) => {
-                                        let right_node =
-                                            unwrap_node!(expression_node.clone(), Identifier)
-                                                .unwrap();
-                                        right_index = identifier(right_node, &syntax_tree).unwrap();
+                                        if let Some(right_node) = unwrap_node!(expression_node.clone(), Identifier) {
+                                            right_index = identifier(right_node, &syntax_tree).unwrap();
+                                        } else {
+                                            unreachable!()
+                                        }
                                     }
                                     // Indexing a number
                                     RefNode::IntegralNumber(_) => {
-                                        let right_node =
-                                            unwrap_node!(select_node.clone(), DecimalNumber)
-                                                .unwrap();
-                                        right_index = get_string(right_node, &syntax_tree).unwrap();
+                                        if let Some(right_node) = unwrap_node!(expression_node.clone(), DecimalNumber) {
+                                            right_index = get_string(right_node, &syntax_tree).unwrap();
+                                        } else {
+                                            unreachable!()
+                                        }
                                     }
                                     _ => (),
                                 }
@@ -120,19 +130,21 @@ fn inst_connections(
                         RefNode::Select(y) => {
                             for expression_node in y {
                                 match expression_node {
-                                    // Indexing a variabel
+                                    // Indexing a variable
                                     RefNode::HierarchicalIdentifier(_) => {
-                                        let right_node =
-                                            unwrap_node!(expression_node.clone(), Identifier)
-                                                .unwrap();
-                                        right_index = identifier(right_node, &syntax_tree).unwrap();
+                                        if let Some(right_node) = unwrap_node!(expression_node.clone(), Identifier) {
+                                            right_index = identifier(right_node, &syntax_tree).unwrap();
+                                        } else {
+                                            unreachable!()
+                                        }
                                     }
-                                    // Indexng a number
+                                    // Indexing a number
                                     RefNode::IntegralNumber(_) => {
-                                        let right_node =
-                                            unwrap_node!(expression_node.clone(), DecimalNumber)
-                                                .unwrap();
-                                        right_index = get_string(right_node, &syntax_tree).unwrap();
+                                        if let Some(right_node) = unwrap_node!(expression_node.clone(), DecimalNumber) {
+                                            right_index = get_string(right_node, &syntax_tree).unwrap();
+                                        } else {
+                                            unreachable!()
+                                        }
                                     }
                                     _ => (),
                                 }

@@ -272,7 +272,7 @@ Module:
     ClassIdentifier: None
     NetType: Wire
     Signedness: Unsigned
-    PackedDimensions: []
+    PackedDimensions: [("2", "0")]
     UnpackedDimensions: []
     Comment: None
   Port: 
@@ -290,17 +290,17 @@ Module:
     Module identifier: M6
     Hierarchical instance: i6
     Hierarchy: []
-    Connections: [["in6_1", "in7_1"], ["in6_2", "in7_2"], ["out6_1", "w1"]]
+    Connections: [["in6_1", "in7_1"], ["in6_2", "in7_2[0]"], ["out6_1", "w1"]]
   Instance: 
     Module identifier: M1
     Hierarchical instance: i1
     Hierarchy: []
-    Connections: [["in1_1", "in7_2"], ["out1_1", "w2"]]
+    Connections: [["in1_1", "in7_2[2]"], ["out1_1", "w2"]]
   Instance: 
     Module identifier: M3
     Hierarchical instance: i3
     Hierarchy: []
-    Connections: [["in3_1", "w1"], ["in3_2", "in7_2"], ["in3_3", "w2"], ["out3_1", "out7_1"]]
+    Connections: [["in3_1", "w1"], ["in3_2", "in7_2[1]"], ["in3_3", "w2"], ["out3_1", "out7_1"]]
 
 Module:
   Identifier: M8
@@ -367,7 +367,7 @@ Module:
     Connections: [["in5_1", "in8_1"], ["out5_1", "out8_1"], ["out5_2", "out8_2"]]
   Instance: 
     Module identifier: M7
-    Hierarchical instance: m7
+    Hierarchical instance: i7
     Hierarchy: []
     Connections: [["in7_1", "in8_1"], ["in7_2", "in8_2"], ["out7_1", "out8_3"]]
 
