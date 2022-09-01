@@ -136,7 +136,7 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
         }
     }
 
-    if !opt.silent.clone() {
+    if !opt.silent {
         println!("{}", svdata);
     }
 
@@ -203,14 +203,14 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut SvData
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(_) => {
-                    let d = module_declaration_ansi(node, &syntax_tree, filepath);
+                    let d = module_declaration_ansi(node, syntax_tree, filepath);
                     svdata.modules.push(d.clone());
                 }
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let _d = module_declaration_nonansi(node, &syntax_tree, filepath);
+                    let _d = module_declaration_nonansi(node, syntax_tree, filepath);
                 }
                 RefNode::PackageDeclaration(_) => {
-                    let d = package_declaration(node, &syntax_tree, filepath);
+                    let d = package_declaration(node, syntax_tree, filepath);
                     svdata.packages.push(d.clone());
                 }
                 _ => (),

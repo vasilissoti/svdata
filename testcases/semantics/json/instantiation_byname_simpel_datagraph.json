@@ -1,0 +1,351 @@
+{
+    "modules": [
+      {
+        "identifier": "M1",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in1_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out1_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      },
+      {
+        "identifier": "M2",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in2_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out2_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out2_2",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      },
+      {
+        "identifier": "M3",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in3_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "in3_2",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out3_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      },
+      {
+        "identifier": "M4",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in4_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "in4_2",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out4_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [
+          {
+            "module_identifier": "M3",
+            "hierarchical_instance": "i3",
+            "hierarchy": [],
+            "connections": [
+              [
+                "in3_1",
+                "in4_1"
+              ],
+              [
+                "in3_2",
+                "in4_2"
+              ],
+              [
+                "out3_1",
+                "out4_1"
+              ]
+            ]
+          }
+        ],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      },
+      {
+        "identifier": "M5",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in5_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out5_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out5_2",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [
+          {
+            "module_identifier": "M1",
+            "hierarchical_instance": "i1",
+            "hierarchy": [],
+            "connections": [
+              [
+                "in1_1",
+                "in5_1"
+              ],
+              [
+                "out1_1",
+                "w1"
+              ]
+            ]
+          },
+          {
+            "module_identifier": "M2",
+            "hierarchical_instance": "i2",
+            "hierarchy": [],
+            "connections": [
+              [
+                "in2_1",
+                "in5_1"
+              ],
+              [
+                "out2_1",
+                "w2"
+              ],
+              [
+                "out2_2",
+                "out5_2"
+              ]
+            ]
+          },
+          {
+            "module_identifier": "M4",
+            "hierarchical_instance": "i4",
+            "hierarchy": [],
+            "connections": [
+              [
+                "in4_1",
+                "w1"
+              ],
+              [
+                "in4_2",
+                "w2"
+              ],
+              [
+                "out4_1",
+                "out5_1"
+              ]
+            ]
+          }
+        ],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      },
+      {
+        "identifier": "top_module",
+        "parameters": [],
+        "ports": [
+          {
+            "identifier": "in_1",
+            "direction": "Input",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out_1",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          },
+          {
+            "identifier": "out_2",
+            "direction": "Output",
+            "datakind": "Net",
+            "datatype": "Logic",
+            "classid": null,
+            "nettype": "Wire",
+            "signedness": "Unsigned",
+            "packed_dimensions": [],
+            "unpacked_dimensions": [],
+            "comment": null
+          }
+        ],
+        "instances": [
+          {
+            "module_identifier": "M5",
+            "hierarchical_instance": "i5",
+            "hierarchy": [],
+            "connections": [
+              [
+                "in5_1",
+                "in_1"
+              ],
+              [
+                "out5_1",
+                "out_1"
+              ],
+              [
+                "out5_2",
+                "out_2"
+              ]
+            ]
+          }
+        ],
+        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+      }
+    ],
+    "packages": []
+  }

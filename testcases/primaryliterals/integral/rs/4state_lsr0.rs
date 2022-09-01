@@ -5,7 +5,7 @@ let a = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let b: SvPrimaryLiteralIntegral = a.lsr(2);
+let b: SvPrimaryLiteralIntegral = a >> 2;
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![0, 16140901064495857664],

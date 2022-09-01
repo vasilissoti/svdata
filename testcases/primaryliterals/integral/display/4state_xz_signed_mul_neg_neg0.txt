@@ -1,0 +1,4 @@
+NumBits: 6
+Signed: true
+4State: true
+Data: XXXXXX

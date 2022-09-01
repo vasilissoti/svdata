@@ -154,9 +154,9 @@ Module:
     Module identifier: m1
     Hierarchical instance: i1
     Hierarchy: []
-    Connections: [["c_in", "c"], ["w_in", "c"], ["w_out", "w10"]]
+    Connections: [["c_in", "c"], ["w_in", "w21"], ["w_out", "w10"]]
   Instance: 
-    Module identifier: m1
+    Module identifier: m2
     Hierarchical instance: i2
     Hierarchy: []
     Connections: [["w_in", "w02"], ["w_out", "w21"], ["o_out", "o"]]
