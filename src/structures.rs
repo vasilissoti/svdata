@@ -138,10 +138,10 @@ pub struct SvInstance {
 
 impl fmt::Display for SvData {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
-        for module in self.modules.clone() {
+        for module in &self.modules {
             write!(f, "{}", module)?;
         }
-        for package in self.packages.clone() {
+        for package in &self.packages {
             write!(f, "{}", package)?;
         }
 
@@ -155,15 +155,15 @@ impl fmt::Display for SvModuleDeclaration {
         writeln!(f, "  Identifier: {}", self.identifier)?;
         writeln!(f, "  Filepath: {}", self.filepath)?;
 
-        for port in self.ports.clone() {
+        for port in &self.ports {
             write!(f, "{}", port)?;
         }
 
-        for param in self.parameters.clone() {
+        for param in &self.parameters {
             write!(f, "{}", param)?;
         }
 
-        for instance in self.instances.clone() {
+        for instance in &self.instances {
             write!(f, "{}", instance)?;
         }
 
@@ -193,7 +193,7 @@ impl fmt::Display for SvPackageDeclaration {
         writeln!(f, "  Identifier: {}", self.identifier)?;
         writeln!(f, "  Filepath: {}", self.filepath)?;
 
-        for param in self.parameters.clone() {
+        for param in &self.parameters {
             write!(f, "{}", param)?;
         }
 
@@ -208,7 +208,7 @@ impl fmt::Display for SvPort {
         writeln!(f, "    Direction: {:?}", self.direction)?;
         writeln!(f, "    DataKind: {:?}", self.datakind)?;
         writeln!(f, "    DataType: {:?}", self.datatype)?;
-        match self.classid.clone() {
+        match &self.classid {
             None => {
                 writeln!(f, "    ClassIdentifier: None")?;
             }
@@ -216,7 +216,7 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    ClassIdentifier: {}", x)?;
             }
         }
-        match self.nettype.clone() {
+        match &self.nettype {
             None => {
                 writeln!(f, "    NetType: None")?;
             }
@@ -224,7 +224,7 @@ impl fmt::Display for SvPort {
                 writeln!(f, "    NetType: {:?}", x)?;
             }
         }
-        match self.signedness.clone() {
+        match &self.signedness {
             None => {
                 writeln!(f, "    Signedness: None")?;
             }
@@ -236,14 +236,14 @@ impl fmt::Display for SvPort {
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
         let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 
-        for (u, l) in self.unpacked_dimensions.clone() {
+        for (u, l) in &self.unpacked_dimensions {
             match l {
                 Some(x) => unpackeddim_display.push((u.clone(), x.clone())),
                 None => unpackeddim_display.push((u.clone(), String::from("None"))),
             }
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
-        match self.comment.clone() {
+        match &self.comment {
             None => {
                 writeln!(f, "    Comment: None")?;
             }
@@ -260,7 +260,7 @@ impl fmt::Display for SvParameter {
     fn fmt(&self, f: &mut fmt::Formatter) -> std::fmt::Result {
         writeln!(f, "  Parameter: ")?;
         writeln!(f, "    Identifier: {}", self.identifier)?;
-        match self.expression.clone() {
+        match &self.expression {
             None => {
                 writeln!(f, "    Expression: None")?;
             }
@@ -269,7 +269,7 @@ impl fmt::Display for SvParameter {
             }
         }
         writeln!(f, "    ParameterType: {:?}", self.paramtype)?;
-        match self.datatype.clone() {
+        match &self.datatype {
             None => {
                 writeln!(f, "    DataType: None")?;
             }
@@ -282,7 +282,7 @@ impl fmt::Display for SvParameter {
             "    DataTypeOverridable: {:?}",
             self.datatype_overridable
         )?;
-        match self.classid.clone() {
+        match &self.classid {
             None => {
                 writeln!(f, "    ClassIdentifier: None")?;
             }
@@ -290,7 +290,7 @@ impl fmt::Display for SvParameter {
                 writeln!(f, "    ClassIdentifier: {}", x)?;
             }
         }
-        match self.signedness.clone() {
+        match &self.signedness {
             None => {
                 writeln!(f, "    Signedness: None")?;
             }
@@ -303,7 +303,7 @@ impl fmt::Display for SvParameter {
             "    SignednessOverridable: {:?}",
             self.signedness_overridable
         )?;
-        match self.num_bits.clone() {
+        match &self.num_bits {
             None => {
                 writeln!(f, "    NumBits: None")?;
             }
@@ -314,7 +314,7 @@ impl fmt::Display for SvParameter {
         writeln!(f, "    PackedDimensions: {:?}", self.packed_dimensions)?;
         let mut unpackeddim_display: Vec<(String, String)> = Vec::new();
 
-        for (u, l) in self.unpacked_dimensions.clone() {
+        for (u, l) in &self.unpacked_dimensions {
             match l {
                 Some(x) => unpackeddim_display.push((u.clone(), x.clone())),
                 None => unpackeddim_display.push((u.clone(), String::from("None"))),
@@ -322,7 +322,7 @@ impl fmt::Display for SvParameter {
         }
         writeln!(f, "    UnpackedDimensions: {:?}", unpackeddim_display)?;
 
-        match self.comment.clone() {
+        match &self.comment {
             None => {
                 writeln!(f, "    Comment: None")?;
             }
