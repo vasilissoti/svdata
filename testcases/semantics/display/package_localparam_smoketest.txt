@@ -1,76 +1,50 @@
 Package:
-  Identifier: TestPackage
-  Filepath: testcases/semantics/sv/package_parameter_comment_keyword.sv
+  Identifier: P_smoketest
+  Filepath: testcases/semantics/sv/package_localparam_smoketest.sv
   Parameter: 
     Identifier: a
-    Expression: 1
+    Expression: 8'sb10101010
     ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: false
-    NumBits: 32
+    NumBits: 8
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
+    Comment: None
   Parameter: 
     Identifier: b
-    Expression: 5
+    Expression: 4'b1000
     ParameterType: LocalParam
     DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
     SignednessOverridable: false
-    NumBits: 32
-    PackedDimensions: []
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
     UnpackedDimensions: []
-    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
-  Parameter: 
-    Identifier: c
-    Expression: 3
-    ParameterType: LocalParam
-    DataType: Int
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessOverridable: false
-    NumBits: 32
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: ["/*post*/", "/*eq/val*/", "/* post */"]
-  Parameter: 
-    Identifier: d
-    Expression: 2
-    ParameterType: LocalParam
-    DataType: Int
-    DataTypeOverridable: false
-    ClassIdentifier: None
-    Signedness: Signed
-    SignednessOverridable: false
-    NumBits: 32
-    PackedDimensions: []
-    UnpackedDimensions: []
-    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+    Comment: None
   Parameter: 
     Identifier: e
-    Expression: 5
+    Expression: 7.5
     ParameterType: LocalParam
-    DataType: Logic
+    DataType: Real
     DataTypeOverridable: false
     ClassIdentifier: None
-    Signedness: Signed
+    Signedness: None
     SignednessOverridable: false
-    NumBits: 32
+    NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: ["/* id/eq */", "/*eq/val*/", "/* post */"]
+    Comment: None
   Parameter: 
     Identifier: f
     Expression: 5
     ParameterType: LocalParam
-    DataType: Int
+    DataType: Logic
     DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
@@ -78,5 +52,18 @@ Package:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: ["/*id/eq*/", "/*eq/val*/", "/*post*/"]
+    Comment: None
+  Parameter: 
+    Identifier: g
+    Expression: "hello"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 40
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
 

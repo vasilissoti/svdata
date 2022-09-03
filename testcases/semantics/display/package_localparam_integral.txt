@@ -1,0 +1,6165 @@
+Package:
+  Identifier: P_integralDataTypes
+  Filepath: testcases/semantics/sv/package_localparam_integral.sv
+  Parameter: 
+    Identifier: shortint_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_4
+    Expression: 16'h5555
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_5
+    Expression: 'h5556
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_6
+    Expression: 'sh5557
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_7
+    Expression: -16'h5558
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_8
+    Expression: -'h5559
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_9
+    Expression: -'sh5560
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_10
+    Expression: 16'd5555
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_11
+    Expression: 'd5556
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_12
+    Expression: 'sd5557
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_13
+    Expression: -16'd5558
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_14
+    Expression: -'d5559
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_15
+    Expression: -'sd5560
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_4
+    Expression: 32'h5555_0505
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_5
+    Expression: 'h5556
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_6
+    Expression: 'sh5557
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_7
+    Expression: -32'h5558_0505
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_8
+    Expression: -'h5559
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_9
+    Expression: -'sh5560
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_10
+    Expression: 32'd5555
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_11
+    Expression: 'd5556
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_12
+    Expression: 'sd5557
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_13
+    Expression: -32'd5558
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_14
+    Expression: -'d5559
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_15
+    Expression: -'sd5560
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_4
+    Expression: 64'h5555_0505_0505_0505
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_5
+    Expression: 'h5556
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_6
+    Expression: 'sh5557
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_7
+    Expression: -64'h5558_0505_0505_0505
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_8
+    Expression: -'h5559
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_9
+    Expression: -'sh5560
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_10
+    Expression: 64'd5555
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_11
+    Expression: 'd5556
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_12
+    Expression: 'sd5557
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_13
+    Expression: -64'd5558
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_14
+    Expression: -'d5559
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_15
+    Expression: -'sd5560
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_4
+    Expression: 8'h55
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_5
+    Expression: 'h56
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_6
+    Expression: 'sh57
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_7
+    Expression: -8'h58
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_8
+    Expression: -'h59
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_9
+    Expression: -'sh60
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_10
+    Expression: 8'd55
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_11
+    Expression: 'd56
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_12
+    Expression: 'sd57
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_13
+    Expression: -8'd58
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_14
+    Expression: -'d59
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_15
+    Expression: -'sd60
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_2
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_3
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_2
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_3
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_4
+    Expression: 1'bX
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_5
+    Expression: 1'bZ
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_6
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_7
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_8
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_9
+    Expression: 'sd57
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_10
+    Expression: -8'd58
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_11
+    Expression: -'sh60
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_0
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_1
+    Expression: 'sd57
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_2
+    Expression: -8'd58
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_3
+    Expression: -'sh60
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_4
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_5
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_2
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_3
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_4
+    Expression: 1'bX
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_5
+    Expression: 1'bZ
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_6
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_7
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_8
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_9
+    Expression: 'sd57
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_10
+    Expression: -8'd58
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_11
+    Expression: -'sh60
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_0
+    Expression: 1'b0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_1
+    Expression: 1'b1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_4
+    Expression: 32'h5555_0505
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_5
+    Expression: 'h5556
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_6
+    Expression: 'sh5557
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_7
+    Expression: -32'h5558_0505
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_8
+    Expression: -'h5559
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_9
+    Expression: -'sh5560
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_10
+    Expression: 32'd5555
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_11
+    Expression: 'd5556
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_12
+    Expression: 'sd5557
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_13
+    Expression: -32'd5558
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_14
+    Expression: -'d5559
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_15
+    Expression: -'sd5560
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_18
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_19
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_20
+    Expression: {8{4'b01XZ}}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_4
+    Expression: 64'h5555_0505_0505_0505
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_5
+    Expression: 'h5556
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_6
+    Expression: 'sh5557
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_7
+    Expression: -64'h5558_0505_0505_0505
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_8
+    Expression: -'h5559
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_9
+    Expression: -'sh5560
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_10
+    Expression: 64'd5555
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_11
+    Expression: 'd5556
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_12
+    Expression: 'sd5557
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_13
+    Expression: -64'd5558
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_14
+    Expression: -'d5559
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_15
+    Expression: -'sd5560
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_16
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_17
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_18
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_19
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_20
+    Expression: {16{4'b01XZ}}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_0
+    Expression: 0
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_1
+    Expression: 1
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_2
+    Expression: -1
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_3
+    Expression: 123
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Package:
+  Identifier: P_integralNonVectorUnpacked
+  Filepath: testcases/semantics/sv/package_localparam_integral.sv
+  Parameter: 
+    Identifier: shortint_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: shortint_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Shortint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 16
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: int_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Int
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: longint_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: byte_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_unsigned_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: integer_signed_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Integer
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_unsigned_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_signed_0
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_signed_1
+    Expression: '{-1,-2,-3}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_signed_2
+    Expression: '{'1,'0,'1}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: time_signed_3
+    Expression: '{'0,'1,'X,'Z}
+    ParameterType: LocalParam
+    DataType: Time
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("4", "None")]
+    Comment: None
+
+Package:
+  Identifier: P_integralVectorPacked
+  Filepath: testcases/semantics/sv/package_localparam_integral.sv
+  Parameter: 
+    Identifier: bit_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_0
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: logic_implicit_1
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_0
+    Expression: 4'b0101
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_1
+    Expression: 4'd5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_2
+    Expression: 5
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_3
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_4
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 4
+    PackedDimensions: [("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_5
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_6
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_7
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_8
+    Expression: {4'd1,4'd2,4'd3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_9
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_10
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("2", "0"), ("3", "0")]
+    UnpackedDimensions: []
+    Comment: None
+
+Package:
+  Identifier: P_integralVectorUnpacked
+  Filepath: testcases/semantics/sv/package_localparam_integral.sv
+  Parameter: 
+    Identifier: bit_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_unsigned_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: bit_signed_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_12
+    Expression: '{'X,'Z,'X}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_unsigned_12
+    Expression: '{'X,'Z,'Z}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: logic_signed_12
+    Expression: '{'X,'Z,'Z}
+    ParameterType: LocalParam
+    DataType: Logic
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_12
+    Expression: '{'X,'Z,'X}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_unsigned_12
+    Expression: '{'X,'Z,'Z}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_0
+    Expression: '{1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_1
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("1", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_2
+    Expression: '{3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_3
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_4
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_5
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: []
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_6
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_7
+    Expression: '{1,1,0}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_8
+    Expression: '{0,1,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 1
+    PackedDimensions: [("0", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_9
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_10
+    Expression: '{3,2,1}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("2", "0")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_11
+    Expression: '{1,2,3}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("0", "2")]
+    Comment: None
+  Parameter: 
+    Identifier: reg_signed_12
+    Expression: '{'X,'Z,'Z}
+    ParameterType: LocalParam
+    DataType: Reg
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 3
+    PackedDimensions: [("2", "0")]
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+

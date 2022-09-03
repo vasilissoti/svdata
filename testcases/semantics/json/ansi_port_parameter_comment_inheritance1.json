@@ -12,7 +12,7 @@
           "classid": null,
           "signedness": "Signed",
           "signedness_overridable": true,
-          "num_bits": 404,
+          "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
           "comment": [

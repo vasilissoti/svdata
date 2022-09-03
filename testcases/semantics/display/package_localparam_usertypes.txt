@@ -1,0 +1,203 @@
+Package:
+  Identifier: P_enum
+  Filepath: testcases/semantics/sv/package_localparam_usertypes.sv
+  Parameter: 
+    Identifier: LETTERBOX
+    Expression: red
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: Colors
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: FRUITS
+    Expression: '{red,yellow,blue}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: Colors
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: FIRST
+    Expression: gold
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: medal
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Package:
+  Identifier: P_packedStruct
+  Filepath: testcases/semantics/sv/package_localparam_usertypes.sv
+  Parameter: 
+    Identifier: pack1_0
+    Expression: '0
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack1_1
+    Expression: '1
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack1_2
+    Expression: '{default:'0}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack1_3
+    Expression: '{default:'1}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack1_4
+    Expression: '{a:1,b:2,c:3,d:4}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack1_5
+    Expression: '{a:1,b:2,default:5}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack1
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_0
+    Expression: 'X
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_1
+    Expression: 'Z
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_2
+    Expression: '{default:'X}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_3
+    Expression: '{default:'Z}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_4
+    Expression: '{a:1,b:2,c:'X}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: pack2_5
+    Expression: '{a:1,b:2,default:5}
+    ParameterType: LocalParam
+    DataType: Class
+    DataTypeOverridable: false
+    ClassIdentifier: pack2
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: None
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+

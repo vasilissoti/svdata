@@ -1,0 +1,398 @@
+Package:
+  Identifier: P_string
+  Filepath: testcases/semantics/sv/package_localparam_nonintegral.sv
+  Parameter: 
+    Identifier: hello
+    Expression: "Hello world!"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 96
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: empty
+    Expression: ""
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 0
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: printable
+    Expression: "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !@#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 768
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: c
+    Expression: "A"
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b
+    Expression: "\x41"
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 11
+    PackedDimensions: [("10", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: h
+    Expression: "hello"
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: [("1", "4"), ("7", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: s1
+    Expression: "hello\0world"
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 96
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: b12
+    Expression: 12'ha41
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 12
+    PackedDimensions: [("11", "0")]
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: s2
+    Expression: string'(b)
+    ParameterType: LocalParam
+    DataType: String
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 404
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+
+Package:
+  Identifier: P_real
+  Filepath: testcases/semantics/sv/package_localparam_nonintegral.sv
+  Parameter: 
+    Identifier: shortreal_0
+    Expression: 1.2
+    ParameterType: LocalParam
+    DataType: Shortreal
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: real_0
+    Expression: 1.2
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_0
+    Expression: 1.2
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_1
+    Expression: 1.2fs
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_2
+    Expression: 1.2ps
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_3
+    Expression: 1.2ns
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_4
+    Expression: 1.2us
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_5
+    Expression: 1.2ms
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: realtime_6
+    Expression: 1.2s
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_0
+    Expression: 1.2
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_1
+    Expression: 0.1
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_2
+    Expression: 2394.26331
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_3
+    Expression: 1.2E12
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_4
+    Expression: 1.30e-2
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_5
+    Expression: 0.1e-0
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_6
+    Expression: 23E10
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_7
+    Expression: 29E-2
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: implicit_real_8
+    Expression: 236.123_763_e-12
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: shortreal_unpacked_0
+    Expression: '{1.2,3.4,5.6}
+    ParameterType: LocalParam
+    DataType: Shortreal
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 32
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: real_unpacked_0
+    Expression: '{1.2,3.4,5.6}
+    ParameterType: LocalParam
+    DataType: Real
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: None
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+  Parameter: 
+    Identifier: realtime_unpacked_0
+    Expression: '{1.2,3.4,5.6}
+    ParameterType: LocalParam
+    DataType: Realtime
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: [("3", "None")]
+    Comment: None
+

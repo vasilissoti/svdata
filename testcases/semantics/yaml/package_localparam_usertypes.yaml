@@ -1,0 +1,191 @@
+---
+modules: []
+packages:
+  - identifier: P_enum
+    parameters:
+      - identifier: LETTERBOX
+        expression: red
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: Colors
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: FRUITS
+        expression: "'{red,yellow,blue}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: Colors
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions:
+          - - "3"
+            - ~
+        comment: ~
+      - identifier: FIRST
+        expression: gold
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: medal
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/package_localparam_usertypes.sv
+  - identifier: P_packedStruct
+    parameters:
+      - identifier: pack1_0
+        expression: "'0"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack1_1
+        expression: "'1"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack1_2
+        expression: "'{default:'0}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack1_3
+        expression: "'{default:'1}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack1_4
+        expression: "'{a:1,b:2,c:3,d:4}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack1_5
+        expression: "'{a:1,b:2,default:5}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack1
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_0
+        expression: "'X"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_1
+        expression: "'Z"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_2
+        expression: "'{default:'X}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_3
+        expression: "'{default:'Z}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_4
+        expression: "'{a:1,b:2,c:'X}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: pack2_5
+        expression: "'{a:1,b:2,default:5}"
+        paramtype: LocalParam
+        datatype: Class
+        datatype_overridable: false
+        classid: pack2
+        signedness: ~
+        signedness_overridable: false
+        num_bits: ~
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/package_localparam_usertypes.sv

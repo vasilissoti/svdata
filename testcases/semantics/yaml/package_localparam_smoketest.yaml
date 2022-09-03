@@ -1,7 +1,7 @@
 ---
 modules: []
 packages:
-  - identifier: TestPackage
+  - identifier: P_smoketest
     parameters:
       - identifier: a
         expression: "8'sb10101010"
@@ -65,4 +65,4 @@ packages:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-    filepath: testcases/semantics/sv/package_parameter_keyword.sv
+    filepath: testcases/semantics/sv/package_localparam_smoketest.sv

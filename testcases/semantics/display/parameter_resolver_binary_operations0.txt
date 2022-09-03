@@ -23,7 +23,7 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessOverridable: true
-    NumBits: 404
+    NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None
@@ -62,7 +62,7 @@ Module:
     ClassIdentifier: None
     Signedness: None
     SignednessOverridable: true
-    NumBits: 404
+    NumBits: 64
     PackedDimensions: []
     UnpackedDimensions: []
     Comment: None

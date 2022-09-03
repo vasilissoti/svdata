@@ -1,12 +1,12 @@
 ---
 modules: []
 packages:
-  - identifier: TestPackage
+  - identifier: P_expressions
     parameters:
-      - identifier: a
+      - identifier: A
         expression: "8'sb10101010"
         paramtype: LocalParam
-        datatype: Logic
+        datatype: Byte
         datatype_overridable: false
         classid: ~
         signedness: Signed
@@ -15,54 +15,42 @@ packages:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: b
-        expression: "4'b1000"
+      - identifier: B
+        expression: "(8'd5+\"hello\")"
         paramtype: LocalParam
-        datatype: Logic
+        datatype: Longint
         datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: false
-        num_bits: 4
-        packed_dimensions:
-          - - "3"
-            - "0"
-        unpacked_dimensions: []
-        comment: ~
-      - identifier: e
-        expression: "7.5"
-        paramtype: LocalParam
-        datatype: Real
-        datatype_overridable: false
-        classid: ~
-        signedness: ~
         signedness_overridable: false
         num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: f
-        expression: "5"
+      - identifier: C
+        expression: "(\"hello\"+8'd5)"
         paramtype: LocalParam
-        datatype: Logic
+        datatype: Longint
         datatype_overridable: false
         classid: ~
         signedness: Signed
         signedness_overridable: false
-        num_bits: 32
+        num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
-      - identifier: g
-        expression: "\"hello\""
+      - identifier: D
+        expression: B+(C<<5)
         paramtype: LocalParam
-        datatype: String
+        datatype: Bit
         datatype_overridable: false
         classid: ~
-        signedness: ~
+        signedness: Unsigned
         signedness_overridable: false
-        num_bits: 40
-        packed_dimensions: []
+        num_bits: 404
+        packed_dimensions:
+          - - A-1
+            - "0"
         unpacked_dimensions: []
         comment: ~
-    filepath: testcases/semantics/sv/package_localparam.sv
+    filepath: testcases/semantics/sv/package_localparam_expressions.sv
