@@ -1,0 +1,63 @@
+Module:
+  Identifier: foo
+  Filepath: testcases/semantics/sv/instantiation_byname_label.sv
+  Port: 
+    Identifier: a
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b
+    Direction: Input
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: a2
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Port: 
+    Identifier: b2
+    Direction: Output
+    DataKind: Net
+    DataType: Logic
+    ClassIdentifier: None
+    NetType: Wire
+    Signedness: Unsigned
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Instance: 
+    Module identifier: bar
+    Hierarchical instance: u_bar0
+    Hierarchy: []
+    Connections: [["a", "a0"], ["b", "b0"]]
+  Instance: 
+    Module identifier: bar
+    Hierarchical instance: u_bar1
+    Hierarchy: []
+    Connections: [["a", "a1"], ["b", "b1"]]
+  Instance: 
+    Module identifier: bar
+    Hierarchical instance: u_bar2
+    Hierarchy: ["la_FOO"]
+    Connections: [["a", "a2"], ["b", "b2"]]
+

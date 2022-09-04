@@ -1,0 +1,56 @@
+Package:
+  Identifier: P_expressions
+  Filepath: testcases/semantics/sv/package_localparam_expressions.sv
+  Parameter: 
+    Identifier: A
+    Expression: 8'sb10101010
+    ParameterType: LocalParam
+    DataType: Byte
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 8
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: B
+    Expression: (8'd5+"hello")
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: C
+    Expression: ("hello"+8'd5)
+    ParameterType: LocalParam
+    DataType: Longint
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Signed
+    SignednessOverridable: false
+    NumBits: 64
+    PackedDimensions: []
+    UnpackedDimensions: []
+    Comment: None
+  Parameter: 
+    Identifier: D
+    Expression: B+(C<<5)
+    ParameterType: LocalParam
+    DataType: Bit
+    DataTypeOverridable: false
+    ClassIdentifier: None
+    Signedness: Unsigned
+    SignednessOverridable: false
+    NumBits: 404
+    PackedDimensions: [("A-1", "0")]
+    UnpackedDimensions: []
+    Comment: None
+

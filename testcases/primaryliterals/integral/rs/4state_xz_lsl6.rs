@@ -5,11 +5,11 @@ let a = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let b: SvPrimaryLiteralIntegral = a.lsl(2);
+let b: SvPrimaryLiteralIntegral = a << 2;
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![0, 0],
-    data_xz: Some(vec![2, 0]),
+    data_xz: Some(vec![0, 2]),
     size: 66,
     signed: true,
 };

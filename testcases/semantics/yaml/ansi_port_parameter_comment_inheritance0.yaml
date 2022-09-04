@@ -6,22 +6,23 @@ modules:
         expression: "(8'sb10101010+\"hello\")"
         paramtype: LocalParam
         datatype: Logic
-        datatype_overridable: true
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 404
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /* A0 */
+        comment:
+          - /* A0 */
       - identifier: b
         expression: "3"
         paramtype: LocalParam
         datatype: Logic
-        datatype_overridable: true
+        datatype_overridable: false
         classid: ~
         signedness: Signed
-        signedness_overridable: true
+        signedness_overridable: false
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
@@ -37,7 +38,8 @@ modules:
         num_bits: 32
         packed_dimensions: []
         unpacked_dimensions: []
-        comment: /* C0 */
+        comment:
+          - /* C0 */
       - identifier: d
         expression: "6"
         paramtype: Parameter
@@ -63,5 +65,6 @@ modules:
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/ansi_port_parameter_comment_inheritance0.sv
 packages: []

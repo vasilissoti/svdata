@@ -1,0 +1,56 @@
+---
+modules: []
+packages:
+  - identifier: P_expressions
+    parameters:
+      - identifier: A
+        expression: "8'sb10101010"
+        paramtype: LocalParam
+        datatype: Byte
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 8
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: B
+        expression: "(8'd5+\"hello\")"
+        paramtype: LocalParam
+        datatype: Longint
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 64
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: C
+        expression: "(\"hello\"+8'd5)"
+        paramtype: LocalParam
+        datatype: Longint
+        datatype_overridable: false
+        classid: ~
+        signedness: Signed
+        signedness_overridable: false
+        num_bits: 64
+        packed_dimensions: []
+        unpacked_dimensions: []
+        comment: ~
+      - identifier: D
+        expression: B+(C<<5)
+        paramtype: LocalParam
+        datatype: Bit
+        datatype_overridable: false
+        classid: ~
+        signedness: Unsigned
+        signedness_overridable: false
+        num_bits: 404
+        packed_dimensions:
+          - - A-1
+            - "0"
+        unpacked_dimensions: []
+        comment: ~
+    filepath: testcases/semantics/sv/package_localparam_expressions.sv

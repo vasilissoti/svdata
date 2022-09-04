@@ -22,7 +22,7 @@ modules:
         classid: ~
         signedness: ~
         signedness_overridable: true
-        num_bits: 404
+        num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
@@ -58,10 +58,11 @@ modules:
         classid: ~
         signedness: ~
         signedness_overridable: true
-        num_bits: 404
+        num_bits: 64
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
     ports: []
+    instances: []
     filepath: testcases/semantics/sv/parameter_resolver_binary_operations0.sv
 packages: []

@@ -6,23 +6,23 @@ Module:
     Expression: (8'sb10101010+"hello")
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 404
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* A0 */
+    Comment: ["/* A0 */"]
   Parameter: 
     Identifier: b
     Expression: 3
     ParameterType: LocalParam
     DataType: Logic
-    DataTypeOverridable: true
+    DataTypeOverridable: false
     ClassIdentifier: None
     Signedness: Signed
-    SignednessOverridable: true
+    SignednessOverridable: false
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
@@ -39,7 +39,7 @@ Module:
     NumBits: 32
     PackedDimensions: []
     UnpackedDimensions: []
-    Comment: /* C0 */
+    Comment: ["/* C0 */"]
   Parameter: 
     Identifier: d
     Expression: 6

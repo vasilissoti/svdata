@@ -1,0 +1,265 @@
+{
+  "modules": [
+    {
+      "identifier": "fulladd",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "s",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c_out",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "a_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "c_in",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [],
+      "filepath": "testcases/semantics/sv/instantiation_byname_fulladder.sv"
+    },
+    {
+      "identifier": "fulladder_4bit",
+      "parameters": [],
+      "ports": [
+        {
+          "identifier": "sum",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "cout",
+          "direction": "Output",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "a",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "b",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [
+            [
+              "3",
+              "0"
+            ]
+          ],
+          "unpacked_dimensions": [],
+          "comment": null
+        },
+        {
+          "identifier": "cin",
+          "direction": "Input",
+          "datakind": "Net",
+          "datatype": "Logic",
+          "classid": null,
+          "nettype": "Wire",
+          "signedness": "Unsigned",
+          "packed_dimensions": [],
+          "unpacked_dimensions": [],
+          "comment": null
+        }
+      ],
+      "instances": [
+        {
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f0",
+          "hierarchy": [],
+          "connections": [
+            [
+              "s",
+              "sum[0]"
+            ],
+            [
+              "c_out",
+              "c1"
+            ],
+            [
+              "a_in",
+              "a[0]"
+            ],
+            [
+              "b_in",
+              "b[0]"
+            ],
+            [
+              "c_in",
+              "cin"
+            ]
+          ]
+        },
+        {
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f1",
+          "hierarchy": [],
+          "connections": [
+            [
+              "s",
+              "sum[1]"
+            ],
+            [
+              "c_out",
+              "c2"
+            ],
+            [
+              "a_in",
+              "a[1]"
+            ],
+            [
+              "b_in",
+              "b[1]"
+            ],
+            [
+              "c_in",
+              "c1"
+            ]
+          ]
+        },
+        {
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f2",
+          "hierarchy": [],
+          "connections": [
+            [
+              "s",
+              "sum[2]"
+            ],
+            [
+              "c_out",
+              "c3"
+            ],
+            [
+              "a_in",
+              "a[2]"
+            ],
+            [
+              "b_in",
+              "b[2]"
+            ],
+            [
+              "c_in",
+              "c2"
+            ]
+          ]
+        },
+        {
+          "module_identifier": "fulladd",
+          "hierarchical_instance": "f3",
+          "hierarchy": [],
+          "connections": [
+            [
+              "s",
+              "sum[3]"
+            ],
+            [
+              "c_out",
+              "cout"
+            ],
+            [
+              "a_in",
+              "a[3]"
+            ],
+            [
+              "b_in",
+              "b[3]"
+            ],
+            [
+              "c_in",
+              "c3"
+            ]
+          ]
+        }
+      ],
+      "filepath": "testcases/semantics/sv/instantiation_byname_fulladder.sv"
+    }
+  ],
+  "packages": []
+}

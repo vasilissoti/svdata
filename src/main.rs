@@ -11,6 +11,7 @@ use std::{env, process};
 use sv_parser::{parse_sv, Define, DefineText, NodeEvent, RefNode, SyntaxTree};
 use svdata::structures::SvData;
 use svdata::sv_module::{module_declaration_ansi, module_declaration_nonansi};
+use svdata::sv_package::package_declaration;
 use verilog_filelist_parser; // DBG
 
 // Clap is used for accepting arguments through command prompt
@@ -137,7 +138,7 @@ pub fn run_opt(opt: &Opt) -> Result<SvData, Error> {
         }
     }
 
-    if !opt.silent.clone() {
+    if !opt.silent {
         println!("{}", svdata);
     }
 
@@ -207,11 +208,15 @@ fn sv_to_structure(syntax_tree: &SyntaxTree, filepath: &str, svdata: &mut SvData
         if enter_not_leave {
             match node {
                 RefNode::ModuleDeclarationAnsi(_) => {
-                    let d = module_declaration_ansi(node, &syntax_tree, filepath);
+                    let d = module_declaration_ansi(node, syntax_tree, filepath);
                     svdata.modules.push(d.clone());
                 }
                 RefNode::ModuleDeclarationNonansi(_) => {
-                    let _d = module_declaration_nonansi(node, &syntax_tree, filepath);
+                    let _d = module_declaration_nonansi(node, syntax_tree, filepath);
+                }
+                RefNode::PackageDeclaration(_) => {
+                    let d = package_declaration(node, syntax_tree, filepath);
+                    svdata.packages.push(d.clone());
                 }
                 _ => (),
             }

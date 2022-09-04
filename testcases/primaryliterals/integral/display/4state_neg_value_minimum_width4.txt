@@ -1,0 +1,4 @@
+NumBits: 1
+Signed: true
+4State: true
+Data: 0

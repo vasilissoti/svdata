@@ -1,4 +1,5 @@
-use crate::structures::{SvModuleDeclaration, SvParamType, SvPort};
+use crate::structures::{SvInstance, SvModuleDeclaration, SvParamType, SvPort};
+use crate::sv_instance::module_instance;
 use crate::sv_misc::identifier;
 use crate::sv_port::{port_declaration_ansi, port_parameter_declaration_ansi};
 use sv_parser::{unwrap_node, NodeEvent, RefNode, SyntaxTree};
@@ -12,6 +13,7 @@ pub fn module_declaration_ansi(
         identifier: module_identifier(m.clone(), syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        instances: Vec::new(),
         filepath: String::from(filepath),
     };
 
@@ -21,7 +23,7 @@ pub fn module_declaration_ansi(
         match node {
             RefNode::ParameterPortList(p) => {
                 let mut common_scope_found: bool = false;
-                let mut param_type: RefNode = node.clone();
+                let mut param_type: RefNode = node;
 
                 for sub_node in p.into_iter().event() {
                     match sub_node {
@@ -48,7 +50,6 @@ pub fn module_declaration_ansi(
 
                         NodeEvent::Enter(RefNode::ListOfParamAssignments(a)) => {
                             if !common_scope_found {
-                                let common_data = None;
                                 let param_type = SvParamType::Parameter;
 
                                 for param in a {
@@ -57,9 +58,9 @@ pub fn module_declaration_ansi(
                                             ret.parameters.push(port_parameter_declaration_ansi(
                                                 x,
                                                 syntax_tree,
-                                                common_data.clone(),
+                                                None,
                                                 &param_type,
-                                            ))
+                                            ));
                                         }
                                         _ => (),
                                     }
@@ -67,7 +68,6 @@ pub fn module_declaration_ansi(
                             } else {
                                 let common_data =
                                     unwrap_node!(param_type.clone(), DataType, DataTypeOrImplicit);
-                                let a = unwrap_node!(param_type.clone(), ListOfParamAssignments);
 
                                 let param_type = match param_type {
                                     RefNode::LocalParameterDeclarationParam(_) => {
@@ -80,7 +80,7 @@ pub fn module_declaration_ansi(
                                     _ => unreachable!(),
                                 };
 
-                                for param in a.unwrap() {
+                                for param in a {
                                     match param {
                                         RefNode::ParamAssignment(x) => {
                                             ret.parameters.push(port_parameter_declaration_ansi(
@@ -102,13 +102,19 @@ pub fn module_declaration_ansi(
             }
 
             RefNode::AnsiPortDeclaration(p) => {
-                let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port.clone());
+                let parsed_port: SvPort = port_declaration_ansi(p, syntax_tree, &prev_port);
                 ret.ports.push(parsed_port.clone());
-                prev_port = Some(parsed_port.clone());
+                prev_port = Some(parsed_port);
+            }
+
+            RefNode::ModuleInstantiation(p) => {
+                let parsed_instance: SvInstance = module_instance(p, syntax_tree);
+                ret.instances.push(parsed_instance);
             }
             _ => (),
         }
     }
+
     ret
 }
 
@@ -121,6 +127,7 @@ pub fn module_declaration_nonansi(
         identifier: module_identifier(_m, _syntax_tree).unwrap(),
         parameters: Vec::new(),
         ports: Vec::new(),
+        instances: Vec::new(),
         filepath: String::from(_filepath),
     };
     // TODO
@@ -128,6 +135,9 @@ pub fn module_declaration_nonansi(
 }
 
 fn module_identifier(node: RefNode, syntax_tree: &SyntaxTree) -> Option<String> {
-    let id = unwrap_node!(node, ModuleIdentifier).unwrap();
-    identifier(id, &syntax_tree)
+    if let Some(id) = unwrap_node!(node, ModuleIdentifier) {
+        identifier(id, syntax_tree)
+    } else {
+        unreachable!()
+    }
 }

@@ -12,12 +12,12 @@ let b = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let c: SvPrimaryLiteralIntegral = a.add_primlit(b.clone());
+let c: SvPrimaryLiteralIntegral = a + b;
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![9223372036854775808, 0],
+    data_01: vec![0, 9223372036854775808, 1],
     data_xz: None,
-    size: 128,
+    size: 129,
     signed: true,
 };
 

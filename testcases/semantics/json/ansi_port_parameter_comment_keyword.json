@@ -15,7 +15,9 @@
           "num_bits": null,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*post*/"
+          "comment": [
+            "/*post*/"
+          ]
         },
         {
           "identifier": "b",
@@ -29,7 +31,11 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* id/eq *//*eq/val*//* post */"
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "c",
@@ -43,7 +49,9 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*post*/"
+          "comment": [
+            "/*post*/"
+          ]
         },
         {
           "identifier": "d",
@@ -57,21 +65,29 @@
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*id/eq*//*eq/val*//*post*/"
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
         },
         {
           "identifier": "e",
           "expression": "5",
           "paramtype": "LocalParam",
           "datatype": "Logic",
-          "datatype_overridable": true,
+          "datatype_overridable": false,
           "classid": null,
           "signedness": "Signed",
-          "signedness_overridable": true,
+          "signedness_overridable": false,
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/* id/eq *//*eq/val*//* post */"
+          "comment": [
+            "/* id/eq */",
+            "/*eq/val*/",
+            "/* post */"
+          ]
         },
         {
           "identifier": "f",
@@ -81,14 +97,19 @@
           "datatype_overridable": false,
           "classid": null,
           "signedness": "Signed",
-          "signedness_overridable": true,
+          "signedness_overridable": false,
           "num_bits": 32,
           "packed_dimensions": [],
           "unpacked_dimensions": [],
-          "comment": "/*id/eq*//*eq/val*//*post*/"
+          "comment": [
+            "/*id/eq*/",
+            "/*eq/val*/",
+            "/*post*/"
+          ]
         }
       ],
       "ports": [],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_parameter_comment_keyword.sv"
     }
   ],

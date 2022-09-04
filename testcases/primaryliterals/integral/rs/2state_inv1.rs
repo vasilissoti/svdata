@@ -8,7 +8,7 @@ let a = SvPrimaryLiteralIntegral {
 let b: SvPrimaryLiteralIntegral = a.inv();
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![4611686018427387903, 13835058055282163711],
+    data_01: vec![13835058055282163711, 4611686018427387903],
     data_xz: None,
     size: 127,
     signed: false,

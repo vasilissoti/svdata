@@ -125,6 +125,7 @@
           "comment": null
         }
       ],
+      "instances": [],
       "filepath": "testcases/semantics/sv/ansi_port_inout_net_signed.sv"
     }
   ],

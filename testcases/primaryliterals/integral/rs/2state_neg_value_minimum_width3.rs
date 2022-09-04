@@ -1,5 +1,5 @@
 let mut a = SvPrimaryLiteralIntegral {
-    data_01: vec![1, 9223372036854775808],
+    data_01: vec![9223372036854775808, 1],
     data_xz: None,
     size: 128,
     signed: true,
@@ -8,7 +8,7 @@ let mut a = SvPrimaryLiteralIntegral {
 a._minimum_width();
 
 let exp = SvPrimaryLiteralIntegral {
-    data_01: vec![1, 9223372036854775808],
+    data_01: vec![9223372036854775808, 1],
     data_xz: None,
     size: 66,
     signed: true,

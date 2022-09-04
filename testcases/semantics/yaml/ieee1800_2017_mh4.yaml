@@ -13,5 +13,6 @@ modules:
         packed_dimensions: []
         unpacked_dimensions: []
         comment: ~
+    instances: []
     filepath: testcases/semantics/sv/ieee1800_2017_mh4.sv
 packages: []
