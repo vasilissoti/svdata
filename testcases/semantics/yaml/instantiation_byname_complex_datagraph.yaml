@@ -284,7 +284,9 @@ modules:
         classid: ~
         nettype: Wire
         signedness: Unsigned
-        packed_dimensions: []
+        packed_dimensions:
+          - - "2"
+            - "0"
         unpacked_dimensions: []
         comment: ~
       - identifier: out7_1
@@ -305,7 +307,7 @@ modules:
           - - in6_1
             - in7_1
           - - in6_2
-            - in7_2
+            - "in7_2[0]"
           - - out6_1
             - w1
       - module_identifier: M1
@@ -313,7 +315,7 @@ modules:
         hierarchy: []
         connections:
           - - in1_1
-            - in7_2
+            - "in7_2[2]"
           - - out1_1
             - w2
       - module_identifier: M3
@@ -323,7 +325,7 @@ modules:
           - - in3_1
             - w1
           - - in3_2
-            - in7_2
+            - "in7_2[1]"
           - - in3_3
             - w2
           - - out3_1
@@ -394,7 +396,7 @@ modules:
           - - out5_2
             - out8_2
       - module_identifier: M7
-        hierarchical_instance: m7
+        hierarchical_instance: i7
         hierarchy: []
         connections:
           - - in7_1
