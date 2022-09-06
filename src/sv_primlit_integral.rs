@@ -73,7 +73,6 @@ impl SvPrimaryLiteralIntegral {
     /// Negative value with width < usize::BITS
     /// ```
     /// # use svdata::sv_primlit_integral::*;
-    ///
     /// let a = SvPrimaryLiteralIntegral {
     ///     data_01: vec![9223372036854775808],
     ///     data_xz: None,
@@ -86,7 +85,6 @@ impl SvPrimaryLiteralIntegral {
     /// Positive value with width < usize::BITS
     /// ```
     /// # use svdata::sv_primlit_integral::*;
-    ///
     /// let a = SvPrimaryLiteralIntegral {
     ///     data_01: vec![4611686018427387904],
     ///     data_xz: None,
@@ -99,7 +97,6 @@ impl SvPrimaryLiteralIntegral {
     /// Negative value with width > usize::BITS
     ///  ```
     /// # use svdata::sv_primlit_integral::*;
-    ///
     /// let a = SvPrimaryLiteralIntegral {
     ///     data_01: vec![9223372036854775808, 1],
     ///     data_xz: None,
@@ -112,7 +109,6 @@ impl SvPrimaryLiteralIntegral {
     /// Positive value with width > usize::BITS
     ///  ```
     /// # use svdata::sv_primlit_integral::*;
-    ///
     /// let a = SvPrimaryLiteralIntegral {
     ///     data_01: vec![9223372036854775808, 1],
     ///     data_xz: None,
@@ -130,7 +126,47 @@ impl SvPrimaryLiteralIntegral {
         self.lt(zero) == logic1b_1()
     }
 
-    /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
+    /// Receives an integral primary literal as an argument and deduces whether the stored value is zero or not.
+    ///
+    /// # Examples
+    ///
+    /// Zero with width = 1 bit
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![0],
+    ///     data_xz: None,
+    ///     size: 1,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_zero(), true);
+    /// ```
+    /// Zero with width > usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![0, 0],
+    ///     data_xz: None,
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_zero(), true);
+    /// ```
+    /// Non-Zero with width > usize::BITS
+    ///  ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![0, 1],
+    ///     data_xz: None,
+    ///     size: 65,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_zero(), false);
+    /// ```
+
     pub fn is_zero(&self) -> bool {
         let mut zero = bit1b_0();
         zero.signed = true;
