@@ -1,4 +1,4 @@
-let mut a = SvPrimaryLiteralIntegral {
+let a = SvPrimaryLiteralIntegral {
     data_01: vec![0, 0],
     data_xz: None,
     size: 128,

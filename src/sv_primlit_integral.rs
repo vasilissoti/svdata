@@ -66,8 +66,64 @@ impl SvPrimaryLiteralIntegral {
         }
     }
 
-    /* Receives an integral primary literal as an argument and deduces whether the stored value is -ve or +ve based on the size value set. */
-    pub fn is_negative(&mut self) -> bool {
+    /// Receives an integral primary literal as an argument and deduces whether the stored value is -ve or not.
+    ///
+    /// # Examples
+    ///
+    /// Negative value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    ///
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: None,
+    ///     size: 64,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_negative(), true);
+    /// ```
+    /// Positive value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    ///
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: None,
+    ///     size: 64,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_negative(), false);
+    /// ```
+    /// Negative value with width > usize::BITS
+    ///  ```
+    /// # use svdata::sv_primlit_integral::*;
+    ///
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 1],
+    ///     data_xz: None,
+    ///     size: 65,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_negative(), true);
+    /// ```
+    /// Positive value with width > usize::BITS
+    ///  ```
+    /// # use svdata::sv_primlit_integral::*;
+    ///
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 1],
+    ///     data_xz: None,
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(a.is_negative(), false);
+    /// ```
+
+    pub fn is_negative(&self) -> bool {
         let mut zero = bit1b_0();
         zero.signed = true;
 
@@ -75,7 +131,7 @@ impl SvPrimaryLiteralIntegral {
     }
 
     /* Receives an integral primary literal as an argument and deduces whether the stored value is zero. */
-    pub fn is_zero(&mut self) -> bool {
+    pub fn is_zero(&self) -> bool {
         let mut zero = bit1b_0();
         zero.signed = true;
 
