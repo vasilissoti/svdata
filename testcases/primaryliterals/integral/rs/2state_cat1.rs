@@ -12,7 +12,7 @@ let b = SvPrimaryLiteralIntegral {
     signed: true,
 };
 
-let c: SvPrimaryLiteralIntegral = a.cat(b.clone());
+let c: SvPrimaryLiteralIntegral = a.cat(b);
 
 let exp = SvPrimaryLiteralIntegral {
     data_01: vec![13835058055282163712, 4611686018427387904],

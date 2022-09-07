@@ -2065,7 +2065,7 @@ impl SvPrimaryLiteralIntegral {
     ///
     /// assert_eq!(b, exp);
     /// ```
-    /// Value with width = usize::BITS
+    /// Value with width = 2 * usize::BITS
     /// ```
     /// # use svdata::sv_primlit_integral::*;
     /// let a = SvPrimaryLiteralIntegral {
@@ -2110,6 +2110,142 @@ impl SvPrimaryLiteralIntegral {
 
     /* Receives the number of shift positions and shifts the value to the right without changing the number of bits.
     The dropped bits are shifted in the LHS of the value. */
+    /// # Examples
+    ///
+    /// ## 2-State Primary Literals
+    ///
+    /// Value with usize::BITS < width < 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 3],
+    ///     data_xz: None,
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![16140901064495857664, 1],
+    ///     data_xz: None,
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
+    /// Value with width = 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 9223372036854775809],
+    ///     data_xz: None,
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![6917529027641081856, 6917529027641081856],
+    ///     data_xz: None,
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
+    ///
+    /// ## 4-State Primary Literals (No X/Z(s))
+    ///
+    /// Value with usize::BITS < width < 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 3],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![16140901064495857664, 1],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
+    /// Value with width = 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 9223372036854775809],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![6917529027641081856, 6917529027641081856],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
+    ///
+    /// ## 4-State Primary Literals (Containing X/Z(s))
+    ///
+    /// Value with usize::BITS < width < 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 3],
+    ///     data_xz: Some(vec![1, 0]),
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![16140901064495857664, 1],
+    ///     data_xz: Some(vec![0, 1]),
+    ///     size: 66,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
+    /// Value with width = 2 * usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 9223372036854775809],
+    ///     data_xz: Some(vec![9223372036854775809, 9223372036854775809]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b: SvPrimaryLiteralIntegral = a.ror(2);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![6917529027641081856, 6917529027641081856],
+    ///     data_xz: Some(vec![6917529027641081856, 6917529027641081856]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(b, exp);
+    /// ```
     pub fn ror(&self, n: usize) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         let last_index = ret.data_01.len() - 1;
@@ -2144,8 +2280,270 @@ impl SvPrimaryLiteralIntegral {
         ret
     }
 
-    /* Receives two integral primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
+    /** Receives two integral primary literals, concatenates them (logically shifts left the LHS primlit by RHS primlit's size and adds them).
     Returns an integral SvPrimaryLiteralIntegral with the final value. */
+    /// # Examples
+    ///
+    /// ## 2-State Primary Literals
+    ///
+    /// Value with width = usize::BITS and value with width = usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: None,
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: None,
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 9223372036854775808],
+    ///     data_xz: None,
+    ///     size: 128,
+    ///     signed: false,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with usize::BITS < width < 2 * usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 0],
+    ///     data_xz: None,
+    ///     size: 65,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: None,
+    ///     size: 63,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![13835058055282163712, 4611686018427387904],
+    ///     data_xz: None,
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with width = usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: None,
+    ///     size: 64,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3],
+    ///     data_xz: None,
+    ///     size: 4,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3, 4],
+    ///     data_xz: None,
+    ///     size: 68,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    ///
+    /// ## 4-State Primary Literals (No X/Z(s))
+    ///
+    /// Value with width = usize::BITS and value with width = usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 9223372036854775808],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 128,
+    ///     signed: false,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with usize::BITS < width < 2 * usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775809, 0],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 65,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 63,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![13835058055282163712, 4611686018427387904],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with width = usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 64,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 4,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3, 4],
+    ///     data_xz: Some(vec![0, 0]),
+    ///     size: 68,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    ///
+    /// ## 4-State Primary Literals (Containing X/Z(s))
+    ///
+    /// Value with width = usize::BITS and value with width = usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: Some(vec![9223372036854775808]),
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808],
+    ///     data_xz: Some(vec![9223372036854775808]),
+    ///     size: 64,
+    ///     signed: false,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 9223372036854775808],
+    ///     data_xz: Some(vec![9223372036854775808, 9223372036854775808]),
+    ///     size: 128,
+    ///     signed: false,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with usize::BITS < width < 2 * usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![9223372036854775808, 0],
+    ///     data_xz: Some(vec![9223372036854775808, 0]),
+    ///     size: 65,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![0],
+    ///     data_xz: Some(vec![4611686018427387904]),
+    ///     size: 63,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![0, 4611686018427387904],
+    ///     data_xz: Some(vec![4611686018427387904, 4611686018427387904]),
+    ///     size: 128,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
+    /// Value with width = usize::BITS and value with width < usize::BITS
+    /// ```
+    /// # use svdata::sv_primlit_integral::*;
+    /// let a = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![4611686018427387904],
+    ///     data_xz: Some(vec![4611686018427387904]),
+    ///     size: 64,
+    ///     signed: true,
+    /// };
+    ///
+    /// let b = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3],
+    ///     data_xz: Some(vec![0]),
+    ///     size: 4,
+    ///     signed: true,
+    /// };
+    ///
+    /// let c: SvPrimaryLiteralIntegral = a.cat(b);
+    ///
+    /// let exp = SvPrimaryLiteralIntegral {
+    ///     data_01: vec![3, 4],
+    ///     data_xz: Some(vec![0, 4]),
+    ///     size: 68,
+    ///     signed: true,
+    /// };
+    ///
+    /// assert_eq!(c, exp);
+    /// ```
     pub fn cat(&self, right_nu: SvPrimaryLiteralIntegral) -> SvPrimaryLiteralIntegral {
         let mut ret: SvPrimaryLiteralIntegral = self.clone();
         ret = ret.lsl(right_nu.size);

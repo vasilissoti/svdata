@@ -12,7 +12,7 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c = a.wildcard_eq(b.clone());
+let c = a.wildcard_eq(b);
 
 assert_eq!(c, logic1b_1());
 
