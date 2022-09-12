@@ -81,13 +81,18 @@ fn inst_connections(
                 let left = unwrap_node!(node.clone(), PortIdentifier).unwrap();
                 let left = identifier(left, &syntax_tree).unwrap();
                 // Connection in parent module
-                let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier).unwrap();
-                let right_name = identifier(right_node, &syntax_tree).unwrap();
+                let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier);
+                let right_name;
                 let mut right_index = String::new();
-                for select_node in x {
-                    match select_node {
-                        RefNode::Select(y) => {
-                            for expression_node in y {
+
+                match right_node {
+                    Some(right_node) => {
+                        right_name = identifier(right_node, &syntax_tree).unwrap();
+
+                        if let Some(select_node) = unwrap_node!(x, Select) {
+                            if let Some(expression_node) =
+                                unwrap_node!(select_node, HierarchicalIdentifier, IntegralNumber)
+                            {
                                 match expression_node {
                                     // Indexing a variable
                                     RefNode::HierarchicalIdentifier(_) => {
@@ -115,9 +120,12 @@ fn inst_connections(
                                 }
                             }
                         }
-                        _ => (),
+                    }
+                    _ => {
+                        right_name = String::from(".Z");
                     }
                 }
+
                 // Push connection to ret
                 if right_index == "" {
                     // If no indexing
