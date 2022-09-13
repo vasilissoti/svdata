@@ -1,15 +1,34 @@
 {
   "modules": [
     {
-      "identifier": "M",
+      "identifier": "M1",
       "parameters": [],
       "ports": [],
       "instances": [
         {
-          "module_identifier": "I",
-          "hierarchical_instance": "u_I",
+          "module_identifier": "I1",
+          "hierarchical_instance": "u_I1",
           "hierarchy": [],
           "connections": []
+        }
+      ],
+      "filepath": "testcases/semantics/sv/instantiation_no_port_connections.sv"
+    },
+    {
+      "identifier": "M2",
+      "parameters": [],
+      "ports": [],
+      "instances": [
+        {
+          "module_identifier": "I2",
+          "hierarchical_instance": "u_I2",
+          "hierarchy": [],
+          "connections": [
+            [
+              "C",
+              ".Z"
+            ]
+          ]
         }
       ],
       "filepath": "testcases/semantics/sv/instantiation_no_port_connections.sv"

@@ -24,7 +24,7 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances: []
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
   - identifier: M2
     parameters: []
     ports:
@@ -59,7 +59,7 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances: []
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
   - identifier: M3
     parameters: []
     ports:
@@ -94,7 +94,7 @@ modules:
         unpacked_dimensions: []
         comment: ~
     instances: []
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
   - identifier: M4
     parameters: []
     ports:
@@ -139,7 +139,7 @@ modules:
             - in4_2
           - - out3_1
             - out4_1
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
   - identifier: M5
     parameters: []
     ports:
@@ -202,7 +202,7 @@ modules:
             - w2
           - - out4_1
             - out5_1
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
   - identifier: top_module
     parameters: []
     ports:
@@ -247,5 +247,5 @@ modules:
             - out_1
           - - out5_2
             - out_2
-    filepath: testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv
+    filepath: testcases/semantics/sv/instantiation_byname_simple_datagraph.sv
 packages: []

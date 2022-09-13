@@ -30,7 +30,7 @@
           }
         ],
         "instances": [],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       },
       {
         "identifier": "M2",
@@ -74,7 +74,7 @@
           }
         ],
         "instances": [],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       },
       {
         "identifier": "M3",
@@ -118,7 +118,7 @@
           }
         ],
         "instances": [],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       },
       {
         "identifier": "M4",
@@ -182,7 +182,7 @@
             ]
           }
         ],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       },
       {
         "identifier": "M5",
@@ -280,7 +280,7 @@
             ]
           }
         ],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       },
       {
         "identifier": "top_module",
@@ -344,7 +344,7 @@
             ]
           }
         ],
-        "filepath": "testcases/semantics/sv/instantiation_byname_simpel_datagraph.sv"
+        "filepath": "testcases/semantics/sv/instantiation_byname_simple_datagraph.sv"
       }
     ],
     "packages": []

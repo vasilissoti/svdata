@@ -1,9 +1,18 @@
 Module:
-  Identifier: M
+  Identifier: M1
   Filepath: testcases/semantics/sv/instantiation_no_port_connections.sv
   Instance: 
-    Module identifier: I
-    Hierarchical instance: u_I
+    Module identifier: I1
+    Hierarchical instance: u_I1
     Hierarchy: []
     Connections: []
+
+Module:
+  Identifier: M2
+  Filepath: testcases/semantics/sv/instantiation_no_port_connections.sv
+  Instance: 
+    Module identifier: I2
+    Hierarchical instance: u_I2
+    Hierarchy: []
+    Connections: [["C", ".Z"]]
 
