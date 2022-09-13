@@ -81,51 +81,54 @@ fn inst_connections(
                 let left = unwrap_node!(node.clone(), PortIdentifier).unwrap();
                 let left = identifier(left, &syntax_tree).unwrap();
                 // Connection in parent module
-                let right_node = unwrap_node!(node.clone(), HierarchicalIdentifier).unwrap();
-                let right_name = identifier(right_node, &syntax_tree).unwrap();
-                let mut right_index = String::new();
-                for select_node in x {
-                    match select_node {
-                        RefNode::Select(y) => {
-                            for expression_node in y {
-                                match expression_node {
-                                    // Indexing a variable
-                                    RefNode::HierarchicalIdentifier(_) => {
-                                        if let Some(right_node) =
-                                            unwrap_node!(expression_node.clone(), Identifier)
-                                        {
-                                            right_index =
-                                                identifier(right_node, &syntax_tree).unwrap();
-                                        } else {
-                                            unreachable!()
+                if let Some(right_node) = unwrap_node!(node.clone(), HierarchicalIdentifier) {
+                    let right_name = identifier(right_node, &syntax_tree).unwrap();
+                    let mut right_index = String::new();
+                    for select_node in x {
+                        match select_node {
+                            RefNode::Select(y) => {
+                                for expression_node in y {
+                                    match expression_node {
+                                        // Indexing a variable
+                                        RefNode::HierarchicalIdentifier(_) => {
+                                            if let Some(right_node) =
+                                                unwrap_node!(expression_node.clone(), Identifier)
+                                            {
+                                                right_index =
+                                                    identifier(right_node, &syntax_tree).unwrap();
+                                            } else {
+                                                unreachable!()
+                                            }
                                         }
-                                    }
-                                    // Indexing a number
-                                    RefNode::IntegralNumber(_) => {
-                                        if let Some(right_node) =
-                                            unwrap_node!(expression_node.clone(), DecimalNumber)
-                                        {
-                                            right_index =
-                                                get_string(right_node, &syntax_tree).unwrap();
-                                        } else {
-                                            unreachable!()
+                                        // Indexing a number
+                                        RefNode::IntegralNumber(_) => {
+                                            if let Some(right_node) =
+                                                unwrap_node!(expression_node.clone(), DecimalNumber)
+                                            {
+                                                right_index =
+                                                    get_string(right_node, &syntax_tree).unwrap();
+                                            } else {
+                                                unreachable!()
+                                            }
                                         }
+                                        _ => (),
                                     }
-                                    _ => (),
                                 }
                             }
+                            _ => (),
                         }
-                        _ => (),
                     }
-                }
-                // Push connection to ret
-                if right_index == "" {
-                    // If no indexing
-                    ret.push([left, right_name].to_vec());
+                    // Push connection to ret
+                    if right_index == "" {
+                        // If no indexing
+                        ret.push([left, right_name].to_vec());
+                    } else {
+                        // If there is indexing
+                        let right = format!("{}[{}]", right_name, right_index);
+                        ret.push([left, right].to_vec());
+                    }
                 } else {
-                    // If there is indexing
-                    let right = format!("{}[{}]", right_name, right_index);
-                    ret.push([left, right].to_vec());
+                    ret.push([left, String::from("")].to_vec());
                 }
             }
             // Port connection by order

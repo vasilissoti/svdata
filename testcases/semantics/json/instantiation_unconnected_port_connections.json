@@ -1,0 +1,19 @@
+{
+  "modules": [
+    {
+      "identifier": "M",
+      "parameters": [],
+      "ports": [],
+      "instances": [
+        {
+          "module_identifier": "I",
+          "hierarchical_instance": "u_I",
+          "hierarchy": [],
+          "connections": [["a", ""]]
+        }
+      ],
+      "filepath": "testcases/semantics/sv/instantiation_unconnected_port_connections.sv"
+    }
+  ],
+  "packages": []
+}
