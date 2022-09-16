@@ -8201,6 +8201,37 @@ impl SvPrimaryLiteralIntegral {
     }
 }
 
+/** Converts a usize into a 2-state signed primary literal. Width is set by deafult to usize::BITS */
+/// # Examples
+///
+/// Signed positive value
+/// ```
+/// # use svdata::sv_primlit_integral::*;
+/// let a: SvPrimaryLiteralIntegral = usize_to_primlit(4611686018427387904);
+///
+/// let exp = SvPrimaryLiteralIntegral {
+///     data_01: vec![4611686018427387904],
+///     data_xz: None,
+///     size: 64,
+///     signed: true,
+/// };
+///
+/// assert_eq!(a, exp);
+/// ```
+/// Signed negative value
+/// ```
+/// # use svdata::sv_primlit_integral::*;
+/// let a: SvPrimaryLiteralIntegral = usize_to_primlit(9223372036854775808);
+///
+/// let exp = SvPrimaryLiteralIntegral {
+///     data_01: vec![9223372036854775808],
+///     data_xz: None,
+///     size: 64,
+///     signed: true,
+/// };
+///
+/// assert_eq!(a, exp);
+/// ```
 pub fn usize_to_primlit(value: usize) -> SvPrimaryLiteralIntegral {
     let mut ret = SvPrimaryLiteralIntegral {
         data_01: vec![value],
