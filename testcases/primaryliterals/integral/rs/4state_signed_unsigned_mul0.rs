@@ -7,7 +7,7 @@ let a = SvPrimaryLiteralIntegral {
 
 let b = SvPrimaryLiteralIntegral {
     data_01: vec![4],
-    data_xz: None,
+    data_xz: Some(vec![0]),
     size: 3,
     signed: true,
 };
