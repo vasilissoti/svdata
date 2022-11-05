@@ -1,0 +1,9 @@
+Module:
+  Identifier: M
+  Filepath: testcases/semantics/sv/instantiation_no_port_connections.sv
+  Instance: 
+    Module identifier: I
+    Hierarchical instance: u_I
+    Hierarchy: []
+    Connections: []
+

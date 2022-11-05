@@ -12,7 +12,7 @@ let b = SvPrimaryLiteralIntegral {
     signed: false,
 };
 
-let c = a.ge(b.clone());
+let c = a.ge(b);
 
 assert_eq!(c, logic1b_1());
 
